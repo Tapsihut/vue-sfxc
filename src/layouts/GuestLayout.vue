@@ -105,6 +105,39 @@ const toggleSubmenu = (menuName: string) => {
                                             </ul>
                                         </NavigationMenuContent>
                                     </NavigationMenuItem>
+                                    <NavigationMenuItem>
+                                        <NavigationMenuTrigger>News</NavigationMenuTrigger>
+                                        <NavigationMenuContent>
+                                            <ul class="grid w-50 gap-2">
+                                                <li>
+                                                    <NavigationMenuLink as-child
+                                                        ><RouterLink
+                                                            to="#"
+                                                            class="block p-3 hover:bg-accent rounded-md"
+                                                            >Newsletters</RouterLink
+                                                        ></NavigationMenuLink
+                                                    >
+                                                </li>
+                                                <li>
+                                                    <NavigationMenuLink as-child
+                                                        ><RouterLink
+                                                            to="#"
+                                                            class="block p-3 hover:bg-accent rounded-md"
+                                                            >Announcements</RouterLink
+                                                        ></NavigationMenuLink
+                                                    >
+                                                </li>
+                                            </ul>
+                                        </NavigationMenuContent>
+                                    </NavigationMenuItem>
+                                    <NavigationMenuItem>
+                                        <NavigationMenuLink
+                                            as-child
+                                            :class="navigationMenuTriggerStyle()"
+                                        >
+                                            <RouterLink to="/contact">Contact</RouterLink>
+                                        </NavigationMenuLink>
+                                    </NavigationMenuItem>
                                 </NavigationMenuList>
                             </NavigationMenu>
                             <Button href="/login">Login</Button>
