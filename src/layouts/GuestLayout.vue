@@ -44,7 +44,7 @@ const toggleSubmenu = (menuName: string) => {
                                 class="w-54 md:w-70 h-auto object-contain"
                             />
                         </div>
-                        <div class="hidden md:flex items-center space-x-4 lg:space-x-6">
+                        <div class="hidden md:flex items-center space-x-1">
                             <NavigationMenu>
                                 <NavigationMenuList>
                                     <NavigationMenuItem>
