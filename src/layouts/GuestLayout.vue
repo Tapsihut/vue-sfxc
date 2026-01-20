@@ -52,7 +52,7 @@ const toggleSubmenu = (menuName: string) => {
                                             as-child
                                             :class="navigationMenuTriggerStyle()"
                                         >
-                                            <RouterLink to="/">Home</RouterLink>
+                                            <RouterLink :to="{ name: 'home' }">Home</RouterLink>
                                         </NavigationMenuLink>
                                     </NavigationMenuItem>
                                     <NavigationMenuItem>
@@ -62,18 +62,9 @@ const toggleSubmenu = (menuName: string) => {
                                                 <li>
                                                     <NavigationMenuLink as-child
                                                         ><RouterLink
-                                                            to="#"
+                                                            :to="{ name: 'vision-mission' }"
                                                             class="block p-3 hover:bg-accent rounded-md"
-                                                            >Background</RouterLink
-                                                        ></NavigationMenuLink
-                                                    >
-                                                </li>
-                                                <li>
-                                                    <NavigationMenuLink as-child
-                                                        ><RouterLink
-                                                            to="#"
-                                                            class="block p-3 hover:bg-accent rounded-md"
-                                                            >Mission & Vision</RouterLink
+                                                            >Vision & Mission</RouterLink
                                                         ></NavigationMenuLink
                                                     >
                                                 </li>
@@ -193,7 +184,7 @@ const toggleSubmenu = (menuName: string) => {
                     >
                         <div class="flex flex-col p-4 pb-6 space-y-2">
                             <RouterLink
-                                to="/"
+                                :to="{ name: 'home' }"
                                 class="flex items-center w-full px-4 py-3 text-sm font-medium hover:bg-accent rounded-lg"
                             >
                                 Home
@@ -216,14 +207,9 @@ const toggleSubmenu = (menuName: string) => {
                                     class="px-4 py-2 space-y-1 bg-gray-50 rounded-b-lg mx-2 mt-1"
                                 >
                                     <RouterLink
-                                        to="#"
+                                        :to="{ name: 'vision-mission' }"
                                         class="block px-4 py-2 text-sm rounded-md hover:text-accent-foreground hover:bg-accent"
-                                        >Background</RouterLink
-                                    >
-                                    <RouterLink
-                                        to="#"
-                                        class="block px-4 py-2 text-sm rounded-md hover:text-accent-foreground hover:bg-accent"
-                                        >Mission & Vision</RouterLink
+                                        >Vision & Mission</RouterLink
                                     >
                                     <RouterLink
                                         to="#"
