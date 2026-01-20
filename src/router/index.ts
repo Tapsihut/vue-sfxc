@@ -1,5 +1,5 @@
 import Home from '@/views/Home.vue'
-import MissionVision from '@/views/Abouts/MissionVision.vue'
+import MissionVision from '@/views/Abouts/VisionMission.vue'
 import { createRouter, createWebHistory } from 'vue-router'
 
 const router = createRouter({
