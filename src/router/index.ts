@@ -14,8 +14,8 @@ const router = createRouter({
             },
         },
         {
-            path: '/about/mission-vision',
-            name: 'mission-vision',
+            path: '/about/vision-mission',
+            name: 'vision-mission',
             component: MissionVision,
             meta: {
                 layout: 'guest',
