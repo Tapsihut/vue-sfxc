@@ -310,7 +310,7 @@ const toggleSubmenu = (menuName: string) => {
             </nav>
         </header>
 
-        <main class="w-full max-w-7xl mx-auto">
+        <main class="w-full">
             <slot />
         </main>
     </div>
