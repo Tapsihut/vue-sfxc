@@ -238,10 +238,6 @@ import { Card, CardContent, CardHeader } from '@/components/ui/card'
                     At St. Francis Xavier College, our values are not just words—they are the
                     foundation of our identity and the compass that guides our community.
                 </p>
-                <Button size="lg">
-                    <span>Student Life</span>
-                    <ArrowRight />
-                </Button>
             </div>
 
             <!-- Right Side: The Grid (Layout Preserved, Styles Themed) -->
@@ -345,6 +341,168 @@ import { Card, CardContent, CardHeader } from '@/components/ui/card'
                     fill="currentColor"
                 ></path>
             </svg>
+        </div>
+    </section>
+
+    <section id="core-details" class="py-24 bg-background scroll-mt-16">
+        <div class="container mx-auto px-4 md:px-8 max-w-6xl">
+            <div class="space-y-20">
+                <!-- Service -->
+                <div class="grid md:grid-cols-[auto_1fr] gap-8 md:gap-12 items-start">
+                    <div class="flex flex-col items-center md:items-start min-w-48">
+                        <div
+                            class="w-20 h-20 rounded-2xl bg-primary/10 flex items-center justify-center mb-4"
+                        >
+                            <HeartHandshake class="w-10 h-10 text-primary" />
+                        </div>
+                        <h3 class="text-2xl font-bold text-foreground">Service</h3>
+                        <div class="h-1 w-12 bg-primary rounded-full mt-2"></div>
+                    </div>
+                    <div class="space-y-4">
+                        <p class="text-lg text-muted-foreground leading-relaxed">
+                            Making decisions and actions which will benefit others
+                        </p>
+                        <div class="grid gap-2 mt-6">
+                            <div
+                                v-for="(indicator, index) in [
+                                    'Offers availability of time for extracurricular activities',
+                                    'Demonstrates initiation in finding innovative resolution',
+                                    'Communicates with well-organized ideas and offers critical thoughts',
+                                    'Displays positive character and attitude in communicating ideas and aspirations',
+                                    'Offers fair treatment to everyone',
+                                    'Works without counting much of the time',
+                                    'Works hard for the benefit of the family in particular and in the community in general',
+                                    'Makes himself/herself available when needed',
+                                    'Responsive to the needs of changing time',
+                                ]"
+                                :key="index"
+                                class="flex items-start gap-3 group"
+                            >
+                                <div
+                                    class="w-1.5 h-1.5 rounded-full bg-primary mt-2.5 shrink-0 group-hover:scale-150 transition-transform"
+                                ></div>
+                                <p class="text-muted-foreground leading-relaxed">{{ indicator }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Fortitude -->
+                <div class="grid md:grid-cols-[1fr_auto] gap-8 md:gap-12 items-start">
+                    <div class="space-y-4 md:order-1">
+                        <p class="text-lg text-muted-foreground leading-relaxed">
+                            The act of recognizing strengths and weaknesses and persevering to
+                            achieve success
+                        </p>
+                        <div class="grid gap-2 mt-6">
+                            <div
+                                v-for="(indicator, index) in [
+                                    'Displays persistence and perseverance in all undertakings',
+                                    'Maintains a sense of urgency to complete high-priority actions and meets obligations',
+                                    'Displays resiliency and takes proactive measures to make improvements',
+                                    'Shows mental and emotional strength in facing difficulty courageously',
+                                ]"
+                                :key="index"
+                                class="flex items-start gap-3 group md:justify-end md:text-right"
+                            >
+                                <div
+                                    class="w-1.5 h-1.5 rounded-full bg-primary mt-2.5 shrink-0 group-hover:scale-150 transition-transform md:order-2"
+                                ></div>
+                                <p class="text-muted-foreground leading-relaxed md:order-1">
+                                    {{ indicator }}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div
+                        class="flex flex-col items-center md:items-end min-w-48 md:order-2 order-first"
+                    >
+                        <div
+                            class="w-20 h-20 rounded-2xl bg-primary/10 flex items-center justify-center mb-4"
+                        >
+                            <Shield class="w-10 h-10 text-primary" />
+                        </div>
+                        <h3 class="text-2xl font-bold text-foreground">Fortitude</h3>
+                        <div class="h-1 w-12 bg-primary rounded-full mt-2"></div>
+                    </div>
+                </div>
+
+                <!-- Excellence -->
+                <div class="grid md:grid-cols-[auto_1fr] gap-8 md:gap-12 items-start">
+                    <div class="flex flex-col items-center md:items-start min-w-48">
+                        <div
+                            class="w-20 h-20 rounded-2xl bg-secondary/30 flex items-center justify-center mb-4"
+                        >
+                            <Star class="w-10 h-10 text-secondary" />
+                        </div>
+                        <h3 class="text-2xl font-bold text-foreground">eXcellence</h3>
+                        <div class="h-1 w-12 bg-secondary rounded-full mt-2"></div>
+                    </div>
+                    <div class="space-y-4">
+                        <p class="text-lg text-muted-foreground leading-relaxed">
+                            The commitment to giving one's best all the time and constantly seeking
+                            improvement
+                        </p>
+                        <div class="grid gap-2 mt-6">
+                            <div
+                                v-for="(indicator, index) in [
+                                    'Uses creative and critical thinking to analyse difficulties systematically by planning, prioritizing, and organizing work while anticipating and adjusting to changes',
+                                    'Always willing to do something beyond expectation',
+                                    'Practices tolerance and respect towards differences in religions and other beliefs',
+                                ]"
+                                :key="index"
+                                class="flex items-start gap-3 group"
+                            >
+                                <div
+                                    class="w-1.5 h-1.5 rounded-full bg-secondary mt-2.5 shrink-0 group-hover:scale-150 transition-transform"
+                                ></div>
+                                <p class="text-muted-foreground leading-relaxed">{{ indicator }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Christ-Centeredness -->
+                <div class="grid md:grid-cols-[1fr_auto] gap-8 md:gap-12 items-start">
+                    <div class="space-y-4 md:order-1">
+                        <p class="text-lg text-muted-foreground leading-relaxed">
+                            Having the faith in turning the ordinary into extraordinary
+                        </p>
+                        <div class="grid gap-2 mt-6">
+                            <div
+                                v-for="(indicator, index) in [
+                                    'Developing faith in the Lord Jesus Christ',
+                                    'Losing oneself in the service of others',
+                                    'Being refined by enduring trials and tribulations with a soft heart',
+                                    'Cares for the poor, the depressed and the oppressed',
+                                    'Glorifies God and makes Christ real to others',
+                                    'Maintains humility in spite of tremendous success in life and in profession',
+                                ]"
+                                :key="index"
+                                class="flex items-start gap-3 group md:justify-end md:text-right"
+                            >
+                                <div
+                                    class="w-1.5 h-1.5 rounded-full bg-tertiary mt-2.5 shrink-0 group-hover:scale-150 transition-transform md:order-2"
+                                ></div>
+                                <p class="text-muted-foreground leading-relaxed md:order-1">
+                                    {{ indicator }}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div
+                        class="flex flex-col items-center md:items-end min-w-48 md:order-2 order-first"
+                    >
+                        <div
+                            class="w-20 h-20 rounded-2xl bg-tertiary/30 flex items-center justify-center mb-4"
+                        >
+                            <Cross class="w-10 h-10 text-tertiary" />
+                        </div>
+                        <h3 class="text-2xl font-bold text-foreground">Christ-Centeredness</h3>
+                        <div class="h-1 w-12 bg-tertiary rounded-full mt-2"></div>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 </template>
