@@ -15,8 +15,59 @@ import { Menu, X, ChevronDown } from 'lucide-vue-next'
 import Footer from '@/components/ui/custom/Footer.vue'
 
 const isMobileMenuOpen = ref(false)
-
 const activeSubmenu = ref<string | null>(null)
+
+interface NavigationLink {
+    name: string
+    to: string | { name: string }
+}
+
+interface NavigationItem {
+    name: string
+    type: 'link' | 'dropdown'
+    to?: string | { name: string }
+    items?: NavigationLink[]
+}
+
+const navigationItems = ref<NavigationItem[]>([
+    {
+        name: 'Home',
+        type: 'link',
+        to: { name: 'home' },
+    },
+    {
+        name: 'About',
+        type: 'dropdown',
+        items: [
+            { name: 'School Patron', to: '#' },
+            { name: 'Vision & Mission', to: { name: 'vision-mission' } },
+            { name: 'Organizations', to: '#' },
+        ],
+    },
+    {
+        name: 'Academics',
+        type: 'dropdown',
+        items: [
+            { name: 'Enrollment', to: '#' },
+            { name: 'Tesda', to: '#' },
+            { name: 'College Programs', to: '#' },
+            { name: 'Scholarship', to: '#' },
+        ],
+    },
+    {
+        name: 'News',
+        type: 'dropdown',
+        items: [
+            { name: 'Latest News', to: '#' },
+            { name: 'Announcements', to: '#' },
+        ],
+    },
+    {
+        name: 'Contact',
+        type: 'link',
+        to: '/contact',
+    },
+])
 
 const toggleMobileMenu = () => {
     isMobileMenuOpen.value = !isMobileMenuOpen.value
@@ -48,123 +99,42 @@ const toggleSubmenu = (menuName: string) => {
                         <div class="hidden md:flex items-center space-x-1">
                             <NavigationMenu>
                                 <NavigationMenuList>
-                                    <NavigationMenuItem>
+                                    <NavigationMenuItem
+                                        v-for="item in navigationItems"
+                                        :key="item.name"
+                                    >
+                                        <!-- Link Type -->
                                         <NavigationMenuLink
+                                            v-if="item.type === 'link'"
                                             as-child
                                             :class="navigationMenuTriggerStyle()"
                                         >
-                                            <RouterLink :to="{ name: 'home' }">Home</RouterLink>
+                                            <RouterLink :to="item.to!">{{ item.name }}</RouterLink>
                                         </NavigationMenuLink>
-                                    </NavigationMenuItem>
-                                    <NavigationMenuItem>
-                                        <NavigationMenuTrigger>About</NavigationMenuTrigger>
-                                        <NavigationMenuContent>
-                                            <ul class="grid w-50 gap-2">
-                                                <li>
-                                                    <NavigationMenuLink as-child
-                                                        ><RouterLink
-                                                            :to="{ name: 'vision-mission' }"
-                                                            class="block p-3 hover:bg-accent rounded-md"
-                                                            >Vision & Mission</RouterLink
-                                                        ></NavigationMenuLink
+
+                                        <!-- Dropdown Type -->
+                                        <template v-else-if="item.type === 'dropdown'">
+                                            <NavigationMenuTrigger>{{
+                                                item.name
+                                            }}</NavigationMenuTrigger>
+                                            <NavigationMenuContent>
+                                                <ul class="grid w-50 gap-2">
+                                                    <li
+                                                        v-for="subItem in item.items"
+                                                        :key="subItem.name"
                                                     >
-                                                </li>
-                                                <li>
-                                                    <NavigationMenuLink as-child
-                                                        ><RouterLink
-                                                            to="#"
-                                                            class="block p-3 hover:bg-accent rounded-md"
-                                                            >Clubs</RouterLink
-                                                        ></NavigationMenuLink
-                                                    >
-                                                </li>
-                                                <li>
-                                                    <NavigationMenuLink as-child
-                                                        ><RouterLink
-                                                            to="#"
-                                                            class="block p-3 hover:bg-accent rounded-md"
-                                                            >Student Council</RouterLink
-                                                        ></NavigationMenuLink
-                                                    >
-                                                </li>
-                                            </ul>
-                                        </NavigationMenuContent>
-                                    </NavigationMenuItem>
-                                    <NavigationMenuItem>
-                                        <NavigationMenuTrigger>Academics</NavigationMenuTrigger>
-                                        <NavigationMenuContent>
-                                            <ul class="grid w-50 gap-2">
-                                                <li>
-                                                    <NavigationMenuLink as-child
-                                                        ><RouterLink
-                                                            to="#"
-                                                            class="block p-3 hover:bg-accent rounded-md"
-                                                            >Enrollment</RouterLink
-                                                        ></NavigationMenuLink
-                                                    >
-                                                </li>
-                                                <li>
-                                                    <NavigationMenuLink as-child
-                                                        ><RouterLink
-                                                            to="#"
-                                                            class="block p-3 hover:bg-accent rounded-md"
-                                                            >Tesda</RouterLink
-                                                        ></NavigationMenuLink
-                                                    >
-                                                </li>
-                                                <li>
-                                                    <NavigationMenuLink as-child
-                                                        ><RouterLink
-                                                            to="#"
-                                                            class="block p-3 hover:bg-accent rounded-md"
-                                                            >College Programs</RouterLink
-                                                        ></NavigationMenuLink
-                                                    >
-                                                </li>
-                                                <li>
-                                                    <NavigationMenuLink as-child
-                                                        ><RouterLink
-                                                            to="#"
-                                                            class="block p-3 hover:bg-accent rounded-md"
-                                                            >Scholarship</RouterLink
-                                                        ></NavigationMenuLink
-                                                    >
-                                                </li>
-                                            </ul>
-                                        </NavigationMenuContent>
-                                    </NavigationMenuItem>
-                                    <NavigationMenuItem>
-                                        <NavigationMenuTrigger>News</NavigationMenuTrigger>
-                                        <NavigationMenuContent>
-                                            <ul class="grid w-50 gap-2">
-                                                <li>
-                                                    <NavigationMenuLink as-child
-                                                        ><RouterLink
-                                                            to="#"
-                                                            class="block p-3 hover:bg-accent rounded-md"
-                                                            >Latest News</RouterLink
-                                                        ></NavigationMenuLink
-                                                    >
-                                                </li>
-                                                <li>
-                                                    <NavigationMenuLink as-child
-                                                        ><RouterLink
-                                                            to="#"
-                                                            class="block p-3 hover:bg-accent rounded-md"
-                                                            >Announcements</RouterLink
-                                                        ></NavigationMenuLink
-                                                    >
-                                                </li>
-                                            </ul>
-                                        </NavigationMenuContent>
-                                    </NavigationMenuItem>
-                                    <NavigationMenuItem>
-                                        <NavigationMenuLink
-                                            as-child
-                                            :class="navigationMenuTriggerStyle()"
-                                        >
-                                            <RouterLink to="/contact">Contact</RouterLink>
-                                        </NavigationMenuLink>
+                                                        <NavigationMenuLink as-child>
+                                                            <RouterLink
+                                                                :to="subItem.to"
+                                                                class="block p-3 hover:bg-accent rounded-md"
+                                                            >
+                                                                {{ subItem.name }}
+                                                            </RouterLink>
+                                                        </NavigationMenuLink>
+                                                    </li>
+                                                </ul>
+                                            </NavigationMenuContent>
+                                        </template>
                                     </NavigationMenuItem>
                                 </NavigationMenuList>
                             </NavigationMenu>
@@ -193,114 +163,47 @@ const toggleSubmenu = (menuName: string) => {
                         class="absolute top-20 left-0 w-full bg-white border-b shadow-xl md:hidden z-40 max-h-[calc(100vh-5rem)] overflow-y-auto"
                     >
                         <div class="flex flex-col p-4 pb-6 space-y-2">
-                            <RouterLink
-                                :to="{ name: 'home' }"
-                                class="flex items-center w-full px-4 py-3 text-sm font-medium hover:bg-accent rounded-lg"
-                            >
-                                Home
-                            </RouterLink>
-
-                            <div>
-                                <button
-                                    @click="toggleSubmenu('abouts')"
-                                    class="flex items-center justify-between w-full px-4 py-3 text-sm font-medium hover:bg-accent rounded-lg group"
+                            <template v-for="item in navigationItems" :key="item.name">
+                                <!-- Link Type -->
+                                <RouterLink
+                                    v-if="item.type === 'link'"
+                                    :to="item.to!"
+                                    class="flex items-center w-full px-4 py-3 text-sm font-medium hover:bg-accent rounded-lg"
                                 >
-                                    <span>Abouts</span>
-                                    <ChevronDown
-                                        class="w-4 h-4 transition-transform duration-200 text-gray-500"
-                                        :class="{ 'rotate-180': activeSubmenu === 'abouts' }"
-                                    />
-                                </button>
+                                    {{ item.name }}
+                                </RouterLink>
 
-                                <div
-                                    v-if="activeSubmenu === 'abouts'"
-                                    class="px-4 py-2 space-y-1 bg-gray-50 rounded-b-lg mx-2 mt-1"
-                                >
-                                    <RouterLink
-                                        :to="{ name: 'vision-mission' }"
-                                        class="block px-4 py-2 text-sm rounded-md hover:text-accent-foreground hover:bg-accent"
-                                        >Vision & Mission</RouterLink
+                                <!-- Dropdown Type -->
+                                <div v-else-if="item.type === 'dropdown'">
+                                    <button
+                                        @click="toggleSubmenu(item.name.toLowerCase())"
+                                        class="flex items-center justify-between w-full px-4 py-3 text-sm font-medium hover:bg-accent rounded-lg group"
                                     >
-                                    <RouterLink
-                                        to="#"
-                                        class="block px-4 py-2 text-sm rounded-md hover:text-accent-foreground hover:bg-accent"
-                                        >Clubs</RouterLink
+                                        <span>{{ item.name }}</span>
+                                        <ChevronDown
+                                            class="w-4 h-4 transition-transform duration-200 text-gray-500"
+                                            :class="{
+                                                'rotate-180':
+                                                    activeSubmenu === item.name.toLowerCase(),
+                                            }"
+                                        />
+                                    </button>
+
+                                    <div
+                                        v-if="activeSubmenu === item.name.toLowerCase()"
+                                        class="px-4 py-2 space-y-1 bg-gray-50 rounded-b-lg mx-2 mt-1"
                                     >
-                                    <RouterLink
-                                        to="#"
-                                        class="block px-4 py-2 text-sm rounded-md hover:text-accent-foreground hover:bg-accent"
-                                        >Student Council</RouterLink
-                                    >
+                                        <RouterLink
+                                            v-for="subItem in item.items"
+                                            :key="subItem.name"
+                                            :to="subItem.to"
+                                            class="block px-4 py-2 text-sm rounded-md hover:text-accent-foreground hover:bg-accent"
+                                        >
+                                            {{ subItem.name }}
+                                        </RouterLink>
+                                    </div>
                                 </div>
-                            </div>
-
-                            <div>
-                                <button
-                                    @click="toggleSubmenu('academics')"
-                                    class="flex items-center justify-between w-full px-4 py-3 text-sm font-medium hover:bg-accent rounded-lg group"
-                                >
-                                    <span>Academics</span>
-                                    <ChevronDown
-                                        class="w-4 h-4 transition-transform duration-200 text-gray-500"
-                                        :class="{ 'rotate-180': activeSubmenu === 'academics' }"
-                                    />
-                                </button>
-
-                                <div
-                                    v-if="activeSubmenu === 'academics'"
-                                    class="px-4 py-2 space-y-1 bg-gray-50 rounded-b-lg mx-2 mt-1"
-                                >
-                                    <RouterLink
-                                        to="#"
-                                        class="block px-4 py-2 text-sm rounded-md hover:text-accent-foreground hover:bg-accent"
-                                        >Enrollment</RouterLink
-                                    >
-                                    <RouterLink
-                                        to="#"
-                                        class="block px-4 py-2 text-sm rounded-md hover:text-accent-foreground hover:bg-accent"
-                                        >Tesda</RouterLink
-                                    >
-                                    <RouterLink
-                                        to="#"
-                                        class="block px-4 py-2 text-sm rounded-md hover:text-accent-foreground hover:bg-accent"
-                                        >College Programs</RouterLink
-                                    >
-                                    <RouterLink
-                                        to="#"
-                                        class="block px-4 py-2 text-sm rounded-md hover:text-accent-foreground hover:bg-accent"
-                                        >Scholarship</RouterLink
-                                    >
-                                </div>
-                            </div>
-
-                            <div>
-                                <button
-                                    @click="toggleSubmenu('news')"
-                                    class="flex items-center justify-between w-full px-4 py-3 text-sm font-medium hover:bg-accent rounded-lg group"
-                                >
-                                    <span>News</span>
-                                    <ChevronDown
-                                        class="w-4 h-4 transition-transform duration-200 text-gray-500"
-                                        :class="{ 'rotate-180': activeSubmenu === 'news' }"
-                                    />
-                                </button>
-
-                                <div
-                                    v-if="activeSubmenu === 'news'"
-                                    class="px-4 py-2 space-y-1 bg-gray-50 rounded-b-lg mx-2 mt-1"
-                                >
-                                    <RouterLink
-                                        to="#"
-                                        class="block px-4 py-2 text-sm rounded-md hover:text-accent-foreground hover:bg-accent"
-                                        >Latest News</RouterLink
-                                    >
-                                    <RouterLink
-                                        to="#"
-                                        class="block px-4 py-2 text-sm rounded-md hover:text-accent-foreground hover:bg-accent"
-                                        >Announcements</RouterLink
-                                    >
-                                </div>
-                            </div>
+                            </template>
 
                             <Separator class="my-4" />
 
