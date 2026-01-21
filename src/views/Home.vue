@@ -58,8 +58,13 @@ const carouselApi = ref<CarouselApi>()
 const current = ref(0)
 const count = ref(0)
 
-const plugin = Autoplay({
+const firstCarouselAutoplay = Autoplay({
   delay: 3000,
+  stopOnMouseEnter: true,
+  stopOnInteraction: false,
+})
+const secondCarouselAutoplay = Autoplay({
+  delay: 2500,
   stopOnMouseEnter: true,
   stopOnInteraction: false,
 })
@@ -117,10 +122,10 @@ function goToSlide(index: number) {
   <section id="home" class="relative w-full">
     <Carousel 
       class="relative overflow-hidden h-150 md:h-125 sm:h-100 max-sm:h-87.5 w-full mask-image:[linear-gradient(to_bottom,rgba(0,0,0,1)_0%,rgba(0,0,0,1)_92%,rgba(0,0,0,0)_100%)]"
-      :plugins="[plugin]"
+      :plugins="[firstCarouselAutoplay]"
       @init-api="setApi"
-      @mouseenter="plugin.stop"
-      @mouseLeave="[plugin.reset(), plugin.play()]"
+      @mouseenter="firstCarouselAutoplay.stop"
+      @mouseLeave="[firstCarouselAutoplay.reset(), firstCarouselAutoplay.play()]"
     >
       <CarouselContent class="ml-0">
         <CarouselItem v-for="slide in heroSlides" :key="slide.id" class="pl-0">
@@ -194,8 +199,8 @@ function goToSlide(index: number) {
   </section>
 
       <section id="schoolHero" class="py-24 bg-background scroll-mt-16">
-        <div class="w-300 p-8 mx-auto">
-            <div class="grid md:grid-cols-2 gap-12 lg:gap-24 items-center mb-24">
+        <div class="max-w-7xl px-4 sm:px-6 lg:px-8 mx-auto">
+            <div class="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
                 <div class="order-2 md:order-1 px-4 md:px-0">
                     <h3 class="text-3xl md:text-4xl font-bold mb-6 text-foreground leading-tight">
                         St. Francis Xavier College
@@ -215,14 +220,14 @@ function goToSlide(index: number) {
                         </p>
                     </div>
                 </div>
-                <div class="order-1 md:order-2 relative group">
+                <div class="order-1 md:order-2 relative group max-w-lg mx-auto">
                     <div
                         class="absolute -inset-4 bg-primary/10 rounded-2xl -z-10 group-hover:bg-primary/20 transition-colors duration-500"
                     ></div>
                     <img
                         src="@/assets/images/enrollment-marketing.jpg"
                         alt="SFXC Mission"
-                        class="rounded-xl w-full object-cover aspect-4/3"
+                        class="rounded-xl w-full object-cover aspect-video"
                     />
                 </div>
             </div>
@@ -250,6 +255,9 @@ function goToSlide(index: number) {
               loop: true,
             }"
             @init-api="setProgramsApi"
+            :plugins="[secondCarouselAutoplay]"
+            @mouseenter="secondCarouselAutoplay.stop"
+            @mouseLeave="[secondCarouselAutoplay.reset(), secondCarouselAutoplay.play()]"
           >
             <CarouselContent class="-ml-4">
               <CarouselItem 
@@ -290,6 +298,119 @@ function goToSlide(index: number) {
               @click="goToProgramSlide(index)"
               :aria-label="`Go to program ${index + 1}`"
             />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- School Image Hero Section -->
+    <section id="schoolImage" class="relative py-32 md:py-40 lg:py-48 overflow-hidden">
+      <!-- Background Image -->
+      <div class="absolute inset-0">
+        <img
+          src="@/assets/images/sfxc-building.jpg"
+          alt="School Campus"
+          class="w-full h-full object-cover"
+        />
+        <div class="absolute inset-0 bg-linear-to-t from-black/70 via-black/30 to-transparent"></div>
+      </div>
+
+      <!-- Content -->
+      <div class="relative z-10 px-4 sm:px-6 lg:px-8 h-full flex items-end">
+        <div class="max-w-7xl mx-auto w-full pb-12 md:pb-16">
+          <h2 class="text-3xl md:text-5xl lg:text-6xl font-bold text-white leading-tight max-w-2xl">
+            Bringing Art to everything
+          </h2>
+        </div>
+      </div>
+    </section>
+
+    <!-- News and Announcements Section -->
+    <section id="news" class="py-16 md:py-24 bg-background">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl md:text-4xl font-bold text-foreground mb-4">News & Announcements</h2>
+          <p class="text-muted-foreground text-lg">Stay updated with the latest happenings at SFXC</p>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-6 lg:gap-8">
+          <!-- Featured News - Large Image -->
+          <div class="group relative overflow-hidden rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300">
+            <div class="aspect-4/3 overflow-hidden">
+              <img
+                src="https://images.unsplash.com/photo-1523580494863-6f3031224c94?w=800&h=600&fit=crop"
+                alt="Featured News"
+                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+              />
+            </div>
+            <div class="absolute inset-0 bg-linear-to-t from-black/80 via-black/20 to-transparent"></div>
+            <div class="absolute bottom-0 left-0 right-0 p-6 text-white">
+              <span class="inline-block px-3 py-1 bg-primary rounded-full text-xs font-semibold mb-3">Featured</span>
+              <h3 class="text-xl md:text-2xl font-bold mb-2 line-clamp-2">
+                Annual Sports Festival 2026: Celebrating Excellence in Athletics
+              </h3>
+              <p class="text-sm text-white/80 mb-3 line-clamp-2">
+                Join us for three days of exciting sports competitions, team spirit, and memorable moments.
+              </p>
+              <span class="text-xs text-white/70">January 20, 2026</span>
+            </div>
+          </div>
+
+          <!-- Mini News - 3 Small Images -->
+          <div class="flex flex-col gap-6">
+            <!-- Mini News 1 -->
+            <div class="group flex gap-4 bg-card rounded-xl overflow-hidden shadow hover:shadow-lg transition-all duration-300">
+              <div class="w-32 md:w-40 shrink-0 overflow-hidden">
+                <img
+                  src="https://images.unsplash.com/photo-1427504494785-3a9ca7044f45?w=400&h=300&fit=crop"
+                  alt="News 1"
+                  class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                />
+              </div>
+              <div class="flex-1 py-4 pr-4">
+                <span class="inline-block px-2 py-1 bg-primary/10 text-primary rounded text-xs font-semibold mb-2">Academic</span>
+                <h4 class="font-bold text-foreground mb-2 line-clamp-2 text-sm md:text-base">
+                  Scholarship Applications Now Open for Academic Year 2026-2027
+                </h4>
+                <span class="text-xs text-muted-foreground">January 18, 2026</span>
+              </div>
+            </div>
+
+            <!-- Mini News 2 -->
+            <div class="group flex gap-4 bg-card rounded-xl overflow-hidden shadow hover:shadow-lg transition-all duration-300">
+              <div class="w-32 md:w-40 shrink-0 overflow-hidden">
+                <img
+                  src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=400&h=300&fit=crop"
+                  alt="News 2"
+                  class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                />
+              </div>
+              <div class="flex-1 py-4 pr-4">
+                <span class="inline-block px-2 py-1 bg-primary/10 text-primary rounded text-xs font-semibold mb-2">Events</span>
+                <h4 class="font-bold text-foreground mb-2 line-clamp-2 text-sm md:text-base">
+                  Cultural Week 2026: Showcasing Student Talents and Creativity
+                </h4>
+                <span class="text-xs text-muted-foreground">January 15, 2026</span>
+              </div>
+            </div>
+
+            <!-- Mini News 3 -->
+            <div class="group flex gap-4 bg-card rounded-xl overflow-hidden shadow hover:shadow-lg transition-all duration-300">
+              <div class="w-32 md:w-40 shrink-0 overflow-hidden">
+                <img
+                  src="https://images.unsplash.com/photo-1541339907198-e08756dedf3f?w=400&h=300&fit=crop"
+                  alt="News 3"
+                  class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                />
+              </div>
+              <div class="flex-1 py-4 pr-4">
+                <span class="inline-block px-2 py-1 bg-primary/10 text-primary rounded text-xs font-semibold mb-2">Achievement</span>
+                <h4 class="font-bold text-foreground mb-2 line-clamp-2 text-sm md:text-base">
+                  SFXC Students Win National Science Competition
+                </h4>
+                <span class="text-xs text-muted-foreground">January 12, 2026</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>
