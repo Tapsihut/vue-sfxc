@@ -136,10 +136,54 @@ import { Card, CardContent, CardHeader } from '@/components/ui/card'
         </div>
     </section>
 
-    <section id="mission" class="py-24 bg-background scroll-mt-16">
+    <section id="vision" class="py-24 bg-background scroll-mt-16">
         <div class="container mx-auto px-4 md:px-8">
             <div class="grid md:grid-cols-2 gap-12 lg:gap-24 items-center mb-24">
                 <div class="order-2 md:order-1 px-4 md:px-0">
+                    <div
+                        class="inline-flex items-center gap-2 text-primary font-bold mb-4 uppercase tracking-wider text-sm"
+                    >
+                        Our Vision
+                    </div>
+                    <h3 class="text-3xl md:text-4xl font-bold mb-6 text-foreground leading-tight">
+                        Empowered & Excellence-Driven
+                    </h3>
+                    <p class="text-lg text-muted-foreground leading-relaxed">
+                        St. Francis Xavier College is a dynamic, empowered, excellence-driven
+                        educational institution committed to produce globally-competent and
+                        versatile learners for a more meaningful life.
+                    </p>
+                </div>
+                <div class="order-1 md:order-2 relative group px-6">
+                    <div
+                        class="-skew-x-12 overflow-hidden rounded-xl shadow-xl border border-border"
+                    >
+                        <img
+                            src="https://placehold.co/600x400"
+                            alt="SFXC Vision"
+                            class="w-full object-cover aspect-4/3 skew-x-12 scale-125"
+                        />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="mission" class="pb-24 bg-background scroll-mt-16">
+        <div class="container mx-auto px-4 md:px-8">
+            <div class="grid md:grid-cols-2 gap-12 lg:gap-24 items-center mb-24">
+                <div class="relative group px-6">
+                    <div
+                        class="-skew-x-12 overflow-hidden rounded-xl shadow-xl border border-border"
+                    >
+                        <img
+                            src="https://placehold.co/600x400"
+                            alt="SFXC Mission"
+                            class="w-full object-cover aspect-4/3 skew-x-12 scale-125"
+                        />
+                    </div>
+                </div>
+                <div>
                     <div
                         class="inline-flex items-center gap-2 text-primary font-bold mb-4 uppercase tracking-wider text-sm"
                     >
@@ -159,56 +203,6 @@ import { Card, CardContent, CardHeader } from '@/components/ui/card'
                         </p>
                         <p>Is inculcated to guarantee genuine transformation.</p>
                     </div>
-                </div>
-                <div class="order-1 md:order-2 relative group px-6">
-                    <div
-                        class="absolute -inset-4 bg-primary/10 rounded-2xl -z-10 group-hover:bg-primary/20 transition-colors duration-500 -skew-x-12"
-                    ></div>
-                    <div
-                        class="-skew-x-12 overflow-hidden rounded-xl shadow-xl border border-border"
-                    >
-                        <img
-                            src="https://placehold.co/600x400"
-                            alt="SFXC Mission"
-                            class="w-full object-cover aspect-4/3 skew-x-12 scale-125"
-                        />
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="vision" class="pb-24 bg-background scroll-mt-16">
-        <div class="container mx-auto px-4 md:px-8">
-            <div class="grid md:grid-cols-2 gap-12 lg:gap-24 items-center mb-24">
-                <div class="relative group px-6">
-                    <div
-                        class="absolute -inset-4 bg-secondary/30 rounded-2xl -z-10 group-hover:bg-secondary/50 transition-colors duration-500 -skew-x-12"
-                    ></div>
-                    <div
-                        class="-skew-x-12 overflow-hidden rounded-xl shadow-xl border border-border"
-                    >
-                        <img
-                            src="https://placehold.co/600x400"
-                            alt="SFXC Vision"
-                            class="w-full object-cover aspect-4/3 skew-x-12 scale-125"
-                        />
-                    </div>
-                </div>
-                <div>
-                    <div
-                        class="inline-flex items-center gap-2 text-primary font-bold mb-4 uppercase tracking-wider text-sm"
-                    >
-                        Our Vision
-                    </div>
-                    <h3 class="text-3xl md:text-4xl font-bold mb-6 text-foreground leading-tight">
-                        Empowered & Excellence-Driven
-                    </h3>
-                    <p class="text-lg text-muted-foreground leading-relaxed">
-                        St. Francis Xavier College is a dynamic, empowered, excellence-driven
-                        educational institution committed to produce globally-competent and
-                        versatile learners for a more meaningful life.
-                    </p>
                 </div>
             </div>
         </div>
