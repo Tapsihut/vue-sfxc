@@ -37,7 +37,7 @@ import { Card, CardContent, CardHeader } from '@/components/ui/card'
     </section>
 
     <section id="mission" class="py-24 bg-background scroll-mt-16">
-        <div class="w-300 p-8 mx-auto">
+        <div class="container mx-auto px-4 md:px-8">
             <div class="grid md:grid-cols-2 gap-12 lg:gap-24 items-center mb-24">
                 <div class="order-2 md:order-1 px-4 md:px-0">
                     <div
@@ -57,38 +57,43 @@ import { Card, CardContent, CardHeader } from '@/components/ui/card'
                             It pledges to provide the learners a curricular framework to instill
                             creative and critical thinking in a changing world.
                         </p>
-                        <p>
-                            Cultural Preservation, Environmental Care and Values Formation are
-                            inculcated to guarantee genuine transformation.
-                        </p>
+                        <p>Is inculcated to guarantee genuine transformation.</p>
                     </div>
                 </div>
-                <div class="order-1 md:order-2 relative group">
+                <div class="order-1 md:order-2 relative group px-6">
                     <div
-                        class="absolute -inset-4 bg-primary/10 rounded-2xl -z-10 group-hover:bg-primary/20 transition-colors duration-500"
+                        class="absolute -inset-4 bg-primary/10 rounded-2xl -z-10 group-hover:bg-primary/20 transition-colors duration-500 -skew-x-12"
                     ></div>
-                    <img
-                        src="https://placehold.co/600x400"
-                        alt="SFXC Mission"
-                        class="rounded-xl shadow-xl w-full object-cover aspect-4/3 border border-border"
-                    />
+                    <div
+                        class="-skew-x-12 overflow-hidden rounded-xl shadow-xl border border-border"
+                    >
+                        <img
+                            src="https://placehold.co/600x400"
+                            alt="SFXC Mission"
+                            class="w-full object-cover aspect-4/3 skew-x-12 scale-125"
+                        />
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
     <section id="vision" class="pb-24 bg-background scroll-mt-16">
-        <div class="w-300 p-8 mx-auto">
+        <div class="container mx-auto px-4 md:px-8">
             <div class="grid md:grid-cols-2 gap-12 lg:gap-24 items-center mb-24">
-                <div class="relative group">
+                <div class="relative group px-6">
                     <div
-                        class="absolute -inset-4 bg-secondary/30 rounded-2xl -z-10 group-hover:bg-secondary/50 transition-colors duration-500"
+                        class="absolute -inset-4 bg-secondary/30 rounded-2xl -z-10 group-hover:bg-secondary/50 transition-colors duration-500 -skew-x-12"
                     ></div>
-                    <img
-                        src="https://placehold.co/600x400"
-                        alt="SFXC Vision"
-                        class="rounded-xl shadow-xl w-full object-cover aspect-4/3 border border-border"
-                    />
+                    <div
+                        class="-skew-x-12 overflow-hidden rounded-xl shadow-xl border border-border"
+                    >
+                        <img
+                            src="https://placehold.co/600x400"
+                            alt="SFXC Vision"
+                            class="w-full object-cover aspect-4/3 skew-x-12 scale-125"
+                        />
+                    </div>
                 </div>
                 <div>
                     <div
@@ -126,7 +131,7 @@ import { Card, CardContent, CardHeader } from '@/components/ui/card'
             </svg>
         </div>
         <main
-            class="w-300 p-8 mx-auto relative z-10 flex md:flex-row justify-center flex-col gap-15 md:gap-10 lg:gap-25 px-4 lg:px-8 py-8"
+            class="container mx-auto px-4 md:px-8 relative z-10 flex md:flex-row justify-center flex-col gap-15 md:gap-10 lg:gap-25 py-8"
         >
             <!-- Left Side: Header -->
             <div class="max-w-137.5 md:mt-16 text-center md:text-left">
