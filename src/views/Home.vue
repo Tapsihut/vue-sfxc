@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted } from 'vue'
+import { ref } from 'vue'
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel'
 import type { CarouselApi } from '@/components/ui/carousel'
 import sfxcCauldron from '@/assets/images/cauldron.jpg'
-
+import Autoplay from 'embla-carousel-autoplay'
 type HeroButton = {
   text: string
   href: string
@@ -57,7 +57,12 @@ const heroSlides: HeroSlide[] = [
 const carouselApi = ref<CarouselApi>()
 const current = ref(0)
 const count = ref(0)
-let autoPlayInterval: ReturnType<typeof setInterval> | null = null
+
+const plugin = Autoplay({
+  delay: 3000,
+  stopOnMouseEnter: true,
+  stopOnInteraction: false,
+})
 
 const programsCarouselApi = ref<CarouselApi>()
 const programsCurrent = ref(0)
@@ -79,9 +84,12 @@ function setApi(api: CarouselApi) {
   count.value = api.scrollSnapList().length
   current.value = api.selectedScrollSnap()
 
-  api.on('select', () => {
+  const updateCurrent = () => {
     current.value = api.selectedScrollSnap()
-  })
+  }
+
+  api.on('select', updateCurrent)
+  api.on('reInit', updateCurrent)
 }
 
 function setProgramsApi(api: CarouselApi) {
@@ -102,47 +110,17 @@ function goToProgramSlide(index: number) {
 
 function goToSlide(index: number) {
   carouselApi.value?.scrollTo(index)
-  resetAutoPlay()
 }
-
-function startAutoPlay() {
-  stopAutoPlay()
-  autoPlayInterval = setInterval(() => {
-    if (carouselApi.value) {
-      const nextIndex = (current.value + 1) % count.value
-      carouselApi.value.scrollTo(nextIndex)
-    }
-  }, 5000)
-}
-
-function stopAutoPlay() {
-  if (autoPlayInterval) {
-    clearInterval(autoPlayInterval)
-    autoPlayInterval = null
-  }
-}
-
-function resetAutoPlay() {
-  stopAutoPlay()
-  startAutoPlay()
-}
-
-onMounted(() => {
-  startAutoPlay()
-})
-
-onUnmounted(() => {
-  stopAutoPlay()
-})
 </script>
 
 <template>
   <section id="home" class="relative w-full">
     <Carousel 
       class="relative overflow-hidden h-150 md:h-125 sm:h-100 max-sm:h-87.5 w-full mask-image:[linear-gradient(to_bottom,rgba(0,0,0,1)_0%,rgba(0,0,0,1)_92%,rgba(0,0,0,0)_100%)]"
+      :plugins="[plugin]"
       @init-api="setApi"
-      @mouseenter="stopAutoPlay"
-      @mouseleave="startAutoPlay"
+      @mouseenter="plugin.stop"
+      @mouseLeave="[plugin.reset(), plugin.play()]"
     >
       <CarouselContent class="ml-0">
         <CarouselItem v-for="slide in heroSlides" :key="slide.id" class="pl-0">
