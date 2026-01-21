@@ -2,7 +2,7 @@
 import { ref, onMounted, onUnmounted } from 'vue'
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel'
 import type { CarouselApi } from '@/components/ui/carousel'
-import sfxcLogo from '@/assets/images/cauldron.jpg'
+import sfxcCauldron from '@/assets/images/cauldron.jpg'
 
 type HeroButton = {
   text: string
@@ -23,7 +23,7 @@ const heroSlides: HeroSlide[] = [
     id: 1,
     title: '',
     description: '',
-    image: sfxcLogo,
+    image: sfxcCauldron,
   },
   {
     id: 2,
@@ -59,6 +59,19 @@ const current = ref(0)
 const count = ref(0)
 let autoPlayInterval: ReturnType<typeof setInterval> | null = null
 
+const programsCarouselApi = ref<CarouselApi>()
+const programsCurrent = ref(0)
+const programsCount = ref(0)
+
+const programs = [
+  { id: 1, image: sfxcCauldron, alt: 'Course 1' },
+  { id: 2, image: sfxcCauldron, alt: 'Course 2' },
+  { id: 3, image: sfxcCauldron, alt: 'Course 3' },
+  { id: 4, image: sfxcCauldron, alt: 'Course 4' },
+  { id: 5, image: sfxcCauldron, alt: 'Course 5' },
+  { id: 6, image: sfxcCauldron, alt: 'Course 6' },
+]
+
 function setApi(api: CarouselApi) {
   carouselApi.value = api
   if (!api) return
@@ -69,6 +82,22 @@ function setApi(api: CarouselApi) {
   api.on('select', () => {
     current.value = api.selectedScrollSnap()
   })
+}
+
+function setProgramsApi(api: CarouselApi) {
+  programsCarouselApi.value = api
+  if (!api) return
+
+  programsCount.value = api.scrollSnapList().length
+  programsCurrent.value = api.selectedScrollSnap()
+
+  api.on('select', () => {
+    programsCurrent.value = api.selectedScrollSnap()
+  })
+}
+
+function goToProgramSlide(index: number) {
+  programsCarouselApi.value?.scrollTo(index)
 }
 
 function goToSlide(index: number) {
@@ -220,6 +249,72 @@ onUnmounted(() => {
                 </div>
             </div>
         </div>
+    </section>
+
+    <!-- Programs Offered Section -->
+    <section id="academics" class="py-12 md:py-16 lg:py-20 bg-gray-50 relative">
+      <div class="absolute inset-0 bg-cover bg-center bg-fixed" style="background-image: url('/6.jpg');"></div>
+      <div class="absolute inset-0 bg-white bg-opacity-90"></div>
+      
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div class="text-center mb-12 md:mb-16">
+          <h3 class="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 text-primary">Program Offered</h3>
+          <p class="text-sm sm:text-base text-gray-700 max-w-2xl mx-auto">
+            Undergraduate Program offers.
+          </p>
+        </div>
+
+        <div class="relative">
+          <Carousel
+            class="relative w-full"
+            :opts="{
+              align: 'start',
+              loop: true,
+            }"
+            @init-api="setProgramsApi"
+          >
+            <CarouselContent class="-ml-4">
+              <CarouselItem 
+                v-for="program in programs" 
+                :key="program.id" 
+                class="pl-4 md:basis-1/2 lg:basis-1/3"
+              >
+                <div class="p-1">
+                  <div class="aspect-square overflow-hidden rounded-lg">
+                    <img 
+                      :src="program.image" 
+                      :alt="program.alt" 
+                      class="w-full h-full object-cover hover:scale-110 transition-transform duration-300"
+                    />
+                  </div>
+                </div>
+              </CarouselItem>
+            </CarouselContent>
+            
+            <CarouselPrevious 
+              class="absolute top-1/2 -translate-y-1/2 -left-12 max-lg:hidden"
+            />
+            <CarouselNext 
+              class="absolute top-1/2 -translate-y-1/2 -right-12 max-lg:hidden"
+            />
+          </Carousel>
+
+          <div class="flex justify-center gap-2 mt-8">
+            <button 
+              v-for="(program, index) in programs" 
+              :key="program.id"
+              :class="[
+                'w-2.5 h-2.5 rounded-full cursor-pointer transition-all duration-300 border-none p-0',
+                programsCurrent === index 
+                  ? 'bg-primary scale-110' 
+                  : 'bg-gray-400'
+              ]"
+              @click="goToProgramSlide(index)"
+              :aria-label="`Go to program ${index + 1}`"
+            />
+          </div>
+        </div>
+      </div>
     </section>
 
 
