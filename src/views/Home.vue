@@ -2,7 +2,7 @@
 import { ref, onMounted, onUnmounted } from 'vue'
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel'
 import type { CarouselApi } from '@/components/ui/carousel'
-import sfxcLogo from '@/assets/images/4.jpg'
+import sfxcLogo from '@/assets/images/cauldron.jpg'
 
 type HeroButton = {
   text: string
@@ -213,7 +213,7 @@ onUnmounted(() => {
                         class="absolute -inset-4 bg-primary/10 rounded-2xl -z-10 group-hover:bg-primary/20 transition-colors duration-500"
                     ></div>
                     <img
-                        src="@/assets/images/5.jpg"
+                        src="@/assets/images/enrollment-marketing.jpg"
                         alt="SFXC Mission"
                         class="rounded-xl w-full object-cover aspect-4/3"
                     />
