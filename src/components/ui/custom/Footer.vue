@@ -1,14 +1,5 @@
 <script setup lang="ts">
-import {
-    Mail,
-    Phone,
-    MapPin,
-    Facebook,
-    Twitter,
-    Instagram,
-    Linkedin,
-    Youtube,
-} from 'lucide-vue-next'
+import { Mail, Phone, MapPin, Facebook } from 'lucide-vue-next'
 import { Separator } from '@/components/ui/separator'
 </script>
 
