@@ -64,12 +64,12 @@ const programsCurrent = ref(0)
 const programsCount = ref(0)
 
 const programs = [
-  { id: 1, image: sfxcCauldron, alt: 'Course 1' },
-  { id: 2, image: sfxcCauldron, alt: 'Course 2' },
-  { id: 3, image: sfxcCauldron, alt: 'Course 3' },
-  { id: 4, image: sfxcCauldron, alt: 'Course 4' },
-  { id: 5, image: sfxcCauldron, alt: 'Course 5' },
-  { id: 6, image: sfxcCauldron, alt: 'Course 6' },
+  { id: 1, image: sfxcCauldron, alt: 'Course 1', name: 'Program 1' },
+  { id: 2, image: sfxcCauldron, alt: 'Course 2', name: 'Program 2' },
+  { id: 3, image: sfxcCauldron, alt: 'Course 3', name: 'Program 3' },
+  { id: 4, image: sfxcCauldron, alt: 'Course 4', name: 'Program 4' },
+  { id: 5, image: sfxcCauldron, alt: 'Course 5', name: 'Program 5' },
+  { id: 6, image: sfxcCauldron, alt: 'Course 6', name: 'Program 6' },
 ]
 
 function setApi(api: CarouselApi) {
@@ -316,6 +316,88 @@ onUnmounted(() => {
         </div>
       </div>
     </section>
+
+    <!-- Features Section -->
+    <section class="py-10 lg:py-14 bg-background">
+      <div class="max-w-340 px-4 sm:px-6 lg:px-8 mx-auto">
+        <!-- Grid -->
+        <div class="lg:grid lg:grid-cols-12 lg:gap-16 lg:items-center">
+          <div class="lg:col-span-7">
+            <!-- Grid -->
+            <div class="grid grid-cols-12 gap-2 sm:gap-6 items-center lg:-translate-x-10">
+              <div class="col-span-3">
+                <img class="rounded-xl" :src="sfxcCauldron" alt="Features Image">
+              </div>
+
+              <div class="col-span-4">
+                <img class="rounded-xl" :src="sfxcCauldron" alt="Features Image">
+              </div>
+
+              <div class="col-span-5">
+                <img class="rounded-xl" :src="sfxcCauldron" alt="Features Image">
+              </div>
+            </div>
+            <!-- End Grid -->
+          </div>
+          <!-- End Col -->
+
+          <div class="mt-5 sm:mt-10 lg:mt-0 lg:col-span-5">
+            <div class="space-y-6 sm:space-y-8">
+              <!-- Title -->
+              <div class="space-y-2 md:space-y-4">
+                <h2 class="font-bold text-3xl lg:text-4xl text-gray-800">
+                  Excellence in Education
+                </h2>
+                <p class="text-gray-500">
+                  Empowering students with quality education and innovative learning experiences to achieve their full potential.
+                </p>
+              </div>
+              <!-- End Title -->
+
+              <!-- List -->
+              <ul class="space-y-2 sm:space-y-4">
+                <li class="flex gap-x-3">
+                  <span class="mt-0.5 size-5 flex justify-center items-center rounded-full bg-primary/10 text-primary">
+                    <svg class="shrink-0 size-3.5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                  </span>
+                  <div class="grow">
+                    <span class="text-sm sm:text-base text-gray-500">
+                      <span class="font-bold">Innovative</span> – teaching methodologies
+                    </span>
+                  </div>
+                </li>
+
+                <li class="flex gap-x-3">
+                  <span class="mt-0.5 size-5 flex justify-center items-center rounded-full bg-primary/10 text-primary">
+                    <svg class="shrink-0 size-3.5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                  </span>
+                  <div class="grow">
+                    <span class="text-sm sm:text-base text-gray-500">
+                      Holistic student development
+                    </span>
+                  </div>
+                </li>
+
+                <li class="flex gap-x-3">
+                  <span class="mt-0.5 size-5 flex justify-center items-center rounded-full bg-primary/10 text-primary">
+                    <svg class="shrink-0 size-3.5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                  </span>
+                  <div class="grow">
+                    <span class="text-sm sm:text-base text-gray-500">
+                      State-of-the-art <span class="font-bold">facilities</span>
+                    </span>
+                  </div>
+                </li>
+              </ul>
+              <!-- End List -->
+            </div>
+          </div>
+          <!-- End Col -->
+        </div>
+        <!-- End Grid -->
+      </div>
+    </section>
+    <!-- End Features -->
 
 
 </template>
