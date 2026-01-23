@@ -15,7 +15,7 @@ import { Quote } from 'lucide-vue-next'
                 <h1
                     class="text-3xl md:text-5xl lg:text-7xl font-bold text-white tracking-tight drop-shadow-md"
                 >
-                    Our School Patron
+                    Our School Patronssss
                 </h1>
                 <p class="text-white/80 mt-4 text-lg md:text-xl max-w-xl">
                     Saint Francis Xavier - A beacon of faith, service, and evangelization.
@@ -190,9 +190,6 @@ import { Quote } from 'lucide-vue-next'
                 </div>
                 <div class="order-1 md:order-2 relative group px-6">
                     <div
-                        class="absolute -inset-4 bg-primary/10 rounded-2xl -z-10 group-hover:bg-primary/20 transition-colors duration-500 -skew-x-12"
-                    ></div>
-                    <div
                         class="-skew-x-12 overflow-hidden rounded-xl shadow-xl border border-border"
                     >
                         <img
@@ -239,9 +236,6 @@ import { Quote } from 'lucide-vue-next'
             <div class="grid md:grid-cols-2 gap-12 lg:gap-16 items-start mb-16">
                 <div class="flex justify-center md:sticky md:top-24">
                     <div class="relative">
-                        <div
-                            class="absolute inset-0 bg-linear-to-br from-primary/20 via-secondary/20 to-tertiary/20 rounded-full blur-3xl"
-                        ></div>
                         <img
                             src="@/assets/images/sfxc-logo-with-name.jpg"
                             alt="SFXC Logo"
