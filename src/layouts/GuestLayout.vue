@@ -48,10 +48,18 @@ const navigationItems = ref<NavigationItem[]>([
         name: 'Academics',
         type: 'dropdown',
         items: [
-            { name: 'Enrollment', to: '#' },
             { name: 'Tesda', to: '#' },
             { name: 'College Programs', to: '#' },
             { name: 'Scholarship', to: '#' },
+        ],
+    },
+        {
+        name: 'Admission',
+        type: 'dropdown',
+        items: [
+            { name: 'Enrollment', to: { name: 'enrollment' } },
+            { name: 'Requirements', to: '#' },
+            { name: 'Payment Options', to: '#' },
         ],
     },
     {
