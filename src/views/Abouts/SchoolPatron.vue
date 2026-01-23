@@ -15,7 +15,7 @@ import { Quote } from 'lucide-vue-next'
                 <h1
                     class="text-3xl md:text-5xl lg:text-7xl font-bold text-white tracking-tight drop-shadow-md"
                 >
-                    Our School Patronssss
+                    Our School Patron
                 </h1>
                 <p class="text-white/80 mt-4 text-lg md:text-xl max-w-xl">
                     Saint Francis Xavier - A beacon of faith, service, and evangelization.
