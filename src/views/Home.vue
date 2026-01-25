@@ -121,7 +121,7 @@ function goToSlide(index: number) {
 <template>
   <section id="home" class="relative w-full">
     <Carousel 
-      class="relative overflow-hidden h-400px sm:h-500px md:h-600px lg:h-700px xl:h-800px w-full mask-image:[linear-gradient(to_bottom,rgba(0,0,0,1)_0%,rgba(0,0,0,1)_92%,rgba(0,0,0,0)_100%)]"
+      class="relative overflow-hidden h-120 md:h-[75dvh] w-full mask-image:[linear-gradient(to_bottom,rgba(0,0,0,1)_0%,rgba(0,0,0,1)_92%,rgba(0,0,0,0)_100%)]"
       :plugins="[firstCarouselAutoplay]"
       @init-api="setApi"
       @mouseenter="firstCarouselAutoplay.stop"
@@ -129,7 +129,7 @@ function goToSlide(index: number) {
     >
       <CarouselContent class="ml-0">
         <CarouselItem v-for="slide in heroSlides" :key="slide.id" class="pl-0">
-          <div class="relative w-full h-400px sm:h-500px md:h-600px lg:h-700px xl:h-800px">
+          <div class="relative w-full h-120 md:h-[75dvh]">
             <img 
               :src="slide.image" 
               :alt="slide.title"
