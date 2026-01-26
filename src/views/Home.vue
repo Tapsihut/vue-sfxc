@@ -333,12 +333,12 @@ function goToSlide(index: number) {
           <p class="text-muted-foreground text-sm sm:text-base md:text-lg">Stay updated with the latest happenings at SFXC</p>
         </div>
 
-        <div class="grid md:grid-cols-2 gap-4 sm:gap-6 lg:gap-8">
+        <div class="grid h-full md:grid-cols-2 gap-4 sm:gap-6 lg:gap-8">
           <!-- Featured News - Large Image -->
           <div class="group relative overflow-hidden rounded-lg sm:rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300">
             <div class="aspect-4/3 overflow-hidden">
               <img
-                src="https://images.unsplash.com/photo-1523580494863-6f3031224c94?w=800&h=600&fit=crop"
+                src="@/assets/images/news/sfxc_hr.jpg"
                 alt="Featured News"
                 class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
               />
@@ -347,12 +347,12 @@ function goToSlide(index: number) {
             <div class="absolute bottom-0 left-0 right-0 p-4 sm:p-5 md:p-6 text-white">
               <span class="inline-block px-2 sm:px-3 py-1 bg-primary rounded-full text-xs font-semibold mb-2 sm:mb-3">Featured</span>
               <h3 class="text-lg sm:text-xl md:text-2xl font-bold mb-1.5 sm:mb-2 line-clamp-2">
-                Annual Sports Festival 2026: Celebrating Excellence in Athletics
+                SFXC Human Resource Office FB Page
               </h3>
               <p class="text-xs sm:text-sm text-white/80 mb-2 sm:mb-3 line-clamp-2">
-                Join us for three days of exciting sports competitions, team spirit, and memorable moments.
+                Scan the QR Code to visit the SFXC Human Resource Office Facebook Page for updates and announcements.
               </p>
-              <span class="text-xs text-white/70">January 20, 2026</span>
+              <span class="text-xs text-white/70">January 27, 2026</span>
             </div>
           </div>
 
@@ -362,17 +362,17 @@ function goToSlide(index: number) {
             <div class="group flex gap-3 sm:gap-4 bg-card rounded-lg sm:rounded-xl overflow-hidden shadow hover:shadow-lg transition-all duration-300">
               <div class="w-24 sm:w-32 md:w-40 shrink-0 overflow-hidden">
                 <img
-                  src="https://images.unsplash.com/photo-1427504494785-3a9ca7044f45?w=400&h=300&fit=crop"
+                  src="@/assets/images/news/sfxc_sacred.jpg"
                   alt="News 1"
                   class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                 />
               </div>
               <div class="flex-1 py-3 sm:py-4 pr-3 sm:pr-4">
-                <span class="inline-block px-2 py-0.5 sm:py-1 bg-primary/10 text-primary rounded text-xs font-semibold mb-1.5 sm:mb-2">Academic</span>
+                <span class="inline-block px-2 py-0.5 sm:py-1 bg-primary/10 text-primary rounded text-xs font-semibold mb-1.5 sm:mb-2">Spiritual</span>
                 <h4 class="font-bold text-foreground mb-1.5 sm:mb-2 line-clamp-2 text-xs sm:text-sm md:text-base">
-                  Scholarship Applications Now Open for Academic Year 2026-2027
+                  Sacred Heart of Jesus Parish Church Mass
                 </h4>
-                <span class="text-xs text-muted-foreground">January 18, 2026</span>
+                <span class="text-xs text-muted-foreground">January 09, 2026</span>
               </div>
             </div>
 
@@ -380,17 +380,17 @@ function goToSlide(index: number) {
             <div class="group flex gap-3 sm:gap-4 bg-card rounded-lg sm:rounded-xl overflow-hidden shadow hover:shadow-lg transition-all duration-300">
               <div class="w-24 sm:w-32 md:w-40 shrink-0 overflow-hidden">
                 <img
-                  src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=400&h=300&fit=crop"
+                  src="@/assets/images/news/sfxc_application.jpg"
                   alt="News 2"
                   class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                 />
               </div>
               <div class="flex-1 py-3 sm:py-4 pr-3 sm:pr-4">
-                <span class="inline-block px-2 py-0.5 sm:py-1 bg-primary/10 text-primary rounded text-xs font-semibold mb-1.5 sm:mb-2">Events</span>
+                <span class="inline-block px-2 py-0.5 sm:py-1 bg-primary/10 text-primary rounded text-xs font-semibold mb-1.5 sm:mb-2">Academics</span>
                 <h4 class="font-bold text-foreground mb-1.5 sm:mb-2 line-clamp-2 text-xs sm:text-sm md:text-base">
-                  Cultural Week 2026: Showcasing Student Talents and Creativity
+                  Application for Non-Academics Awards
                 </h4>
-                <span class="text-xs text-muted-foreground">January 15, 2026</span>
+                <span class="text-xs text-muted-foreground">January 12, 2026 - Feb 27, 2026</span>
               </div>
             </div>
 
@@ -398,17 +398,17 @@ function goToSlide(index: number) {
             <div class="group flex gap-3 sm:gap-4 bg-card rounded-lg sm:rounded-xl overflow-hidden shadow hover:shadow-lg transition-all duration-300">
               <div class="w-24 sm:w-32 md:w-40 shrink-0 overflow-hidden">
                 <img
-                  src="https://images.unsplash.com/photo-1541339907198-e08756dedf3f?w=400&h=300&fit=crop"
+                  src="@/assets/images/news/sfxc_Midterm.jpg"
                   alt="News 3"
                   class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                 />
               </div>
               <div class="flex-1 py-3 sm:py-4 pr-3 sm:pr-4">
-                <span class="inline-block px-2 py-0.5 sm:py-1 bg-primary/10 text-primary rounded text-xs font-semibold mb-1.5 sm:mb-2">Achievement</span>
+                <span class="inline-block px-2 py-0.5 sm:py-1 bg-primary/10 text-primary rounded text-xs font-semibold mb-1.5 sm:mb-2">Academics</span>
                 <h4 class="font-bold text-foreground mb-1.5 sm:mb-2 line-clamp-2 text-xs sm:text-sm md:text-base">
-                  SFXC Students Win National Science Competition
+                  Midterm Permit Release
                 </h4>
-                <span class="text-xs text-muted-foreground">January 12, 2026</span>
+                <span class="text-xs text-muted-foreground">January 28 - 30, 2026</span>
               </div>
             </div>
           </div>
