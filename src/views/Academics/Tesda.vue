@@ -18,51 +18,11 @@ interface Course {
 const tesdaCourses = ref<Course[]>([
   {
     id: 1,
-    title: 'Food and Beverage Services NC II',
+    title: 'Driving NC II',
     duration: '3 months',
     level: 'NC II',
-    description: 'Develop skills in food service operations, customer service, and beverage preparation for the hospitality industry.',
-    skills: ['Table Service', 'Customer Relations', 'Beverage Preparation', 'Food Safety']
-  },
-  {
-    id: 2,
-    title: 'Housekeeping NC II',
-    duration: '2 months',
-    level: 'NC II',
-    description: 'Learn professional housekeeping procedures, cleaning techniques, and maintenance for hotels and commercial establishments.',
-    skills: ['Room Cleaning', 'Laundry Operations', 'Guest Relations', 'Safety Procedures']
-  },
-  {
-    id: 3,
-    title: 'Computer System Servicing NC II',
-    duration: '3 months',
-    level: 'NC II',
-    description: 'Gain expertise in installing, configuring, and troubleshooting computer systems and networks.',
-    skills: ['Hardware Installation', 'Software Configuration', 'Network Setup', 'System Maintenance']
-  },
-  {
-    id: 4,
-    title: 'Cookery NC II',
-    duration: '3 months',
-    level: 'NC II',
-    description: 'Master culinary skills including food preparation, cooking techniques, and kitchen management.',
-    skills: ['Food Preparation', 'Cooking Methods', 'Menu Planning', 'Kitchen Sanitation']
-  },
-  {
-    id: 5,
-    title: 'Bread and Pastry Production NC II',
-    duration: '3 months',
-    level: 'NC II',
-    description: 'Learn baking techniques for bread, pastries, and confectionery products for commercial production.',
-    skills: ['Baking Techniques', 'Pastry Making', 'Cake Decoration', 'Product Costing']
-  },
-  {
-    id: 6,
-    title: 'Electrical Installation and Maintenance NC II',
-    duration: '4 months',
-    level: 'NC II',
-    description: 'Develop competencies in electrical wiring, installation, and maintenance of electrical systems.',
-    skills: ['Wiring Installation', 'Electrical Testing', 'Safety Standards', 'Troubleshooting']
+    description: 'Develop professional driving skills and competencies for operating light vehicles safely and efficiently in accordance with traffic rules and regulations.',
+    skills: ['Defensive Driving', 'Vehicle Maintenance', 'Traffic Rules', 'Road Safety']
   }
 ])
 
@@ -106,7 +66,7 @@ const benefits = [
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
           <div>
-            <Badge variant="outline" class="mb-4">About Our Program</Badge>
+            <!-- <Badge variant="outline" class="mb-4">About Our Program</Badge> -->
             <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 sm:mb-6 text-foreground">
               Excellence in Technical Education
             </h2>
@@ -149,7 +109,7 @@ const benefits = [
     <section class="py-12 sm:py-16 md:py-20 lg:py-24 bg-muted/30">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center mb-10 sm:mb-12 md:mb-16">
-          <Badge variant="outline" class="mb-4">Available Programs</Badge>
+          <!-- <Badge variant="outline" class="mb-4">Available Programs</Badge> -->
           <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold mb-3 sm:mb-4 text-foreground">
             TESDA Courses Offered
           </h2>
@@ -207,7 +167,6 @@ const benefits = [
     <section class="py-12 sm:py-16 md:py-20 lg:py-24">
       <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center mb-10 sm:mb-12">
-          <Badge variant="outline" class="mb-4">Enrollment</Badge>
           <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold mb-3 sm:mb-4 text-foreground">
             Admission Requirements
           </h2>
