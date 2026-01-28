@@ -17,10 +17,8 @@ import SFXCTextOnly from '@/assets/images/logo-text-white-no-website.png'
                             :logo-src="SFXCLogoOnly"
                             :text-src="SFXCTextOnly"
                             variant="vertical"
-                            icon-class="w-10"
-                            alt="Company Name"
-                            logo-width="148px"
-                            text-width="248px"
+                            logo-class="w-36"
+                            text-class="w-62"
                         />
                     </div>
                 </div>
