@@ -14,6 +14,8 @@ import { Separator } from '@/components/ui/separator'
 import { Menu, X, ChevronDown } from 'lucide-vue-next'
 import Footer from '@/components/ui/custom/Footer.vue'
 import SchoolLogo from '@/components/ui/custom/logo/SchoolLogo.vue'
+import SFXCLogoOnly from '@/assets/images/sfxc-logo-only.png'
+import SFXCTextOnly from '@/assets/images/sfxc-text-only.png'
 
 const isMobileMenuOpen = ref(false)
 const activeSubmenu = ref<string | null>(null)
@@ -100,6 +102,8 @@ const toggleSubmenu = (menuName: string) => {
                     <div class="flex justify-between items-center h-20 bg-white relative z-50">
                         <div class="flex items-center">
                             <SchoolLogo
+                                :logo-src="SFXCLogoOnly"
+                                :text-src="SFXCTextOnly"
                                 variant="horizontal"
                                 icon-class="w-10"
                                 alt="Company Name"
