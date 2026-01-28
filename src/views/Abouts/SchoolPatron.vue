@@ -15,7 +15,7 @@ import { Quote } from 'lucide-vue-next'
                 <h1
                     class="text-3xl md:text-5xl lg:text-7xl font-bold text-white tracking-tight drop-shadow-md"
                 >
-                    Our School Patronssss
+                    Our School Patron
                 </h1>
                 <p class="text-white/80 mt-4 text-lg md:text-xl max-w-xl">
                     Saint Francis Xavier - A beacon of faith, service, and evangelization.
@@ -234,12 +234,12 @@ import { Quote } from 'lucide-vue-next'
             </div>
 
             <div class="grid md:grid-cols-2 gap-12 lg:gap-16 items-start mb-16">
-                <div class="flex justify-center md:sticky md:top-24">
+                <div class="flex justify-center md:sticky md:top-24 md:self-start">
                     <div class="relative">
                         <img
-                            src="@/assets/images/sfxc-logo-with-name.jpg"
+                            src="@/assets/images/sfxc-logo-only.png"
                             alt="SFXC Logo"
-                            class="relative w-80 h-auto object-contain rounded-2xl shadow-2xl"
+                            class="relative w-120 h-auto object-contain"
                         />
                     </div>
                 </div>
