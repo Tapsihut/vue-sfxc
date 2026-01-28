@@ -234,7 +234,7 @@ import { Quote } from 'lucide-vue-next'
             </div>
 
             <div class="grid md:grid-cols-2 gap-12 lg:gap-16 items-start mb-16">
-                <div class="flex justify-center md:sticky md:top-24 md:self-start">
+                <div class="flex justify-center md:sticky md:top-24">
                     <div class="relative">
                         <img
                             src="@/assets/images/sfxc-logo-only.png"
