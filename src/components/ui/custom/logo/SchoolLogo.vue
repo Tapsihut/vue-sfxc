@@ -6,19 +6,15 @@ interface SchoolLogoProps {
     logoSrc: string
     textSrc: string
     alt?: string
-    width?: string
-    height?: string
-    logoWidth?: string
-    textWidth?: string
+    logoClass?: string
+    textClass?: string
 }
 
 const props = withDefaults(defineProps<SchoolLogoProps>(), {
     variant: 'horizontal',
     alt: 'SFXC Logo',
-    width: 'auto',
-    height: 'auto',
-    logoWidth: 'auto',
-    textWidth: 'auto',
+    logoClass: '',
+    textClass: '',
 })
 
 const containerClasses = computed(() => {
@@ -58,21 +54,13 @@ const showText = computed(
             v-if="showLogo"
             :src="logoSrc"
             :alt="alt"
-            :style="{
-                width: logoWidth,
-                height: height,
-            }"
-            class="object-contain"
+            :class="['object-contain h-auto', props.logoClass]"
         />
         <img
             v-if="showText"
             :src="textSrc"
             :alt="`${alt} Text`"
-            :style="{
-                width: textWidth,
-                height: height,
-            }"
-            class="object-contain"
+            :class="['object-contain h-auto', props.textClass]"
         />
     </div>
 </template>
