@@ -12,7 +12,7 @@ import SFXCTextOnly from '@/assets/images/logo-text-white-no-website.png'
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
                 <!-- Logo -->
                 <div class="space-y-4">
-                    <div class="flex items-center">
+                    <div class="flex items-center justify-center">
                         <SchoolLogo
                             :logo-src="SFXCLogoOnly"
                             :text-src="SFXCTextOnly"
