@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 
-interface LogoProps {
+interface SchoolLogoProps {
     variant?: 'horizontal' | 'vertical' | 'logo-only' | 'text-only'
+    logoSrc: string
+    textSrc: string
     alt?: string
     width?: string
     height?: string
@@ -10,9 +12,9 @@ interface LogoProps {
     textWidth?: string
 }
 
-const props = withDefaults(defineProps<LogoProps>(), {
+const props = withDefaults(defineProps<SchoolLogoProps>(), {
     variant: 'horizontal',
-    alt: 'Company Logo',
+    alt: 'SFXC Logo',
     width: 'auto',
     height: 'auto',
     logoWidth: 'auto',
@@ -54,7 +56,7 @@ const showText = computed(
     <div :class="containerClasses">
         <img
             v-if="showLogo"
-            src="@/assets/images/sfxc-logo-only.png"
+            :src="logoSrc"
             :alt="alt"
             :style="{
                 width: logoWidth,
@@ -64,7 +66,7 @@ const showText = computed(
         />
         <img
             v-if="showText"
-            src="@/assets/images/sfxc-text-only.png"
+            :src="textSrc"
             :alt="`${alt} Text`"
             :style="{
                 width: textWidth,
