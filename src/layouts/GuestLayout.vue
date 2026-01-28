@@ -105,10 +105,9 @@ const toggleSubmenu = (menuName: string) => {
                                 :logo-src="SFXCLogoOnly"
                                 :text-src="SFXCTextOnly"
                                 variant="horizontal"
-                                icon-class="w-10"
                                 alt="Company Name"
-                                logo-width="68px"
-                                text-width="220px"
+                                logo-class="w-16"
+                                text-class="w-50"
                             />
                         </div>
                         <div class="hidden md:flex items-center space-x-1">
