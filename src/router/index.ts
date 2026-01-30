@@ -16,7 +16,7 @@ const router = createRouter({
             name: 'home',
             component: Home,
             meta: {
-                layout: 'guest',    
+                layout: 'guest',
             },
         },
         {
@@ -73,10 +73,13 @@ const router = createRouter({
             component: Contact,
             meta: {
                 layout: 'guest',
+            },
         },
-    },
-
     ],
+    scrollBehavior(to, from, savedPosition) {
+        // always scroll to top
+        return { top: 0 }
+    },
 })
 
 export default router
