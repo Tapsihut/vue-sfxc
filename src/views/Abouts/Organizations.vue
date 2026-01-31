@@ -126,9 +126,6 @@ const collegeOfficers = {
                 </div>
                 <div class="order-1 md:order-2 relative group px-6">
                     <div
-                        class="absolute -inset-4 bg-primary/10 rounded-2xl -z-10 group-hover:bg-primary/20 transition-colors duration-500 skew-x-12"
-                    ></div>
-                    <div
                         class="skew-x-12 overflow-hidden rounded-xl shadow-xl border border-border"
                     >
                         <img
@@ -455,9 +452,6 @@ const collegeOfficers = {
         <div class="container mx-auto px-4 md:px-8">
             <div class="grid md:grid-cols-2 gap-12 lg:gap-24 items-center">
                 <div class="relative group px-6">
-                    <div
-                        class="absolute -inset-4 bg-tertiary/10 rounded-2xl -z-10 group-hover:bg-tertiary/20 transition-colors duration-500 -skew-x-12"
-                    ></div>
                     <div
                         class="-skew-x-12 overflow-hidden rounded-xl shadow-xl border border-border"
                     >

@@ -1,6 +1,9 @@
 <script setup lang="ts">
 import { Mail, Phone, MapPin, Facebook } from 'lucide-vue-next'
 import { Separator } from '@/components/ui/separator'
+import SchoolLogo from '@/components/ui/custom/logo/SchoolLogo.vue'
+import SFXCLogoOnly from '@/assets/images/sfxc-logo-only.png'
+import SFXCTextOnly from '@/assets/images/logo-text-white-no-website.png'
 </script>
 
 <template>
@@ -9,11 +12,13 @@ import { Separator } from '@/components/ui/separator'
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
                 <!-- Logo -->
                 <div class="space-y-4">
-                    <div class="flex items-center">
-                        <img
-                            src="@/assets/images/sfxc-logo-with-name.jpg"
-                            alt="St. Francis Xavier College Logo"
-                            class="w-48 h-auto object-contain bg-white rounded-lg p-2"
+                    <div class="flex items-center justify-center">
+                        <SchoolLogo
+                            :logo-src="SFXCLogoOnly"
+                            :text-src="SFXCTextOnly"
+                            variant="vertical"
+                            logo-class="w-36"
+                            text-class="w-62"
                         />
                     </div>
                 </div>

@@ -13,6 +13,10 @@ import { Button } from '@/components/ui/button'
 import { Separator } from '@/components/ui/separator'
 import { Menu, X, ChevronDown } from 'lucide-vue-next'
 import Footer from '@/components/ui/custom/Footer.vue'
+import SchoolLogo from '@/components/ui/custom/logo/SchoolLogo.vue'
+import SFXCLogoOnly from '@/assets/images/sfxc-logo-only.png'
+import SFXCTextOnly from '@/assets/images/sfxc-text-only.png'
+
 
 const isMobileMenuOpen = ref(false)
 const activeSubmenu = ref<string | null>(null)
@@ -53,7 +57,7 @@ const navigationItems = ref<NavigationItem[]>([
             { name: 'Scholarship', to: { name: 'scholarship' } },
         ],
     },
-        {
+    {
         name: 'Admission',
         type: 'dropdown',
         items: [
@@ -66,12 +70,11 @@ const navigationItems = ref<NavigationItem[]>([
         name: 'News',
         type: 'dropdown',
         items: [
-            { name: 'Latest News', to: '#' },
+            { name: 'Latest News', to: { name: 'news' } },
             { name: 'Announcements', to: '#' },
         ],
     },
-    {
-        name: 'Contact',
+    { name: 'Contact',
         type: 'link',
         to: '/contact',
     },
@@ -98,10 +101,13 @@ const toggleSubmenu = (menuName: string) => {
                 <div class="px-4 sm:px-6 lg:px-8">
                     <div class="flex justify-between items-center h-20 bg-white relative z-50">
                         <div class="flex items-center">
-                            <img
-                                src="@/assets/images/sfxc-logo-with-name.jpg"
-                                alt="St. Francis Xavier College Logo"
-                                class="w-54 md:w-70 h-auto object-contain"
+                            <SchoolLogo
+                                :logo-src="SFXCLogoOnly"
+                                :text-src="SFXCTextOnly"
+                                variant="horizontal"
+                                alt="Company Name"
+                                logo-class="w-16"
+                                text-class="w-50"
                             />
                         </div>
                         <div class="hidden md:flex items-center space-x-1">
