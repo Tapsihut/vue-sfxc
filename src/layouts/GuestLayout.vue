@@ -50,7 +50,7 @@ const navigationItems = ref<NavigationItem[]>([
         items: [
             { name: 'Tesda', to: { name: 'tesda' } },
             { name: 'College Programs', to: '#' },
-            { name: 'Scholarship', to: '#' },
+            { name: 'Scholarship', to: { name: 'scholarship' } },
         ],
     },
         {

@@ -4,6 +4,7 @@ import Enrollment from '@/views/Admission/Enrollment.vue'
 import { createRouter, createWebHistory } from 'vue-router'
 import SchoolPatron from '@/views/Abouts/SchoolPatron.vue'
 import Organizations from '@/views/Abouts/Organizations.vue'
+import Scholarship from '@/views/Academics/Scholarship.vue'
 import Tesda from '@/views/Academics/Tesda.vue'
 
 const router = createRouter({
@@ -53,6 +54,14 @@ const router = createRouter({
             path: '/academics/tesda',
             name: 'tesda',
             component: Tesda,
+            meta: {
+                layout: 'guest',
+            },
+        },
+                {
+            path: '/academics/scholarship',
+            name: 'scholarship',
+            component: Scholarship,
             meta: {
                 layout: 'guest',
             },
