@@ -53,6 +53,14 @@ const router = createRouter({
             },
         },
         {
+            path: '/academics/scholarship',
+            name: 'scholarship',
+            component: Scholarship,
+            meta: {
+                layout: 'guest',
+            },
+        },
+        {
             path: '/academics/tesda',
             name: 'tesda',
             component: Tesda,
@@ -60,7 +68,27 @@ const router = createRouter({
                 layout: 'guest',
             },
         },
+        {
+            path: '/news/latest-update',
+            name: 'news',
+            component: NewsAndUpdates,
+            meta: {
+                layout: 'guest',
+            },
+        },
+        {
+            path: '/contact',
+            name: 'contact',
+            component: Contact,
+            meta: {
+                layout: 'guest',
+            },
+        },
     ],
+    scrollBehavior(to, from, savedPosition) {
+        // always scroll to top
+        return { top: 0 }
+    },
 })
 
 export default router
