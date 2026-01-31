@@ -5,6 +5,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import SchoolPatron from '@/views/Abouts/SchoolPatron.vue'
 import Organizations from '@/views/Abouts/Organizations.vue'
 import Scholarship from '@/views/Academics/Scholarship.vue'
+import Programs from '@/views/Academics/Program.vue'
 import Tesda from '@/views/Academics/Tesda.vue'
 import Contact from '@/views/Contact/Contact.vue'
 import NewsAndUpdates from '@/views/News/NewsAndUpdates.vue'
@@ -56,6 +57,14 @@ const router = createRouter({
             path: '/academics/scholarship',
             name: 'scholarship',
             component: Scholarship,
+            meta: {
+                layout: 'guest',
+            },
+        },
+                {
+            path: '/academics/programs',
+            name: 'programs',
+            component: Programs,
             meta: {
                 layout: 'guest',
             },
