@@ -128,30 +128,30 @@ const tesdaPrograms: Program[] = [
     icon: 'car',
     heroImage: 'https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?w=800&h=400&fit=crop'
   },
-  {
-    id: 'css',
-    name: 'Computer Systems Servicing NC II',
-    code: 'TESDA',
-    department: 'TVET/TESDA Programs',
-    description: 'Provides skills in computer hardware maintenance and troubleshooting.',
-    duration: 'Short-term',
-    degree: 'Certificate',
-    careers: ['Computer Technician', 'IT Support', 'Hardware Specialist'],
-    icon: 'computer',
-    heroImage: 'https://images.unsplash.com/photo-1581092921461-eab62e97a780?w=800&h=400&fit=crop'
-  },
-  {
-    id: 'bookkeeping',
-    name: 'Bookkeeping NC III',
-    code: 'TESDA',
-    department: 'TVET/TESDA Programs',
-    description: 'Teaches fundamental bookkeeping and accounting procedures.',
-    duration: 'Short-term',
-    degree: 'Certificate',
-    careers: ['Bookkeeper', 'Accounting Clerk', 'Finance Assistant'],
-    icon: 'book-open',
-    heroImage: 'https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=800&h=400&fit=crop'
-  }
+  // {
+  //   id: 'css',
+  //   name: 'Computer Systems Servicing NC II',
+  //   code: 'TESDA',
+  //   department: 'TVET/TESDA Programs',
+  //   description: 'Provides skills in computer hardware maintenance and troubleshooting.',
+  //   duration: 'Short-term',
+  //   degree: 'Certificate',
+  //   careers: ['Computer Technician', 'IT Support', 'Hardware Specialist'],
+  //   icon: 'computer',
+  //   heroImage: 'https://images.unsplash.com/photo-1581092921461-eab62e97a780?w=800&h=400&fit=crop'
+  // },
+  // {
+  //   id: 'bookkeeping',
+  //   name: 'Bookkeeping NC III',
+  //   code: 'TESDA',
+  //   department: 'TVET/TESDA Programs',
+  //   description: 'Teaches fundamental bookkeeping and accounting procedures.',
+  //   duration: 'Short-term',
+  //   degree: 'Certificate',
+  //   careers: ['Bookkeeper', 'Accounting Clerk', 'Finance Assistant'],
+  //   icon: 'book-open',
+  //   heroImage: 'https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=800&h=400&fit=crop'
+  // }
 ]
 
 // Separate programs by department
