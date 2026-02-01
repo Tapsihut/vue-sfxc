@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Mail, Phone, MapPin, Facebook } from 'lucide-vue-next'
+import { Mail, Phone, MapPin, Facebook, Globe } from 'lucide-vue-next'
 import { Separator } from '@/components/ui/separator'
 import SchoolLogo from '@/components/ui/custom/logo/SchoolLogo.vue'
 import SFXCLogoOnly from '@/assets/images/sfxc-logo-only.png'
@@ -117,6 +117,18 @@ import SFXCTextOnly from '@/assets/images/logo-text-white-no-website.png'
                             aria-label="Facebook"
                         >
                             St. Francis Xavier College
+                        </a>
+                    </div>
+                        <div class="flex items-start gap-3">
+                        <Globe class="w-5 h-5 shrink-0 text-primary-foreground/80" />
+                        <a
+                            href="https://www.sfxc.edu.ph"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="text-primary-foreground/80 hover:text-primary-foreground transition-colors text-sm"
+                            aria-label="Facebook"
+                        >
+                            www.sfxc.edu.ph
                         </a>
                     </div>
                 </div>

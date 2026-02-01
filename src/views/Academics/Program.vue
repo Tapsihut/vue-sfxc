@@ -1,7 +1,6 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import { Badge } from '@/components/ui/badge'
 import { Separator } from '@/components/ui/separator'
 
 interface Program {
@@ -18,7 +17,6 @@ interface Program {
 }
 
 const programs: Program[] = [
-  // College of Business Education (CBE)
   {
     id: 'it',
     name: 'Bachelor of Science in Information Technology',
@@ -79,7 +77,6 @@ const programs: Program[] = [
     icon: 'briefcase',
     heroImage: 'https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&h=400&fit=crop'
   },
-  // College of Criminal Justice Education (CCJE)
   {
     id: 'criminology',
     name: 'Bachelor of Science in Criminology',
@@ -92,7 +89,6 @@ const programs: Program[] = [
     icon: 'shield',
     heroImage: 'https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=800&h=400&fit=crop'
   },
-  // College of Teachers Education (CTE)
   {
     id: 'bsed',
     name: 'Bachelor of Science in Secondary Education',
@@ -158,106 +154,103 @@ const tesdaPrograms: Program[] = [
   }
 ]
 
-const selectedDepartment = ref<string>('all')
-const departments = [
-  'All Departments',
-  'College of Business Education (CBE)',
-  'College of Criminal Justice Education (CCJE)',
-  'College of Teachers Education (CTE)',
-  'TVET/TESDA Programs'
-]
-
-const filteredPrograms = ref(programs)
-
-const filterByDepartment = (dept: string) => {
-  selectedDepartment.value = dept
-  if (dept === 'All Departments') {
-    filteredPrograms.value = programs
-  } else {
-    filteredPrograms.value = programs.filter(p => p.department === dept)
-  }
-}
-
-const getIconPath = (icon: string) => {
-  const icons: Record<string, string> = {
-    shield: 'M12 1l9 4v6c0 5.55-3.84 10.74-9 12-5.16-1.26-9-6.45-9-12V5l9-4z',
-    calculator: 'M6 2h12v20H6V2zm2 2v4h8V4H8zm0 6v2h2v-2H8zm4 0v2h2v-2h-2zm4 0v2h2v-2h-2zm-8 4v2h2v-2H8zm4 0v2h2v-2h-2zm4 0v2h2v-2h-2zm-8 4v2h2v-2H8zm4 0v2h2v-2h-2zm4 0v2h2v-2h-2z',
-    database: 'M12 3C7.58 3 4 4.79 4 7s3.58 4 8 4 8-1.79 8-4-3.58-4-8-4zM4 9v3c0 2.21 3.58 4 8 4s8-1.79 8-4V9c0 2.21-3.58 4-8 4s-8-1.79-8-4zm0 5v3c0 2.21 3.58 4 8 4s8-1.79 8-4v-3c0 2.21-3.58 4-8 4s-8-1.79-8-4z',
-    chart: 'M3 3v18h18M7 16l4-4 4 4 6-6',
-    search: 'M11 2a9 9 0 106.32 15.49l4.58 4.58L23 21l-4.58-4.58A9 9 0 0011 2z',
-    money: 'M12 2v20M17 5H9.5a3.5 3.5 0 100 7h5a3.5 3.5 0 110 7H6',
-    megaphone: 'M3 11l18-5v12l-18-5 6-1v7',
-    cog: 'M12 15a3 3 0 100-6 3 3 0 000 6zM19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83 0 2 2 0 010-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 010-2.83 2 2 0 012.83 0l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 0 2 2 0 010 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z',
-    users: 'M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2M9 11a4 4 0 100-8 4 4 0 000 8zM23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75',
-    trending: 'M23 6l-9.5 9.5-5-5L1 18',
-    lightbulb: 'M9 21h6M12 3a6 6 0 00-6 6c0 2.5 1.5 4.5 2 6v2a2 2 0 002 2h4a2 2 0 002-2v-2c.5-1.5 2-3.5 2-6a6 6 0 00-6-6z',
-    laptop: 'M20 16V7a2 2 0 00-2-2H6a2 2 0 00-2 2v9m16 0H4m16 0l1.5 2a2 2 0 01-1.5 3H4a2 2 0 01-1.5-3L4 16',
-    briefcase: 'M20 7H4a2 2 0 00-2 2v10a2 2 0 002 2h16a2 2 0 002-2V9a2 2 0 00-2-2zM16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16',
-    book: 'M4 19.5A2.5 2.5 0 016.5 17H20M4 19.5A2.5 2.5 0 016.5 22H20V2H6.5A2.5 2.5 0 004 4.5z',
-    pen: 'M12 20h9M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z',
-    write: 'M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z',
-    car: 'M16 8a1 1 0 011-1h2.586a1 1 0 01.707.293l1.414 1.414A1 1 0 0122 9.414V15a1 1 0 01-1 1h-1M8 8a1 1 0 00-1-1H4.414a1 1 0 00-.707.293L2.293 8.707A1 1 0 002 9.414V15a1 1 0 001 1h1m12 0a2 2 0 11-4 0m4 0H8m0 0a2 2 0 11-4 0M3 5h18v10H3z',
-    computer: 'M9 17h6M9 21h6M6 19h12V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14z',
-    'book-open': 'M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2V3zm20 0h-6a4 4 0 00-4 4v14a3 3 0 013-3h7V3z'
-  }
-  return icons[icon] || icons['book']
-}
+// Separate programs by department
+const cbePrograms = computed(() =>
+  programs.filter(p => p.department.includes('College of Business Education'))
+)
+const ccjePrograms = computed(() =>
+  programs.filter(p => p.department.includes('College of Criminal Justice Education'))
+)
+const ctePrograms = computed(() =>
+  programs.filter(p => p.department.includes('College of Teachers Education'))
+)
 </script>
 
 <template>
+    <!-- HERO -->
+  <section id="hero" class="relative">
+    <div
+      class="h-120 md:h-[75dvh] flex flex-col relative bg-[url('/src/assets/images/sfxc-building.jpg')] bg-cover bg-center bg-no-repeat"
+    >
+      <div class="absolute inset-0 bg-linear-to-t from-tertiary/90 via-background/20 to-transparent"></div>
+
+      <div class="relative z-10 mt-auto w-full md:max-w-4xl ps-5 pb-16 md:ps-10 md:pb-24">
+        <h1 class="text-3xl md:text-5xl lg:text-7xl font-bold text-white tracking-tight drop-shadow-md">
+          Colleges / Programs
+        </h1>
+        <p class="text-white/80 mt-4 text-lg md:text-xl max-w-xl">
+          Explore the degree and graduate programs offered at St. Francis Xavier College.
+        </p>
+      </div>
+
+      <div class="absolute bottom-0 left-0 right-0 text-background leading-none">
+        <svg class="w-full h-12 md:h-24" viewBox="0 0 1440 320" preserveAspectRatio="none">
+          <path fill="currentColor" d="M0,224L1440,128L1440,320L0,320Z"></path>
+        </svg>
+      </div>
+    </div>
+  </section>
   <div class="min-h-screen bg-linear-to-b from-gray-50 to-white py-8 md:py-12">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
-      <!-- Department Filter -->
-      <!-- <div class="mb-8">
-        <h2 class="text-xl font-bold text-foreground mb-4">Filter by Department</h2>
-        <div class="flex flex-wrap gap-2">
-          <Badge 
-            v-for="dept in departments" 
-            :key="dept"
-            :variant="selectedDepartment === dept || (dept === 'All Departments' && selectedDepartment === 'all') ? 'default' : 'outline'"
-            class="cursor-pointer px-4 py-2 text-sm"
-            @click="filterByDepartment(dept === 'All Departments' ? 'all' : dept)"
-          >
-            {{ dept }}
-          </Badge>
-        </div>
-      </div> -->
-
-      <!-- Degree Programs Section -->
+      <!-- CBE Section -->
       <div class="mb-16">
         <div class="flex items-center gap-3 mb-6">
           <div class="w-1 h-8 bg-primary rounded-full"></div>
-          <h2 class="text-2xl md:text-3xl font-bold text-foreground">Degree Programs</h2>
+          <h2 class="text-2xl md:text-3xl font-bold">College of Business Education (CBE)</h2>
         </div>
-        
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          <Card 
-            v-for="program in filteredPrograms" 
-            :key="program.id"
-            class="relative overflow-hidden h-80 group cursor-pointer transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 border-2 hover:border-primary"
-          >
-            <!-- Background Image -->
+          <Card v-for="program in cbePrograms" :key="program.id"
+            class="relative overflow-hidden h-80 group cursor-pointer transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 border-2 hover:border-primary">
             <div class="absolute inset-0">
-              <img 
-                :src="program.heroImage" 
-                :alt="program.name"
-                class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-              />
-              <!-- Dark Overlay -->
-              <div class="absolute inset-0 bg-linear-to-t from-black/80 via-black/40 to-black/20"></div>
+              <img :src="program.heroImage" class="w-full h-full object-cover" />
+              <div class="absolute inset-0 bg-black/60"></div>
             </div>
-
-            <!-- Content -->
             <div class="relative h-full flex flex-col justify-end p-6 text-white">
-              
-              <h3 class="text-2xl font-bold mb-2 drop-shadow-lg">{{ program.name }}</h3>
-              <div class="flex items-center gap-2 text-white/90">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-                <span class="text-sm font-medium">{{ program.duration }}</span>
-              </div>
+              <h3 class="text-2xl font-bold mb-2">{{ program.name }}</h3>
+              <span class="text-sm">{{ program.duration }}</span>
+            </div>
+          </Card>
+        </div>
+      </div>
+
+      <!-- CCJE Section -->
+      <div class="mb-16">
+        <div class="flex items-center gap-3 mb-6">
+          <div class="w-1 h-8 bg-primary rounded-full"></div>
+          <h2 class="text-2xl md:text-3xl font-bold">College of Criminal Justice Education (CCJE)</h2>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <Card v-for="program in ccjePrograms" :key="program.id"
+            class="relative overflow-hidden h-80 group cursor-pointer transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 border-2 hover:border-primary">
+            <div class="absolute inset-0">
+              <img :src="program.heroImage" class="w-full h-full object-cover" />
+              <div class="absolute inset-0 bg-black/60"></div>
+            </div>
+            <div class="relative h-full flex flex-col justify-end p-6 text-white">
+              <h3 class="text-2xl font-bold mb-2">{{ program.name }}</h3>
+              <span class="text-sm">{{ program.duration }}</span>
+            </div>
+          </Card>
+        </div>
+      </div>
+
+      <!-- CTE Section -->
+      <div class="mb-16">
+        <div class="flex items-center gap-3 mb-6">
+          <div class="w-1 h-8 bg-primary rounded-full"></div>
+          <h2 class="text-2xl md:text-3xl font-bold">College of Teachers Education (CTE)</h2>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <Card v-for="program in ctePrograms" :key="program.id"
+            class="relative overflow-hidden h-80 group cursor-pointer transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 border-2 hover:border-primary">
+            <div class="absolute inset-0">
+              <img :src="program.heroImage" class="w-full h-full object-cover" />
+              <div class="absolute inset-0 bg-black/60"></div>
+            </div>
+            <div class="relative h-full flex flex-col justify-end p-6 text-white">
+              <h3 class="text-2xl font-bold mb-2">{{ program.name }}</h3>
+              <span class="text-sm">{{ program.duration }}</span>
             </div>
           </Card>
         </div>
@@ -265,43 +258,25 @@ const getIconPath = (icon: string) => {
 
       <Separator class="my-12" />
 
-      <!-- TESDA Programs Section -->
+      <!-- TESDA Section -->
       <div class="mb-12">
         <div class="flex items-center gap-3 mb-6">
           <div class="w-1 h-8 bg-primary rounded-full"></div>
-          <h2 class="text-2xl md:text-3xl font-bold text-foreground">TVET/TESDA Programs</h2>
+          <h2 class="text-2xl md:text-3xl font-bold">TVET/TESDA Programs</h2>
         </div>
         <p class="text-muted-foreground mb-6">
           Short-term technical vocational courses that provide industry-recognized certifications.
         </p>
-        
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <Card 
-            v-for="program in tesdaPrograms" 
-            :key="program.id"
-            class="relative overflow-hidden h-80 group cursor-pointer transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 border-2 hover:border-primary"
-          >
-            <!-- Background Image -->
+          <Card v-for="program in tesdaPrograms" :key="program.id"
+            class="relative overflow-hidden h-80 group cursor-pointer transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 border-2 hover:border-primary">
             <div class="absolute inset-0">
-              <img 
-                :src="program.heroImage" 
-                :alt="program.name"
-                class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-              />
-              <!-- Dark Overlay -->
-              <div class="absolute inset-0 bg-linear-to-t from-black/80 via-black/40 to-black/20"></div>
+              <img :src="program.heroImage" class="w-full h-full object-cover" />
+              <div class="absolute inset-0 bg-black/60"></div>
             </div>
-
-            <!-- Content -->
             <div class="relative h-full flex flex-col justify-end p-6 text-white">
-              
-              <h3 class="text-2xl font-bold mb-2 drop-shadow-lg">{{ program.name }}</h3>
-              <div class="flex items-center gap-2 text-white/90">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-                <span class="text-sm font-medium">{{ program.duration }}</span>
-              </div>
+              <h3 class="text-2xl font-bold mb-2">{{ program.name }}</h3>
+              <span class="text-sm">{{ program.duration }}</span>
             </div>
           </Card>
         </div>
@@ -309,7 +284,7 @@ const getIconPath = (icon: string) => {
 
       <Separator class="my-12" />
 
-      <!-- Admission Information -->
+      <!-- Admission Info -->
       <Card class="border-2 bg-linear-to-r from-primary/5 to-transparent">
         <CardHeader>
           <CardTitle class="text-2xl">Ready to Start Your Journey?</CardTitle>
@@ -320,28 +295,31 @@ const getIconPath = (icon: string) => {
             <div class="flex flex-col items-start p-4 rounded-lg bg-white border">
               <div class="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center mb-3">
                 <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                 </svg>
               </div>
               <p class="font-semibold text-foreground mb-2">Admissions Office</p>
               <p class="text-sm text-muted-foreground">Visit our office for enrollment inquiries and application assistance.</p>
             </div>
-            
+
             <div class="flex flex-col items-start p-4 rounded-lg bg-white border">
               <div class="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center mb-3">
                 <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
                 </svg>
               </div>
               <p class="font-semibold text-foreground mb-2">Contact Number</p>
               <p class="text-sm text-muted-foreground mb-1">0909-088-85380</p>
               <p class="text-xs text-muted-foreground">Monday - Friday, 8:00 AM - 5:00 PM</p>
             </div>
-            
+
             <div class="flex flex-col items-start p-4 rounded-lg bg-white border">
               <div class="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center mb-3">
                 <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                 </svg>
               </div>
               <p class="font-semibold text-foreground mb-2">Email Address</p>

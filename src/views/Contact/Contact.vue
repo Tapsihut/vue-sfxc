@@ -162,7 +162,7 @@ const YoutubeIcon = {
 
       <div class="rounded-2xl overflow-hidden border border-border shadow-lg">
         <iframe
-          src="https://www.google.com/maps?q=St.%20Francis%20Xavier%20College&output=embed"
+          src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d7891.911751061956!2d125.9743272!3d8.5036654!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x32fdfcec0b3e6c19%3A0xb8c88f05389f18ef!2sSaint%20Francis%20Xavier%20College!5e0!3m2!1sen!2sph!4v1769919580174!5m2!1sen!2sph"
           width="100%"
           height="400"
           style="border:0;"
