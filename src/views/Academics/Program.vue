@@ -262,11 +262,8 @@ const ctePrograms = computed(() =>
       <div class="mb-12">
         <div class="flex items-center gap-3 mb-6">
           <div class="w-1 h-8 bg-primary rounded-full"></div>
-          <h2 class="text-2xl md:text-3xl font-bold">TVET/TESDA Programs</h2>
+          <h2 class="text-2xl md:text-3xl font-bold">TESDA Programs</h2>
         </div>
-        <p class="text-muted-foreground mb-6">
-          Short-term technical vocational courses that provide industry-recognized certifications.
-        </p>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
           <Card v-for="program in tesdaPrograms" :key="program.id"
             class="relative overflow-hidden h-80 group cursor-pointer transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 border-2 hover:border-primary">
