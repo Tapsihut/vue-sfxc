@@ -63,7 +63,7 @@ const navigationItems = ref<NavigationItem[]>([
         items: [
             { name: 'Enrollment', to: { name: 'enrollment' } },
             { name: 'Requirements', to: { name: 'requirements' } },
-            { name: 'Payment Options', to: '#' },
+            { name: 'Payment Options', to: { name: 'payment-options' } },
         ],
     },
     {

@@ -2,6 +2,7 @@ import Home from '@/views/Home.vue'
 import MissionVision from '@/views/Abouts/VisionMission.vue'
 import Enrollment from '@/views/Admission/Enrollment.vue'
 import Requirements from '@/views/Admission/Requirements.vue'
+import PaymentOption from '@/views/Admission/PaymentOption.vue'
 import { createRouter, createWebHistory } from 'vue-router'
 import SchoolPatron from '@/views/Abouts/SchoolPatron.vue'
 import Organizations from '@/views/Abouts/Organizations.vue'
@@ -98,6 +99,14 @@ const router = createRouter({
             path: '/admission/requirements',
             name: 'requirements',
             component: Requirements,
+            meta: {
+                layout: 'guest',
+            },
+        },
+                {
+            path: '/admission/payment-options',
+            name: 'payment-options',
+            component: PaymentOption,
             meta: {
                 layout: 'guest',
             },
