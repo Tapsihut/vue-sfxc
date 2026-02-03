@@ -11,6 +11,7 @@ import Programs from '@/views/Academics/Program.vue'
 import Tesda from '@/views/Academics/Tesda.vue'
 import Contact from '@/views/Contact/Contact.vue'
 import NewsAndUpdates from '@/views/News/NewsAndUpdates.vue'
+import Announcement from '@/views/News/Announcement.vue'
 
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
@@ -83,6 +84,14 @@ const router = createRouter({
             path: '/news/latest-update',
             name: 'news',
             component: NewsAndUpdates,
+            meta: {
+                layout: 'guest',
+            },
+        },
+        {
+            path: '/news/announcements',
+            name: 'announcements',
+            component: Announcement,
             meta: {
                 layout: 'guest',
             },

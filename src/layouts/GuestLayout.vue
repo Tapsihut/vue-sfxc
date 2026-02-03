@@ -71,7 +71,7 @@ const navigationItems = ref<NavigationItem[]>([
         type: 'dropdown',
         items: [
             { name: 'Latest News', to: { name: 'news' } },
-            { name: 'Announcements', to: '#' },
+            { name: 'Announcements', to: { name: 'announcements' } },
         ],
     },
     { name: 'Contact',
