@@ -4,6 +4,8 @@ import { useRouter } from 'vue-router'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
+
+// Composable for portal state management
 import { usePortal } from '@/composables/usePortal'
 
 //--- Image Slideshow Logic ---
@@ -37,8 +39,12 @@ const identifier = ref('')
 const password = ref('')
 const isLoading = ref(false)
 const errorMessage = ref('')
+
+// Mock implementation of usePortal composable
 const { setRole } = usePortal()
 
+
+// HANDLE LOGIN MOCK USERS
 const handleLogin = async () => {
   errorMessage.value = ''
   isLoading.value = true
