@@ -62,7 +62,7 @@ const navigationItems = ref<NavigationItem[]>([
         type: 'dropdown',
         items: [
             { name: 'Enrollment', to: { name: 'enrollment' } },
-            { name: 'Requirements', to: '#' },
+            { name: 'Requirements', to: { name: 'requirements' } },
             { name: 'Payment Options', to: '#' },
         ],
     },

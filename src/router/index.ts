@@ -1,6 +1,7 @@
 import Home from '@/views/Home.vue'
 import MissionVision from '@/views/Abouts/VisionMission.vue'
 import Enrollment from '@/views/Admission/Enrollment.vue'
+import Requirements from '@/views/Admission/Requirements.vue'
 import { createRouter, createWebHistory } from 'vue-router'
 import SchoolPatron from '@/views/Abouts/SchoolPatron.vue'
 import Organizations from '@/views/Abouts/Organizations.vue'
@@ -89,6 +90,14 @@ const router = createRouter({
             path: '/contact',
             name: 'contact',
             component: Contact,
+            meta: {
+                layout: 'guest',
+            },
+        },
+        {
+            path: '/admission/requirements',
+            name: 'requirements',
+            component: Requirements,
             meta: {
                 layout: 'guest',
             },
