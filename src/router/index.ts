@@ -1,5 +1,5 @@
 import Home from '@/views/Home.vue'
-import MissionVision from '@/views/Abouts/VisionMission.vue'
+import VisionMission from '@/views/Abouts/VisionMission.vue'
 import Enrollment from '@/views/Admission/Enrollment.vue'
 import Requirements from '@/views/Admission/Requirements.vue'
 import PaymentOption from '@/views/Admission/PaymentOption.vue'
@@ -27,7 +27,7 @@ const router = createRouter({
         {
             path: '/about/vision-mission',
             name: 'vision-mission',
-            component: MissionVision,
+            component: VisionMission,
             meta: {
                 layout: 'guest',
             },
@@ -64,7 +64,7 @@ const router = createRouter({
                 layout: 'guest',
             },
         },
-                {
+        {
             path: '/academics/programs',
             name: 'programs',
             component: Programs,
@@ -112,7 +112,7 @@ const router = createRouter({
                 layout: 'guest',
             },
         },
-                {
+        {
             path: '/admission/payment-options',
             name: 'payment-options',
             component: PaymentOption,
