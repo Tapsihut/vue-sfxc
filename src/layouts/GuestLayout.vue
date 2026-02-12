@@ -50,7 +50,7 @@ const navigationItems = ref<NavigationItem[]>([
             {
                 label: 'Overview',
                 links: [
-                    { name: 'Mission, Vision, and History', to: '/about/vision-mission' },
+                    { name: 'Mission, Vision, and History', to: '#' },
                     { name: 'Contact Us', to: '/contact' },
                 ],
             },
@@ -180,10 +180,11 @@ const navigationItems = ref<NavigationItem[]>([
         ],
     },
     {
-        name: 'Student Resources',
+        name: 'More',
         type: 'dropdown',
         groups: [
             {
+                label: 'Student Resources',
                 links: [
                     { name: 'Academic Calendar', to: '#' },
                     { name: 'Policies and Handbooks', to: '#' },
@@ -193,13 +194,8 @@ const navigationItems = ref<NavigationItem[]>([
                     { name: 'Search and Site Map', to: '#' },
                 ],
             },
-        ],
-    },
-    {
-        name: 'Campus Safety',
-        type: 'dropdown',
-        groups: [
             {
+                label: 'Campus Safety',
                 links: [
                     { name: 'Emergency Procedures', to: '#' },
                     { name: 'Disaster Preparedness', to: '#' },
@@ -243,7 +239,7 @@ const toggleSubmenu = (menuName: string) => {
                                 :logo-src="SFXCLogoOnly"
                                 :text-src="SFXCTextOnly"
                                 variant="horizontal"
-                                alt="Company Name"
+                                alt="St. Francis Xavier College Logo"
                                 logo-class="w-16"
                                 text-class="w-50"
                             />
@@ -259,7 +255,10 @@ const toggleSubmenu = (menuName: string) => {
                                         <NavigationMenuLink
                                             v-if="item.type === 'link'"
                                             as-child
-                                            :class="navigationMenuTriggerStyle()"
+                                            :class="
+                                                navigationMenuTriggerStyle() +
+                                                ' px-3 py-2 text-sm font-medium'
+                                            "
                                         >
                                             <RouterLink :to="item.to!">{{ item.name }}</RouterLink>
                                         </NavigationMenuLink>
@@ -317,7 +316,6 @@ const toggleSubmenu = (menuName: string) => {
                                     </NavigationMenuItem>
                                 </NavigationMenuList>
                             </NavigationMenu>
-                            <Button href="/login">Login</Button>
                         </div>
 
                         <div class="md:hidden">
@@ -394,10 +392,6 @@ const toggleSubmenu = (menuName: string) => {
                                     </div>
                                 </div>
                             </template>
-
-                            <Separator class="my-4" />
-
-                            <Button class="w-full justify-center" href="/login">Login</Button>
                         </div>
                     </div>
                 </Transition>
