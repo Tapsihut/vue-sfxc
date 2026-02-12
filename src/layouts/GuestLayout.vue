@@ -17,7 +17,6 @@ import SchoolLogo from '@/components/ui/custom/logo/SchoolLogo.vue'
 import SFXCLogoOnly from '@/assets/images/sfxc-logo-only.png'
 import SFXCTextOnly from '@/assets/images/sfxc-text-only.png'
 
-
 const isMobileMenuOpen = ref(false)
 const activeSubmenu = ref<string | null>(null)
 
@@ -26,11 +25,16 @@ interface NavigationLink {
     to: string | { name: string }
 }
 
+interface NavigationGroup {
+    label?: string
+    links: NavigationLink[]
+}
+
 interface NavigationItem {
     name: string
     type: 'link' | 'dropdown'
     to?: string | { name: string }
-    items?: NavigationLink[]
+    groups?: NavigationGroup[]
 }
 
 const navigationItems = ref<NavigationItem[]>([
@@ -40,45 +44,179 @@ const navigationItems = ref<NavigationItem[]>([
         to: { name: 'home' },
     },
     {
-        name: 'About',
+        name: 'About Us',
         type: 'dropdown',
-        items: [
-            { name: 'School Patron', to: { name: 'school-patron' } },
-            { name: 'Vision & Mission', to: { name: 'vision-mission' } },
-            { name: 'Organizations', to: { name: 'organizations' } },
+        groups: [
+            {
+                label: 'Overview',
+                links: [
+                    { name: 'Mission, Vision, and History', to: '/about/vision-mission' },
+                    { name: 'Contact Us', to: '/contact' },
+                ],
+            },
+            {
+                label: 'Governance & Quality',
+                links: [
+                    { name: 'Leadership and Governance', to: '#' },
+                    { name: 'Office Directory', to: '#' },
+                    { name: 'Accreditations, Rankings, and Major Achievements', to: '#' },
+                ],
+            },
+            {
+                label: 'Campus',
+                links: [{ name: 'Campus Facilities and Virtual Tour', to: '#' }],
+            },
+        ],
+    },
+    {
+        name: 'Community',
+        type: 'dropdown',
+        groups: [
+            {
+                label: 'Community',
+                links: [
+                    { name: 'News and Events Calendar', to: '#' },
+                    { name: 'Media Gallery', to: '#' },
+                    { name: 'Alumni', to: '#' },
+                    { name: 'Careers at SFXC', to: '#' },
+                ],
+            },
+            {
+                label: 'Outreach',
+                links: [
+                    { name: 'Outreach Programs', to: '#' },
+                    { name: 'Partner Barangays/Agencies', to: '#' },
+                    { name: 'Volunteer Opportunities', to: '#' },
+                    { name: 'Impact Stories', to: '#' },
+                ],
+            },
+        ],
+    },
+    {
+        name: 'Admissions',
+        type: 'dropdown',
+        groups: [
+            {
+                label: 'Apply',
+                links: [
+                    { name: 'How to Apply (Local/International)', to: '#' },
+                    { name: 'Requirements and Deadlines', to: '#' },
+                    { name: 'Application Portal Login', to: '#' },
+                    { name: 'Visit/Schedule Tour', to: '#' },
+                ],
+            },
+            {
+                label: 'Costs & Aid',
+                links: [
+                    { name: 'Tuition and Financial Aid', to: '#' },
+                    { name: 'Scholarships (Philippine/ASEAN-focused)', to: '#' },
+                ],
+            },
+            {
+                label: 'Guidance',
+                links: [{ name: 'What Course Should I Choose?', to: '#' }],
+            },
         ],
     },
     {
         name: 'Academics',
         type: 'dropdown',
-        items: [
-            { name: 'Tesda', to: { name: 'tesda' } },
-            { name: 'College Programs', to: { name: 'programs' } },
-            { name: 'Scholarship', to: { name: 'scholarship' } },
+        groups: [
+            {
+                label: 'Programs',
+                links: [
+                    { name: 'Baccalaureate Programs', to: '#' },
+                    { name: 'Unit Earner Program', to: '#' },
+                    { name: 'Technical Vocational Programs', to: '#' },
+                ],
+            },
+            {
+                label: 'Offices',
+                links: [
+                    { name: 'International Relations Office', to: '#' },
+                    { name: 'Research Office', to: '#' },
+                ],
+            },
+            {
+                label: 'Recognitions',
+                links: [
+                    { name: 'Faculty Achievements', to: '#' },
+                    { name: 'External Appointment of Faculty Members', to: '#' },
+                    { name: 'Institutional Recognition/s', to: '#' },
+                    { name: 'Program-level Recognitions/s', to: '#' },
+                ],
+            },
+            {
+                label: 'Learning',
+                links: [{ name: 'Alternative Learning Arrangements', to: '#' }],
+            },
         ],
     },
     {
-        name: 'Admission',
+        name: 'Xavier Knight Life',
         type: 'dropdown',
-        items: [
-            { name: 'Enrollment', to: { name: 'enrollment' } },
-            { name: 'Requirements', to: { name: 'requirements' } },
-            { name: 'Payment Options', to: { name: 'payment-options' } },
+        groups: [
+            {
+                label: 'Student Life',
+                links: [
+                    { name: 'Office of Student Affairs and Services', to: '#' },
+                    { name: 'Campus Housing and Dining', to: '#' },
+                    { name: 'Student Organizations and Clubs', to: { name: 'organizations' } },
+                    { name: 'Athletics and Fitness', to: '#' },
+                    { name: 'Health and Wellness', to: '#' },
+                    { name: 'Career Services', to: '#' },
+                ],
+            },
+            {
+                label: 'Culture & Faith',
+                links: [
+                    { name: 'Culture and Arts Office', to: '#' },
+                    { name: 'Campus Culture and Traditions', to: '#' },
+                    { name: 'Recollection', to: '#' },
+                    { name: 'Faith (Patron)', to: { name: 'school-patron' } },
+                    { name: 'Impact Stories', to: '#' },
+                ],
+            },
         ],
     },
     {
-        name: 'News',
+        name: 'Student Resources',
         type: 'dropdown',
-        items: [
-            { name: 'Latest News', to: { name: 'news' } },
-            { name: 'Announcements', to: { name: 'announcements' } },
+        groups: [
+            {
+                links: [
+                    { name: 'Academic Calendar', to: '#' },
+                    { name: 'Policies and Handbooks', to: '#' },
+                    { name: 'Library Access', to: '#' },
+                    { name: 'XIMS', to: '#' },
+                    { name: 'WIFI Access', to: '#' },
+                    { name: 'Search and Site Map', to: '#' },
+                ],
+            },
         ],
     },
-    { name: 'Contact',
-        type: 'link',
-        to: '/contact',
+    {
+        name: 'Campus Safety',
+        type: 'dropdown',
+        groups: [
+            {
+                links: [
+                    { name: 'Emergency Procedures', to: '#' },
+                    { name: 'Disaster Preparedness', to: '#' },
+                    { name: 'Health Protocols', to: '#' },
+                    { name: 'Security Office Contact', to: '#' },
+                    { name: 'Incident Reporting', to: '#' },
+                ],
+            },
+        ],
     },
 ])
+
+const getLinksCount = (item: NavigationItem) =>
+    item.groups?.reduce((total, group) => total + group.links.length, 0) ?? 0
+
+const useTwoColumns = (item: NavigationItem) =>
+    (item.groups?.length ?? 0) > 1 || getLinksCount(item) > 6
 
 const toggleMobileMenu = () => {
     isMobileMenuOpen.value = !isMobileMenuOpen.value
@@ -132,20 +270,47 @@ const toggleSubmenu = (menuName: string) => {
                                                 item.name
                                             }}</NavigationMenuTrigger>
                                             <NavigationMenuContent>
-                                                <ul class="grid w-50 gap-2">
-                                                    <li
-                                                        v-for="subItem in item.items"
-                                                        :key="subItem.name"
+                                                <ul
+                                                    class="grid gap-2 p-2"
+                                                    :class="
+                                                        useTwoColumns(item)
+                                                            ? 'w-130 grid-cols-2'
+                                                            : 'w-56 grid-cols-1'
+                                                    "
+                                                >
+                                                    <template
+                                                        v-for="(group, groupIndex) in item.groups"
+                                                        :key="groupIndex"
                                                     >
-                                                        <NavigationMenuLink as-child>
-                                                            <RouterLink
-                                                                :to="subItem.to"
-                                                                class="block p-3 hover:bg-accent rounded-md"
+                                                        <li
+                                                            class="col-span-1"
+                                                            :class="{
+                                                                'mb-2': useTwoColumns(item),
+                                                            }"
+                                                        >
+                                                            <p
+                                                                v-if="group.label"
+                                                                class="px-3 pt-2 pb-1 text-xs font-semibold uppercase tracking-wider text-muted-foreground"
                                                             >
-                                                                {{ subItem.name }}
-                                                            </RouterLink>
-                                                        </NavigationMenuLink>
-                                                    </li>
+                                                                {{ group.label }}
+                                                            </p>
+                                                            <ul class="grid gap-1">
+                                                                <li
+                                                                    v-for="subItem in group.links"
+                                                                    :key="subItem.name"
+                                                                >
+                                                                    <NavigationMenuLink as-child>
+                                                                        <RouterLink
+                                                                            :to="subItem.to"
+                                                                            class="block p-3 hover:bg-accent rounded-md"
+                                                                        >
+                                                                            {{ subItem.name }}
+                                                                        </RouterLink>
+                                                                    </NavigationMenuLink>
+                                                                </li>
+                                                            </ul>
+                                                        </li>
+                                                    </template>
                                                 </ul>
                                             </NavigationMenuContent>
                                         </template>
@@ -207,14 +372,25 @@ const toggleSubmenu = (menuName: string) => {
                                         v-if="activeSubmenu === item.name.toLowerCase()"
                                         class="px-4 py-2 space-y-1 bg-gray-50 rounded-b-lg mx-2 mt-1"
                                     >
-                                        <RouterLink
-                                            v-for="subItem in item.items"
-                                            :key="subItem.name"
-                                            :to="subItem.to"
-                                            class="block px-4 py-2 text-sm rounded-md hover:text-accent-foreground hover:bg-accent"
+                                        <template
+                                            v-for="(group, groupIndex) in item.groups"
+                                            :key="groupIndex"
                                         >
-                                            {{ subItem.name }}
-                                        </RouterLink>
+                                            <p
+                                                v-if="group.label"
+                                                class="px-4 pt-3 pb-1 text-xs font-semibold uppercase tracking-wider text-muted-foreground"
+                                            >
+                                                {{ group.label }}
+                                            </p>
+                                            <RouterLink
+                                                v-for="subItem in group.links"
+                                                :key="subItem.name"
+                                                :to="subItem.to"
+                                                class="block px-4 py-2 text-sm rounded-md hover:text-accent-foreground hover:bg-accent"
+                                            >
+                                                {{ subItem.name }}
+                                            </RouterLink>
+                                        </template>
                                     </div>
                                 </div>
                             </template>
