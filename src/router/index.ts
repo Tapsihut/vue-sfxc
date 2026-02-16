@@ -12,6 +12,7 @@ import Tesda from '@/views/Academics/Tesda.vue'
 import Contact from '@/views/Contact/Contact.vue'
 import NewsAndUpdates from '@/views/News/NewsAndUpdates.vue'
 import Announcement from '@/views/News/Announcement.vue'
+import ScheduleTour from '@/views/Admission/ScheduleTour.vue'
 
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
@@ -68,6 +69,14 @@ const router = createRouter({
             path: '/academics/programs',
             name: 'programs',
             component: Programs,
+            meta: {
+                layout: 'guest',
+            },
+        },
+        {
+            path: '/academics/tour',
+            name: 'schedule-tour',
+            component: ScheduleTour,
             meta: {
                 layout: 'guest',
             },

@@ -102,7 +102,7 @@ const navigationItems = ref<NavigationItem[]>([
                     { name: 'How to Apply (Local/International)', to:  { name: 'requirements' } },
                     // { name: 'Requirements and Deadlines', to: { name: 'requirements' } },
                     { name: 'Application Portal Login', to: '#' },
-                    { name: 'Visit/Schedule Tour', to: '#' },
+                    { name: 'Visit/Schedule Tour', to: { name: 'schedule-tour'} },
                 ],
             },
             {
