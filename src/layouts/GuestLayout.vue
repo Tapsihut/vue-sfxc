@@ -114,7 +114,7 @@ const navigationItems = ref<NavigationItem[]>([
             },
             {
                 label: 'Guidance',
-                links: [{ name: 'What Course Should I Choose?', to: '#' }],
+                links: [{ name: 'What Course Should I Choose?', to: { name: 'course-guide' } }],
             },
         ],
     },

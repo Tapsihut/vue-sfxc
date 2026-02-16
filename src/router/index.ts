@@ -13,6 +13,7 @@ import Contact from '@/views/Contact/Contact.vue'
 import NewsAndUpdates from '@/views/News/NewsAndUpdates.vue'
 import Announcement from '@/views/News/Announcement.vue'
 import ScheduleTour from '@/views/Admission/ScheduleTour.vue'
+import Guide from '@/views/Admission/Guide.vue'
 
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
@@ -74,14 +75,6 @@ const router = createRouter({
             },
         },
         {
-            path: '/academics/tour',
-            name: 'schedule-tour',
-            component: ScheduleTour,
-            meta: {
-                layout: 'guest',
-            },
-        },
-        {
             path: '/academics/tesda',
             name: 'tesda',
             component: Tesda,
@@ -129,6 +122,22 @@ const router = createRouter({
                 layout: 'guest',
             },
         },
+                {
+            path: '/admission/tour',
+            name: 'schedule-tour',
+            component: ScheduleTour,
+            meta: {
+                layout: 'guest',
+            },
+        },
+        {
+            path: '/admission/guide',
+            name: 'course-guide',
+            component: Guide,
+            meta: {
+                layout: 'guest',
+            },
+        }
     ],
     scrollBehavior(to, from, savedPosition) {
         // always scroll to top
