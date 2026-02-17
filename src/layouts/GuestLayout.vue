@@ -75,7 +75,7 @@ const navigationItems = ref<NavigationItem[]>([
             {
                 label: 'Community',
                 links: [
-                    { name: 'News and Events Calendar', to: '#' },
+                    { name: 'News and Events Calendar', to: { name: 'news' } },
                     { name: 'Media Gallery', to: '#' },
                     { name: 'Alumni', to: '#' },
                     { name: 'Careers at SFXC', to: '#' },
