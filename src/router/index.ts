@@ -14,6 +14,7 @@ import NewsAndUpdates from '@/views/Community/NewsAndUpdates.vue'
 import Announcement from '@/views/Community/Announcement.vue'
 import ScheduleTour from '@/views/Admission/ScheduleTour.vue'
 import Guide from '@/views/Admission/Guide.vue'
+import MediaGallery from '@/views/Community/MediaGallery.vue'
 
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
@@ -86,6 +87,14 @@ const router = createRouter({
             path: '/news/latest-update',
             name: 'news',
             component: NewsAndUpdates,
+            meta: {
+                layout: 'guest',
+            },
+        },
+        {
+            path: '/community/media-gallery',
+            name: 'media-gallery',
+            component: MediaGallery,
             meta: {
                 layout: 'guest',
             },
