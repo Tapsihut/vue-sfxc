@@ -77,7 +77,7 @@ const navigationItems = ref<NavigationItem[]>([
                 links: [
                     { name: 'News and Events Calendar', to: { name: 'news' } },
                     { name: 'Media Gallery', to: { name: 'media-gallery'} },
-                    { name: 'Alumni', to: '#' },
+                    { name: 'Alumni', to: { name: 'alumni'} },
                     { name: 'Careers at SFXC', to: '#' },
                 ],
             },
