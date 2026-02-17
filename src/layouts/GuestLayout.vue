@@ -84,7 +84,7 @@ const navigationItems = ref<NavigationItem[]>([
             {
                 label: 'Outreach',
                 links: [
-                    { name: 'Outreach Programs', to: '#' },
+                    { name: 'Outreach Programs', to: { name: 'outreach-programs'} },
                     { name: 'Partner Barangays/Agencies', to: '#' },
                     { name: 'Volunteer Opportunities', to: '#' },
                     { name: 'Impact Stories', to: '#' },
