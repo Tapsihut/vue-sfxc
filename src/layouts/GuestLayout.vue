@@ -108,8 +108,8 @@ const navigationItems = ref<NavigationItem[]>([
             {
                 label: 'Costs & Aid',
                 links: [
-                    { name: 'Tuition and Financial Aid', to: '#' },
-                    { name: 'Scholarships (Philippine/ASEAN-focused)', to: '#' },
+                    { name: 'Tuition and Financial Aid', to: { name: 'payment-options'} },
+                    { name: 'Scholarships (Philippine/ASEAN-focused)', to: { name: 'scholarship' } },
                 ],
             },
             {
