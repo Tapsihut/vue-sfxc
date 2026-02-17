@@ -19,6 +19,7 @@ import Alumni from '@/views/Community/Alumni.vue'
 import Careers from '@/views/Community/Careers.vue'
 import OutreachProgram from '@/views/Community/OutreachProgram.vue'
 import BarangayPartner from '@/views/Community/BarangayPartner.vue'
+import VolunteerOp from '@/views/Community/VolunteerOp.vue'
 
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
@@ -131,6 +132,14 @@ const router = createRouter({
             path: '/community/barangay-partners',
             name: 'barangay-partners',
             component: BarangayPartner,
+            meta: {
+                layout: 'guest',
+            },
+        },
+        {
+            path: '/community/volunteer-opportunities',
+            name: 'volunteer-opportunities',
+            component: VolunteerOp,
             meta: {
                 layout: 'guest',
             },
