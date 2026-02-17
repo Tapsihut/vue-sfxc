@@ -16,6 +16,7 @@ import ScheduleTour from '@/views/Admission/ScheduleTour.vue'
 import Guide from '@/views/Admission/Guide.vue'
 import MediaGallery from '@/views/Community/MediaGallery.vue'
 import Alumni from '@/views/Community/Alumni.vue'
+import Careers from '@/views/Community/Careers.vue'
 
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
@@ -104,6 +105,14 @@ const router = createRouter({
             path: '/community/alumni',
             name: 'alumni',
             component: Alumni,
+            meta: {
+                layout: 'guest',
+            },
+        },
+        {
+            path: '/community/careers',
+            name: 'careers',
+            component: Careers,
             meta: {
                 layout: 'guest',
             },
