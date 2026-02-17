@@ -20,6 +20,7 @@ import Careers from '@/views/Community/Careers.vue'
 import OutreachProgram from '@/views/Community/OutreachProgram.vue'
 import BarangayPartner from '@/views/Community/BarangayPartner.vue'
 import VolunteerOp from '@/views/Community/VolunteerOp.vue'
+import Stories from '@/views/Community/Stories.vue'
 
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
@@ -140,6 +141,14 @@ const router = createRouter({
             path: '/community/volunteer-opportunities',
             name: 'volunteer-opportunities',
             component: VolunteerOp,
+            meta: {
+                layout: 'guest',
+            },
+        },
+        {
+            path: '/community/stories',
+            name: 'stories',
+            component: Stories,
             meta: {
                 layout: 'guest',
             },
