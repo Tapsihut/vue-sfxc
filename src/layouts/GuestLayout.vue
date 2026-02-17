@@ -50,7 +50,7 @@ const navigationItems = ref<NavigationItem[]>([
             {
                 label: 'Overview',
                 links: [
-                    { name: 'Mission, Vision, and History', to: '#' },
+                    { name: 'Mission, Vision, and History', to: { name: 'vision-mission'} },
                     { name: 'Contact Us', to: '/contact' },
                 ],
             },
