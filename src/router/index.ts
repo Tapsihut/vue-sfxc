@@ -22,6 +22,7 @@ import BarangayPartner from '@/views/Community/BarangayPartner.vue'
 import VolunteerOp from '@/views/Community/VolunteerOp.vue'
 import Stories from '@/views/Community/Stories.vue'
 import Facilities from '@/views/Abouts/Facilities.vue'
+import OfficeDirectory from '@/views/Abouts/OfficeDirectory.vue'
 
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
@@ -62,6 +63,14 @@ const router = createRouter({
             path: '/about/facilities',
             name: 'facilities',
             component: Facilities,
+            meta: {
+                layout: 'guest',
+            },
+        },
+        {
+            path: '/about/office-directory',
+            name: 'office-directory',
+            component: OfficeDirectory,
             meta: {
                 layout: 'guest',
             },
