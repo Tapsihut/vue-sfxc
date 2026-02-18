@@ -64,7 +64,7 @@ const navigationItems = ref<NavigationItem[]>([
             },
             {
                 label: 'Campus',
-                links: [{ name: 'Campus Facilities and Virtual Tour', to: '#' }],
+                links: [{ name: 'Campus Facilities and Virtual Tour', to: { name: 'facilities'} }],
             },
         ],
     },
