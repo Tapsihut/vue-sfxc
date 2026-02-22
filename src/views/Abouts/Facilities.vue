@@ -80,7 +80,7 @@ const setActive = (facility: Facility) => {
     <section
       class="relative h-[58vh] flex items-end overflow-hidden bg-[url('/src/assets/images/sfxc-building.jpg')] bg-cover bg-center"
     >
-      <div class="absolute inset-0 bg-gradient-to-t from-background via-black/40 to-transparent" />
+      <div class="absolute inset-0 bg-linear-to-t from-background via-black/40 to-transparent" />
 
       <div class="relative z-10 w-full max-w-7xl mx-auto px-6 lg:px-10 pb-14 animate-rise">
         <h1 class="text-5xl md:text-6xl font-extrabold tracking-tight text-white leading-tight">
@@ -129,7 +129,7 @@ const setActive = (facility: Facility) => {
             <div :key="activeFacility.id" class="flex-1 flex flex-col md:flex-row gap-8">
 
               <!-- Image -->
-              <div class="md:w-1/2 aspect-[4/3] overflow-hidden rounded-xl bg-muted shrink-0">
+              <div class="md:w-1/2 aspect-4/3 overflow-hidden rounded-xl bg-muted shrink-0">
                 <img
                   :src="activeFacility.image"
                   :alt="activeFacility.name"
@@ -188,7 +188,7 @@ const setActive = (facility: Facility) => {
               :alt="facility.name"
               class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
             />
-            <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+            <div class="absolute inset-0 bg-linear-to-t from-black/60 to-transparent" />
             <div class="absolute bottom-3 left-3 right-3">
               <CardTitle class="text-white text-sm font-semibold">{{ facility.name }}</CardTitle>
             </div>
