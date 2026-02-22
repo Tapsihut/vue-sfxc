@@ -156,35 +156,6 @@ const closeProgramDetails = () => {
       </div>
     </section>
 
-    <!-- Impact Section -->
-    <section class="py-16 bg-muted/30">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center mb-12">
-          <h2 class="text-3xl md:text-4xl font-bold">Our Impact</h2>
-          <p class="text-muted-foreground mt-2">Creating lasting change in communities</p>
-        </div>
-
-        <div class="grid md:grid-cols-4 gap-8">
-          <Card class="text-center p-8 animate-fade-in">
-            <div class="text-4xl font-bold text-primary mb-2">5,000+</div>
-            <p class="text-muted-foreground">Families Served</p>
-          </Card>
-          <Card class="text-center p-8 animate-fade-in" style="animation-delay: 100ms">
-            <div class="text-4xl font-bold text-primary mb-2">50+</div>
-            <p class="text-muted-foreground">Partner Communities</p>
-          </Card>
-          <Card class="text-center p-8 animate-fade-in" style="animation-delay: 200ms">
-            <div class="text-4xl font-bold text-primary mb-2">1,000+</div>
-            <p class="text-muted-foreground">Student Volunteers</p>
-          </Card>
-          <Card class="text-center p-8 animate-fade-in" style="animation-delay: 300ms">
-            <div class="text-4xl font-bold text-primary mb-2">100+</div>
-            <p class="text-muted-foreground">Programs Conducted</p>
-          </Card>
-        </div>
-      </div>
-    </section>
-
     <!-- Program Details Modal -->
     <Transition name="fade">
       <div
