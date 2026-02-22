@@ -6,6 +6,13 @@ import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
 import { Separator } from '@/components/ui/separator'
 
+// Import images
+import sfxcBuilding from '@/assets/images/sfxc-building.jpg'
+import cauldron from '@/assets/images/cauldron.jpg'
+import bsit1 from '@/assets/images/news/sfxc_bsit.jpg'
+import bsit2 from '@/assets/images/news/sfxc_bsit2.jpg'
+import bsit3 from '@/assets/images/news/sfxc_bsit3.jpg'
+
 interface Recognition {
   id: string
   category: string
@@ -35,7 +42,7 @@ const recognitions: Recognition[] = [
       'Bachelor of Secondary Education',
       'Liberal Arts Programs'
     ],
-    image: '/src/assets/images/sfxc-building.jpg',
+    image: sfxcBuilding,
     color: 'bg-[#E5243B]',
     icon: '<path d="M12 15l-4.224 2.224.805-4.704-3.416-3.33 4.723-.687L12 4l2.112 4.503 4.723.687-3.416 3.33.805 4.704z"/>'
   },
@@ -48,7 +55,7 @@ const recognitions: Recognition[] = [
     year: 'Valid until 2027',
     description: 'Recognized as a premier institution demonstrating excellent performance in the areas of instruction, research and publication, extension and linkages, and institutional qualifications.',
     details: ['Teacher Education Programs'],
-    image: '/src/assets/images/cauldron.jpg',
+    image: cauldron,
     color: 'bg-[#DDA63A]',
     icon: '<path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>'
   },
@@ -65,7 +72,7 @@ const recognitions: Recognition[] = [
       'Top 3 Regional Placer (2024)',
       '100% First-time Takers Passing Rate'
     ],
-    image: '/src/assets/images/news/sfxc_bsit.jpg',
+    image: bsit1,
     color: 'bg-[#4C9F38]',
     icon: '<path d="M12 20V10"/><path d="M18 20V4"/><path d="M6 20v-4"/>'
   },
@@ -78,7 +85,7 @@ const recognitions: Recognition[] = [
     year: 'Valid until 2026',
     description: 'Certified for implementing a robust Quality Management System across all academic and administrative processes, ensuring consistent delivery of educational services.',
     details: ['Institution-wide Quality Management System'],
-    image: '/src/assets/images/news/sfxc_bsit2.jpg',
+    image: bsit2,
     color: 'bg-[#C5192D]',
     icon: '<path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="M22 4L12 14.01l-3-3"/>'
   },
@@ -95,7 +102,7 @@ const recognitions: Recognition[] = [
       '₱1M Grant Awardee',
       'Featured in National Tech Magazine'
     ],
-    image: '/src/assets/images/news/sfxc_bsit3.jpg',
+    image: bsit3,
     color: 'bg-[#FF3A21]',
     icon: '<path d="M9 18h6"/><path d="M10 22h4"/><path d="M15.09 14c.18-.98.65-1.74 1.41-2.5A4.65 4.65 0 0 0 18 8 6 6 0 0 0 6 8c0 1 .23 2.23 1.5 3.5A4.61 4.61 0 0 1 8.91 14"/>'
   }

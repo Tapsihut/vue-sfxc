@@ -6,6 +6,9 @@ import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
 import { Separator } from '@/components/ui/separator'
 
+// Import image
+import sfxcBuilding from '@/assets/images/sfxc-building.jpg'
+
 interface Partner {
   id: number
   name: string
@@ -26,7 +29,7 @@ const partners: Partner[] = [
     partnership: 'Education & Health Programs',
     programs: ['Medical Mission', 'Feeding Program', 'Educational Support'],
     established: 'Since 2020',
-    image: '/src/assets/images/barangay-lumbia.jpg',
+    image: sfxcBuilding,
     population: '15,000+',
     impact: '500+ families served'
   },
@@ -37,7 +40,7 @@ const partners: Partner[] = [
     partnership: 'Skills Development & Livelihood',
     programs: ['Vocational Training', 'Entrepreneurship Workshop', 'Youth Camp'],
     established: 'Since 2019',
-    image: '/src/assets/images/barangay-carmen.jpg',
+    image: sfxcBuilding,
     population: '20,000+',
     impact: '300+ entrepreneurs trained'
   },
@@ -48,7 +51,7 @@ const partners: Partner[] = [
     partnership: 'Environmental Conservation',
     programs: ['Tree Planting', 'Coastal Cleanup', 'Waste Management'],
     established: 'Since 2021',
-    image: '/src/assets/images/barangay-bulua.jpg',
+    image: sfxcBuilding,
     population: '18,000+',
     impact: '10,000+ trees planted'
   },
@@ -59,7 +62,7 @@ const partners: Partner[] = [
     partnership: 'Youth Development',
     programs: ['Leadership Training', 'Sports Clinic', 'Tutorial Program'],
     established: 'Since 2020',
-    image: '/src/assets/images/barangay-macasandig.jpg',
+    image: sfxcBuilding,
     population: '12,000+',
     impact: '200+ youth leaders'
   },
@@ -70,7 +73,7 @@ const partners: Partner[] = [
     partnership: 'Community Health Services',
     programs: ['Health Education', 'Dental Mission', 'Nutrition Program'],
     established: 'Since 2018',
-    image: '/src/assets/images/barangay-kauswagan.jpg',
+    image: sfxcBuilding,
     population: '25,000+',
     impact: '1,000+ consultations'
   },
@@ -81,7 +84,7 @@ const partners: Partner[] = [
     partnership: 'Education & Technology',
     programs: ['Computer Literacy', 'Library Support', 'Scholarship Program'],
     established: 'Since 2021',
-    image: '/src/assets/images/barangay-balulang.jpg',
+    image: sfxcBuilding,
     population: '22,000+',
     impact: '150+ scholars supported'
   },
@@ -92,7 +95,7 @@ const partners: Partner[] = [
     partnership: 'Livelihood Support',
     programs: ['Skills Training', 'Microfinance Education', 'Market Linkage'],
     established: 'Since 2019',
-    image: '/src/assets/images/barangay-gusa.jpg',
+    image: sfxcBuilding,
     population: '30,000+',
     impact: '400+ livelihood programs'
   },
@@ -103,7 +106,7 @@ const partners: Partner[] = [
     partnership: 'Disaster Preparedness',
     programs: ['Emergency Response', 'First Aid Training', 'Relief Operations'],
     established: 'Since 2020',
-    image: '/src/assets/images/barangay-indahag.jpg',
+    image: sfxcBuilding,
     population: '16,000+',
     impact: '500+ trained responders'
   },
@@ -114,7 +117,7 @@ const partners: Partner[] = [
     partnership: 'Cultural & Arts',
     programs: ['Cultural Exchange', 'Arts Workshop', 'Community Theater'],
     established: 'Since 2022',
-    image: '/src/assets/images/barangay-lapasan.jpg',
+    image: sfxcBuilding,
     population: '14,000+',
     impact: '100+ cultural events'
   }
