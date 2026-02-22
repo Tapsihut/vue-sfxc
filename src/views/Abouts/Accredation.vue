@@ -2,6 +2,9 @@
 import { ref, computed } from 'vue'
 import { Input } from '@/components/ui/input'
 import { Badge } from '@/components/ui/badge'
+import { Button } from '@/components/ui/button'
+import { Card, CardContent } from '@/components/ui/card'
+import { Separator } from '@/components/ui/separator'
 
 interface Recognition {
   id: string
@@ -158,18 +161,17 @@ const filteredRecognitions = computed(() => {
         </div>
 
         <!-- Category Filters -->
-        <div class="flex gap-1 overflow-x-auto w-full md:w-auto pb-2 md:pb-0 hide-scrollbar">
-          <button
+        <div class="flex gap-2 overflow-x-auto w-full md:w-auto pb-2 md:pb-0 hide-scrollbar">
+          <Button
             v-for="cat in categories"
             :key="cat"
             @click="activeCategory = cat"
-            class="px-4 py-2 rounded-md text-sm font-medium whitespace-nowrap transition-all duration-200"
-            :class="activeCategory === cat 
-              ? 'bg-foreground text-background shadow-sm' 
-              : 'text-muted-foreground hover:bg-muted hover:text-foreground'"
+            :variant="activeCategory === cat ? 'default' : 'ghost'"
+            size="sm"
+            class="whitespace-nowrap"
           >
             {{ cat }}
-          </button>
+          </Button>
         </div>
       </div>
     </section>
@@ -188,12 +190,13 @@ const filteredRecognitions = computed(() => {
           </div>
           <h3 class="text-lg font-semibold text-foreground mb-1">No recognitions found</h3>
           <p class="text-muted-foreground mb-6">We couldn't find anything matching your search criteria.</p>
-          <button 
+          <Button 
             @click="searchQuery = ''; activeCategory = 'All'" 
-            class="text-sm font-medium text-primary hover:underline underline-offset-4"
+            variant="link"
+            size="sm"
           >
             Clear all filters
-          </button>
+          </Button>
         </div>
       </Transition>
 
