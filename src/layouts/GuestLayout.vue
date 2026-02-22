@@ -59,7 +59,7 @@ const navigationItems = ref<NavigationItem[]>([
                 links: [
                     { name: 'Leadership and Governance', to: '#' },
                     { name: 'Office Directory', to: { name: 'office-directory'} },
-                    { name: 'Accreditations, Rankings, and Major Achievements', to: '#' },
+                    { name: 'Accreditations, Rankings, and Major Achievements', to: { name: 'accreditation'} },
                 ],
             },
             {
