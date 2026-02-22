@@ -1,6 +1,10 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
+import { Input } from '@/components/ui/input'
+import { Badge } from '@/components/ui/badge'
+import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
+import { Separator } from '@/components/ui/separator'
 
 interface Partner {
   id: number
@@ -9,6 +13,9 @@ interface Partner {
   partnership: string
   programs: string[]
   established: string
+  image: string
+  population: string
+  impact: string
 }
 
 const partners: Partner[] = [
@@ -18,7 +25,10 @@ const partners: Partner[] = [
     location: 'Cagayan de Oro City',
     partnership: 'Education & Health Programs',
     programs: ['Medical Mission', 'Feeding Program', 'Educational Support'],
-    established: '2020'
+    established: 'Since 2020',
+    image: '/src/assets/images/barangay-lumbia.jpg',
+    population: '15,000+',
+    impact: '500+ families served'
   },
   {
     id: 2,
@@ -26,7 +36,10 @@ const partners: Partner[] = [
     location: 'Cagayan de Oro City',
     partnership: 'Skills Development & Livelihood',
     programs: ['Vocational Training', 'Entrepreneurship Workshop', 'Youth Camp'],
-    established: '2019'
+    established: 'Since 2019',
+    image: '/src/assets/images/barangay-carmen.jpg',
+    population: '20,000+',
+    impact: '300+ entrepreneurs trained'
   },
   {
     id: 3,
@@ -34,7 +47,10 @@ const partners: Partner[] = [
     location: 'Cagayan de Oro City',
     partnership: 'Environmental Conservation',
     programs: ['Tree Planting', 'Coastal Cleanup', 'Waste Management'],
-    established: '2021'
+    established: 'Since 2021',
+    image: '/src/assets/images/barangay-bulua.jpg',
+    population: '18,000+',
+    impact: '10,000+ trees planted'
   },
   {
     id: 4,
@@ -42,7 +58,10 @@ const partners: Partner[] = [
     location: 'Cagayan de Oro City',
     partnership: 'Youth Development',
     programs: ['Leadership Training', 'Sports Clinic', 'Tutorial Program'],
-    established: '2020'
+    established: 'Since 2020',
+    image: '/src/assets/images/barangay-macasandig.jpg',
+    population: '12,000+',
+    impact: '200+ youth leaders'
   },
   {
     id: 5,
@@ -50,7 +69,10 @@ const partners: Partner[] = [
     location: 'Cagayan de Oro City',
     partnership: 'Community Health Services',
     programs: ['Health Education', 'Dental Mission', 'Nutrition Program'],
-    established: '2018'
+    established: 'Since 2018',
+    image: '/src/assets/images/barangay-kauswagan.jpg',
+    population: '25,000+',
+    impact: '1,000+ consultations'
   },
   {
     id: 6,
@@ -58,7 +80,10 @@ const partners: Partner[] = [
     location: 'Cagayan de Oro City',
     partnership: 'Education & Technology',
     programs: ['Computer Literacy', 'Library Support', 'Scholarship Program'],
-    established: '2021'
+    established: 'Since 2021',
+    image: '/src/assets/images/barangay-balulang.jpg',
+    population: '22,000+',
+    impact: '150+ scholars supported'
   },
   {
     id: 7,
@@ -66,7 +91,10 @@ const partners: Partner[] = [
     location: 'Cagayan de Oro City',
     partnership: 'Livelihood Support',
     programs: ['Skills Training', 'Microfinance Education', 'Market Linkage'],
-    established: '2019'
+    established: 'Since 2019',
+    image: '/src/assets/images/barangay-gusa.jpg',
+    population: '30,000+',
+    impact: '400+ livelihood programs'
   },
   {
     id: 8,
@@ -74,7 +102,10 @@ const partners: Partner[] = [
     location: 'Cagayan de Oro City',
     partnership: 'Disaster Preparedness',
     programs: ['Emergency Response', 'First Aid Training', 'Relief Operations'],
-    established: '2020'
+    established: 'Since 2020',
+    image: '/src/assets/images/barangay-indahag.jpg',
+    population: '16,000+',
+    impact: '500+ trained responders'
   },
   {
     id: 9,
@@ -82,179 +113,237 @@ const partners: Partner[] = [
     location: 'Cagayan de Oro City',
     partnership: 'Cultural & Arts',
     programs: ['Cultural Exchange', 'Arts Workshop', 'Community Theater'],
-    established: '2022'
+    established: 'Since 2022',
+    image: '/src/assets/images/barangay-lapasan.jpg',
+    population: '14,000+',
+    impact: '100+ cultural events'
   }
 ]
 
-const selectedPartner = ref<Partner | null>(null)
+const searchQuery = ref('')
+const activeFilter = ref('All')
+const categories = ['All', 'Education', 'Health', 'Livelihood', 'Environmental', 'Cultural']
 
-const openPartnerDetails = (partner: Partner) => {
-  selectedPartner.value = partner
-}
-
-const closePartnerDetails = () => {
-  selectedPartner.value = null
-}
+const filteredPartners = computed(() => {
+  const query = searchQuery.value.toLowerCase().trim()
+  return partners.filter(partner => {
+    // Check if filter matches partnership type
+    let matchesFilter = activeFilter.value === 'All'
+    if (!matchesFilter) {
+      const partnershipLower = partner.partnership.toLowerCase()
+      const filterLower = activeFilter.value.toLowerCase()
+      
+      // Match specific keywords
+      if (filterLower === 'education' && (partnershipLower.includes('education') || partnershipLower.includes('technology'))) {
+        matchesFilter = true
+      } else if (filterLower === 'health' && partnershipLower.includes('health')) {
+        matchesFilter = true
+      } else if (filterLower === 'livelihood' && (partnershipLower.includes('livelihood') || partnershipLower.includes('skills'))) {
+        matchesFilter = true
+      } else if (filterLower === 'environmental' && (partnershipLower.includes('environmental') || partnershipLower.includes('conservation'))) {
+        matchesFilter = true
+      } else if (filterLower === 'cultural' && (partnershipLower.includes('cultural') || partnershipLower.includes('arts'))) {
+        matchesFilter = true
+      }
+    }
+    
+    const matchesSearch = !query || 
+      partner.name.toLowerCase().includes(query) || 
+      partner.partnership.toLowerCase().includes(query) ||
+      partner.location.toLowerCase().includes(query)
+    
+    return matchesFilter && matchesSearch
+  })
+})
 </script>
 
 <template>
-  <div class="min-h-screen bg-background">
-    <!-- Hero Header -->
-    <section class="relative">
-      <div
-        class="h-[50vh] md:h-[60vh] flex flex-col relative bg-[url('/src/assets/images/sfxc-building.jpg')] bg-cover bg-center bg-no-repeat"
-      >
-        <div class="absolute inset-0 bg-linear-to-t from-tertiary/90 via-tertiary/40 to-transparent"></div>
+  <div class="min-h-screen bg-background pb-24">
+    <!-- Hero Section -->
+    <section
+      class="relative h-[58vh] flex items-end overflow-hidden bg-[url('/src/assets/images/sfxc-building.jpg')] bg-cover bg-center"
+    >
+      <div class="absolute inset-0 bg-linear-to-t from-background via-black/60 to-transparent" />
 
-        <div class="relative z-10 mt-auto w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-12">
-          <h1 class="text-4xl md:text-5xl font-bold text-white tracking-tight">
-            Barangay Partners
-          </h1>
-          <p class="text-white/90 mt-3 text-lg md:text-xl max-w-2xl">
-            Building stronger communities through collaborative partnerships
-          </p>
+      <div class="relative z-10 w-full max-w-7xl mx-auto px-6 lg:px-12 pb-14 animate-fade-in-up">
+        <Badge variant="outline" class="mb-6 px-4 py-1.5 text-xs tracking-[0.2em] uppercase rounded-none border-white/20 text-white bg-transparent backdrop-blur-sm">
+          Community Partnership
+        </Badge>
+        <h1 class="text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight text-white leading-tight mb-4">
+          Barangay Partners.
+        </h1>
+        <p class="text-lg md:text-xl text-white/80 font-light leading-relaxed max-w-2xl">
+          Building stronger communities through collaborative partnerships and sustainable development programs.
+        </p>
+      </div>
+    </section>
+
+    <!-- Sticky Toolbar -->
+    <section class="sticky top-0 z-30 bg-background/80 backdrop-blur-xl border-b border-border/50 px-6 lg:px-12 py-4 shadow-sm">
+      <div class="max-w-7xl mx-auto flex flex-col md:flex-row gap-4 items-start md:items-center justify-between">
+        
+        <!-- Search Input -->
+        <div class="relative w-full md:max-w-md">
+          <svg 
+            class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" 
+            xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+          >
+            <circle cx="11" cy="11" r="8"></circle>
+            <path d="m21 21-4.3-4.3"></path>
+          </svg>
+          <Input 
+            v-model="searchQuery" 
+            placeholder="Search barangays or programs..." 
+            class="pl-9 bg-muted/40 border-transparent focus-visible:bg-background focus-visible:ring-1 focus-visible:ring-ring transition-all"
+          />
         </div>
 
-        <div class="absolute bottom-0 left-0 right-0 text-background leading-none">
-          <svg class="w-full h-8 md:h-16" viewBox="0 0 1440 320" preserveAspectRatio="none">
-            <path fill="currentColor" d="M0,224L1440,128L1440,320L0,320Z"></path>
-          </svg>
+        <!-- Category Filters -->
+        <div class="flex gap-2 overflow-x-auto w-full md:w-auto pb-2 md:pb-0 hide-scrollbar">
+          <Button
+            v-for="cat in categories"
+            :key="cat"
+            @click="activeFilter = cat"
+            :variant="activeFilter === cat ? 'default' : 'ghost'"
+            size="sm"
+            class="whitespace-nowrap"
+          >
+            {{ cat }}
+          </Button>
         </div>
       </div>
     </section>
 
     <!-- Partners Grid -->
-    <section class="py-16">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center mb-12">
-          <h2 class="text-3xl md:text-4xl font-bold">Our Partner Communities</h2>
-          <p class="text-muted-foreground mt-2">Working together for community development</p>
-        </div>
-
-        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          <Card
-            v-for="(partner, index) in partners"
-            :key="partner.id"
-            class="group cursor-pointer hover:shadow-xl transition-all duration-300 animate-fade-in"
-            :style="{ animationDelay: `${index * 50}ms` }"
-            @click="openPartnerDetails(partner)"
-          >
-            <CardContent class="p-6">
-              <div class="flex items-start justify-between mb-4">
-                <div class="flex-1">
-                  <h3 class="text-xl font-bold mb-1 group-hover:text-primary transition-colors">
-                    {{ partner.name }}
-                  </h3>
-                  <p class="text-sm text-muted-foreground">{{ partner.location }}</p>
-                </div>
-                <span class="text-xs bg-primary/10 text-primary px-3 py-1 rounded-full">
-                  Since {{ partner.established }}
-                </span>
-              </div>
-
-              <div class="space-y-3">
-                <div>
-                  <h4 class="text-sm font-semibold mb-1">Partnership Focus</h4>
-                  <p class="text-sm text-muted-foreground">{{ partner.partnership }}</p>
-                </div>
-
-                <div>
-                  <h4 class="text-sm font-semibold mb-2">Active Programs</h4>
-                  <div class="flex flex-wrap gap-1">
-                    <span 
-                      v-for="program in partner.programs" 
-                      :key="program"
-                      class="text-xs bg-muted px-2 py-1 rounded"
-                    >
-                      {{ program }}
-                    </span>
-                  </div>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-        </div>
-      </div>
-    </section>
-
-    <!-- Partner Details Modal -->
-    <Transition name="fade">
-      <div
-        v-if="selectedPartner"
-        class="fixed inset-0 z-50 overflow-y-auto bg-black/90 p-4"
-        @click="closePartnerDetails"
-      >
-        <div class="min-h-screen flex items-center justify-center">
-          <div
-            class="relative w-full max-w-2xl bg-background rounded-lg animate-scale-in p-6 md:p-8"
-            @click.stop
-          >
-            <button
-              @click="closePartnerDetails"
-              class="absolute top-4 right-4 text-muted-foreground hover:text-foreground"
-            >
-              ✕
-            </button>
-
-            <div class="mb-6">
-              <div class="flex items-start justify-between mb-2">
-                <h2 class="text-3xl font-bold">{{ selectedPartner.name }}</h2>
-                <span class="text-sm bg-primary/10 text-primary px-3 py-1 rounded-full">
-                  Since {{ selectedPartner.established }}
-                </span>
-              </div>
-              <p class="text-muted-foreground">{{ selectedPartner.location }}</p>
-            </div>
-
-            <div class="space-y-6">
-              <div>
-                <h3 class="font-semibold mb-2">Partnership Focus</h3>
-                <p class="text-muted-foreground">{{ selectedPartner.partnership }}</p>
-              </div>
-
-              <div>
-                <h3 class="font-semibold mb-3">Active Programs</h3>
-                <div class="grid md:grid-cols-2 gap-2">
-                  <div 
-                    v-for="program in selectedPartner.programs" 
-                    :key="program"
-                    class="flex items-center gap-2"
-                  >
-                    <span class="w-2 h-2 bg-primary rounded-full"></span>
-                    <span class="text-sm">{{ program }}</span>
-                  </div>
-                </div>
-              </div>
-
-              <div class="pt-6 border-t">
-                <h3 class="font-semibold mb-3">Partnership Information</h3>
-                <p class="text-muted-foreground text-sm mb-4">
-                  For more information about our partnership programs or collaboration opportunities, please contact our Community Relations Office.
-                </p>
-                <div class="bg-muted/50 rounded-lg p-4 space-y-2 text-sm">
-                  <div class="flex justify-between">
-                    <span class="text-muted-foreground">Email:</span>
-                    <span class="font-medium">partnerships@sfxc.edu.ph</span>
-                  </div>
-                  <div class="flex justify-between">
-                    <span class="text-muted-foreground">Phone:</span>
-                    <span class="font-medium">(088) 123-4571</span>
-                  </div>
-                </div>
-              </div>
-            </div>
+    <section class="max-w-7xl mx-auto px-6 lg:px-12 mt-12">
+      
+      <!-- Empty State -->
+      <Transition name="fade">
+        <div v-if="filteredPartners.length === 0" class="flex flex-col items-center justify-center py-24 text-center">
+          <div class="w-12 h-12 rounded-full bg-muted flex items-center justify-center mb-4">
+            <svg class="w-6 h-6 text-muted-foreground" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="11" cy="11" r="8"></circle>
+              <path d="m21 21-4.3-4.3"></path>
+            </svg>
           </div>
+          <h3 class="text-lg font-semibold text-foreground mb-1">No partners found</h3>
+          <p class="text-muted-foreground mb-6">We couldn't find anything matching your search criteria.</p>
+          <Button 
+            @click="searchQuery = ''; activeFilter = 'All'" 
+            variant="link"
+            size="sm"
+          >
+            Clear all filters
+          </Button>
         </div>
-      </div>
-    </Transition>
+      </Transition>
+
+      <!-- Grid -->
+      <TransitionGroup 
+        name="list" 
+        tag="div" 
+        class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+      >
+        <Card 
+          v-for="(partner, index) in filteredPartners" 
+          :key="partner.id"
+          class="group relative overflow-hidden border-border bg-card hover:border-primary/30 hover:shadow-lg transition-all duration-300"
+        >
+          <div class="flex flex-col md:flex-row h-full">
+            <!-- Image -->
+            <div class="relative md:w-40 h-48 overflow-hidden bg-muted flex-shrink-0">
+              <img 
+                :src="partner.image" 
+                :alt="partner.name"
+                class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                @error="(e) => (e.target as HTMLImageElement).src = '/src/assets/images/sfxc-building.jpg'"
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+              <div class="absolute bottom-3 left-3">
+                <p class="text-xs font-medium text-white/90 uppercase tracking-wider px-2 py-1 bg-black/40 backdrop-blur-sm rounded">
+                  Community
+                </p>
+              </div>
+            </div>
+
+            <CardContent class="p-6 flex flex-col flex-1">
+              
+              <!-- Header -->
+              <div class="mb-4">
+                <h3 class="text-lg font-semibold tracking-tight text-foreground group-hover:text-primary transition-colors">
+                  {{ partner.name }}
+                </h3>
+              </div>
+
+              <!-- Organization -->
+              <div class="mb-4">
+                <p class="text-sm font-medium text-foreground">{{ partner.partnership }}</p>
+                <p class="text-xs text-muted-foreground">{{ partner.location }}</p>
+              </div>
+
+              <div class="mt-auto">
+                <Separator class="mb-4 opacity-60 group-hover:opacity-100 transition-opacity" />
+                
+                <!-- Details -->
+                <div class="space-y-3 text-sm">
+                  <div class="flex items-start gap-3">
+                    <span class="text-muted-foreground font-medium w-20 shrink-0 text-xs">Established</span>
+                    <span class="text-foreground text-xs">{{ partner.established }}</span>
+                  </div>
+                  
+                  <div class="flex items-start gap-3">
+                    <span class="text-muted-foreground font-medium w-20 shrink-0 text-xs">Population</span>
+                    <span class="text-foreground text-xs">{{ partner.population }}</span>
+                  </div>
+
+                  <div class="flex items-start gap-3">
+                    <span class="text-muted-foreground font-medium w-20 shrink-0 text-xs">Impact</span>
+                    <span class="text-foreground text-xs">{{ partner.impact }}</span>
+                  </div>
+
+                  <div class="flex items-start gap-3">
+                    <span class="text-muted-foreground font-medium w-20 shrink-0 text-xs">Programs</span>
+                    <ul class="text-foreground space-y-0.5 text-xs">
+                      <li v-for="(program, pIndex) in partner.programs.slice(0, 2)" :key="pIndex" class="line-clamp-1">
+                        {{ program }}
+                      </li>
+                      <li v-if="partner.programs.length > 2" class="text-muted-foreground italic">
+                        +{{ partner.programs.length - 2 }} more
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+            </CardContent>
+          </div>
+        </Card>
+      </TransitionGroup>
+
+    </section>
   </div>
 </template>
 
 <style scoped>
+/* Hide scrollbar for filter container */
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.hide-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Animations */
 @keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes fade-in-up {
   from {
     opacity: 0;
-    transform: translateY(20px);
+    transform: translateY(15px);
   }
   to {
     opacity: 1;
@@ -262,23 +351,35 @@ const closePartnerDetails = () => {
   }
 }
 
-@keyframes scale-in {
-  from {
-    opacity: 0;
-    transform: scale(0.95);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-
 .animate-fade-in {
-  animation: fade-in 0.4s ease-out forwards;
+  animation: fade-in 0.6s ease-out forwards;
 }
 
-.animate-scale-in {
-  animation: scale-in 0.3s ease-out;
+.animate-fade-in-up {
+  animation: fade-in-up 0.5s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+  opacity: 0;
+}
+
+/* Transition Group */
+.list-move,
+.list-enter-active,
+.list-leave-active {
+  transition: all 0.3s ease;
+}
+
+.list-enter-from {
+  opacity: 0;
+  transform: translateY(10px);
+}
+
+.list-leave-to {
+  opacity: 0;
+  transform: translateY(-10px);
+}
+
+.list-leave-active {
+  position: absolute;
+  width: 100%;
 }
 
 .fade-enter-active,
