@@ -5,6 +5,12 @@ import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card'
 import { Separator } from '@/components/ui/separator'
 
+// Import images
+import sfxcBuilding from '@/assets/images/sfxc-building.jpg'
+import sfxcApplication from '@/assets/images/news/sfxc_application.jpg'
+import sfxcSacred from '@/assets/images/news/sfxc_sacred.jpg'
+import sfxcUpdate from '@/assets/images/news/sfxc_update.jpg'
+
 interface Facility {
   id: number
   name: string
@@ -20,7 +26,7 @@ const facilities: Facility[] = [
     id: 1,
     name: 'Library',
     description: 'An expansive learning hub with over 10,000 volumes, private study rooms, and full digital access.',
-    image: '/src/assets/images/sfxc-building.jpg',
+    image: sfxcBuilding,
     tag: 'Academic',
     features: ['10,000+ Books', 'Digital Resources', 'Study Rooms', 'Computer Lab']
   },
@@ -28,7 +34,7 @@ const facilities: Facility[] = [
     id: 2,
     name: 'Science Laboratory',
     description: 'Purpose-built labs for Physics, Chemistry, and Biology — equipped to the highest safety standards.',
-    image: '/src/assets/images/news/sfxc_application.jpg',
+    image: sfxcApplication,
     tag: 'Academic',
     features: ['Modern Equipment', 'Safety-Certified', 'Expert Supervision', 'Hands-on Learning']
   },
@@ -36,7 +42,7 @@ const facilities: Facility[] = [
     id: 3,
     name: 'Computer Laboratory',
     description: 'High-performance workstations with enterprise-grade internet and a full professional software suite.',
-    image: '/src/assets/images/news/sfxc_sacred.jpg',
+    image: sfxcSacred,
     tag: 'Technology',
     features: ['Latest Hardware', 'Fiber Internet', 'Software Suite', 'Tech Support']
   },
@@ -44,7 +50,7 @@ const facilities: Facility[] = [
     id: 4,
     name: 'Sports Complex',
     description: 'A multi-court complex for basketball, volleyball, athletics, and fitness training.',
-    image: '/src/assets/images/news/sfxc_update.jpg',
+    image: sfxcUpdate,
     tag: 'Athletics',
     features: ['Basketball Court', 'Volleyball Court', 'Fitness Equipment', 'Outdoor Track']
   },
@@ -52,7 +58,7 @@ const facilities: Facility[] = [
     id: 5,
     name: 'Chapel',
     description: 'A serene sacred space for daily Mass, quiet prayer, and spiritual formation.',
-    image: '/src/assets/images/sfxc-building.jpg',
+    image: sfxcBuilding,
     tag: 'Spiritual',
     features: ['Daily Mass', 'Quiet Reflection', 'Religious Events', 'Spiritual Direction']
   },
@@ -60,7 +66,7 @@ const facilities: Facility[] = [
     id: 6,
     name: 'Cafeteria',
     description: 'A bright, spacious dining hall offering nutritious, affordable meals in a clean environment.',
-    image: '/src/assets/images/news/sfxc_application.jpg',
+    image: sfxcApplication,
     tag: 'Dining',
     features: ['Balanced Meals', 'Ample Seating', 'Affordable Pricing', 'Sanitary Standards']
   }
