@@ -6,6 +6,11 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Textarea } from '@/components/ui/textarea'
 
+// Import images
+import sfxcBuilding from '@/assets/images/sfxc-building.jpg'
+import sfxcApplication from '@/assets/images/news/sfxc_application.jpg'
+import sfxcSacred from '@/assets/images/news/sfxc_sacred.jpg'
+
 interface AlumniFeatured {
   id: number
   name: string
@@ -21,7 +26,7 @@ const featuredAlumni: AlumniFeatured[] = [
     name: 'Maria Santos',
     batch: 'Class of 2020',
     profession: 'Software Engineer at Tech Corp',
-    image: '/src/assets/images/sfxc-building.jpg',
+    image: sfxcBuilding,
     quote: 'SFXC provided me with the foundation to pursue my dreams in technology.'
   },
   {
@@ -29,7 +34,7 @@ const featuredAlumni: AlumniFeatured[] = [
     name: 'John Dela Cruz',
     batch: 'Class of 2018',
     profession: 'Business Owner',
-    image: '/src/assets/images/news/sfxc_application.jpg',
+    image: sfxcApplication,
     quote: 'The values and education I received here shaped my entrepreneurial journey.'
   },
   {
@@ -37,7 +42,7 @@ const featuredAlumni: AlumniFeatured[] = [
     name: 'Anna Reyes',
     batch: 'Class of 2019',
     profession: 'Teacher at Public School',
-    image: '/src/assets/images/news/sfxc_sacred.jpg',
+    image: sfxcSacred,
     quote: 'Giving back to the community through education, just as SFXC taught me.'
   },
 ]

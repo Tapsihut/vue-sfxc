@@ -4,6 +4,12 @@ import { Card, CardContent } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 
+// Import images
+import sfxcBuilding from '@/assets/images/sfxc-building.jpg'
+import sfxcApplication from '@/assets/images/news/sfxc_application.jpg'
+import sfxcSacred from '@/assets/images/news/sfxc_sacred.jpg'
+import sfxcUpdate from '@/assets/images/news/sfxc_update.jpg'
+
 interface MediaItem {
   id: number
   title: string
@@ -16,42 +22,42 @@ const mediaItems: MediaItem[] = [
   {
     id: 1,
     title: 'Campus Intramurals 2026',
-    image: '/src/assets/images/sfxc-building.jpg',
+    image: sfxcBuilding,
     category: 'events',
     date: '2026-02-10'
   },
   {
     id: 2,
     title: 'Science Fair Winners',
-    image: '/src/assets/images/news/sfxc_application.jpg',
+    image: sfxcApplication,
     category: 'achievements',
     date: '2026-01-25'
   },
   {
     id: 3,
     title: 'Campus Library',
-    image: '/src/assets/images/news/sfxc_sacred.jpg',
+    image: sfxcSacred,
     category: 'campus',
     date: '2026-01-15'
   },
   {
     id: 4,
     title: 'Student Council Activities',
-    image: '/src/assets/images/news/sfxc_update.jpg',
+    image: sfxcUpdate,
     category: 'activities',
     date: '2026-02-05'
   },
   {
     id: 5,
     title: 'Graduation Ceremony 2025',
-    image: '/src/assets/images/sfxc-building.jpg',
+    image: sfxcBuilding,
     category: 'events',
     date: '2025-12-15'
   },
   {
     id: 6,
     title: 'Sports Achievement',
-    image: '/src/assets/images/news/sfxc_application.jpg',
+    image: sfxcApplication,
     category: 'achievements',
     date: '2026-02-01'
   },

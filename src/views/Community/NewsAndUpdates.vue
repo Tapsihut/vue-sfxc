@@ -3,6 +3,11 @@ import { ref, computed } from 'vue'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 
+// Import images
+import sfxcApplication from '@/assets/images/news/sfxc_application.jpg'
+import sfxcSacred from '@/assets/images/news/sfxc_sacred.jpg'
+import sfxcUpdate from '@/assets/images/news/sfxc_update.jpg'
+
 interface NewsItem {
   id: number
   title: string
@@ -23,7 +28,7 @@ const news: NewsItem[] = [
     date: 'Coming Soon',
     excerpt:
       'This is a placeholder for a future news article. Content will be updated once published by the administrator.',
-    image: '/src/assets/images/news/sfxc_application.jpg',
+    image: sfxcApplication,
     slug: 'news-title-placeholder-1',
   },
   {
@@ -32,7 +37,7 @@ const news: NewsItem[] = [
     date: 'Coming Soon',
     excerpt:
       'Details about this announcement will be posted soon. Please check back for updates.',
-    image: '/src/assets/images/news/sfxc_sacred.jpg',
+    image: sfxcSacred,
     slug: 'upcoming-announcement',
   },
   {
@@ -41,7 +46,7 @@ const news: NewsItem[] = [
     date: 'Coming Soon',
     excerpt:
       'An official update from Saint Francis Xavier College will be published here by the administrator.',
-    image: '/src/assets/images/news/sfxc_update.jpg',
+    image: sfxcUpdate,
     slug: 'campus-update',
   },
 ]

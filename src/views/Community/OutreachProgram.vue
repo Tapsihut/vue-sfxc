@@ -3,6 +3,12 @@ import { ref } from 'vue'
 import { Card, CardContent } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 
+// Import images
+import sfxcBuilding from '@/assets/images/sfxc-building.jpg'
+import sfxcApplication from '@/assets/images/news/sfxc_application.jpg'
+import sfxcSacred from '@/assets/images/news/sfxc_sacred.jpg'
+import sfxcUpdate from '@/assets/images/news/sfxc_update.jpg'
+
 interface Program {
   id: number
   title: string
@@ -18,7 +24,7 @@ const programs: Program[] = [
     id: 1,
     title: 'Medical Mission',
     description: 'Free medical checkups, consultations, and medicine distribution to underserved communities.',
-    image: '/src/assets/images/sfxc-building.jpg',
+    image: sfxcBuilding,
     date: 'March 15, 2026',
     location: 'Barangay Lumbia',
     beneficiaries: '500+ residents'
@@ -27,7 +33,7 @@ const programs: Program[] = [
     id: 2,
     title: 'Educational Support Program',
     description: 'Providing school supplies, books, and tutoring sessions for underprivileged children.',
-    image: '/src/assets/images/news/sfxc_application.jpg',
+    image: sfxcApplication,
     date: 'April 5, 2026',
     location: 'Rural Elementary Schools',
     beneficiaries: '300+ students'
@@ -36,7 +42,7 @@ const programs: Program[] = [
     id: 3,
     title: 'Feeding Program',
     description: 'Nutritious meals and nutrition education for malnourished children and families.',
-    image: '/src/assets/images/news/sfxc_sacred.jpg',
+    image: sfxcSacred,
     date: 'Monthly',
     location: 'Various Barangays',
     beneficiaries: '200+ children'
@@ -45,7 +51,7 @@ const programs: Program[] = [
     id: 4,
     title: 'Skills Training Workshop',
     description: 'Free vocational training in livelihood skills like sewing, cooking, and crafts.',
-    image: '/src/assets/images/news/sfxc_update.jpg',
+    image: sfxcUpdate,
     date: 'May 10-12, 2026',
     location: 'SFXC Campus',
     beneficiaries: '150+ participants'
@@ -54,7 +60,7 @@ const programs: Program[] = [
     id: 5,
     title: 'Environmental Cleanup Drive',
     description: 'Tree planting and coastal cleanup activities to promote environmental awareness.',
-    image: '/src/assets/images/sfxc-building.jpg',
+    image: sfxcBuilding,
     date: 'June 8, 2026',
     location: 'Coastal Areas',
     beneficiaries: 'Community-wide'
@@ -63,7 +69,7 @@ const programs: Program[] = [
     id: 6,
     title: 'Youth Leadership Camp',
     description: 'Character building and leadership training for youth from partner communities.',
-    image: '/src/assets/images/news/sfxc_application.jpg',
+    image: sfxcApplication,
     date: 'July 20-22, 2026',
     location: 'SFXC Campus',
     beneficiaries: '100+ youth'

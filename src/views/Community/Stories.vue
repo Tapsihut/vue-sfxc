@@ -3,6 +3,12 @@ import { ref } from 'vue'
 import { Card, CardContent } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 
+// Import images
+import sfxcBuilding from '@/assets/images/sfxc-building.jpg'
+import sfxcApplication from '@/assets/images/news/sfxc_application.jpg'
+import sfxcSacred from '@/assets/images/news/sfxc_sacred.jpg'
+import sfxcUpdate from '@/assets/images/news/sfxc_update.jpg'
+
 interface Story {
   id: number
   title: string
@@ -24,7 +30,7 @@ const stories: Story[] = [
     category: 'Alumni',
     excerpt: 'How SFXC shaped my career in technology and helped me achieve my dreams.',
     content: 'When I first entered SFXC, I was just a dreamer from a small barangay with big aspirations. The faculty, facilities, and values instilled in me transformed that dream into reality. Today, I work as a software engineer at a leading tech company, and I owe it all to the foundation SFXC gave me.',
-    image: '/src/assets/images/sfxc-building.jpg',
+    image: sfxcBuilding,
     date: '2026-01-15'
   },
   {
@@ -35,7 +41,7 @@ const stories: Story[] = [
     category: 'Faculty',
     excerpt: 'Why I chose to dedicate my career to shaping future business leaders at SFXC.',
     content: 'After years in the corporate world, I found my true calling in education. At SFXC, I have the privilege of guiding students not just academically, but in developing the values and character needed to succeed. Every graduation day reminds me why this work matters.',
-    image: '/src/assets/images/news/sfxc_application.jpg',
+    image: sfxcApplication,
     date: '2026-01-20'
   },
   {
@@ -46,7 +52,7 @@ const stories: Story[] = [
     category: 'Student',
     excerpt: 'How being part of the student council changed my life and perspective.',
     content: 'I was always shy and reserved until I joined the student council at SFXC. The experience taught me confidence, leadership, and the importance of serving others. These lessons will stay with me forever, long after I leave these halls.',
-    image: '/src/assets/images/news/sfxc_sacred.jpg',
+    image: sfxcSacred,
     date: '2026-01-25'
   },
   {
@@ -57,7 +63,7 @@ const stories: Story[] = [
     category: 'Community',
     excerpt: 'The impact of SFXC\'s outreach programs on our community.',
     content: 'The partnership with SFXC brought hope and opportunities to our barangay. From medical missions to educational support, their commitment to service has made a tangible difference in the lives of our residents. This is education with a heart.',
-    image: '/src/assets/images/news/sfxc_update.jpg',
+    image: sfxcUpdate,
     date: '2026-02-01'
   },
   {
@@ -68,7 +74,7 @@ const stories: Story[] = [
     category: 'Alumni',
     excerpt: 'How SFXC\'s vocational programs gave me a fresh start in life.',
     content: 'After struggling for years, the TESDA programs at SFXC gave me skills and hope. Now I run my own small business and support my family. SFXC believed in me when others didn\'t, and I am forever grateful.',
-    image: '/src/assets/images/sfxc-building.jpg',
+    image: sfxcBuilding,
     date: '2026-02-05'
   },
   {
@@ -79,7 +85,7 @@ const stories: Story[] = [
     category: 'Faculty',
     excerpt: 'Leading community-based research projects that create real-world impact.',
     content: 'At SFXC, research isn\'t just about publications. Our faculty and students work on projects that directly benefit local communities. Seeing our research translate into improved lives is the greatest reward of academic work.',
-    image: '/src/assets/images/news/sfxc_application.jpg',
+    image: sfxcApplication,
     date: '2026-02-10'
   }
 ]
