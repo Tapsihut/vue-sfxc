@@ -1,7 +1,6 @@
 <script setup lang="ts">
-import { ref } from 'vue'
 import { Card, CardContent } from '@/components/ui/card'
-import { Button } from '@/components/ui/button'
+import { User, Calendar } from 'lucide-vue-next'
 
 // Import images
 import sfxcBuilding from '@/assets/images/sfxc-building.jpg'
@@ -15,266 +14,162 @@ interface Program {
   description: string
   image: string
   date: string
-  location: string
-  beneficiaries: string
+  author: string
+  category: string
 }
 
-const programs: Program[] = [
+const latestPrograms: Program[] = [
   {
     id: 1,
+    title: '#ShapedbySFXC: The third choice that led an alumna to become psych\'s first international scholar',
+    description: 'Narratives of redirection amidst uncertainties have long been familiar in the landscape of feature stories....',
+    image: sfxcApplication,
+    date: 'February 19, 2026',
+    author: 'SFXC',
+    category: 'Feature'
+  },
+  {
+    id: 2,
+    title: 'Golden Paddlers elevate SDG involvement in TINGUHA 2026',
+    description: 'Golden Paddlers, through the University Student Government (USG) continues to advance its commitment to sustainable...',
+    image: sfxcSacred,
+    date: 'February 16, 2026',
+    author: 'SFXC',
+    category: 'Updates'
+  },
+  {
+    id: 3,
+    title: 'SFXC co-hosts international colloquium on SDGs',
+    description: 'San Francisco, Agusan del Sur — St Francis Xavier College (SFXC) joined leading Higher Education Institutions in co-hosting the...',
+    image: sfxcUpdate,
+    date: 'February 16, 2026',
+    author: 'SFXC',
+    category: 'Updates'
+  },
+  {
+    id: 4,
     title: 'Medical Mission',
     description: 'Free medical checkups, consultations, and medicine distribution to underserved communities.',
     image: sfxcBuilding,
     date: 'March 15, 2026',
-    location: 'Barangay Lumbia',
-    beneficiaries: '500+ residents'
+    author: 'SFXC',
+    category: 'Feature'
   },
   {
-    id: 2,
+    id: 5,
     title: 'Educational Support Program',
     description: 'Providing school supplies, books, and tutoring sessions for underprivileged children.',
     image: sfxcApplication,
     date: 'April 5, 2026',
-    location: 'Rural Elementary Schools',
-    beneficiaries: '300+ students'
+    author: 'SFXC',
+    category: 'Updates'
   },
   {
-    id: 3,
+    id: 6,
     title: 'Feeding Program',
     description: 'Nutritious meals and nutrition education for malnourished children and families.',
     image: sfxcSacred,
     date: 'Monthly',
-    location: 'Various Barangays',
-    beneficiaries: '200+ children'
-  },
-  {
-    id: 4,
-    title: 'Skills Training Workshop',
-    description: 'Free vocational training in livelihood skills like sewing, cooking, and crafts.',
-    image: sfxcUpdate,
-    date: 'May 10-12, 2026',
-    location: 'SFXC Campus',
-    beneficiaries: '150+ participants'
-  },
-  {
-    id: 5,
-    title: 'Environmental Cleanup Drive',
-    description: 'Tree planting and coastal cleanup activities to promote environmental awareness.',
-    image: sfxcBuilding,
-    date: 'June 8, 2026',
-    location: 'Coastal Areas',
-    beneficiaries: 'Community-wide'
-  },
-  {
-    id: 6,
-    title: 'Youth Leadership Camp',
-    description: 'Character building and leadership training for youth from partner communities.',
-    image: sfxcApplication,
-    date: 'July 20-22, 2026',
-    location: 'SFXC Campus',
-    beneficiaries: '100+ youth'
+    author: 'SFXC',
+    category: 'Updates'
   }
 ]
 
-const selectedProgram = ref<Program | null>(null)
-
-const openProgramDetails = (program: Program) => {
-  selectedProgram.value = program
-}
-
-const closeProgramDetails = () => {
-  selectedProgram.value = null
+const featuredProgram: Program = {
+  id: 7,
+  title: '#ShapedbySFXC: The third choice that led an alumna to become psych\'s first international scholar',
+  description: 'Narratives of redirection amidst uncertainties have long been familiar in the landscape of feature stories. It has always been the path chosen beyond desire, and setting it as the foreground for inspiration. Yet, a psychology alumna from St Francis Xavier College...',
+  image: sfxcBuilding,
+  date: 'February 19, 2026',
+  author: 'SFXC',
+  category: 'Feature'
 }
 </script>
 
 <template>
-  <div class="min-h-screen bg-background">
-    <!-- Hero Header -->
-    <section class="relative">
-      <div
-        class="h-[50vh] md:h-[60vh] flex flex-col relative bg-[url('/src/assets/images/sfxc-building.jpg')] bg-cover bg-center bg-no-repeat"
-      >
-        <div class="absolute inset-0 bg-linear-to-t from-tertiary/90 via-tertiary/40 to-transparent"></div>
+  <div class="min-h-screen bg-background py-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
 
-        <div class="relative z-10 mt-auto w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-12">
-          <h1 class="text-4xl md:text-5xl font-bold text-white tracking-tight">
-            Community Outreach Programs
-          </h1>
-          <p class="text-white/90 mt-3 text-lg md:text-xl max-w-2xl">
-            Serving communities through education, healthcare, and sustainable development
-          </p>
-        </div>
+      <section>
+        <h2 class="text-3xl font-bold text-green-950 mb-6">Featured Release</h2>
+        <div class="grid lg:grid-cols-3 gap-6">
+          <!-- Main Featured Card -->
+          <Card class="lg:col-span-2 overflow-hidden border-green-200 rounded-xl relative group cursor-pointer">
+            <div class="absolute inset-0">
+              <img :src="featuredProgram.image" :alt="featuredProgram.title" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
+              <div class="absolute inset-0 bg-linear-to-t from-green-950/90 via-green-950/40 to-transparent"></div>
+            </div>
+            <CardContent class="relative h-full min-h-100 flex flex-col justify-end p-8 text-white">
+              <div class="mb-4">
+                <span class="inline-flex items-center px-2.5 py-0.5 text-xs font-bold bg-green-50 text-green-900 border-l-4 border-yellow-400">
+                  {{ featuredProgram.category }}
+                </span>
+              </div>
+              <h3 class="text-2xl md:text-3xl font-bold mb-3 leading-tight">
+                {{ featuredProgram.title }}
+              </h3>
+              <p class="text-white/90 line-clamp-3">
+                {{ featuredProgram.description }}
+              </p>
+            </CardContent>
+          </Card>
 
-        <div class="absolute bottom-0 left-0 right-0 text-background leading-none">
-          <svg class="w-full h-8 md:h-16" viewBox="0 0 1440 320" preserveAspectRatio="none">
-            <path fill="currentColor" d="M0,224L1440,128L1440,320L0,320Z"></path>
-          </svg>
-        </div>
-      </div>
-    </section>
-
-    <!-- Programs Grid -->
-    <section class="py-16">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center mb-12">
-          <h2 class="text-3xl md:text-4xl font-bold">Our Programs</h2>
-          <p class="text-muted-foreground mt-2">Making a difference in the community</p>
-        </div>
-
-        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          <Card
-            v-for="(program, index) in programs"
-            :key="program.id"
-            class="group overflow-hidden cursor-pointer hover:shadow-xl transition-all duration-300 animate-fade-in"
-            :style="{ animationDelay: `${index * 75}ms` }"
-            @click="openProgramDetails(program)"
-          >
-            <div class="relative overflow-hidden h-56">
-              <img
-                :src="program.image"
-                :alt="program.title"
-                class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-              />
-              <div class="absolute inset-0 bg-linear-to-t from-black/70 via-transparent to-transparent"></div>
-              <div class="absolute bottom-0 left-0 right-0 p-6 text-white">
-                <h3 class="text-xl font-bold">{{ program.title }}</h3>
+          <!-- Side Card -->
+          <!-- <Card class="overflow-hidden border-green-200 rounded-xl flex flex-col">
+            <div class="bg-green-950 p-8 flex-1 flex flex-col items-center justify-center text-center relative">
+              <h3 class="text-white font-serif italic text-3xl mb-6 z-10">Congratulations!</h3>
+              <div class="w-32 h-32 bg-green-800 rounded-full flex items-center justify-center mb-6 z-10">
+                <span class="text-white font-bold">LOGO</span>
+              </div>
+              <div class="bg-white px-4 py-1 rounded text-xs font-bold text-orange-500 z-10">
+                WORLD UNIVERSITY RANKINGS
               </div>
             </div>
-            <CardContent class="p-6">
-              <p class="text-sm text-muted-foreground mb-4">{{ program.description }}</p>
-              <div class="space-y-2 text-sm">
-                <div class="flex justify-between">
-                  <span class="text-muted-foreground">Date:</span>
-                  <span class="font-medium">{{ program.date }}</span>
+            <div class="bg-white p-6 border-t border-green-200">
+              <p class="text-gray-800 font-medium mb-2">SFXC Seals Rank in 2026 QS World University Ranking Debut.</p>
+              <a href="#" class="text-green-700 hover:text-green-800 font-medium text-sm">Learn more</a>
+            </div>
+          </Card> -->
+        </div>
+      </section>
+      
+      <!-- Latest Releases Section -->
+      <section>
+        <h2 class="text-3xl font-bold text-green-950 mb-6">Latest Releases</h2>
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <Card v-for="program in latestPrograms" :key="program.id" class="overflow-hidden border-green-200 rounded-xl hover:shadow-lg transition-shadow cursor-pointer flex flex-col">
+            <div class="h-56 overflow-hidden">
+              <img :src="program.image" :alt="program.title" class="w-full h-full object-cover transition-transform duration-500 hover:scale-105" />
+            </div>
+            <CardContent class="p-6 flex-1 flex flex-col">
+              <div class="mb-4">
+                <span class="inline-flex items-center px-2.5 py-0.5 text-xs font-bold bg-green-50 text-green-900 border-l-4 border-yellow-400">
+                  {{ program.category }}
+                </span>
+              </div>
+              <h3 class="text-xl font-bold text-gray-900 mb-4 line-clamp-3">
+                {{ program.title }}
+              </h3>
+              <div class="flex items-center text-xs text-gray-500 mb-4 space-x-4">
+                <div class="flex items-center">
+                  <User class="w-3.5 h-3.5 mr-1" />
+                  <span>by: {{ program.author }}</span>
                 </div>
-                <div class="flex justify-between">
-                  <span class="text-muted-foreground">Location:</span>
-                  <span class="font-medium">{{ program.location }}</span>
-                </div>
-                <div class="flex justify-between">
-                  <span class="text-muted-foreground">Beneficiaries:</span>
-                  <span class="font-medium">{{ program.beneficiaries }}</span>
+                <div class="flex items-center">
+                  <Calendar class="w-3.5 h-3.5 mr-1" />
+                  <span>{{ program.date }}</span>
                 </div>
               </div>
+              <p class="text-gray-600 text-sm line-clamp-3 mt-auto">
+                {{ program.description }}
+              </p>
             </CardContent>
           </Card>
         </div>
-      </div>
-    </section>
-
-    <!-- Program Details Modal -->
-    <Transition name="fade">
-      <div
-        v-if="selectedProgram"
-        class="fixed inset-0 z-50 overflow-y-auto bg-black/90 p-4"
-        @click="closeProgramDetails"
-      >
-        <div class="min-h-screen flex items-center justify-center">
-          <Button
-            variant="ghost"
-            size="icon"
-            class="fixed top-4 right-4 text-white hover:bg-white/20 z-10"
-            @click="closeProgramDetails"
-          >
-            ✕
-          </Button>
-
-          <div
-            class="relative w-full max-w-3xl bg-background rounded-lg animate-scale-in overflow-hidden"
-            @click.stop
-          >
-            <div class="relative h-64 overflow-hidden">
-              <img
-                :src="selectedProgram.image"
-                :alt="selectedProgram.title"
-                class="w-full h-full object-cover"
-              />
-              <div class="absolute inset-0 bg-linear-to-t from-black/80 via-transparent to-transparent"></div>
-              <div class="absolute bottom-0 left-0 right-0 p-6 text-white">
-                <h2 class="text-3xl font-bold">{{ selectedProgram.title }}</h2>
-              </div>
-            </div>
-
-            <div class="p-6 md:p-8">
-              <p class="text-muted-foreground mb-6">{{ selectedProgram.description }}</p>
-
-              <div class="grid md:grid-cols-3 gap-6 mb-6">
-                <div>
-                  <h4 class="font-semibold mb-1">Date</h4>
-                  <p class="text-muted-foreground">{{ selectedProgram.date }}</p>
-                </div>
-                <div>
-                  <h4 class="font-semibold mb-1">Location</h4>
-                  <p class="text-muted-foreground">{{ selectedProgram.location }}</p>
-                </div>
-                <div>
-                  <h4 class="font-semibold mb-1">Beneficiaries</h4>
-                  <p class="text-muted-foreground">{{ selectedProgram.beneficiaries }}</p>
-                </div>
-              </div>
-
-              <div class="pt-6 border-t">
-                <h4 class="font-semibold mb-3">Get Involved</h4>
-                <p class="text-muted-foreground text-sm mb-4">
-                  Interested in volunteering or supporting this program? Contact our Community Outreach Office for more information.
-                </p>
-                <div class="bg-muted/50 rounded-lg p-4 space-y-2 text-sm">
-                  <div class="flex justify-between">
-                    <span class="text-muted-foreground">Email:</span>
-                    <span class="font-medium">outreach@sfxc.edu.ph</span>
-                  </div>
-                  <div class="flex justify-between">
-                    <span class="text-muted-foreground">Phone:</span>
-                    <span class="font-medium">(088) 123-4570</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </Transition>
+      </section>
+    </div>
   </div>
 </template>
 
 <style scoped>
-@keyframes fade-in {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes scale-in {
-  from {
-    opacity: 0;
-    transform: scale(0.95);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-
-.animate-fade-in {
-  animation: fade-in 0.5s ease-out forwards;
-}
-
-.animate-scale-in {
-  animation: scale-in 0.3s ease-out;
-}
-
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.3s ease;
-}
-
-.fade-enter-from,
-.fade-leave-to {
-  opacity: 0;
-}
 </style>
