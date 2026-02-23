@@ -1,111 +1,214 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
 import { Input } from '@/components/ui/input'
-import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
-import { Card, CardContent } from '@/components/ui/card'
-import { Separator } from '@/components/ui/separator'
+import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui/card'
 
 interface Office {
   id: string
   name: string
   department: string
-  head: string
-  role: string
   email: string
+  email2?: string
   phone: string
-  location: string
-  hours: string
 }
 
 const offices: Office[] = [
+  // A. Colleges
   {
-    id: 'pres',
-    name: 'Office of the President',
-    department: 'Administration',
-    head: 'Rev. Fr. Juan dela Cruz',
-    role: 'School President',
-    email: 'president@sfxc.edu.ph',
-    phone: '(062) 991-0001',
-    location: 'Main Building, 2nd Floor',
-    hours: 'Mon–Fri, 8:00 AM – 5:00 PM'
+    id: 'ccje',
+    name: 'CCJE',
+    department: 'A. Colleges',
+    email: 'ccje@sfxc.edu.ph',
+    phone: '0908 885 5383'
   },
   {
-    id: 'reg',
-    name: 'Registrar\'s Office',
-    department: 'Academic Affairs',
-    head: 'Ms. Maria Santos',
-    role: 'University Registrar',
-    email: 'registrar@sfxc.edu.ph',
-    phone: '(062) 991-0002',
-    location: 'Main Building, 1st Floor',
-    hours: 'Mon–Fri, 7:30 AM – 4:30 PM'
+    id: 'cte',
+    name: 'CTE',
+    department: 'A. Colleges',
+    email: 'cte@sfxc.edu.ph',
+    phone: '0908 885 6149'
   },
   {
-    id: 'adm',
-    name: 'Admissions Office',
-    department: 'Academic Affairs',
-    head: 'Mr. Jose Reyes',
-    role: 'Admissions Director',
-    email: 'admissions@sfxc.edu.ph',
-    phone: '(062) 991-0003',
-    location: 'Main Building, 1st Floor',
-    hours: 'Mon–Sat, 8:00 AM – 5:00 PM'
+    id: 'cbe-bsa',
+    name: 'CBE (BSA/AT)',
+    department: 'A. Colleges',
+    email: 'bsa@sfxc.edu.ph',
+    phone: '0908 885 5381'
   },
   {
-    id: 'fin',
-    name: 'Finance & Accounting',
-    department: 'Finance',
-    head: 'Ms. Ana Lim',
-    role: 'Finance Officer',
-    email: 'finance@sfxc.edu.ph',
-    phone: '(062) 991-0004',
-    location: 'Finance Building, Ground Floor',
-    hours: 'Mon–Fri, 8:00 AM – 4:00 PM'
+    id: 'bsba',
+    name: 'BSBA',
+    department: 'A. Colleges',
+    email: 'bsba@sfxc.edu.ph',
+    phone: '0908 885 5334'
   },
   {
-    id: 'sao',
-    name: 'Student Affairs Office',
-    department: 'Student Services',
-    head: 'Mr. Carlos Mendoza',
-    role: 'Dean of Student Affairs',
-    email: 'studentaffairs@sfxc.edu.ph',
-    phone: '(062) 991-0005',
-    location: 'Student Center, 1st Floor',
-    hours: 'Mon–Fri, 8:00 AM – 5:00 PM'
+    id: 'bsit',
+    name: 'BSIT',
+    department: 'A. Colleges',
+    email: 'bsit@sfxc.edu.ph',
+    phone: '0908 885 5376'
   },
   {
-    id: 'guid',
-    name: 'Guidance & Counseling',
-    department: 'Student Services',
-    head: 'Ms. Rosa Garcia',
-    role: 'Guidance Counselor',
-    email: 'guidance@sfxc.edu.ph',
-    phone: '(062) 991-0006',
-    location: 'Student Center, 2nd Floor',
-    hours: 'Mon–Fri, 8:00 AM – 5:00 PM'
+    id: 'bsoa',
+    name: 'BSOA',
+    department: 'A. Colleges',
+    email: '',
+    phone: '0908 885 5359'
   },
+  // B. Accounting & Finance
+  {
+    id: 'accounting',
+    name: 'Accounting Office',
+    department: 'B. Accounting & Finance',
+    email: 'accountingoffice@sfxc.edu.ph',
+    phone: '0908 885 3694'
+  },
+  {
+    id: 'finance',
+    name: 'Finance Office',
+    department: 'B. Accounting & Finance',
+    email: 'financeoffice@sfxc.edu.ph',
+    phone: '0908 885 4520'
+  },
+  {
+    id: 'property',
+    name: 'Property & Merchandising Office',
+    department: 'B. Accounting & Finance',
+    email: 'merchandising@sfxc.edu.ph',
+    phone: '0908 885 4521'
+  },
+  {
+    id: 'student-accounts',
+    name: 'Student Accounts',
+    department: 'B. Accounting & Finance',
+    email: 'studentaccounts@sfxc.edu.ph',
+    phone: '0966 720 9527'
+  },
+  {
+    id: 'helpdesk',
+    name: 'Account Help Desk',
+    department: 'B. Accounting & Finance',
+    email: 'accounthelpdesk@sfxc.edu.ph',
+    phone: ''
+  },
+  // C. Academics Support
+  {
+    id: 'osas',
+    name: 'OSAS',
+    department: 'C. Academics Support',
+    email: 'osas@sfxc.edu.ph',
+    phone: '0908 885 6201'
+  },
+  {
+    id: 'guidance',
+    name: 'Guidance Counseling',
+    department: 'C. Academics Support',
+    email: 'guidanceoffice@sfxc.edu.ph',
+    phone: ''
+  },
+  {
+    id: 'gender',
+    name: 'Gender Development',
+    department: 'C. Academics Support',
+    email: 'genderdevelopment@sfxc.edu.ph',
+    phone: ''
+  },
+  {
+    id: 'registrar',
+    name: 'Registrar Office',
+    department: 'C. Academics Support',
+    email: 'registraroffice@sfxc.edu.ph',
+    phone: '0908 885 3687'
+  },
+  {
+    id: 'admission',
+    name: 'Admission Scholarship',
+    department: 'C. Academics Support',
+    email: 'admission.scholarship@sfxc.edu.ph',
+    email2: 'scholarships@sfxc.edu.ph',
+    phone: '0908 885 4527'
+  },
+  // D. Department/Offices
   {
     id: 'hr',
-    name: 'Human Resources',
-    department: 'Administration',
-    head: 'Ms. Elena Torres',
-    role: 'HR Director',
-    email: 'hr@sfxc.edu.ph',
-    phone: '(062) 991-0007',
-    location: 'Admin Building, 2nd Floor',
-    hours: 'Mon–Fri, 8:00 AM – 5:00 PM'
+    name: 'Human Resources Department',
+    department: 'D. Department/Offices',
+    email: 'humanresources@sfxc.edu.ph',
+    email2: 'recruitment@sfxc.edu.ph',
+    phone: '0939 936 5618'
   },
   {
-    id: 'lib',
-    name: 'Library Services',
-    department: 'Academic Affairs',
-    head: 'Mr. Ramon Villanueva',
-    role: 'Head Librarian',
+    id: 'communications',
+    name: 'Information and Communications',
+    department: 'D. Department/Offices',
+    email: 'communications@sfxc.edu.ph',
+    email2: 'gclassroom_ico@sfxc.edu.ph',
+    phone: ''
+  },
+  {
+    id: 'marketing',
+    name: 'Marketing Office',
+    department: 'D. Department/Offices',
+    email: 'marketing@sfxc.edu.ph',
+    phone: '0908 885 5380'
+  },
+  {
+    id: 'community',
+    name: 'Community Development Services',
+    department: 'D. Department/Offices',
+    email: 'communityextension@sfxc.edu.ph',
+    phone: ''
+  },
+  {
+    id: 'evp',
+    name: 'EVP Operations',
+    department: 'D. Department/Offices',
+    email: 'evp.operations@sfxc.edu.ph',
+    phone: ''
+  },
+  {
+    id: 'library',
+    name: 'Library',
+    department: 'D. Department/Offices',
     email: 'library@sfxc.edu.ph',
-    phone: '(062) 991-0008',
-    location: 'Library Building',
-    hours: 'Mon–Sat, 7:00 AM – 6:00 PM'
+    phone: ''
+  },
+  {
+    id: 'research',
+    name: 'Research Office',
+    department: 'D. Department/Offices',
+    email: 'researchdev@sfxc.edu.ph',
+    phone: ''
+  },
+  {
+    id: 'clinic',
+    name: 'School Clinic',
+    department: 'D. Department/Offices',
+    email: 'clinic@sfxc.edu.ph',
+    phone: ''
+  },
+  {
+    id: 'compliance',
+    name: 'SFXC Compliance',
+    department: 'D. Department/Offices',
+    email: 'compliance@sfxc.edu.ph',
+    phone: ''
+  },
+  {
+    id: 'student-accounts-dept',
+    name: 'Student Accounts',
+    department: 'D. Department/Offices',
+    email: 'studentaccounts@sfxc.edu.ph',
+    phone: ''
+  },
+  {
+    id: 'techvoc',
+    name: 'TechVoc',
+    department: 'D. Department/Offices',
+    email: 'techvoc@sfxc.edu.ph',
+    phone: ''
   }
 ]
 
@@ -119,8 +222,8 @@ const filteredOffices = computed(() => {
     const matchesDept = activeDept.value === 'All' || office.department === activeDept.value
     const matchesSearch = !query || 
       office.name.toLowerCase().includes(query) || 
-      office.head.toLowerCase().includes(query) ||
-      office.role.toLowerCase().includes(query)
+      office.email.toLowerCase().includes(query) ||
+      (office.email2 && office.email2.toLowerCase().includes(query))
     
     return matchesDept && matchesSearch
   })
@@ -131,14 +234,14 @@ const filteredOffices = computed(() => {
   <div class="min-h-screen bg-background pb-24">
     <!-- ─── Hero Section ─────────────────────────────────────── -->
     <section
-      class="relative h-[58vh] flex items-end overflow-hidden bg-[url('/src/assets/images/sfxc-building.jpg')] bg-cover bg-center"
+      class="relative h-[58vh] flex items-end overflow-hidden bg-[url('/src/assets/images/sfxc-building.jpg')] bg-cover bg-center mb-12"
     >
       <div class="absolute inset-0 bg-linear-to-t from-background via-black/60 to-transparent" />
 
       <div class="relative z-10 w-full max-w-7xl mx-auto px-6 lg:px-12 pb-14 animate-fade-in-up">
-        <Badge variant="outline" class="mb-6 px-4 py-1.5 text-xs tracking-[0.2em] uppercase rounded-none border-white/20 text-white bg-transparent backdrop-blur-sm">
+        <div class="inline-flex items-center rounded-full border border-white/20 bg-transparent backdrop-blur-sm px-4 py-1.5 text-xs font-semibold tracking-[0.2em] uppercase text-white mb-6">
           Directory
-        </Badge>
+        </div>
         <h1 class="text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight text-white leading-tight mb-4">
           Connect with<br class="hidden sm:block" /> our offices.
         </h1>
@@ -148,189 +251,119 @@ const filteredOffices = computed(() => {
       </div>
     </section>
 
-    <!-- Sticky Toolbar -->
-    <section class="sticky top-0 z-30 bg-background/80 backdrop-blur-xl border-b border-border/50 px-6 lg:px-12 py-4 shadow-sm">
-      <div class="max-w-7xl mx-auto flex flex-col md:flex-row gap-4 items-start md:items-center justify-between">
-        
-        <!-- Search Input -->
-        <div class="relative w-full md:max-w-md">
-          <svg 
-            class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" 
-            xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-          >
-            <circle cx="11" cy="11" r="8"></circle>
-            <path d="m21 21-4.3-4.3"></path>
-          </svg>
-          <Input 
-            v-model="searchQuery" 
-            placeholder="Search offices or personnel..." 
-            class="pl-9 bg-muted/40 border-transparent focus-visible:bg-background focus-visible:ring-1 focus-visible:ring-ring transition-all"
-          />
-        </div>
-
-        <!-- Department Filters -->
-        <div class="flex gap-2 overflow-x-auto w-full md:w-auto pb-2 md:pb-0 hide-scrollbar">
-          <Button
-            v-for="dept in departments"
-            :key="dept"
-            @click="activeDept = dept"
-            :variant="activeDept === dept ? 'default' : 'ghost'"
-            size="sm"
-            class="whitespace-nowrap"
-          >
-            {{ dept }}
-          </Button>
-        </div>
-      </div>
-    </section>
-
-    <!-- Directory Grid -->
-    <section class="max-w-7xl mx-auto px-6 lg:px-12 mt-12">
+    <!-- Main Content Grid -->
+    <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-5 gap-8 items-start px-6 lg:px-12">
       
-      <!-- Empty State -->
-      <Transition name="fade">
-        <div v-if="filteredOffices.length === 0" class="flex flex-col items-center justify-center py-24 text-center">
-          <div class="w-12 h-12 rounded-full bg-muted flex items-center justify-center mb-4">
-            <svg class="w-6 h-6 text-muted-foreground" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <circle cx="11" cy="11" r="8"></circle>
-              <path d="m21 21-4.3-4.3"></path>
-            </svg>
-          </div>
-          <h3 class="text-lg font-semibold text-foreground mb-1">No offices found</h3>
-          <p class="text-muted-foreground mb-6">We couldn't find anything matching your search criteria.</p>
-          <Button 
-            @click="searchQuery = ''; activeDept = 'All'" 
-            variant="link"
-            size="sm"
-          >
-            Clear all filters
-          </Button>
-        </div>
-      </Transition>
-
-      <!-- Grid -->
-      <TransitionGroup 
-        name="list" 
-        tag="div" 
-        class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
-      >
-        <Card 
-          v-for="(office, index) in filteredOffices" 
-          :key="office.id"
-          class="group relative overflow-hidden border-border bg-card hover:border-primary/30 hover:shadow-lg transition-all duration-300 animate-fade-in-up"
-          :style="{ animationDelay: `${index * 50}ms` }"
-        >
-          <CardContent class="p-6 flex flex-col h-full">
-            
-            <!-- Header -->
-            <div class="mb-6">
-              <p class="text-xs font-medium text-muted-foreground uppercase tracking-wider mb-2">
-                {{ office.department }}
-              </p>
-              <h3 class="text-xl font-semibold tracking-tight text-foreground group-hover:text-primary transition-colors">
-                {{ office.name }}
-              </h3>
+      <!-- Left Column: Search & Info -->
+      <div class="lg:col-span-2 space-y-6">
+        <!-- Search Card -->
+        <Card>
+          <CardHeader>
+            <CardTitle>Search Directory</CardTitle>
+            <CardDescription>Filter by name, email, or department.</CardDescription>
+          </CardHeader>
+          <CardContent class="space-y-5">
+            <div class="relative">
+              <svg class="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+              <Input v-model="searchQuery" placeholder="Search offices..." class="pl-9 bg-transparent" />
             </div>
-
-            <!-- Personnel -->
-            <div class="mb-6">
-              <p class="text-base font-medium text-foreground">{{ office.head }}</p>
-              <p class="text-sm text-muted-foreground">{{ office.role }}</p>
+            <div class="flex flex-wrap gap-2">
+              <Button 
+                v-for="dept in departments" 
+                :key="dept"
+                :variant="activeDept === dept ? 'default' : 'outline'"
+                size="sm"
+                class="rounded-full"
+                @click="activeDept = dept"
+              >
+                {{ dept.replace(/^[A-Z]\.\s/, '') }}
+              </Button>
             </div>
-
-            <div class="mt-auto">
-              <Separator class="mb-5 opacity-60 group-hover:opacity-100 transition-opacity" />
-              
-              <!-- Details -->
-              <div class="space-y-4 text-sm">
-                <div class="flex items-start gap-3">
-                  <span class="text-muted-foreground font-medium w-16 shrink-0">Contact</span>
-                  <div class="flex flex-col gap-1">
-                    <a :href="`mailto:${office.email}`" class="text-foreground hover:text-primary transition-colors">{{ office.email }}</a>
-                    <span class="text-foreground">{{ office.phone }}</span>
-                  </div>
-                </div>
-                
-                <div class="flex items-start gap-3">
-                  <span class="text-muted-foreground font-medium w-16 shrink-0">Location</span>
-                  <span class="text-foreground">{{ office.location }}</span>
-                </div>
-
-                <div class="flex items-start gap-3">
-                  <span class="text-muted-foreground font-medium w-16 shrink-0">Hours</span>
-                  <span class="text-foreground">{{ office.hours }}</span>
-                </div>
-              </div>
-            </div>
-
           </CardContent>
         </Card>
-      </TransitionGroup>
 
-    </section>
+        <!-- Campus Info Card -->
+        <Card>
+          <CardHeader>
+            <CardTitle>Main Campus</CardTitle>
+            <CardDescription>St. Francis Xavier College</CardDescription>
+          </CardHeader>
+          <CardContent class="space-y-4 text-sm">
+            <div class="flex items-start gap-3">
+              <svg class="h-4 w-4 mt-0.5 text-muted-foreground shrink-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+              <span class="text-foreground">Barangay 5, San Francisco,<br/>Agusan del Sur, Philippines 8501</span>
+            </div>
+            <div class="flex items-center gap-3">
+              <svg class="h-4 w-4 text-muted-foreground shrink-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+              <span class="text-foreground">+63 85 8390321 | +63 85 9855006</span>
+            </div>
+            <div class="flex items-center gap-3">
+              <svg class="h-4 w-4 text-muted-foreground shrink-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              <span class="text-foreground">Mon - Fri, 8:00 AM - 5:00 PM</span>
+            </div>
+          </CardContent>
+        </Card>
+      </div>
+
+      <!-- Right Column: Directory List -->
+      <div class="lg:col-span-3">
+        <Card class="h-175 flex flex-col overflow-hidden">
+          <CardHeader class="border-b border-border/40 bg-muted/10 pb-4">
+            <CardTitle>Departments & Offices</CardTitle>
+            <CardDescription>Showing {{ filteredOffices.length }} result(s)</CardDescription>
+          </CardHeader>
+          <CardContent class="flex-1 overflow-y-auto custom-scrollbar p-0">
+            <div class="divide-y divide-border/40">
+              <div v-for="office in filteredOffices" :key="office.id" class="p-6 hover:bg-muted/20 transition-colors">
+                <h3 class="text-lg font-semibold text-foreground mb-1">{{ office.name }}</h3>
+                <p class="text-[11px] font-medium text-muted-foreground uppercase tracking-wider mb-4">
+                  {{ office.department.replace(/^[A-Z]\.\s/, '') }}
+                </p>
+                <div class="space-y-2 text-sm text-muted-foreground">
+                  <div v-if="office.phone" class="flex items-center gap-3">
+                    <svg class="h-4 w-4 text-foreground/70 shrink-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                    <span class="text-foreground">{{ office.phone }}</span>
+                  </div>
+                  <div v-if="office.email" class="flex items-start gap-3">
+                    <svg class="h-4 w-4 mt-0.5 text-foreground/70 shrink-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+                    <div class="flex flex-col gap-1">
+                      <a :href="`mailto:${office.email}`" class="text-foreground hover:text-primary hover:underline transition-colors break-all">{{ office.email }}</a>
+                      <a v-if="office.email2" :href="`mailto:${office.email2}`" class="text-foreground hover:text-primary hover:underline transition-colors break-all">{{ office.email2 }}</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- Empty State -->
+              <div v-if="filteredOffices.length === 0" class="p-12 flex flex-col items-center justify-center text-center">
+                <div class="w-12 h-12 rounded-full bg-muted/50 flex items-center justify-center mb-4">
+                  <svg class="w-6 h-6 text-muted-foreground" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+                </div>
+                <h3 class="text-lg font-medium text-foreground mb-1">No offices found</h3>
+                <p class="text-sm text-muted-foreground">Try adjusting your search or filters.</p>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+      </div>
+
+    </div>
   </div>
 </template>
 
 <style scoped>
-/* Hide scrollbar for filter container */
-.hide-scrollbar::-webkit-scrollbar {
-  display: none;
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px;
 }
-.hide-scrollbar {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
 }
-
-/* Animations */
-@keyframes fade-in {
-  from { opacity: 0; }
-  to { opacity: 1; }
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background-color: hsl(var(--border));
+  border-radius: 10px;
 }
-
-@keyframes fade-in-up {
-  from {
-    opacity: 0;
-    transform: translateY(15px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.animate-fade-in {
-  animation: fade-in 0.6s ease-out forwards;
-}
-
-.animate-fade-in-up {
-  animation: fade-in-up 0.5s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
-  opacity: 0;
-}
-
-/* Transition Group */
-.list-move,
-.list-enter-active,
-.list-leave-active {
-  transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
-}
-
-.list-enter-from,
-.list-leave-to {
-  opacity: 0;
-  transform: scale(0.96) translateY(10px);
-}
-
-.list-leave-active {
-  position: absolute;
-}
-
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.3s ease;
-}
-
-.fade-enter-from,
-.fade-leave-to {
-  opacity: 0;
+.custom-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: hsl(var(--border)) transparent;
 }
 </style>
