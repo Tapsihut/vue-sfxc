@@ -172,7 +172,36 @@
     * {
         @apply border-border outline-ring/50;
     }
-    body {
+    html, body {
         @apply bg-background text-foreground;
+        overflow-x: hidden;
+        max-width: 100vw;
+        position: relative;
     }
+    #app {
+        overflow-x: hidden;
+        max-width: 100vw;
+    }
+}
+
+/* V-Calendar custom styles */
+.vc-container {
+    --vc-accent-50: #f0fdf4;
+    --vc-accent-100: #dcfce7;
+    --vc-accent-200: #bbf7d0;
+    --vc-accent-300: #86efac;
+    --vc-accent-400: #4ade80;
+    --vc-accent-500: #22c55e;
+    --vc-accent-600: #16a34a;
+    --vc-accent-700: #15803d;
+    --vc-accent-800: #166534;
+    --vc-accent-900: #14532d;
+}
+
+.vc-day-content:hover {
+    @apply bg-primary/10;
+}
+
+.vc-day-content:focus {
+    @apply ring-2 ring-primary;
 }

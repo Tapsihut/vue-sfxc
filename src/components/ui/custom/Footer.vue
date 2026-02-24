@@ -9,7 +9,7 @@ import SFXCTextOnly from '@/assets/images/logo-text-white-no-website.png'
 <template>
     <footer class="bg-primary text-primary-foreground">
         <div class="container mx-auto px-4 md:px-8 py-12 md:py-16">
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 lg:gap-12">
                 <!-- Logo -->
                 <div class="space-y-4">
                     <div class="flex items-center justify-center">
@@ -17,15 +17,15 @@ import SFXCTextOnly from '@/assets/images/logo-text-white-no-website.png'
                             :logo-src="SFXCLogoOnly"
                             :text-src="SFXCTextOnly"
                             variant="vertical"
-                            logo-class="w-36"
+                            logo-class="w-36 filter-[drop-shadow(1px_0_0_white)_drop-shadow(-1px_0_0_white)_drop-shadow(0_1px_0_white)_drop-shadow(0_-1px_0_white)]"
                             text-class="w-62"
                         />
                     </div>
                 </div>
 
-                <!-- Quick Links -->
+                <!-- General Use -->
                 <div class="space-y-4">
-                    <h3 class="text-lg font-bold">Quick Links</h3>
+                    <h3 class="text-lg font-bold">General Use</h3>
                     <ul class="space-y-2">
                         <li>
                             <RouterLink
@@ -64,7 +64,23 @@ import SFXCTextOnly from '@/assets/images/logo-text-white-no-website.png'
                                 to="#"
                                 class="text-primary-foreground/80 hover:text-primary-foreground transition-colors text-sm"
                             >
-                                News & Events
+                                News and Events
+                            </RouterLink>
+                        </li>
+                        <li>
+                            <RouterLink
+                                to="#"
+                                class="text-primary-foreground/80 hover:text-primary-foreground transition-colors text-sm"
+                            >
+                                Student Resources
+                            </RouterLink>
+                        </li>
+                        <li>
+                            <RouterLink
+                                to="#"
+                                class="text-primary-foreground/80 hover:text-primary-foreground transition-colors text-sm"
+                            >
+                                Careers at SFXC
                             </RouterLink>
                         </li>
                     </ul>
@@ -101,9 +117,9 @@ import SFXCTextOnly from '@/assets/images/logo-text-white-no-website.png'
                     </ul>
                 </div>
 
-                <!-- Get in Touch -->
+                <!-- Connect with Us -->
                 <div class="space-y-4">
-                    <h3 class="text-lg font-bold">Get in Touch</h3>
+                    <h3 class="text-lg font-bold">Connect with Us</h3>
                     <p class="text-primary-foreground/80 text-sm">
                         Follow us on social media for updates and news.
                     </p>
@@ -119,7 +135,7 @@ import SFXCTextOnly from '@/assets/images/logo-text-white-no-website.png'
                             St. Francis Xavier College
                         </a>
                     </div>
-                        <div class="flex items-start gap-3">
+                    <div class="flex items-start gap-3">
                         <Globe class="w-5 h-5 shrink-0 text-primary-foreground/80" />
                         <a
                             href="https://www.sfxc.edu.ph"
@@ -131,6 +147,37 @@ import SFXCTextOnly from '@/assets/images/logo-text-white-no-website.png'
                             www.sfxc.edu.ph
                         </a>
                     </div>
+                </div>
+
+                <!-- For Faculty/Staff -->
+                <div class="space-y-4">
+                    <h3 class="text-lg font-bold">For Faculty/Staff</h3>
+                    <ul class="space-y-2">
+                        <li>
+                            <RouterLink
+                                to="#"
+                                class="text-primary-foreground/80 hover:text-primary-foreground transition-colors text-sm"
+                            >
+                                HR Portal
+                            </RouterLink>
+                        </li>
+                        <li>
+                            <RouterLink
+                                to="#"
+                                class="text-primary-foreground/80 hover:text-primary-foreground transition-colors text-sm"
+                            >
+                                Facilities Requests
+                            </RouterLink>
+                        </li>
+                        <li>
+                            <RouterLink
+                                to="#"
+                                class="text-primary-foreground/80 hover:text-primary-foreground transition-colors text-sm"
+                            >
+                                Professional Development
+                            </RouterLink>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </div>

@@ -1,17 +1,29 @@
 import Home from '@/views/Home.vue'
-import MissionVision from '@/views/Abouts/VisionMission.vue'
+import VisionMission from '@/views/Abouts/VisionMission.vue'
 import Enrollment from '@/views/Admission/Enrollment.vue'
 import Requirements from '@/views/Admission/Requirements.vue'
 import PaymentOption from '@/views/Admission/PaymentOption.vue'
 import { createRouter, createWebHistory } from 'vue-router'
 import SchoolPatron from '@/views/Abouts/SchoolPatron.vue'
 import Organizations from '@/views/Abouts/Organizations.vue'
-import Scholarship from '@/views/Academics/Scholarship.vue'
+import Scholarship from '@/views/Admission/Scholarship.vue'
 import Programs from '@/views/Academics/Program.vue'
 import Tesda from '@/views/Academics/Tesda.vue'
 import Contact from '@/views/Contact/Contact.vue'
-import NewsAndUpdates from '@/views/News/NewsAndUpdates.vue'
-import Announcement from '@/views/News/Announcement.vue'
+import NewsAndUpdates from '@/views/Community/NewsAndUpdates.vue'
+import Announcement from '@/views/Community/Announcement.vue'
+import ScheduleTour from '@/views/Admission/ScheduleTour.vue'
+import Guide from '@/views/Admission/Guide.vue'
+import MediaGallery from '@/views/Community/MediaGallery.vue'
+import Alumni from '@/views/Community/Alumni.vue'
+import Careers from '@/views/Community/Careers.vue'
+import OutreachProgram from '@/views/Community/OutreachProgram.vue'
+import BarangayPartner from '@/views/Community/BarangayPartner.vue'
+import VolunteerOp from '@/views/Community/VolunteerOp.vue'
+import Stories from '@/views/Community/Stories.vue'
+import Facilities from '@/views/Abouts/Facilities.vue'
+import OfficeDirectory from '@/views/Abouts/OfficeDirectory.vue'
+import Accredation from '@/views/Abouts/Accredation.vue'
 
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
@@ -27,7 +39,7 @@ const router = createRouter({
         {
             path: '/about/vision-mission',
             name: 'vision-mission',
-            component: MissionVision,
+            component: VisionMission,
             meta: {
                 layout: 'guest',
             },
@@ -49,6 +61,30 @@ const router = createRouter({
             },
         },
         {
+            path: '/about/facilities',
+            name: 'facilities',
+            component: Facilities,
+            meta: {
+                layout: 'guest',
+            },
+        },
+        {
+            path: '/about/office-directory',
+            name: 'office-directory',
+            component: OfficeDirectory,
+            meta: {
+                layout: 'guest',
+            },
+        },
+        {
+            path: '/about/accreditation',
+            name: 'accreditation',
+            component: Accredation,
+            meta: {
+                layout: 'guest',
+            },
+        },
+        {
             path: '/academics/enrollment',
             name: 'enrollment',
             component: Enrollment,
@@ -64,7 +100,7 @@ const router = createRouter({
                 layout: 'guest',
             },
         },
-                {
+        {
             path: '/academics/programs',
             name: 'programs',
             component: Programs,
@@ -84,6 +120,62 @@ const router = createRouter({
             path: '/news/latest-update',
             name: 'news',
             component: NewsAndUpdates,
+            meta: {
+                layout: 'guest',
+            },
+        },
+        {
+            path: '/community/media-gallery',
+            name: 'media-gallery',
+            component: MediaGallery,
+            meta: {
+                layout: 'guest',
+            },
+        },
+        {
+            path: '/community/alumni',
+            name: 'alumni',
+            component: Alumni,
+            meta: {
+                layout: 'guest',
+            },
+        },
+        {
+            path: '/community/careers',
+            name: 'careers',
+            component: Careers,
+            meta: {
+                layout: 'guest',
+            },
+        },
+        {
+            path: '/community/outreach-programs',
+            name: 'outreach-programs',
+            component: OutreachProgram,
+            meta: {
+                layout: 'guest',
+            },
+        },
+        {
+            path: '/community/barangay-partners',
+            name: 'barangay-partners',
+            component: BarangayPartner,
+            meta: {
+                layout: 'guest',
+            },
+        },
+        {
+            path: '/community/volunteer-opportunities',
+            name: 'volunteer-opportunities',
+            component: VolunteerOp,
+            meta: {
+                layout: 'guest',
+            },
+        },
+        {
+            path: '/community/stories',
+            name: 'stories',
+            component: Stories,
             meta: {
                 layout: 'guest',
             },
@@ -112,7 +204,7 @@ const router = createRouter({
                 layout: 'guest',
             },
         },
-                {
+        {
             path: '/admission/payment-options',
             name: 'payment-options',
             component: PaymentOption,
@@ -120,6 +212,22 @@ const router = createRouter({
                 layout: 'guest',
             },
         },
+                {
+            path: '/admission/tour',
+            name: 'schedule-tour',
+            component: ScheduleTour,
+            meta: {
+                layout: 'guest',
+            },
+        },
+        {
+            path: '/admission/guide',
+            name: 'course-guide',
+            component: Guide,
+            meta: {
+                layout: 'guest',
+            },
+        }
     ],
     scrollBehavior(to, from, savedPosition) {
         // always scroll to top

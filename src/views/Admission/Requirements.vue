@@ -9,7 +9,7 @@ interface Requirement {
   description: string
 }
 
-const selectedStudentType = ref<'freshmen' | 'transferee'>('freshmen')
+const selectedStudentType = ref<'freshmen' | 'transferee' | 'international'>('freshmen')
 
 const freshmenRequirements: Requirement[] = [
   { name: 'Form 138 (Report Card)', description: 'Original copy from senior high school' },
@@ -29,6 +29,18 @@ const transfereeRequirements: Requirement[] = [
   { name: '2x2 ID Pictures', description: '2 pieces with white background' },
   { name: 'Medical Certificate', description: 'From licensed physician' },
   { name: 'Barangay Clearance', description: 'From current residence' },
+]
+
+const internationalRequirements: Requirement[] = [
+  { name: 'Valid Passport', description: 'With valid visa or student permit' },
+  { name: 'Academic Records', description: 'Authenticated transcripts from previous school with English translation' },
+  { name: 'Certificate of Eligibility', description: 'For college admission issued by previous institution' },
+  { name: 'Good Moral Certificate', description: 'From previous institution with authentication' },
+  { name: 'Birth Certificate', description: 'Authenticated copy with English translation' },
+  { name: '2x2 ID Pictures', description: '6 pieces with white background' },
+  { name: 'Medical Certificate', description: 'From licensed physician with health clearance' },
+  { name: 'Student Visa', description: '9(f) Student visa or ACR I-Card' },
+  { name: 'Certificate of Recognition', description: 'School recognition from Philippine Embassy or Consulate' },
 ]
 
 const enrollmentSteps = [
@@ -60,6 +72,7 @@ const enrollmentSteps = [
 ]
 
 const currentRequirements = () => {
+  if (selectedStudentType.value === 'international') return internationalRequirements
   return selectedStudentType.value === 'freshmen' ? freshmenRequirements : transfereeRequirements
 }
 </script>
@@ -120,6 +133,19 @@ const currentRequirements = () => {
           >
             Transferee
           </Button>
+          <Button
+            variant="ghost"
+            size="lg"
+            @click="selectedStudentType = 'international'"
+            :class="[
+              'px-8',
+              selectedStudentType === 'international' 
+                ? 'bg-background shadow-sm' 
+                : 'hover:bg-transparent'
+            ]"
+          >
+            International
+          </Button>
         </div>
       </div>
 
@@ -128,7 +154,13 @@ const currentRequirements = () => {
         <div class="text-center mb-12">
           <h2 class="text-3xl font-bold mb-3">Document Requirements</h2>
           <p class="text-muted-foreground">
-            {{ selectedStudentType === 'freshmen' ? 'For new students applying to SFXC' : 'For students transferring from other institutions' }}
+            {{ 
+              selectedStudentType === 'freshmen' 
+                ? 'For new students applying to SFXC' 
+                : selectedStudentType === 'transferee'
+                ? 'For students transferring from other institutions'
+                : 'For international students applying to SFXC'
+            }}
           </p>
         </div>
 
