@@ -197,6 +197,19 @@ function goToSlide(index: number) {
     </div>
   </section>
 
+  <section class="py-8 bg-background overflow-hidden">
+    <div class="container mx-auto px-4">
+      <div class="flex justify-center items-center">
+        <h2 class="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold text-primary text-center tracking-[0.2em] flex justify-center gap-x-2 sm:gap-x-3 md:gap-x-4 uppercase whitespace-nowrap" style="font-family: 'Times New Roman', Times, serif;">
+          <span class="animate-popup" style="animation-delay: 0.5s;">Service.</span>
+          <span class="animate-popup" style="animation-delay: 1.5s;">Fortitude.</span>
+          <span class="animate-popup" style="animation-delay: 2.5s;">Excellence.</span>
+          <span class="animate-popup" style="animation-delay: 3.5s;">Christ-centeredness.</span>
+        </h2>
+      </div>
+    </div>
+  </section>
+
       <section id="schoolHero" class="py-12 sm:py-16 md:py-20 lg:py-24 bg-background scroll-mt-16">
         <div class="max-w-7xl px-4 sm:px-6 lg:px-8 mx-auto">
             <div class="grid md:grid-cols-2 gap-6 sm:gap-8 md:gap-10 lg:gap-12 items-center">
@@ -417,3 +430,21 @@ function goToSlide(index: number) {
 
 
 </template>
+
+<style scoped>
+@keyframes popup {
+  0% {
+    opacity: 0;
+    transform: translateY(10px) scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.animate-popup {
+  opacity: 0;
+  animation: popup 1.5s ease-out forwards;
+}
+</style>

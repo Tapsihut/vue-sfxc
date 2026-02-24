@@ -7,11 +7,11 @@ import { Card, CardContent } from '@/components/ui/card'
 import { Separator } from '@/components/ui/separator'
 
 // Import images
-import sfxcBuilding from '@/assets/images/sfxc-building.jpg'
-import cauldron from '@/assets/images/cauldron.jpg'
-import bsit1 from '@/assets/images/news/sfxc_bsit.jpg'
-import bsit2 from '@/assets/images/news/sfxc_bsit2.jpg'
-import bsit3 from '@/assets/images/news/sfxc_bsit3.jpg'
+const sfxcBuilding = 'https://placehold.co/800x800?text=800x800'
+const cauldron = 'https://placehold.co/800x800?text=800x800'
+const bsit1 = 'https://placehold.co/800x800?text=800x800'
+const bsit2 = 'https://placehold.co/800x800?text=800x800'
+const bsit3 = 'https://placehold.co/800x800?text=800x800'
 
 interface Recognition {
   id: string
@@ -130,11 +130,11 @@ const filteredRecognitions = computed(() => {
   <div class="min-h-screen bg-background pb-24">
     <!-- Hero Section -->
     <section
-      class="relative h-[58vh] flex items-end overflow-hidden bg-[url('/src/assets/images/sfxc-building.jpg')] bg-cover bg-center"
+      class="relative h-[58vh] flex items-end overflow-hidden bg-[url('https://placehold.co/1920x1080?text=1920x1080')] bg-cover bg-center"
     >
-      <div class="absolute inset-0 bg-linear-to-t from-background via-black/60 to-transparent" />
+      <!-- <div class="absolute inset-0 bg-linear-to-t from-background via-black/60 to-transparent" /> -->
 
-      <div class="relative z-10 w-full max-w-7xl mx-auto px-6 lg:px-12 pb-14 animate-fade-in-up">
+      <!-- <div class="relative z-10 w-full max-w-7xl mx-auto px-6 lg:px-12 pb-14 animate-fade-in-up">
         <Badge variant="outline" class="mb-6 px-4 py-1.5 text-xs tracking-[0.2em] uppercase rounded-none border-white/20 text-white bg-transparent backdrop-blur-sm">
           Institutional Excellence
         </Badge>
@@ -144,7 +144,7 @@ const filteredRecognitions = computed(() => {
         <p class="text-lg md:text-xl text-white/80 font-light leading-relaxed max-w-2xl">
           A testament to our unwavering commitment to quality education, continuous improvement, and global standards.
         </p>
-      </div>
+      </div> -->
     </section>
 
     <!-- Sticky Toolbar -->

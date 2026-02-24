@@ -5,10 +5,10 @@ import { Input } from '@/components/ui/input'
 import { Search, X } from 'lucide-vue-next'
 
 // Import images
-import sfxcBuilding from '@/assets/images/sfxc-building.jpg'
-import sfxcApplication from '@/assets/images/news/sfxc_application.jpg'
-import sfxcSacred from '@/assets/images/news/sfxc_sacred.jpg'
-import sfxcUpdate from '@/assets/images/news/sfxc_update.jpg'
+const sfxcBuilding = 'https://placehold.co/800x800?text=800x800'
+const sfxcApplication = 'https://placehold.co/800x800?text=800x800'
+const sfxcSacred = 'https://placehold.co/800x800?text=800x800'
+const sfxcUpdate = 'https://placehold.co/800x800?text=800x800'
 
 interface MediaItem {
   id: number
@@ -137,19 +137,19 @@ const getGridClass = (index: number) => {
         <div class="absolute -top-[20%] -right-[10%] w-[50%] h-[70%] rounded-full bg-green-800/40 blur-[100px]"></div>
         <div class="absolute bottom-[10%] -left-[10%] w-[40%] h-[60%] rounded-full bg-yellow-500/20 blur-[100px]"></div>
         <div class="absolute top-[40%] left-[20%] w-[20%] h-[30%] rounded-full bg-green-400/20 blur-[80px]"></div>
-        <div class="absolute inset-0 bg-[url('/src/assets/images/sfxc-building.jpg')] bg-cover bg-center opacity-10 mix-blend-overlay"></div>
+        <div class="absolute inset-0 bg-[url('https://placehold.co/1920x1080?text=1920x1080')] bg-cover bg-center opacity-10 mix-blend-overlay"></div>
       </div>
 
       <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <!-- <span class="inline-block py-1.5 px-4 rounded-full bg-green-900/50 border border-green-700/50 text-green-300 text-xs font-bold tracking-widest uppercase mb-6 backdrop-blur-md shadow-lg">
           Discover SFXC
         </span> -->
-        <h1 class="text-5xl md:text-7xl font-extrabold text-white tracking-tight mb-6 drop-shadow-lg">
+        <!-- <h1 class="text-5xl md:text-7xl font-extrabold text-white tracking-tight mb-6 drop-shadow-lg">
           <span class="text-transparent bg-clip-text bg-linear-to-r from-yellow-400 to-yellow-200">St. Francis Xavier College</span>
-        </h1>
-        <p class="text-green-50/90 max-w-2xl mx-auto text-lg md:text-xl leading-relaxed font-medium">
+        </h1> -->
+        <!-- <p class="text-green-50/90 max-w-2xl mx-auto text-lg md:text-xl leading-relaxed font-medium">
           Explore the vibrant life, achievements, and unforgettable moments that shape the Saint Francis Xavier College community.
-        </p>
+        </p> -->
       </div>
 
       <!-- Decorative Bottom Divider -->

@@ -119,7 +119,7 @@ const formatDate = (dateString: string) => {
     <!-- Hero Header -->
     <section class="relative">
       <div
-        class="h-[50vh] md:h-[60vh] flex flex-col relative bg-[url('/src/assets/images/sfxc-building.jpg')] bg-cover bg-center bg-no-repeat"
+        class="h-[50vh] md:h-[60vh] flex flex-col relative bg-[url('https://placehold.co/1920x1080?text=1920x1080')] bg-cover bg-center bg-no-repeat"
       >
         <div class="absolute inset-0 bg-linear-to-t from-tertiary/90 via-tertiary/40 to-transparent"></div>
 

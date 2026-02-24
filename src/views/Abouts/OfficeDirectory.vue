@@ -236,9 +236,9 @@ const filteredOffices = computed(() => {
     <section
       class="relative h-[58vh] flex items-end overflow-hidden bg-[url('/src/assets/images/sfxc-building.jpg')] bg-cover bg-center mb-12"
     >
-      <div class="absolute inset-0 bg-linear-to-t from-background via-black/60 to-transparent" />
+      <!-- <div class="absolute inset-0 bg-linear-to-t from-background via-black/60 to-transparent" /> -->
 
-      <div class="relative z-10 w-full max-w-7xl mx-auto px-6 lg:px-12 pb-14 animate-fade-in-up">
+      <!-- <div class="relative z-10 w-full max-w-7xl mx-auto px-6 lg:px-12 pb-14 animate-fade-in-up">
         <div class="inline-flex items-center rounded-full border border-white/20 bg-transparent backdrop-blur-sm px-4 py-1.5 text-xs font-semibold tracking-[0.2em] uppercase text-white mb-6">
           Directory
         </div>
@@ -248,7 +248,7 @@ const filteredOffices = computed(() => {
         <p class="text-lg md:text-xl text-white/80 font-light leading-relaxed max-w-2xl">
           Find the right department, contact key personnel, and access essential campus services instantly.
         </p>
-      </div>
+      </div> -->
     </section>
 
     <!-- Main Content Grid -->

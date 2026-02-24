@@ -16,7 +16,7 @@ const YoutubeIcon = {
   <!-- HERO -->
   <section id="hero" class="relative">
     <div
-      class="h-120 md:h-[75dvh] flex flex-col relative bg-[url('/src/assets/images/sfxc-building.jpg')] bg-cover bg-center bg-no-repeat"
+      class="h-120 md:h-[75dvh] flex flex-col relative bg-[url('https://placehold.co/1920x1080?text=Hero+Image+1920x1080')] bg-cover bg-center bg-no-repeat"
     >
       <div class="absolute inset-0 bg-linear-to-t from-tertiary/90 via-background/20 to-transparent"></div>
 

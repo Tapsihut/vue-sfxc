@@ -2,7 +2,7 @@
 import { ref, computed } from 'vue'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
-import bsitPicture from '@/assets/images/news/sfxc_bsit.jpg'
+const bsitPicture = 'https://placehold.co/800x800?text=800x800'
 
 interface Program {
   id: string
@@ -52,7 +52,7 @@ const programs: Program[] = [
     degree: 'Bachelor of Science',
     careers: ['Business Manager', 'Operations Manager', 'Entrepreneur', 'Management Consultant'],
     icon: '<path d="M16 20V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/><rect width="20" height="14" x="2" y="6" rx="2"/>',
-    heroImage: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800&h=400&fit=crop',
+    heroImage: 'https://placehold.co/800x800?text=800x800',
     color: 'bg-[#FBBF24]'
   },
   {
@@ -65,7 +65,7 @@ const programs: Program[] = [
     degree: 'Bachelor of Science',
     careers: ['Certified Public Accountant', 'Auditor', 'Tax Consultant', 'Financial Analyst'],
     icon: '<rect width="16" height="20" x="4" y="2" rx="2" ry="2"/><path d="M9 22v-4h6v4"/><path d="M8 6h.01"/><path d="M16 6h.01"/><path d="M12 6h.01"/><path d="M12 10h.01"/><path d="M12 14h.01"/><path d="M16 10h.01"/><path d="M16 14h.01"/><path d="M8 10h.01"/><path d="M8 14h.01"/>',
-    heroImage: 'https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?w=800&h=400&fit=crop',
+    heroImage: 'https://placehold.co/800x800?text=800x800',
     color: 'bg-[#3B82F6]'
   },
   {
@@ -78,7 +78,7 @@ const programs: Program[] = [
     degree: 'Bachelor of Science',
     careers: ['Systems Accountant', 'IT Auditor', 'Business Analyst', 'Data Analyst'],
     icon: '<ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v14a9 3 0 0 0 18 0V5"/><path d="M3 12a9 3 0 0 0 18 0"/>',
-    heroImage: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=400&fit=crop',
+    heroImage: 'https://placehold.co/800x800?text=800x800',
     color: 'bg-[#3B82F6]'
   },
   {
@@ -91,7 +91,7 @@ const programs: Program[] = [
     degree: 'Bachelor of Science',
     careers: ['Office Manager', 'Administrative Officer', 'Executive Assistant', 'Operations Coordinator'],
     icon: '<path d="M16 20V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/><rect width="20" height="14" x="2" y="6" rx="2"/>',
-    heroImage: 'https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&h=400&fit=crop',
+    heroImage: 'https://placehold.co/800x800?text=800x800',
     color: 'bg-[#A855F7]'
   },
   {
@@ -104,7 +104,7 @@ const programs: Program[] = [
     degree: 'Bachelor of Science',
     careers: ['Police Officer', 'Criminal Investigator', 'Forensic Specialist', 'Security Manager'],
     icon: '<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10"/>',
-    heroImage: 'https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=800&h=400&fit=crop',
+    heroImage: 'https://placehold.co/800x800?text=800x800',
     color: 'bg-[#DC2626]'
   },
   {
@@ -117,7 +117,7 @@ const programs: Program[] = [
     degree: 'Bachelor of Secondary Education',
     careers: ['High School Teacher', 'Subject Specialist', 'Curriculum Developer', 'Education Coordinator'],
     icon: '<path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>',
-    heroImage: 'https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=800&h=400&fit=crop',
+    heroImage: 'https://placehold.co/800x800?text=800x800',
     color: 'bg-[#1E40AF]'
   },
   {
@@ -130,7 +130,7 @@ const programs: Program[] = [
     degree: 'Bachelor of Elementary Education',
     careers: ['Elementary Teacher', 'Education Coordinator', 'Curriculum Developer', 'School Administrator'],
     icon: '<path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>',
-    heroImage: 'https://images.unsplash.com/photo-1427504494785-3a9ca7044f45?w=800&h=400&fit=crop',
+    heroImage: 'https://placehold.co/800x800?text=800x800',
     color: 'bg-[#2563EB]'
   }
 ]
@@ -141,7 +141,7 @@ const colleges: College[] = [
     name: 'College of Business Education',
     code: 'CBE',
     description: 'Empowering future business leaders and entrepreneurs with innovative management and technology skills.',
-    heroImage: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800&h=400&fit=crop',
+    heroImage: 'https://placehold.co/800x800?text=800x800',
     color: 'bg-[#DDA63A]',
     icon: '<path d="M16 20V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/><rect width="20" height="14" x="2" y="6" rx="2"/>'
   },
@@ -150,7 +150,7 @@ const colleges: College[] = [
     name: 'College of Teachers Education',
     code: 'CTE',
     description: 'Shaping passionate educators who inspire and transform lives through quality teaching.',
-    heroImage: 'https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=800&h=400&fit=crop',
+    heroImage: 'https://placehold.co/800x800?text=800x800',
     color: 'bg-[#1E40AF]',
     icon: '<path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>'
   },
@@ -159,7 +159,7 @@ const colleges: College[] = [
     name: 'College of Criminal Justice Education',
     code: 'CCJE',
     description: 'Training dedicated professionals committed to upholding justice, law, and public safety.',
-    heroImage: 'https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=800&h=400&fit=crop',
+    heroImage: 'https://placehold.co/800x800?text=800x800',
     color: 'bg-[#DC2626]',
     icon: '<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10"/>'
   }
@@ -189,11 +189,11 @@ const selectCollege = (collegeCode: string) => {
   <div class="min-h-screen bg-background pb-24">
     <!-- Hero Section -->
     <section
-      class="relative h-[58vh] flex items-end overflow-hidden bg-[url('/src/assets/images/sfxc-building.jpg')] bg-cover bg-center"
+      class="relative h-[58vh] flex items-end overflow-hidden bg-[url('https://placehold.co/1920x1080?text=1920x1080')] bg-cover bg-center"
     >
-      <div class="absolute inset-0 bg-linear-to-t from-background via-black/60 to-transparent" />
+      <!-- <div class="absolute inset-0 bg-linear-to-t from-background via-black/60 to-transparent" /> -->
 
-      <div class="relative z-10 w-full max-w-7xl mx-auto px-6 lg:px-12 pb-14 animate-fade-in-up">
+      <!-- <div class="relative z-10 w-full max-w-7xl mx-auto px-6 lg:px-12 pb-14 animate-fade-in-up">
         <Badge variant="outline" class="mb-6 px-4 py-1.5 text-xs tracking-[0.2em] uppercase rounded-none border-white/20 text-white bg-transparent backdrop-blur-sm">
           Academic Programs
         </Badge>
@@ -203,15 +203,15 @@ const selectCollege = (collegeCode: string) => {
         <p class="text-lg md:text-xl text-white/80 font-light leading-relaxed max-w-2xl">
           Explore the degree and graduate programs offered at St. Francis Xavier College.
         </p>
-      </div>
+      </div> -->
     </section>
 
     <!-- College Selection Section -->
     <section class="max-w-7xl mx-auto px-6 lg:px-12 mt-12">
-      <div class="text-center mb-12">
+      <!-- <div class="text-center mb-12">
         <h2 class="text-3xl md:text-4xl font-bold mb-3">Choose Your College</h2>
         <p class="text-muted-foreground text-lg">Select a college to view available programs</p>
-      </div>
+      </div> -->
 
       <!-- College Cards -->
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">

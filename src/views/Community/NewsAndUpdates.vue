@@ -5,10 +5,10 @@ import { Button } from '@/components/ui/button'
 import { User, Calendar as CalendarIcon } from 'lucide-vue-next'
 
 // Import images
-import sfxcApplication from '@/assets/images/news/sfxc_application.jpg'
-import sfxcSacred from '@/assets/images/news/sfxc_sacred.jpg'
-import sfxcUpdate from '@/assets/images/news/sfxc_update.jpg'
-import sfxcBuilding from '@/assets/images/sfxc-building.jpg'
+const sfxcApplication = 'https://placehold.co/800x600?text=800x600'
+const sfxcSacred = 'https://placehold.co/800x600?text=800x600'
+const sfxcUpdate = 'https://placehold.co/800x600?text=800x600'
+const sfxcBuilding = 'https://placehold.co/1280x720?text=1280x720'
 
 interface NewsItem {
   id: number
@@ -161,11 +161,11 @@ const nextMonth = () => {
     <!-- HERO -->
     <section id="hero" class="relative">
       <div
-        class="h-120 md:h-[60dvh] flex flex-col relative bg-[url('/src/assets/images/sfxc-building.jpg')] bg-cover bg-center bg-no-repeat"
+        class="h-120 md:h-[60dvh] flex flex-col relative bg-[url('https://placehold.co/1920x1080?text=1920x1080')] bg-cover bg-center bg-no-repeat"
       >
         <div class="absolute inset-0 bg-linear-to-t from-tertiary/90 via-background/20 to-transparent"></div>
 
-        <div class="relative z-10 mt-auto w-full md:max-w-4xl ps-5 pb-16 md:ps-10 md:pb-24">
+        <!-- <div class="relative z-10 mt-auto w-full md:max-w-4xl ps-5 pb-16 md:ps-10 md:pb-24">
           <h1 class="text-3xl md:text-5xl lg:text-7xl font-bold text-white tracking-tight drop-shadow-md">
             News and Updates
           </h1>
@@ -173,7 +173,7 @@ const nextMonth = () => {
               Stay updated with the latest events, announcements, and milestones of
             Saint Francis Xavier College.
           </p>
-        </div>
+        </div> -->
 
         <div class="absolute bottom-0 left-0 right-0 text-background leading-none">
           <svg class="w-full h-12 md:h-24" viewBox="0 0 1440 320" preserveAspectRatio="none">

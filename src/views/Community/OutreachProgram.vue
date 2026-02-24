@@ -3,10 +3,10 @@ import { Card, CardContent } from '@/components/ui/card'
 import { User, Calendar } from 'lucide-vue-next'
 
 // Import images
-import sfxcBuilding from '@/assets/images/sfxc-building.jpg'
-import sfxcApplication from '@/assets/images/news/sfxc_application.jpg'
-import sfxcSacred from '@/assets/images/news/sfxc_sacred.jpg'
-import sfxcUpdate from '@/assets/images/news/sfxc_update.jpg'
+const sfxcBuilding = 'https://placehold.co/1280x720?text=1280x720'
+const sfxcApplication = 'https://placehold.co/800x600?text=800x600'
+const sfxcSacred = 'https://placehold.co/800x600?text=800x600'
+const sfxcUpdate = 'https://placehold.co/800x600?text=800x600'
 
 interface Program {
   id: number

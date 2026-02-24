@@ -5,12 +5,6 @@ import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card'
 import { Separator } from '@/components/ui/separator'
 
-// Import images
-import sfxcBuilding from '@/assets/images/sfxc-building.jpg'
-import sfxcApplication from '@/assets/images/news/sfxc_application.jpg'
-import sfxcSacred from '@/assets/images/news/sfxc_sacred.jpg'
-import sfxcUpdate from '@/assets/images/news/sfxc_update.jpg'
-
 interface Facility {
   id: number
   name: string
@@ -26,7 +20,7 @@ const facilities: Facility[] = [
     id: 1,
     name: 'Library',
     description: 'An expansive learning hub with over 10,000 volumes, private study rooms, and full digital access.',
-    image: sfxcBuilding,
+    image: 'https://placehold.co/800x600?text=800x600',
     tag: 'Academic',
     features: ['10,000+ Books', 'Digital Resources', 'Study Rooms', 'Computer Lab']
   },
@@ -34,7 +28,7 @@ const facilities: Facility[] = [
     id: 2,
     name: 'Science Laboratory',
     description: 'Purpose-built labs for Physics, Chemistry, and Biology — equipped to the highest safety standards.',
-    image: sfxcApplication,
+    image: 'https://placehold.co/800x600?text=800x600',
     tag: 'Academic',
     features: ['Modern Equipment', 'Safety-Certified', 'Expert Supervision', 'Hands-on Learning']
   },
@@ -42,7 +36,7 @@ const facilities: Facility[] = [
     id: 3,
     name: 'Computer Laboratory',
     description: 'High-performance workstations with enterprise-grade internet and a full professional software suite.',
-    image: sfxcSacred,
+    image: 'https://placehold.co/800x600?text=800x600',
     tag: 'Technology',
     features: ['Latest Hardware', 'Fiber Internet', 'Software Suite', 'Tech Support']
   },
@@ -50,7 +44,7 @@ const facilities: Facility[] = [
     id: 4,
     name: 'Sports Complex',
     description: 'A multi-court complex for basketball, volleyball, athletics, and fitness training.',
-    image: sfxcUpdate,
+    image: 'https://placehold.co/800x600?text=800x600',
     tag: 'Athletics',
     features: ['Basketball Court', 'Volleyball Court', 'Fitness Equipment', 'Outdoor Track']
   },
@@ -58,7 +52,7 @@ const facilities: Facility[] = [
     id: 5,
     name: 'Chapel',
     description: 'A serene sacred space for daily Mass, quiet prayer, and spiritual formation.',
-    image: sfxcBuilding,
+    image: 'https://placehold.co/800x600?text=800x600',
     tag: 'Spiritual',
     features: ['Daily Mass', 'Quiet Reflection', 'Religious Events', 'Spiritual Direction']
   },
@@ -66,7 +60,7 @@ const facilities: Facility[] = [
     id: 6,
     name: 'Cafeteria',
     description: 'A bright, spacious dining hall offering nutritious, affordable meals in a clean environment.',
-    image: sfxcApplication,
+    image: 'https://placehold.co/800x600?text=800x600',
     tag: 'Dining',
     features: ['Balanced Meals', 'Ample Seating', 'Affordable Pricing', 'Sanitary Standards']
   }
@@ -83,8 +77,8 @@ const setActive = (facility: Facility) => {
   <div class="min-h-screen bg-background">
 
     <!-- ─── Hero ─────────────────────────────────────────────── -->
-    <section
-      class="relative h-[58vh] flex items-end overflow-hidden bg-[url('/src/assets/images/sfxc-building.jpg')] bg-cover bg-center"
+    <!-- <section
+      class="relative h-[58vh] flex items-end overflow-hidden bg-[url('https://placehold.co/1920x1080?text=Hero+Image+1920x1080')] bg-cover bg-center"
     >
       <div class="absolute inset-0 bg-linear-to-t from-background via-black/40 to-transparent" />
 
@@ -93,7 +87,7 @@ const setActive = (facility: Facility) => {
           Built for<br class="hidden sm:block" /> Every Learner
         </h1>
       </div>
-    </section>
+    </section> -->
 
     <!-- ─── Interactive Facility Explorer ─────────────────────── -->
     <section class="py-20 px-6 lg:px-10 bg-background">
@@ -177,7 +171,7 @@ const setActive = (facility: Facility) => {
     <section class="py-16 bg-muted/30 border-t border-border overflow-hidden">
       <div class="max-w-7xl mx-auto px-6 lg:px-10 mb-8">
         <h2 class="text-2xl font-bold tracking-tight">Around Campus</h2>
-        <p class="text-muted-foreground text-sm mt-1">A glimpse of life at our school</p>
+        <!-- <p class="text-muted-foreground text-sm mt-1">A glimpse of life at our school</p> -->
       </div>
 
       <div class="flex gap-4 overflow-x-auto no-scrollbar px-6 lg:px-10 pb-2">

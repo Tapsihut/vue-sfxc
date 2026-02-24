@@ -7,7 +7,7 @@ import { Card, CardContent } from '@/components/ui/card'
 import { Separator } from '@/components/ui/separator'
 
 // Import image
-import sfxcBuilding from '@/assets/images/sfxc-building.jpg'
+const sfxcBuilding = 'https://placehold.co/800x800?text=800x800'
 
 interface Partner {
   id: number
@@ -164,21 +164,15 @@ const filteredPartners = computed(() => {
   <div class="min-h-screen bg-background pb-24">
     <!-- Hero Section -->
     <section
-      class="relative h-[58vh] flex items-end overflow-hidden bg-[url('/src/assets/images/sfxc-building.jpg')] bg-cover bg-center"
+      class="relative h-[58vh] flex items-end overflow-hidden bg-[url('https://placehold.co/1920x1080?text=1920x1080')] bg-cover bg-center"
     >
       <div class="absolute inset-0 bg-linear-to-t from-background via-black/60 to-transparent" />
 
-      <div class="relative z-10 w-full max-w-7xl mx-auto px-6 lg:px-12 pb-14 animate-fade-in-up">
+      <!-- <div class="relative z-10 w-full max-w-7xl mx-auto px-6 lg:px-12 pb-14 animate-fade-in-up">
         <Badge variant="outline" class="mb-6 px-4 py-1.5 text-xs tracking-[0.2em] uppercase rounded-none border-white/20 text-white bg-transparent backdrop-blur-sm">
           Community Partnership
         </Badge>
-        <h1 class="text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight text-white leading-tight mb-4">
-          Barangay Partners.
-        </h1>
-        <p class="text-lg md:text-xl text-white/80 font-light leading-relaxed max-w-2xl">
-          Building stronger communities through collaborative partnerships and sustainable development programs.
-        </p>
-      </div>
+      </div> -->
     </section>
 
     <!-- Sticky Toolbar -->
@@ -254,14 +248,14 @@ const filteredPartners = computed(() => {
         >
           <div class="flex flex-col md:flex-row h-full">
             <!-- Image -->
-            <div class="relative md:w-40 h-48 overflow-hidden bg-muted flex-shrink-0">
+            <div class="relative md:w-40 h-48 overflow-hidden bg-muted shrink-0">
               <img 
                 :src="partner.image" 
                 :alt="partner.name"
                 class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                @error="(e) => (e.target as HTMLImageElement).src = '/src/assets/images/sfxc-building.jpg'"
+                @error="(e) => (e.target as HTMLImageElement).src = 'https://placehold.co/800x800?text=Partner+Image+800x800'"
               />
-              <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+              <div class="absolute inset-0 bg-linear-to-t from-black/60 to-transparent"></div>
               <div class="absolute bottom-3 left-3">
                 <p class="text-xs font-medium text-white/90 uppercase tracking-wider px-2 py-1 bg-black/40 backdrop-blur-sm rounded">
                   Community
