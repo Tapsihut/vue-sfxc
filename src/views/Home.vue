@@ -22,7 +22,7 @@ const heroSlides: HeroSlide[] = [
     id: 1,
     title: '',
     description: '',
-    image: 'https://placehold.co/1920x1080?text=Hero+Image+1920x1080',
+    image: 'https://placehold.co/1920x1080?text=1920x1080',
   },
   {
     id: 2,
