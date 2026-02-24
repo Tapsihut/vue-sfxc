@@ -7,9 +7,9 @@ import { Label } from '@/components/ui/label'
 import { Textarea } from '@/components/ui/textarea'
 
 // Import images
-import sfxcBuilding from '@/assets/images/sfxc-building.jpg'
-import sfxcApplication from '@/assets/images/news/sfxc_application.jpg'
-import sfxcSacred from '@/assets/images/news/sfxc_sacred.jpg'
+const sfxcBuilding = 'https://placehold.co/800x800?text=800x800'
+const sfxcApplication = 'https://placehold.co/800x800?text=800x800'
+const sfxcSacred = 'https://placehold.co/800x800?text=800x800'
 
 interface AlumniFeatured {
   id: number
@@ -63,10 +63,10 @@ const batchAlbums: BatchAlbum[] = [
     title: 'Class of 2025',
     description: 'Graduation and memorable moments',
     images: [
-      '/src/assets/images/sfxc-building.jpg',
-      '/src/assets/images/news/sfxc_application.jpg',
-      '/src/assets/images/news/sfxc_sacred.jpg',
-      '/src/assets/images/news/sfxc_update.jpg'
+      'https://placehold.co/800x800?text=800x800',
+      'https://placehold.co/800x800?text=800x800',
+      'https://placehold.co/800x800?text=800x800',
+      'https://placehold.co/800x800?text=800x800'
     ],
     photoCount: 48
   },
@@ -76,10 +76,10 @@ const batchAlbums: BatchAlbum[] = [
     title: 'Class of 2024',
     description: 'Journey through the years',
     images: [
-      '/src/assets/images/news/sfxc_application.jpg',
-      '/src/assets/images/sfxc-building.jpg',
-      '/src/assets/images/news/sfxc_update.jpg',
-      '/src/assets/images/news/sfxc_sacred.jpg'
+      'https://placehold.co/800x800?text=800x800',
+      'https://placehold.co/800x800?text=800x800',
+      'https://placehold.co/800x800?text=800x800',
+      'https://placehold.co/800x800?text=800x800'
     ],
     photoCount: 52
   },
@@ -89,10 +89,10 @@ const batchAlbums: BatchAlbum[] = [
     title: 'Class of 2023',
     description: 'Achievements and celebrations',
     images: [
-      '/src/assets/images/news/sfxc_sacred.jpg',
-      '/src/assets/images/news/sfxc_update.jpg',
-      '/src/assets/images/sfxc-building.jpg',
-      '/src/assets/images/news/sfxc_application.jpg'
+      'https://placehold.co/800x800?text=800x800',
+      'https://placehold.co/800x800?text=800x800',
+      'https://placehold.co/800x800?text=800x800',
+      'https://placehold.co/800x800?text=800x800'
     ],
     photoCount: 45
   },
@@ -102,10 +102,10 @@ const batchAlbums: BatchAlbum[] = [
     title: 'Class of 2022',
     description: 'Milestones and memories',
     images: [
-      '/src/assets/images/news/sfxc_update.jpg',
-      '/src/assets/images/news/sfxc_sacred.jpg',
-      '/src/assets/images/news/sfxc_application.jpg',
-      '/src/assets/images/sfxc-building.jpg'
+      'https://placehold.co/800x800?text=800x800',
+      'https://placehold.co/800x800?text=800x800',
+      'https://placehold.co/800x800?text=800x800',
+      'https://placehold.co/800x800?text=800x800'
     ],
     photoCount: 39
   },
@@ -115,10 +115,10 @@ const batchAlbums: BatchAlbum[] = [
     title: 'Class of 2021',
     description: 'Resilience and triumph',
     images: [
-      '/src/assets/images/sfxc-building.jpg',
-      '/src/assets/images/news/sfxc_sacred.jpg',
-      '/src/assets/images/news/sfxc_application.jpg',
-      '/src/assets/images/news/sfxc_update.jpg'
+      'https://placehold.co/800x800?text=800x800',
+      'https://placehold.co/800x800?text=800x800',
+      'https://placehold.co/800x800?text=800x800',
+      'https://placehold.co/800x800?text=800x800'
     ],
     photoCount: 41
   },
@@ -128,10 +128,10 @@ const batchAlbums: BatchAlbum[] = [
     title: 'Class of 2020',
     description: 'A unique graduation story',
     images: [
-      '/src/assets/images/news/sfxc_application.jpg',
-      '/src/assets/images/sfxc-building.jpg',
-      '/src/assets/images/news/sfxc_update.jpg',
-      '/src/assets/images/news/sfxc_sacred.jpg'
+      'https://placehold.co/800x800?text=800x800',
+      'https://placehold.co/800x800?text=800x800',
+      'https://placehold.co/800x800?text=800x800',
+      'https://placehold.co/800x800?text=800x800'
     ],
     photoCount: 36
   },
@@ -153,18 +153,10 @@ const closeBatchAlbum = () => {
     <!-- Hero Header -->
     <section class="relative">
       <div
-        class="h-[50vh] md:h-[60vh] flex flex-col relative bg-[url('/src/assets/images/sfxc-building.jpg')] bg-cover bg-center bg-no-repeat"
+        class="h-[50vh] md:h-[60vh] flex flex-col relative bg-[url('https://placehold.co/1920x1080?text=1920x1080')] bg-cover bg-center bg-no-repeat"
       >
         <div class="absolute inset-0 bg-linear-to-t from-tertiary/90 via-tertiary/40 to-transparent"></div>
 
-        <div class="relative z-10 mt-auto w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-12">
-          <h1 class="text-4xl md:text-5xl font-bold text-white tracking-tight">
-            Alumni Network
-          </h1>
-          <p class="text-white/90 mt-3 text-lg md:text-xl max-w-2xl">
-            Connecting Xaverians across generations and celebrating success stories
-          </p>
-        </div>
 
         <div class="absolute bottom-0 left-0 right-0 text-background leading-none">
           <svg class="w-full h-8 md:h-16" viewBox="0 0 1440 320" preserveAspectRatio="none">

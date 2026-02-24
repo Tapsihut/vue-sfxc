@@ -2,12 +2,6 @@
 import { ref } from 'vue'
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel'
 import type { CarouselApi } from '@/components/ui/carousel'
-import sfxcCauldron from '@/assets/images/cauldron.jpg'
-import bsit from '@/assets/images/news/sfxc_bsit.jpg'
-import bsit2 from '@/assets/images/news/sfxc_bsit2.jpg'
-import bsit3 from '@/assets/images/news/sfxc_bsit3.jpg'
-import bsit4 from '@/assets/images/news/sfxc_bsit4.jpg'
-import bsitUpdate from '@/assets/images/news/sfxc_update.jpg'
 import Autoplay from 'embla-carousel-autoplay'
 type HeroButton = {
   text: string
@@ -28,13 +22,13 @@ const heroSlides: HeroSlide[] = [
     id: 1,
     title: '',
     description: '',
-    image: sfxcCauldron,
+    image: 'https://placehold.co/1920x1080?text=1920x1080',
   },
   {
     id: 2,
     title: 'Excellence in Education',
     description: 'Nurturing young minds through innovative teaching methods and state-of-the-art facilities.',
-    image: 'https://images.unsplash.com/photo-1541339907198-e08756dedf3f?w=1920&h=1080&fit=crop',
+    image: 'https://placehold.co/1920x1080?text=Hero+Image+1920x1080',
     buttons: [
       { text: 'Enroll Now', href: '#academics', primary: true },
     ]
@@ -43,7 +37,7 @@ const heroSlides: HeroSlide[] = [
     id: 3,
     title: 'Building Community',
     description: 'Fostering a supportive environment where students grow academically, socially, and emotionally.',
-    image: 'https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=1920&h=1080&fit=crop',
+    image: 'https://placehold.co/1920x1080?text=Hero+Image+1920x1080',
     buttons: [
       { text: 'Enroll Now', href: '#events', primary: true },
     ]
@@ -52,7 +46,7 @@ const heroSlides: HeroSlide[] = [
     id: 4,
     title: 'Holistic Development',
     description: 'Balancing academic rigor with arts, sports, and character development for well-rounded growth.',
-    image: 'https://images.unsplash.com/photo-1427504494785-3a9ca7044f45?w=1920&h=1080&fit=crop',
+    image: 'https://placehold.co/1920x1080?text=Hero+Image+1920x1080',
     buttons: [
       { text: 'Enroll Now', href: '#academics', primary: true },
     ]
@@ -79,12 +73,12 @@ const programsCurrent = ref(0)
 const programsCount = ref(0)
 
 const programs = [
-  { id: 1, image: bsit, alt: 'Course 1', name: 'Program 1' },
-  { id: 2, image: bsit2, alt: 'Course 2', name: 'Program 2' },
-  { id: 3, image: bsit3, alt: 'Course 3', name: 'Program 3' },
-  { id: 4, image: bsit4, alt: 'Course 4', name: 'Program 4' },
-  { id: 5, image: bsitUpdate, alt: 'Course 5', name: 'Program 5' },
-  { id: 6, image: bsitUpdate, alt: 'Course 6', name: 'Program 6' },
+  { id: 1, image: 'https://placehold.co/800x800?text=Program+800x800', alt: 'Course 1', name: 'Program 1' },
+  { id: 2, image: 'https://placehold.co/800x800?text=Program+800x800', alt: 'Course 2', name: 'Program 2' },
+  { id: 3, image: 'https://placehold.co/800x800?text=Program+800x800', alt: 'Course 3', name: 'Program 3' },
+  { id: 4, image: 'https://placehold.co/800x800?text=Program+800x800', alt: 'Course 4', name: 'Program 4' },
+  { id: 5, image: 'https://placehold.co/800x800?text=Program+800x800', alt: 'Course 5', name: 'Program 5' },
+  { id: 6, image: 'https://placehold.co/800x800?text=Program+800x800', alt: 'Course 6', name: 'Program 6' },
 ]
 
 function setApi(api: CarouselApi) {
@@ -203,6 +197,19 @@ function goToSlide(index: number) {
     </div>
   </section>
 
+  <section class="py-8 bg-background overflow-hidden">
+    <div class="container mx-auto px-4">
+      <div class="flex justify-center items-center">
+        <h2 class="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold text-primary text-center tracking-[0.2em] flex justify-center gap-x-2 sm:gap-x-3 md:gap-x-4 uppercase whitespace-nowrap" style="font-family: 'Times New Roman', Times, serif;">
+          <span class="animate-popup" style="animation-delay: 0.5s;">Service.</span>
+          <span class="animate-popup" style="animation-delay: 1.5s;">Fortitude.</span>
+          <span class="animate-popup" style="animation-delay: 2.5s;">Excellence.</span>
+          <span class="animate-popup" style="animation-delay: 3.5s;">Christ-centeredness.</span>
+        </h2>
+      </div>
+    </div>
+  </section>
+
       <section id="schoolHero" class="py-12 sm:py-16 md:py-20 lg:py-24 bg-background scroll-mt-16">
         <div class="max-w-7xl px-4 sm:px-6 lg:px-8 mx-auto">
             <div class="grid md:grid-cols-2 gap-6 sm:gap-8 md:gap-10 lg:gap-12 items-center">
@@ -230,7 +237,7 @@ function goToSlide(index: number) {
                         class="absolute -inset-2 sm:-inset-3 md:-inset-4 bg-primary/10 rounded-xl sm:rounded-2xl -z-10 group-hover:bg-primary/20 transition-colors duration-500"
                     ></div>
                     <img
-                        src="@/assets/images/enrollment-marketing.jpg"
+                        src="https://placehold.co/1280x720?text=1280x720"
                         alt="SFXC Mission"
                         class="rounded-lg sm:rounded-xl w-full object-cover aspect-video"
                     />
@@ -241,7 +248,7 @@ function goToSlide(index: number) {
 
     <!-- Programs Offered Section -->
     <section id="academics" class="py-12 md:py-16 lg:py-20 bg-gray-50 relative">
-      <div class="absolute inset-0 bg-cover bg-center bg-fixed" style="background-image: url('/6.jpg');"></div>
+      <div class="absolute inset-0 bg-cover bg-center bg-fixed" style="background-image: url('https://placehold.co/1920x1080?text=Background+1920x1080');"></div>
       <div class="absolute inset-0 bg-white bg-opacity-90"></div>
       
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -313,7 +320,7 @@ function goToSlide(index: number) {
       <!-- Background Image -->
       <div class="absolute inset-0">
         <img
-          src="@/assets/images/sfxc-building.jpg"
+          src="https://placehold.co/1920x1080?text=1920x1080"
           alt="School Campus"
           class="w-full h-full object-cover"
         />
@@ -343,7 +350,7 @@ function goToSlide(index: number) {
           <div class="group relative overflow-hidden rounded-lg sm:rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300">
             <div class="aspect-4/3 overflow-hidden">
               <img
-                src="@/assets/images/news/sfxc_hr.jpg"
+                src="https://placehold.co/1024x768?text=Featured+News+1024x768"
                 alt="Featured News"
                 class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
               />
@@ -367,7 +374,7 @@ function goToSlide(index: number) {
             <div class="group flex gap-3 sm:gap-4 bg-card rounded-lg sm:rounded-xl overflow-hidden shadow hover:shadow-lg transition-all duration-300">
               <div class="w-24 sm:w-32 md:w-40 shrink-0 overflow-hidden">
                 <img
-                  src="@/assets/images/news/sfxc_sacred.jpg"
+                  src="https://placehold.co/600x600?text=Mini+News+600x600"
                   alt="News 1"
                   class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                 />
@@ -385,7 +392,7 @@ function goToSlide(index: number) {
             <div class="group flex gap-3 sm:gap-4 bg-card rounded-lg sm:rounded-xl overflow-hidden shadow hover:shadow-lg transition-all duration-300">
               <div class="w-24 sm:w-32 md:w-40 shrink-0 overflow-hidden">
                 <img
-                  src="@/assets/images/news/sfxc_application.jpg"
+                  src="https://placehold.co/600x600?text=Mini+News+600x600"
                   alt="News 2"
                   class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                 />
@@ -403,7 +410,7 @@ function goToSlide(index: number) {
             <div class="group flex gap-3 sm:gap-4 bg-card rounded-lg sm:rounded-xl overflow-hidden shadow hover:shadow-lg transition-all duration-300">
               <div class="w-24 sm:w-32 md:w-40 shrink-0 overflow-hidden">
                 <img
-                  src="@/assets/images/news/sfxc_midterm.jpg"
+                  src="https://placehold.co/600x600?text=Mini+News+600x600"
                   alt="News 3"
                   class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                 />
@@ -423,3 +430,21 @@ function goToSlide(index: number) {
 
 
 </template>
+
+<style scoped>
+@keyframes popup {
+  0% {
+    opacity: 0;
+    transform: translateY(10px) scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.animate-popup {
+  opacity: 0;
+  animation: popup 1.5s ease-out forwards;
+}
+</style>

@@ -4,10 +4,10 @@ import { Card, CardContent } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 
 // Import images
-import sfxcBuilding from '@/assets/images/sfxc-building.jpg'
-import sfxcApplication from '@/assets/images/news/sfxc_application.jpg'
-import sfxcSacred from '@/assets/images/news/sfxc_sacred.jpg'
-import sfxcUpdate from '@/assets/images/news/sfxc_update.jpg'
+const sfxcBuilding = 'https://placehold.co/800x600?text=800x600'
+const sfxcApplication = 'https://placehold.co/800x600?text=800x600'
+const sfxcSacred = 'https://placehold.co/800x600?text=800x600'
+const sfxcUpdate = 'https://placehold.co/800x600?text=800x600'
 
 interface Story {
   id: number
@@ -129,18 +129,9 @@ const formatDate = (dateString: string) => {
     <!-- Hero Header -->
     <section class="relative">
       <div
-        class="h-[50vh] md:h-[60vh] flex flex-col relative bg-[url('/src/assets/images/sfxc-building.jpg')] bg-cover bg-center bg-no-repeat"
+        class="h-[50vh] md:h-[60vh] flex flex-col relative bg-[url('https://placehold.co/1920x1080?text=1920x1080')] bg-cover bg-center bg-no-repeat"
       >
         <div class="absolute inset-0 bg-linear-to-t from-tertiary/90 via-tertiary/40 to-transparent"></div>
-
-        <div class="relative z-10 mt-auto w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-12">
-          <h1 class="text-4xl md:text-5xl font-bold text-white tracking-tight">
-            Community Stories
-          </h1>
-          <p class="text-white/90 mt-3 text-lg md:text-xl max-w-2xl">
-            Real stories from students, alumni, faculty, and community partners
-          </p>
-        </div>
 
         <div class="absolute bottom-0 left-0 right-0 text-background leading-none">
           <svg class="w-full h-8 md:h-16" viewBox="0 0 1440 320" preserveAspectRatio="none">
