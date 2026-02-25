@@ -134,8 +134,8 @@ onMounted(() => {
         const startRect = startEl.getBoundingClientRect()
         const endRect = endEl.getBoundingClientRect()
         return {
-          dx: endRect.left - startRect.left,
-          dy: endRect.top - startRect.top
+          dx: (endRect.left + endRect.width / 2) - (startRect.left + startRect.width / 2),
+          dy: (endRect.top + endRect.height / 2) - (startRect.top + startRect.height / 2)
         }
       }
       return { dx: 0, dy: 0 }
@@ -234,16 +234,16 @@ onMounted(() => {
         <!-- Animated Words -->
         <h2 class="text-base font-bold text-white text-center tracking-widest flex flex-col justify-center gap-y-2 uppercase drop-shadow-lg" style="font-family: 'Times New Roman', Times, serif;">
           <span class="animate-popup" style="animation-delay: 0.5s;">
-            <span id="start-s" class="inline-block animate-fly-s">S</span><span class="inline-block animate-fade-out">ervice.</span>
+            <span id="start-s" class="inline-block animate-fly-s origin-center">S</span><span class="inline-block animate-fade-out">ervice.</span>
           </span>
           <span class="animate-popup" style="animation-delay: 1.5s;">
-            <span id="start-f" class="inline-block animate-fly-f">F</span><span class="inline-block animate-fade-out">ortitude.</span>
+            <span id="start-f" class="inline-block animate-fly-f origin-center">F</span><span class="inline-block animate-fade-out">ortitude.</span>
           </span>
           <span class="animate-popup" style="animation-delay: 2.5s;">
-            <span class="inline-block animate-fade-out">E</span><span id="start-x" class="inline-block animate-fly-x">x</span><span class="inline-block animate-fade-out">cellence.</span>
+            <span class="inline-block animate-fade-out">E</span><span id="start-x" class="inline-block animate-fly-x origin-center">x</span><span class="inline-block animate-fade-out">cellence.</span>
           </span>
           <span class="animate-popup" style="animation-delay: 3.5s;">
-            <span id="start-c" class="inline-block animate-fly-c">C</span><span class="inline-block animate-fade-out">hrist-centeredness.</span>
+            <span id="start-c" class="inline-block animate-fly-c origin-center">C</span><span class="inline-block animate-fade-out">hrist-centeredness.</span>
           </span>
         </h2>
         <!-- Final Text -->
@@ -572,30 +572,34 @@ onMounted(() => {
   }
 }
 
-.animate-fly-s { animation: flyS 1s cubic-bezier(0.34, 1.56, 0.64, 1) 6.0s forwards; }
-.animate-fly-f { animation: flyF 1s cubic-bezier(0.34, 1.56, 0.64, 1) 7.0s forwards; }
-.animate-fly-x { animation: flyX 1s cubic-bezier(0.34, 1.56, 0.64, 1) 8.0s forwards; }
-.animate-fly-c { animation: flyC 1s cubic-bezier(0.34, 1.56, 0.64, 1) 9.0s forwards; }
+.animate-fly-s { animation: flyS 1.2s cubic-bezier(0.4, 0, 0.2, 1) 6.0s forwards; }
+.animate-fly-f { animation: flyF 1.2s cubic-bezier(0.4, 0, 0.2, 1) 7.0s forwards; }
+.animate-fly-x { animation: flyX 1.2s cubic-bezier(0.4, 0, 0.2, 1) 8.0s forwards; }
+.animate-fly-c { animation: flyC 1.2s cubic-bezier(0.4, 0, 0.2, 1) 9.0s forwards; }
 
 @keyframes flyS {
-  0% { transform: translate(0, 0) scale(1); opacity: 1; }
-  99% { transform: translate(var(--dx-s), var(--dy-s)) scale(1.125); opacity: 1; }
-  100% { transform: translate(var(--dx-s), var(--dy-s)) scale(1.125); opacity: 0; }
+  0% { transform: translate(0, 0) scale(1) rotate(0deg); opacity: 1; filter: blur(0px); }
+  50% { transform: translate(calc(var(--dx-s) * 0.5), calc(var(--dy-s) * 0.5 - 30px)) scale(1.5) rotate(-15deg); opacity: 1; filter: blur(1px); }
+  99% { transform: translate(var(--dx-s), var(--dy-s)) scale(1.125) rotate(0deg); opacity: 1; filter: blur(0px); }
+  100% { transform: translate(var(--dx-s), var(--dy-s)) scale(1.125) rotate(0deg); opacity: 0; filter: blur(0px); }
 }
 @keyframes flyF {
-  0% { transform: translate(0, 0) scale(1); opacity: 1; }
-  99% { transform: translate(var(--dx-f), var(--dy-f)) scale(1.125); opacity: 1; }
-  100% { transform: translate(var(--dx-f), var(--dy-f)) scale(1.125); opacity: 0; }
+  0% { transform: translate(0, 0) scale(1) rotate(0deg); opacity: 1; filter: blur(0px); }
+  50% { transform: translate(calc(var(--dx-f) * 0.5), calc(var(--dy-f) * 0.5 - 30px)) scale(1.5) rotate(15deg); opacity: 1; filter: blur(1px); }
+  99% { transform: translate(var(--dx-f), var(--dy-f)) scale(1.125) rotate(0deg); opacity: 1; filter: blur(0px); }
+  100% { transform: translate(var(--dx-f), var(--dy-f)) scale(1.125) rotate(0deg); opacity: 0; filter: blur(0px); }
 }
 @keyframes flyX {
-  0% { transform: translate(0, 0) scale(1); opacity: 1; }
-  99% { transform: translate(var(--dx-x), var(--dy-x)) scale(1.125); opacity: 1; }
-  100% { transform: translate(var(--dx-x), var(--dy-x)) scale(1.125); opacity: 0; }
+  0% { transform: translate(0, 0) scale(1) rotate(0deg); opacity: 1; filter: blur(0px); }
+  50% { transform: translate(calc(var(--dx-x) * 0.5), calc(var(--dy-x) * 0.5 - 30px)) scale(1.5) rotate(-15deg); opacity: 1; filter: blur(1px); }
+  99% { transform: translate(var(--dx-x), var(--dy-x)) scale(1.125) rotate(0deg); opacity: 1; filter: blur(0px); }
+  100% { transform: translate(var(--dx-x), var(--dy-x)) scale(1.125) rotate(0deg); opacity: 0; filter: blur(0px); }
 }
 @keyframes flyC {
-  0% { transform: translate(0, 0) scale(1); opacity: 1; }
-  99% { transform: translate(var(--dx-c), var(--dy-c)) scale(1.125); opacity: 1; }
-  100% { transform: translate(var(--dx-c), var(--dy-c)) scale(1.125); opacity: 0; }
+  0% { transform: translate(0, 0) scale(1) rotate(0deg); opacity: 1; filter: blur(0px); }
+  50% { transform: translate(calc(var(--dx-c) * 0.5), calc(var(--dy-c) * 0.5 - 30px)) scale(1.5) rotate(15deg); opacity: 1; filter: blur(1px); }
+  99% { transform: translate(var(--dx-c), var(--dy-c)) scale(1.125) rotate(0deg); opacity: 1; filter: blur(0px); }
+  100% { transform: translate(var(--dx-c), var(--dy-c)) scale(1.125) rotate(0deg); opacity: 0; filter: blur(0px); }
 }
 
 .animate-show-letter-s { animation: showLetter 0.1s forwards; animation-delay: 6.9s; }
