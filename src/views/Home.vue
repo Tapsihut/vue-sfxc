@@ -273,8 +273,8 @@ onMounted(() => {
         <h2 class="text-xl md:text-2xl lg:text-3xl font-bold text-foreground text-center tracking-[0.2em] flex justify-center gap-x-3 md:gap-x-4 whitespace-nowrap" style="font-family: 'Times New Roman', Times, serif;">
           <span class="animate-popup" style="animation-delay: 0.5s;">Service.</span>
           <span class="animate-popup" style="animation-delay: 2.0s;">Fortitude.</span>
-          <span class="animate-popup" style="animation-delay: 4.0s;">eXcellence.</span>
-          <span class="animate-popup" style="animation-delay: 6.0s;">Christ-centeredness.</span>
+          <span class="animate-popup" style="animation-delay: 3.5s;">eXcellence.</span>
+          <span class="animate-popup" style="animation-delay: 4.5s;">Christ-centeredness.</span>
         </h2>
       </div>
     </div>
@@ -322,12 +322,12 @@ onMounted(() => {
       <div class="absolute inset-0 bg-white bg-opacity-90"></div>
       
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div class="text-center mb-12 md:mb-16">
+        <!-- <div class="text-center mb-12 md:mb-16">
           <h3 class="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 text-primary">Program Offered</h3>
           <p class="text-sm sm:text-base text-gray-700 max-w-2xl mx-auto">
             Undergraduate Program offers.
           </p>
-        </div>
+        </div> -->
 
         <div class="relative">
           <Carousel
@@ -412,7 +412,6 @@ onMounted(() => {
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center mb-8 sm:mb-10 md:mb-12">
           <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-foreground mb-3 sm:mb-4">News & Announcements</h2>
-          <p class="text-muted-foreground text-sm sm:text-base md:text-lg">Stay updated with the latest happenings at SFXC</p>
         </div>
 
         <div class="grid h-full md:grid-cols-2 gap-4 sm:gap-6 lg:gap-8">
