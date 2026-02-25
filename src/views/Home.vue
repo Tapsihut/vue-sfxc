@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel'
 import type { CarouselApi } from '@/components/ui/carousel'
 import Autoplay from 'embla-carousel-autoplay'
@@ -28,7 +28,7 @@ const heroSlides: HeroSlide[] = [
     id: 2,
     title: 'Excellence in Education',
     description: 'Nurturing young minds through innovative teaching methods and state-of-the-art facilities.',
-    image: 'https://placehold.co/1920x1080?text=Hero+Image+1920x1080',
+    image: 'https://placehold.co/1920x1080?text=1920x1080',
     buttons: [
       { text: 'Enroll Now', href: '#academics', primary: true },
     ]
@@ -37,7 +37,7 @@ const heroSlides: HeroSlide[] = [
     id: 3,
     title: 'Building Community',
     description: 'Fostering a supportive environment where students grow academically, socially, and emotionally.',
-    image: 'https://placehold.co/1920x1080?text=Hero+Image+1920x1080',
+    image: 'https://placehold.co/1920x1080?text=1920x1080',
     buttons: [
       { text: 'Enroll Now', href: '#events', primary: true },
     ]
@@ -46,7 +46,7 @@ const heroSlides: HeroSlide[] = [
     id: 4,
     title: 'Holistic Development',
     description: 'Balancing academic rigor with arts, sports, and character development for well-rounded growth.',
-    image: 'https://placehold.co/1920x1080?text=Hero+Image+1920x1080',
+    image: 'https://placehold.co/1920x1080?text=1920x1080',
     buttons: [
       { text: 'Enroll Now', href: '#academics', primary: true },
     ]
@@ -115,6 +115,49 @@ function goToProgramSlide(index: number) {
 function goToSlide(index: number) {
   carouselApi.value?.scrollTo(index)
 }
+
+const sDx = ref(0)
+const sDy = ref(0)
+const fDx = ref(0)
+const fDy = ref(0)
+const xDx = ref(0)
+const xDy = ref(0)
+const cDx = ref(0)
+const cDy = ref(0)
+
+onMounted(() => {
+  setTimeout(() => {
+    const getDiff = (startId: string, endId: string) => {
+      const startEl = document.getElementById(startId)
+      const endEl = document.getElementById(endId)
+      if (startEl && endEl) {
+        const startRect = startEl.getBoundingClientRect()
+        const endRect = endEl.getBoundingClientRect()
+        return {
+          dx: endRect.left - startRect.left,
+          dy: endRect.top - startRect.top
+        }
+      }
+      return { dx: 0, dy: 0 }
+    }
+
+    const sDiff = getDiff('start-s', 'end-s')
+    sDx.value = sDiff.dx
+    sDy.value = sDiff.dy
+
+    const fDiff = getDiff('start-f', 'end-f')
+    fDx.value = fDiff.dx
+    fDy.value = fDiff.dy
+
+    const xDiff = getDiff('start-x', 'end-x')
+    xDx.value = xDiff.dx
+    xDy.value = xDiff.dy
+
+    const cDiff = getDiff('start-c', 'end-c')
+    cDx.value = cDiff.dx
+    cDy.value = cDiff.dy
+  }, 500)
+})
 </script>
 
 <template>
@@ -137,13 +180,13 @@ function goToSlide(index: number) {
             <div class="absolute inset-0 bg-linear-to-t from-primary/90 via-background/20 to-transparent"></div>
             <div class="absolute inset-0 bg-linear-to-r from-black/70 to-black/30 z-1"></div>
             <div class="relative z-2 h-full flex flex-col justify-center items-center text-center text-white px-4 sm:px-6 md:px-8">
-              <h2 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold mb-4 sm:mb-5 md:mb-6">
+              <!-- <h2 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold mb-4 sm:mb-5 md:mb-6">
                 {{ slide.title }}
               </h2>
               <p class="text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl mb-6 sm:mb-7 md:mb-8 opacity-90 max-w-3xl mx-auto px-4">
                 {{ slide.description }}
-              </p>
-              <div v-if="slide.buttons && slide.buttons.length" class="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center w-full sm:w-auto px-4">
+              </p> -->
+              <!-- <div v-if="slide.buttons && slide.buttons.length" class="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center w-full sm:w-auto px-4">
                 <a 
                   v-for="(button, idx) in slide.buttons" 
                   :key="idx"
@@ -157,7 +200,7 @@ function goToSlide(index: number) {
                 >
                   {{ button.text }}
                 </a>
-              </div>
+              </div> -->
             </div>
           </div>
         </CarouselItem>
@@ -186,7 +229,34 @@ function goToSlide(index: number) {
       </div>
     </Carousel>
     
-    <div class="absolute bottom-0 left-0 right-0 text-background leading-none">
+    <div class="absolute bottom-12 left-0 right-0 z-10 flex justify-center items-center px-4 pointer-events-none sm:hidden">
+      <div class="relative w-full flex justify-center" :style="{ '--dx-s': sDx + 'px', '--dy-s': sDy + 'px', '--dx-f': fDx + 'px', '--dy-f': fDy + 'px', '--dx-x': xDx + 'px', '--dy-x': xDy + 'px', '--dx-c': cDx + 'px', '--dy-c': cDy + 'px' }">
+        <!-- Animated Words -->
+        <h2 class="text-base font-bold text-white text-center tracking-widest flex flex-col justify-center gap-y-2 uppercase drop-shadow-lg" style="font-family: 'Times New Roman', Times, serif;">
+          <span class="animate-popup" style="animation-delay: 0.5s;">
+            <span id="start-s" class="inline-block animate-fly-s">S</span><span class="inline-block animate-fade-out">ervice.</span>
+          </span>
+          <span class="animate-popup" style="animation-delay: 1.5s;">
+            <span id="start-f" class="inline-block animate-fly-f">F</span><span class="inline-block animate-fade-out">ortitude.</span>
+          </span>
+          <span class="animate-popup" style="animation-delay: 2.5s;">
+            <span class="inline-block animate-fade-out">E</span><span id="start-x" class="inline-block animate-fly-x">x</span><span class="inline-block animate-fade-out">cellence.</span>
+          </span>
+          <span class="animate-popup" style="animation-delay: 3.5s;">
+            <span id="start-c" class="inline-block animate-fly-c">C</span><span class="inline-block animate-fade-out">hrist-centeredness.</span>
+          </span>
+        </h2>
+        <!-- Final Text -->
+        <h2 class="absolute top-[75%] -translate-y-1/2 text-lg whitespace-nowrap font-bold text-white text-center tracking-widest uppercase drop-shadow-lg" style="font-family: 'Times New Roman', Times, serif;">
+          <span id="end-s" class="opacity-0 animate-show-letter-s">S</span><span class="opacity-0 animate-reveal-text-s">t. </span>
+          <span id="end-f" class="opacity-0 animate-show-letter-f">F</span><span class="opacity-0 animate-reveal-text-f">rancis </span>
+          <span id="end-x" class="opacity-0 animate-show-letter-x">X</span><span class="opacity-0 animate-reveal-text-x">avier </span>
+          <span id="end-c" class="opacity-0 animate-show-letter-c">C</span><span class="opacity-0 animate-reveal-text-c">ollege</span>
+        </h2>
+      </div>
+    </div>
+
+    <div class="absolute bottom-0 left-0 right-0 text-background leading-none z-20">
       <svg class="w-full h-8 sm:h-12 md:h-16 lg:h-20 xl:h-24" viewBox="0 0 1440 320" preserveAspectRatio="none">
         <path
           fill="currentColor"
@@ -197,14 +267,14 @@ function goToSlide(index: number) {
     </div>
   </section>
 
-  <section class="py-8 bg-background overflow-hidden">
+  <section class="hidden sm:block py-8 bg-background overflow-hidden">
     <div class="container mx-auto px-4">
       <div class="flex justify-center items-center">
-        <h2 class="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold text-primary text-center tracking-[0.2em] flex justify-center gap-x-2 sm:gap-x-3 md:gap-x-4 uppercase whitespace-nowrap" style="font-family: 'Times New Roman', Times, serif;">
+        <h2 class="text-xl md:text-2xl lg:text-3xl font-bold text-foreground text-center tracking-[0.2em] flex justify-center gap-x-3 md:gap-x-4 whitespace-nowrap" style="font-family: 'Times New Roman', Times, serif;">
           <span class="animate-popup" style="animation-delay: 0.5s;">Service.</span>
-          <span class="animate-popup" style="animation-delay: 1.5s;">Fortitude.</span>
-          <span class="animate-popup" style="animation-delay: 2.5s;">Excellence.</span>
-          <span class="animate-popup" style="animation-delay: 3.5s;">Christ-centeredness.</span>
+          <span class="animate-popup" style="animation-delay: 2.0s;">Fortitude.</span>
+          <span class="animate-popup" style="animation-delay: 4.0s;">eXcellence.</span>
+          <span class="animate-popup" style="animation-delay: 6.0s;">Christ-centeredness.</span>
         </h2>
       </div>
     </div>
@@ -214,7 +284,7 @@ function goToSlide(index: number) {
         <div class="max-w-7xl px-4 sm:px-6 lg:px-8 mx-auto">
             <div class="grid md:grid-cols-2 gap-6 sm:gap-8 md:gap-10 lg:gap-12 items-center">
                 <div class="order-2 md:order-1">
-                    <h3 class="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 sm:mb-5 md:mb-6 text-foreground leading-tight">
+                    <h3 class="text-xl sm:text-3xl md:text-4xl whitespace-nowrap font-bold mb-4 sm:mb-5 md:mb-6 text-foreground leading-tight">
                         St. Francis Xavier College
                     </h3>
                     <div class="space-y-3 sm:space-y-4 text-muted-foreground text-sm sm:text-base md:text-lg leading-relaxed">
@@ -443,8 +513,108 @@ function goToSlide(index: number) {
   }
 }
 
+@keyframes morphOut {
+  0% {
+    opacity: 1;
+    filter: blur(0);
+    letter-spacing: 0.1em;
+  }
+  100% {
+    opacity: 0;
+    filter: blur(12px);
+    letter-spacing: -0.1em;
+    visibility: hidden;
+  }
+}
+
+@keyframes morphIn {
+  0% {
+    opacity: 0;
+    filter: blur(12px);
+    letter-spacing: 0.4em;
+  }
+  100% {
+    opacity: 1;
+    filter: blur(0);
+    letter-spacing: 0.1em;
+  }
+}
+
 .animate-popup {
   opacity: 0;
   animation: popup 1.5s ease-out forwards;
+}
+
+.animate-morph-out {
+  animation: morphOut 1.5s cubic-bezier(0.4, 0, 0.2, 1) 5.5s forwards;
+}
+
+.animate-morph-in {
+  opacity: 0;
+  animation: morphIn 1.5s cubic-bezier(0.4, 0, 0.2, 1) 5.5s forwards;
+}
+
+.animate-fade-out {
+  animation: fadeOut 0.5s cubic-bezier(0.4, 0, 0.2, 1) 5.5s forwards;
+}
+
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+    filter: blur(0);
+    letter-spacing: 0.1em;
+  }
+  100% {
+    opacity: 0;
+    filter: blur(12px);
+    letter-spacing: -0.1em;
+    visibility: hidden;
+  }
+}
+
+.animate-fly-s { animation: flyS 1s cubic-bezier(0.34, 1.56, 0.64, 1) 6.0s forwards; }
+.animate-fly-f { animation: flyF 1s cubic-bezier(0.34, 1.56, 0.64, 1) 7.0s forwards; }
+.animate-fly-x { animation: flyX 1s cubic-bezier(0.34, 1.56, 0.64, 1) 8.0s forwards; }
+.animate-fly-c { animation: flyC 1s cubic-bezier(0.34, 1.56, 0.64, 1) 9.0s forwards; }
+
+@keyframes flyS {
+  0% { transform: translate(0, 0) scale(1); opacity: 1; }
+  99% { transform: translate(var(--dx-s), var(--dy-s)) scale(1.125); opacity: 1; }
+  100% { transform: translate(var(--dx-s), var(--dy-s)) scale(1.125); opacity: 0; }
+}
+@keyframes flyF {
+  0% { transform: translate(0, 0) scale(1); opacity: 1; }
+  99% { transform: translate(var(--dx-f), var(--dy-f)) scale(1.125); opacity: 1; }
+  100% { transform: translate(var(--dx-f), var(--dy-f)) scale(1.125); opacity: 0; }
+}
+@keyframes flyX {
+  0% { transform: translate(0, 0) scale(1); opacity: 1; }
+  99% { transform: translate(var(--dx-x), var(--dy-x)) scale(1.125); opacity: 1; }
+  100% { transform: translate(var(--dx-x), var(--dy-x)) scale(1.125); opacity: 0; }
+}
+@keyframes flyC {
+  0% { transform: translate(0, 0) scale(1); opacity: 1; }
+  99% { transform: translate(var(--dx-c), var(--dy-c)) scale(1.125); opacity: 1; }
+  100% { transform: translate(var(--dx-c), var(--dy-c)) scale(1.125); opacity: 0; }
+}
+
+.animate-show-letter-s { animation: showLetter 0.1s forwards; animation-delay: 6.9s; }
+.animate-show-letter-f { animation: showLetter 0.1s forwards; animation-delay: 7.9s; }
+.animate-show-letter-x { animation: showLetter 0.1s forwards; animation-delay: 8.9s; }
+.animate-show-letter-c { animation: showLetter 0.1s forwards; animation-delay: 9.9s; }
+
+@keyframes showLetter {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+.animate-reveal-text-s { animation: revealText 0.8s ease-out forwards; animation-delay: 6.9s; }
+.animate-reveal-text-f { animation: revealText 0.8s ease-out forwards; animation-delay: 7.9s; }
+.animate-reveal-text-x { animation: revealText 0.8s ease-out forwards; animation-delay: 8.9s; }
+.animate-reveal-text-c { animation: revealText 0.8s ease-out forwards; animation-delay: 9.9s; }
+
+@keyframes revealText {
+  0% { opacity: 0; filter: blur(8px); transform: translateX(-10px); }
+  100% { opacity: 1; filter: blur(0); transform: translateX(0); }
 }
 </style>
