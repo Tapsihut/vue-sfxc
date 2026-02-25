@@ -149,10 +149,6 @@ const closeOpportunityDetails = () => {
     <!-- Opportunities Grid -->
     <section class="py-16">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center mb-12">
-          <h2 class="text-3xl md:text-4xl font-bold">Current Opportunities</h2>
-          <p class="text-muted-foreground mt-2">Find the perfect volunteer role for you</p>
-        </div>
 
         <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           <Card
