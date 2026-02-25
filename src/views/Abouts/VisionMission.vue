@@ -57,13 +57,12 @@ import { Card, CardContent, CardHeader } from '@/components/ui/card'
                         ></div>
                         <div class="md:pr-8">
                             <p class="text-muted-foreground text-lg leading-relaxed">
-                                As a head start the Saint Francis Xavier College, Inc. (SFXC) rented
-                                an old two-storey residential house of Mr. and Mrs. Demetrio G. del
-                                Rosario. It accommodated 108 students enrolled in short-term
-                                technical-vocational course certificates, Bachelor of Science in
-                                Secretarial Administration, Bachelor of Science in Elementary
-                                Education and Bachelor of Arts in English under the tutelage of 20
-                                instructors and six members of the administrative staff.
+                                St. Francis Xavier College, Inc. (SFXC) is a  non-profit non-stock  corporation
+                                with  Registration  Number  DN - 091-00583   granted  by   the   Security  and
+                                Exchange  Commission  (SEC)  on  July  25,  1991.  This  is  under  the  direct
+                                supervision  of   the  Commission  on  Higher  Education  (CHED)   and   the  
+                                National Manpower and Youth Council (NMYC) for the baccalaureate degrees  and technical-vocational
+                                courses, respectively.
                             </p>
                         </div>
                     </div>
@@ -74,12 +73,15 @@ import { Card, CardContent, CardHeader } from '@/components/ui/card'
                         ></div>
                         <div class="md:pl-8">
                             <p class="text-muted-foreground text-lg leading-relaxed">
-                                The SFXC is a non-profit non-stock corporation with a Registration
-                                Number DN – 091-00583 granted by the Security and Exchange
-                                Commission (SEC) on July 25, 1991 under the direct supervision of
-                                the Commission on Higher Education (CHED) and the National Manpower
-                                and Youth Council (NMYC) for the baccalaureate degrees and
-                                technical-vocational courses, respectively.
+                                It   was   founded   in  1990  and   originally   named
+                                St.  Francis  Institute  of  Technology  (SFIT)  to  honor
+                                St.  Francis  Xavier,  a  Jesuit  missionary  who  evangelized
+                                those  in  Asia  and  Africa.  The  school  initially  rented
+                                an  old  two-storey  residential  house  of  Mr. and Mrs.  Demetrio  G. del Rosario
+                                that  accommodated 108 students enrolled in short-term technical-vocational course
+                                certificates   and   three   baccalaureate   courses  (i.e.   Bachelor  of  Science in  
+                                Secretarial  Administration, Bachelor  of Science in Elementary Education, and  Bachelor
+                                of  Arts  in  English)  under  the  tutelage  of  20  instructors  and six  members of the administrative staff.
                             </p>
                         </div>
                     </div>
@@ -90,31 +92,37 @@ import { Card, CardContent, CardHeader } from '@/components/ui/card'
                         ></div>
                         <div class="md:pr-8">
                             <p class="text-muted-foreground text-lg leading-relaxed">
-                                Hidden pillars, who stood united to put up a college, were Messrs.
-                                Mamerto Prochina, Baltazar Lumangyao, Demetrio del Rosario, Romeo
-                                Duron, Emmanuel Plaza, Praxedes Lambaco, and Segundo Guelos. The
-                                then Governor Democrito O. Plaza donated 50 units of typewriter for
-                                use in the secretarial course.
+                                The  founders  of   the   college  were   Messrs.  Mamerto   Prochina,
+                                Baltazar  Lumangyao, Demetrio del Rosario, Romeo Duron, Emmanuel Plaza,
+                                Praxedes  Lambaco, and Segundo Guelos. Mr. Democrito O. Plaza, former congressman
+                                and  governor, personally donated  50  units  of  typewriter  for  the secretarial
+                                course.  After working  in   public  service,  Mrs.  Valentina  G.  Plaza,
+                                former  governor  of  Agusan  del  Sur,  continued  serving  the province’s constituents
+                                through  education.  Board  members  of   the   college  expanded   to  include  founders‘
+                                spouses  to  address the  growing  needs  and increasing  population  of the college.  
                             </p>
                         </div>
                     </div>
 
-                    <div class="relative pl-8 md:pl-1/2 md:pl-12">
+                    <!-- <div class="relative pl-8 md:pl-1/2 md:pl-12">
                         <div
                             class="absolute left-0 top-2 w-3 h-3 rounded-full bg-primary md:right-auto md:left-0 md:-ml-1.5"
                         ></div>
                         <div class="md:pl-8">
                             <p class="text-muted-foreground text-lg leading-relaxed">
-                                The demise of the legendary patriarch of the province of Agusan del
-                                Sur paved the way for Ma'am Valentina G. Plaza to stretch her arms
-                                in serving its constituents through education. Membership of their
-                                respective spouses was given access to be able to address the
-                                growing needs and increasing population of the college.
+                                The  founders  of   the   college  were   Messrs.  Mamerto   Prochina,
+                                Baltazar  Lumangyao, Demetrio del Rosario, Romeo Duron, Emmanuel Plaza,
+                                Praxedes  Lambaco, and Segundo Guelos. Mr. Democrito O. Plaza, former congressman
+                                and  governor, personally donated  50  units  of  typewriter  for  the secretarial
+                                course.  After working  in   public  service,  Mrs.  Valentina  G.  Plaza,
+                                former  governor  of  Agusan  del  Sur,  continued  serving  the province’s constituents
+                                through  education.  Board  members  of   the   college  expanded   to  include  founders‘
+                                spouses  to  address the  growing  needs  and increasing  population  of the college.
                             </p>
                         </div>
-                    </div>
+                    </div> -->
 
-                    <div class="relative pl-8 md:pl-0 md:pr-1/2 md:pr-12 md:text-right">
+                    <!-- <div class="relative pl-8 md:pl-0 md:pr-1/2 md:pr-12 md:text-right">
                         <div
                             class="absolute left-0 top-2 w-3 h-3 rounded-full bg-secondary md:left-auto md:right-0 md:-mr-1.5"
                         ></div>
@@ -130,7 +138,7 @@ import { Card, CardContent, CardHeader } from '@/components/ui/card'
                                 practice of his profession and calling.
                             </p>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
             </div>
         </div>
@@ -141,17 +149,15 @@ import { Card, CardContent, CardHeader } from '@/components/ui/card'
             <div class="grid md:grid-cols-2 gap-12 lg:gap-24 items-center mb-24">
                 <div class="order-2 md:order-1 px-4 md:px-0">
                     <div
-                        class="inline-flex items-center gap-2 text-primary font-bold mb-4 uppercase tracking-wider text-sm"
+                        class="text-3xl inline-flex items-center gap-2 text-primary font-bold mb-4 uppercase tracking-wider"
                     >
                         Our Vision
                     </div>
-                    <h3 class="text-3xl md:text-4xl font-bold mb-6 text-foreground leading-tight">
-                        Empowered & Excellence-Driven
-                    </h3>
+                    <!-- <h3 class="text-3xl md:text-4xl font-bold mb-6 text-foreground leading-tight">
+                        Our Vision
+                    </h3> -->
                     <p class="text-lg text-muted-foreground leading-relaxed">
-                        St. Francis Xavier College is a dynamic, empowered, excellence-driven
-                        educational institution committed to produce globally-competent and
-                        versatile learners for a more meaningful life.
+                        An open, leading educational institution upholding excellence-driven and value laden leaders for the socio-economic development of society.
                     </p>
                 </div>
                 <div class="order-1 md:order-2 relative group px-6">
@@ -185,23 +191,22 @@ import { Card, CardContent, CardHeader } from '@/components/ui/card'
                 </div>
                 <div>
                     <div
-                        class="inline-flex items-center gap-2 text-primary font-bold mb-4 uppercase tracking-wider text-sm"
+                        class="inline-flex items-center gap-2 text-primary font-bold mb-4 uppercase tracking-wider text-3xl"
                     >
                         Our Mission
                     </div>
-                    <h3 class="text-3xl md:text-4xl font-bold mb-6 text-foreground leading-tight">
+                    <!-- <h3 class="text-3xl md:text-4xl font-bold mb-6 text-foreground leading-tight">
                         Innovative Education for Genuine Transformation
-                    </h3>
+                    </h3> -->
                     <div class="space-y-4 text-muted-foreground text-lg leading-relaxed">
                         <p>
-                            The institution pursues innovative approaches in education to enhance
-                            instruction, research and community involvement.
+                            The institution pursues innovative approaches in education to enhance instruction, research, and community involvement. It pledges to provide the learners a curricular framework to instill creative and critical thinking in a changing world. Strengthening of culture, environmental care, and values formation are inculcated to guarantee genuine transformation.
                         </p>
-                        <p>
+                        <!-- <p>
                             It pledges to provide the learners a curricular framework to instill
                             creative and critical thinking in a changing world.
                         </p>
-                        <p>Is inculcated to guarantee genuine transformation.</p>
+                        <p>Is inculcated to guarantee genuine transformation.</p> -->
                     </div>
                 </div>
             </div>
