@@ -396,15 +396,6 @@ onMounted(() => {
         />
         <div class="absolute inset-0 bg-linear-to-t from-black/70 via-black/30 to-transparent"></div>
       </div>
-
-      <!-- Content -->
-      <div class="relative z-10 px-4 sm:px-6 lg:px-8 h-full flex items-end">
-        <div class="max-w-7xl mx-auto w-full pb-8 sm:pb-10 md:pb-12 lg:pb-16">
-          <h2 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-white leading-tight max-w-2xl">
-            Bringing Art to everything
-          </h2>
-        </div>
-      </div>
     </section>
 
     <!-- News and Announcements Section -->

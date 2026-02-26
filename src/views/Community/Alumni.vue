@@ -1,10 +1,11 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Textarea } from '@/components/ui/textarea'
+import { Search, X, GraduationCap, Briefcase, Award, Users, ArrowRight, Image as ImageIcon } from 'lucide-vue-next'
 
 // Import images
 const sfxcBuilding = 'https://placehold.co/800x800?text=800x800'
@@ -46,6 +47,15 @@ const featuredAlumni: AlumniFeatured[] = [
     quote: 'Giving back to the community through education, just as SFXC taught me.'
   },
 ]
+
+const spotlightAlumni: AlumniFeatured = {
+  id: 0,
+  name: 'Dr. Sarah Alcantara',
+  batch: 'Class of 2015',
+  profession: 'Chief Medical Officer at General Hospital',
+  image: 'https://placehold.co/1280x720?text=1280x720',
+  quote: 'The education I received at SFXC was the cornerstone of my medical career. It taught me compassion, excellence, and the true meaning of service to others.'
+}
 
 interface BatchAlbum {
   id: number
@@ -138,6 +148,17 @@ const batchAlbums: BatchAlbum[] = [
 ]
 
 const selectedBatch = ref<BatchAlbum | null>(null)
+const searchQuery = ref('')
+
+const filteredBatches = computed(() => {
+  if (!searchQuery.value) return batchAlbums
+  const query = searchQuery.value.toLowerCase()
+  return batchAlbums.filter(batch => 
+    batch.title.toLowerCase().includes(query) || 
+    batch.year.toLowerCase().includes(query) ||
+    batch.description.toLowerCase().includes(query)
+  )
+})
 
 const openBatchAlbum = (batch: BatchAlbum) => {
   selectedBatch.value = batch
@@ -168,37 +189,71 @@ const closeBatchAlbum = () => {
 
     <!-- Featured Alumni -->
     <section class="py-16 bg-background">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center mb-12">
-          <h2 class="text-3xl md:text-4xl font-bold">Featured Alumni</h2>
-          <p class="text-muted-foreground mt-2">Success stories from our community</p>
-        </div>
-
-        <div class="grid md:grid-cols-3 gap-8">
-          <Card
-            v-for="(alumni, index) in featuredAlumni"
-            :key="alumni.id"
-            class="group overflow-hidden hover:shadow-xl transition-all duration-300"
-            :style="{ animationDelay: `${index * 100}ms` }"
-          >
-            <div class="relative overflow-hidden h-64">
-              <img
-                :src="alumni.image"
-                :alt="alumni.name"
-                class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-              />
-              <div class="absolute inset-0 bg-linear-to-t from-black/70 via-transparent to-transparent"></div>
-              <div class="absolute bottom-0 left-0 right-0 p-6 text-white">
-                <h3 class="text-xl font-bold">{{ alumni.name }}</h3>
-                <p class="text-sm text-white/80">{{ alumni.batch }}</p>
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
+        
+        <!-- Spotlight Alumni (Featured Release Style) -->
+        <section>
+          <h2 class="text-3xl font-bold text-green-950 mb-6">Alumni Spotlight</h2>
+          <div class="grid lg:grid-cols-3 gap-6">
+            <Card class="lg:col-span-2 overflow-hidden border-green-200 rounded-xl relative group cursor-pointer">
+              <div class="absolute inset-0">
+                <img :src="spotlightAlumni.image" :alt="spotlightAlumni.name" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
+                <div class="absolute inset-0 bg-linear-to-t from-green-950/90 via-green-950/40 to-transparent"></div>
               </div>
-            </div>
-            <CardContent class="p-6">
-              <p class="font-medium text-primary mb-3">{{ alumni.profession }}</p>
-              <p class="text-sm text-muted-foreground italic">"{{ alumni.quote }}"</p>
-            </CardContent>
-          </Card>
-        </div>
+              <CardContent class="relative h-full min-h-100 flex flex-col justify-end p-8 text-white">
+                <div class="mb-4">
+                  <span class="inline-flex items-center px-2.5 py-0.5 text-xs font-bold bg-green-50 text-green-900 border-l-4 border-yellow-400">
+                    {{ spotlightAlumni.batch }}
+                  </span>
+                </div>
+                <h3 class="text-2xl md:text-3xl font-bold mb-3 leading-tight">
+                  {{ spotlightAlumni.name }}
+                </h3>
+                <p class="text-white/90 font-medium mb-2">
+                  {{ spotlightAlumni.profession }}
+                </p>
+                <p class="text-white/80 line-clamp-3 italic">
+                  "{{ spotlightAlumni.quote }}"
+                </p>
+              </CardContent>
+            </Card>
+          </div>
+        </section>
+
+        <!-- Other Featured Alumni (Latest Releases Style) -->
+        <section>
+          <h2 class="text-3xl font-bold text-green-950 mb-6">Featured Alumni</h2>
+          <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <Card
+              v-for="(alumni, index) in featuredAlumni"
+              :key="alumni.id"
+              class="overflow-hidden border-green-200 rounded-xl hover:shadow-lg transition-shadow cursor-pointer flex flex-col"
+              :style="{ animationDelay: `${index * 100}ms` }"
+            >
+              <div class="h-56 overflow-hidden">
+                <img
+                  :src="alumni.image"
+                  :alt="alumni.name"
+                  class="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
+                />
+              </div>
+              <CardContent class="p-6 flex-1 flex flex-col">
+                <div class="mb-4">
+                  <span class="inline-flex items-center px-2.5 py-0.5 text-xs font-bold bg-green-50 text-green-900 border-l-4 border-yellow-400">
+                    {{ alumni.batch }}
+                  </span>
+                </div>
+                <h3 class="text-xl font-bold text-gray-900 mb-2 line-clamp-3">
+                  {{ alumni.name }}
+                </h3>
+                <p class="font-medium text-green-700 mb-4 text-sm">{{ alumni.profession }}</p>
+                <p class="text-gray-600 text-sm line-clamp-3 mt-auto italic">
+                  "{{ alumni.quote }}"
+                </p>
+              </CardContent>
+            </Card>
+          </div>
+        </section>
       </div>
     </section>
 
@@ -210,9 +265,36 @@ const closeBatchAlbum = () => {
           <p class="text-muted-foreground mt-2">Explore memories from each graduating class</p>
         </div>
 
-        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- Sticky Filter Section -->
+        <div class="sticky top-20 z-30 bg-muted/30 backdrop-blur-md py-4 mb-8 border-b border-border/50">
+          <div class="max-w-md mx-auto">
+            <div class="relative">
+              <Search class="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
+              <Input 
+                v-model="searchQuery"
+                type="text" 
+                placeholder="Search by year, title, or description..." 
+                class="pl-10 bg-background/80 border-primary/20 focus:border-primary w-full"
+              />
+              <button 
+                v-if="searchQuery"
+                @click="searchQuery = ''"
+                class="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
+              >
+                <X class="w-4 h-4" />
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div v-if="filteredBatches.length === 0" class="text-center py-12">
+          <p class="text-muted-foreground text-lg">No batch albums found matching your search.</p>
+          <Button variant="outline" class="mt-4" @click="searchQuery = ''">Clear Search</Button>
+        </div>
+
+        <div v-else class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           <Card
-            v-for="(batch, index) in batchAlbums"
+            v-for="(batch, index) in filteredBatches"
             :key="batch.id"
             class="group overflow-hidden cursor-pointer hover:shadow-xl transition-all duration-300 animate-fade-in"
             :style="{ animationDelay: `${index * 50}ms` }"
@@ -221,7 +303,7 @@ const closeBatchAlbum = () => {
             <!-- Album Cover Grid -->
             <div class="relative h-64 overflow-hidden bg-muted">
               <div class="grid grid-cols-2 h-full">
-                <div 
+                <div  
                   v-for="(image, i) in batch.images.slice(0, 4)" 
                   :key="i"
                   class="relative overflow-hidden"
