@@ -91,14 +91,14 @@ const currentRequirements = () => {
     >
       <div class="absolute inset-0 bg-linear-to-t from-tertiary/90 via-background/20 to-transparent"></div>
 
-      <div class="relative z-10 mt-auto w-full md:max-w-4xl ps-5 pb-16 md:ps-10 md:pb-24">
+      <!-- <div class="relative z-10 mt-auto w-full md:max-w-4xl ps-5 pb-16 md:ps-10 md:pb-24">
         <h1 class="text-3xl md:text-5xl lg:text-7xl font-bold text-white tracking-tight drop-shadow-md">
           Admission Requirements
         </h1>
         <p class="text-white/80 mt-4 text-lg md:text-xl max-w-2xl">
           Complete guide to admission requirements and enrollment process
         </p>
-      </div>
+      </div> -->
 
       <div class="absolute bottom-0 left-0 right-0 text-background leading-none">
         <svg class="w-full h-12 md:h-24" viewBox="0 0 1440 320" preserveAspectRatio="none">
