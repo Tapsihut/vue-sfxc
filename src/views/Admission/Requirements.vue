@@ -162,13 +162,13 @@ const currentRequirements = () => {
 
         <div class="bg-card border border-border rounded-2xl shadow-sm overflow-hidden flex flex-col md:flex-row">
           <!-- Left Side: Student Type Selection -->
-          <div class="w-full md:w-1/3 lg:w-1/4 bg-muted/30 p-6 border-b md:border-b-0 md:border-r border-border flex flex-col gap-3">
-            <h3 class="text-lg font-semibold text-foreground mb-4 px-2">Student Type</h3>
+          <div class="w-full md:w-1/3 lg:w-1/4 bg-muted/30 p-4 md:p-6 border-b md:border-b-0 md:border-r border-border flex flex-row md:flex-col gap-2 md:gap-3 overflow-x-auto md:overflow-visible">
+            <h3 class="text-lg font-semibold text-foreground mb-2 md:mb-4 px-2 hidden md:block">Student Type</h3>
             <Button
               variant="ghost"
               @click="selectedStudentType = 'freshmen'"
               :class="[
-                'justify-start px-4 py-6 text-base font-medium rounded-xl transition-all duration-300 border-2',
+                'justify-center md:justify-start px-4 py-3 md:py-6 text-sm md:text-base font-medium rounded-xl transition-all duration-300 border-2 whitespace-nowrap',
                 selectedStudentType === 'freshmen' 
                   ? 'bg-tertiary text-tertiary-foreground border-secondary shadow-md' 
                   : 'border-transparent hover:bg-tertiary/10 text-muted-foreground hover:text-foreground'
@@ -180,7 +180,7 @@ const currentRequirements = () => {
               variant="ghost"
               @click="selectedStudentType = 'transferee'"
               :class="[
-                'justify-start px-4 py-6 text-base font-medium rounded-xl transition-all duration-300 border-2',
+                'justify-center md:justify-start px-4 py-3 md:py-6 text-sm md:text-base font-medium rounded-xl transition-all duration-300 border-2 whitespace-nowrap',
                 selectedStudentType === 'transferee' 
                   ? 'bg-tertiary text-tertiary-foreground border-secondary shadow-md' 
                   : 'border-transparent hover:bg-tertiary/10 text-muted-foreground hover:text-foreground'
@@ -192,7 +192,7 @@ const currentRequirements = () => {
               variant="ghost"
               @click="selectedStudentType = 'cross-enrollee'"
               :class="[
-                'justify-start px-4 py-6 text-base font-medium rounded-xl transition-all duration-300 border-2',
+                'justify-center md:justify-start px-4 py-3 md:py-6 text-sm md:text-base font-medium rounded-xl transition-all duration-300 border-2 whitespace-nowrap',
                 selectedStudentType === 'cross-enrollee' 
                   ? 'bg-tertiary text-tertiary-foreground border-secondary shadow-md' 
                   : 'border-transparent hover:bg-tertiary/10 text-muted-foreground hover:text-foreground'
@@ -204,7 +204,7 @@ const currentRequirements = () => {
               variant="ghost"
               @click="selectedStudentType = 'international'"
               :class="[
-                'justify-start px-4 py-6 text-base font-medium rounded-xl transition-all duration-300 border-2',
+                'justify-center md:justify-start px-4 py-3 md:py-6 text-sm md:text-base font-medium rounded-xl transition-all duration-300 border-2 whitespace-nowrap',
                 selectedStudentType === 'international' 
                   ? 'bg-tertiary text-tertiary-foreground border-secondary shadow-md' 
                   : 'border-transparent hover:bg-tertiary/10 text-muted-foreground hover:text-foreground'
@@ -215,7 +215,7 @@ const currentRequirements = () => {
           </div>
 
           <!-- Right Side: Requirements List -->
-          <div class="w-full md:w-2/3 lg:w-3/4 p-6 md:p-8">
+          <div class="w-full md:w-2/3 lg:w-3/4 p-4 sm:p-6 md:p-8">
             <div class="mb-8">
               <h3 class="text-2xl font-bold text-foreground mb-2">
                 {{ 
