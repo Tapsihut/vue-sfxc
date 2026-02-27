@@ -190,8 +190,6 @@ const closeBatchAlbum = () => {
     <!-- Featured Alumni -->
     <section class="py-16 bg-background">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
-        
-        <!-- Spotlight Alumni (Featured Release Style) -->
         <section>
           <h2 class="text-3xl font-bold text-green-950 mb-6">Alumni Spotlight</h2>
           <div class="grid lg:grid-cols-3 gap-6">
