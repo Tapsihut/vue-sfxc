@@ -7,7 +7,7 @@ import SFXCTextOnly from '@/assets/images/logo-text-white-no-website.png'
 </script>
 
 <template>
-    <footer class="bg-primary text-primary-foreground">
+    <footer class="bg-footer text-footer-foreground">
         <div class="container mx-auto px-4 md:px-8 py-12 md:py-16">
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 lg:gap-12">
                 <!-- Logo -->
@@ -30,7 +30,7 @@ import SFXCTextOnly from '@/assets/images/logo-text-white-no-website.png'
                         <li>
                             <RouterLink
                                 :to="{ name: 'home' }"
-                                class="text-primary-foreground/80 hover:text-primary-foreground transition-colors text-sm"
+                                class="text-footer-foreground/80 hover:text-footer-foreground transition-colors text-sm"
                             >
                                 Home
                             </RouterLink>
@@ -38,7 +38,7 @@ import SFXCTextOnly from '@/assets/images/logo-text-white-no-website.png'
                         <li>
                             <RouterLink
                                 :to="{ name: 'vision-mission' }"
-                                class="text-primary-foreground/80 hover:text-primary-foreground transition-colors text-sm"
+                                class="text-footer-foreground/80 hover:text-footer-foreground transition-colors text-sm"
                             >
                                 Vision & Mission
                             </RouterLink>
@@ -46,7 +46,7 @@ import SFXCTextOnly from '@/assets/images/logo-text-white-no-website.png'
                         <li>
                             <RouterLink
                                 to="#"
-                                class="text-primary-foreground/80 hover:text-primary-foreground transition-colors text-sm"
+                                class="text-footer-foreground/80 hover:text-footer-foreground transition-colors text-sm"
                             >
                                 Academics
                             </RouterLink>
@@ -54,7 +54,7 @@ import SFXCTextOnly from '@/assets/images/logo-text-white-no-website.png'
                         <li>
                             <RouterLink
                                 to="#"
-                                class="text-primary-foreground/80 hover:text-primary-foreground transition-colors text-sm"
+                                class="text-footer-foreground/80 hover:text-footer-foreground transition-colors text-sm"
                             >
                                 Admissions
                             </RouterLink>
@@ -62,7 +62,7 @@ import SFXCTextOnly from '@/assets/images/logo-text-white-no-website.png'
                         <li>
                             <RouterLink
                                 to="#"
-                                class="text-primary-foreground/80 hover:text-primary-foreground transition-colors text-sm"
+                                class="text-footer-foreground/80 hover:text-footer-foreground transition-colors text-sm"
                             >
                                 News and Events
                             </RouterLink>
@@ -70,7 +70,7 @@ import SFXCTextOnly from '@/assets/images/logo-text-white-no-website.png'
                         <li>
                             <RouterLink
                                 to="#"
-                                class="text-primary-foreground/80 hover:text-primary-foreground transition-colors text-sm"
+                                class="text-footer-foreground/80 hover:text-footer-foreground transition-colors text-sm"
                             >
                                 Student Resources
                             </RouterLink>
@@ -78,7 +78,7 @@ import SFXCTextOnly from '@/assets/images/logo-text-white-no-website.png'
                         <li>
                             <RouterLink
                                 to="#"
-                                class="text-primary-foreground/80 hover:text-primary-foreground transition-colors text-sm"
+                                class="text-footer-foreground/80 hover:text-footer-foreground transition-colors text-sm"
                             >
                                 Careers at SFXC
                             </RouterLink>
@@ -91,25 +91,25 @@ import SFXCTextOnly from '@/assets/images/logo-text-white-no-website.png'
                     <h3 class="text-lg font-bold">Contact Us</h3>
                     <ul class="space-y-3">
                         <li class="flex items-start gap-3">
-                            <MapPin class="w-5 h-5 mt-0.5 shrink-0 text-primary-foreground/80" />
-                            <span class="text-primary-foreground/80 text-sm">
+                            <MapPin class="w-5 h-5 mt-0.5 shrink-0 text-footer-foreground/80" />
+                            <span class="text-footer-foreground/80 text-sm">
                                 Barangay 5, San Francisco, Agusan del Sur, Philippines, 8501
                             </span>
                         </li>
                         <li class="flex items-center gap-3">
-                            <Phone class="w-5 h-5 shrink-0 text-primary-foreground/80" />
+                            <Phone class="w-5 h-5 shrink-0 text-footer-foreground/80" />
                             <a
                                 href="tel:+639853438327"
-                                class="text-primary-foreground/80 hover:text-primary-foreground transition-colors text-sm"
+                                class="text-footer-foreground/80 hover:text-footer-foreground transition-colors text-sm"
                             >
                                 +63 985 343 8327
                             </a>
                         </li>
                         <li class="flex items-center gap-3">
-                            <Mail class="w-5 h-5 shrink-0 text-primary-foreground/80" />
+                            <Mail class="w-5 h-5 shrink-0 text-footer-foreground/80" />
                             <a
                                 href="mailto:communications@sfxc.edu.ph"
-                                class="text-primary-foreground/80 hover:text-primary-foreground transition-colors text-sm"
+                                class="text-footer-foreground/80 hover:text-footer-foreground transition-colors text-sm"
                             >
                                 communications@sfxc.edu.ph
                             </a>
@@ -120,28 +120,28 @@ import SFXCTextOnly from '@/assets/images/logo-text-white-no-website.png'
                 <!-- Connect with Us -->
                 <div class="space-y-4">
                     <h3 class="text-lg font-bold">Connect with Us</h3>
-                    <p class="text-primary-foreground/80 text-sm">
+                    <p class="text-footer-foreground/80 text-sm">
                         Follow us on social media for updates and news.
                     </p>
                     <div class="flex items-start gap-3">
-                        <Facebook class="w-5 h-5 shrink-0 text-primary-foreground/80" />
+                        <Facebook class="w-5 h-5 shrink-0 text-footer-foreground/80" />
                         <a
                             href="https://www.facebook.com/StFrancisXavierCollegeADS"
                             target="_blank"
                             rel="noopener noreferrer"
-                            class="text-primary-foreground/80 hover:text-primary-foreground transition-colors text-sm"
+                            class="text-footer-foreground/80 hover:text-footer-foreground transition-colors text-sm"
                             aria-label="Facebook"
                         >
                             St. Francis Xavier College
                         </a>
                     </div>
                     <div class="flex items-start gap-3">
-                        <Globe class="w-5 h-5 shrink-0 text-primary-foreground/80" />
+                        <Globe class="w-5 h-5 shrink-0 text-footer-foreground/80" />
                         <a
                             href="https://www.sfxc.edu.ph"
                             target="_blank"
                             rel="noopener noreferrer"
-                            class="text-primary-foreground/80 hover:text-primary-foreground transition-colors text-sm"
+                            class="text-footer-foreground/80 hover:text-footer-foreground transition-colors text-sm"
                             aria-label="Facebook"
                         >
                             www.sfxc.edu.ph
@@ -156,7 +156,7 @@ import SFXCTextOnly from '@/assets/images/logo-text-white-no-website.png'
                         <li>
                             <RouterLink
                                 to="#"
-                                class="text-primary-foreground/80 hover:text-primary-foreground transition-colors text-sm"
+                                class="text-footer-foreground/80 hover:text-footer-foreground transition-colors text-sm"
                             >
                                 HR Portal
                             </RouterLink>
@@ -164,7 +164,7 @@ import SFXCTextOnly from '@/assets/images/logo-text-white-no-website.png'
                         <li>
                             <RouterLink
                                 to="#"
-                                class="text-primary-foreground/80 hover:text-primary-foreground transition-colors text-sm"
+                                class="text-footer-foreground/80 hover:text-footer-foreground transition-colors text-sm"
                             >
                                 Facilities Requests
                             </RouterLink>
@@ -172,7 +172,7 @@ import SFXCTextOnly from '@/assets/images/logo-text-white-no-website.png'
                         <li>
                             <RouterLink
                                 to="#"
-                                class="text-primary-foreground/80 hover:text-primary-foreground transition-colors text-sm"
+                                class="text-footer-foreground/80 hover:text-footer-foreground transition-colors text-sm"
                             >
                                 Professional Development
                             </RouterLink>
@@ -182,11 +182,11 @@ import SFXCTextOnly from '@/assets/images/logo-text-white-no-website.png'
             </div>
         </div>
 
-        <Separator class="bg-primary-foreground/20" />
+        <Separator class="bg-footer-foreground/20" />
 
         <div class="container mx-auto px-4 md:px-8 py-6">
             <div
-                class="flex flex-col md:flex-row justify-center items-center gap-4 text-sm text-primary-foreground/80"
+                class="flex flex-col md:flex-row justify-center items-center gap-4 text-sm text-footer-foreground/80"
             >
                 <p>
                     &copy; {{ new Date().getFullYear() }} St. Francis Xavier College. All rights
