@@ -99,7 +99,7 @@ const navigationItems = ref<NavigationItem[]>([
             {
                 label: 'Apply',
                 links: [
-                    { name: 'How to Apply (Local/International)', to:  { name: 'requirements' } },
+                    { name: 'Information Hub', to:  { name: 'requirements' } },
                     // { name: 'Requirements and Deadlines', to: { name: 'requirements' } },
                     { name: 'Application Portal Login', to: '#' },
                     { name: 'Visit/Schedule Tour', to: { name: 'schedule-tour'} },
