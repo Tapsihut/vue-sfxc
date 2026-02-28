@@ -68,30 +68,30 @@ const navigationItems = ref<NavigationItem[]>([
             },
         ],
     },
-    {
-        name: 'Community',
-        type: 'dropdown',
-        groups: [
-            {
-                label: 'Community',
-                links: [
-                    { name: 'News and Events Calendar', to: { name: 'news' } },
-                    { name: 'Media Gallery', to: { name: 'media-gallery'} },
-                    { name: 'Alumni', to: { name: 'alumni'} },
-                    { name: 'Careers at SFXC', to: { name: 'careers'} },
-                ],
-            },
-            {
-                label: 'Outreach',
-                links: [
-                    { name: 'Outreach Programs', to: { name: 'outreach-programs'} },
-                    { name: 'Partner Barangays/Agencies', to: { name: 'barangay-partners'} },
-                    { name: 'Volunteer Opportunities', to: { name: 'volunteer-opportunities'} },
-                    { name: 'Impact Stories', to: { name: 'stories'} },
-                ],
-            },
-        ],
-    },
+    // {
+    //     name: 'Community',
+    //     type: 'dropdown',
+    //     groups: [
+    //         {
+    //             label: 'Community',
+    //             links: [
+    //                 { name: 'News and Events Calendar', to: { name: 'news' } },
+    //                 { name: 'Media Gallery', to: { name: 'media-gallery'} },
+    //                 { name: 'Alumni', to: { name: 'alumni'} },
+    //                 { name: 'Careers at SFXC', to: { name: 'careers'} },
+    //             ],
+    //         },
+    //         {
+    //             label: 'Outreach',
+    //             links: [
+    //                 { name: 'Outreach Programs', to: { name: 'outreach-programs'} },
+    //                 { name: 'Partner Barangays/Agencies', to: { name: 'barangay-partners'} },
+    //                 { name: 'Volunteer Opportunities', to: { name: 'volunteer-opportunities'} },
+    //                 { name: 'Impact Stories', to: { name: 'stories'} },
+    //             ],
+    //         },
+    //     ],
+    // },
     {
         name: 'Admissions',
         type: 'dropdown',
@@ -133,23 +133,23 @@ const navigationItems = ref<NavigationItem[]>([
             {
                 label: 'Offices',
                 links: [
+                    { name: 'Research Development Office', to: '#' },
                     { name: 'International Relations Office', to: '#' },
-                    { name: 'Research Office', to: '#' },
                 ],
             },
-            {
-                label: 'Recognitions',
-                links: [
-                    { name: 'Faculty Achievements', to: '#' },
-                    { name: 'External Appointment of Faculty Members', to: '#' },
-                    { name: 'Institutional Recognition/s', to: '#' },
-                    { name: 'Program-level Recognitions/s', to: '#' },
-                ],
-            },
-            {
-                label: 'Learning',
-                links: [{ name: 'Alternative Learning Arrangements', to: '#' }],
-            },
+            // {
+            //     label: 'Recognitions',
+            //     links: [
+            //         { name: 'Faculty Achievements', to: '#' },
+            //         { name: 'External Appointment of Faculty Members', to: '#' },
+            //         { name: 'Institutional Recognition/s', to: '#' },
+            //         { name: 'Program-level Recognitions/s', to: '#' },
+            //     ],
+            // },
+            // {
+            //     label: 'Learning',
+            //     links: [{ name: 'Alternative Learning Arrangements', to: '#' }],
+            // },
         ],
     },
     {
