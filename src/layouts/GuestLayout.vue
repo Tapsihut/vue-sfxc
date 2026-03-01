@@ -22,7 +22,7 @@ const activeSubmenu = ref<string | null>(null)
 
 interface NavigationLink {
     name: string
-    to: string | { name: string }
+    to: string | { name: string, hash?: string }
 }
 
 interface NavigationGroup {
@@ -99,7 +99,7 @@ const navigationItems = ref<NavigationItem[]>([
             {
                 label: 'Apply',
                 links: [
-                    { name: 'Information Hub', to:  { name: 'requirements' } },
+                    { name: 'How to Apply (Local & International)', to:  { name: 'requirements', hash: '#enrollment' } },
                     // { name: 'Requirements and Deadlines', to: { name: 'requirements' } },
                     { name: 'Application Portal Login', to: '#' },
                     { name: 'Visit/Schedule Tour', to: { name: 'schedule-tour'} },
