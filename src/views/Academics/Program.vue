@@ -3,7 +3,7 @@ import { ref, computed } from 'vue'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Separator } from '@/components/ui/separator'
-import { Plus, Minus } from 'lucide-vue-next'
+
 const bsitPicture = 'https://placehold.co/800x800?text=800x800'
 
 interface Program {
@@ -170,27 +170,25 @@ const colleges: College[] = [
 const otherProgramsData = [
   {
     name: 'Unit Earner Program',
-    description: 'This program is designed for professionals who wish to earn education units to qualify for the Licensure Examination for Teachers (LET). It provides the necessary pedagogical knowledge and skills for effective teaching.'
+    description: 'This program is designed for professionals who wish to earn education units to qualify for the Licensure Examination for Teachers (LET). It provides the necessary pedagogical knowledge and skills for effective teaching.',
+    link: '#' // Replace with actual link
   },
   {
     name: 'Technical Vocational Programs',
-    description: 'Our TechVoc programs offer practical, skills-based training aligned with industry standards. These short-course programs prepare students for immediate employment and TESDA certification.'
+    description: 'Our TechVoc programs offer practical, skills-based training aligned with industry standards. These short-course programs prepare students for immediate employment and TESDA certification.',
+    link: '#' // Replace with actual link
   },
   {
     name: 'Research Development Office',
-    description: 'The Research Development Office (RDO) spearheads the institution\'s research initiatives, fostering a culture of innovation and scholarly inquiry among faculty and students for the advancement of knowledge and community development.'
+    description: 'The Research Development Office (RDO) spearheads the institution\'s research initiatives, fostering a culture of innovation and scholarly inquiry among faculty and students for the advancement of knowledge and community development.',
+    link: '#' // Replace with actual link
   },
   {
     name: 'International Relations Office',
-    description: 'The International Relations Office (IRO) establishes global partnerships and programs, providing students and faculty with international exposure, exchange opportunities, and collaborative linkages across borders.'
+    description: 'The International Relations Office (IRO) establishes global partnerships and programs, providing students and faculty with international exposure, exchange opportunities, and collaborative linkages across borders.',
+    link: '#' // Replace with actual link
   }
 ]
-
-const expandedOtherPrograms = ref<Record<string, boolean>>({})
-
-const toggleOtherProgram = (name: string) => {
-  expandedOtherPrograms.value[name] = !expandedOtherPrograms.value[name]
-}
 
 const selectedCollege = ref<string | null>(null)
 const programsSection = ref<HTMLElement | null>(null)
@@ -405,21 +403,16 @@ const selectCollege = (collegeCode: string) => {
         <div class="mb-12">
           <h2 class="text-3xl md:text-4xl font-black mb-3 text-primary uppercase tracking-wide">Explore Other Programs</h2>
           <div class="h-1.5 w-24 bg-tertiary mb-6"></div>
-          <p class="text-lg text-muted-foreground">Discover other educational opportunities and offices dedicated to your success.</p>
-        </div>
-        
-        <div class="space-y-3">
-          <div v-for="program in otherProgramsData" :key="program.name" class="border border-border rounded-md overflow-hidden bg-background">
-            <button @click="toggleOtherProgram(program.name)" class="w-full flex items-center gap-3 p-4 bg-muted/20 hover:bg-muted/50 transition-colors text-left font-semibold text-foreground">
-              <span class="flex-1 text-lg">{{ program.name }}</span>
-              <Minus v-if="expandedOtherPrograms[program.name]" class="w-5 h-5 shrink-0 text-foreground ml-auto" stroke-width="2.5" />
-              <Plus v-else class="w-5 h-5 shrink-0 text-foreground text-opacity-80 ml-auto" stroke-width="2.5" />
-            </button>
-            
-            <div v-show="expandedOtherPrograms[program.name]" class="p-6 border-t border-border bg-background">
-              <p class="text-muted-foreground leading-relaxed text-sm md:text-base whitespace-pre-wrap">{{ program.description }}</p>
-            </div>
-          </div>
+          <p class="text-lg text-muted-foreground mb-6">Discover other educational opportunities and offices dedicated to your success:</p>
+          
+          <ul class="list-disc list-inside text-lg text-muted-foreground pl-6 space-y-4">
+            <li v-for="(program, index) in otherProgramsData" :key="program.name" class="leading-relaxed">
+              <router-link :to="program.link" class="text-tertiary hover:underline font-medium">{{ program.name }}</router-link>
+              <template v-if="index === otherProgramsData.length - 2"></template>
+              <template v-else-if="index === otherProgramsData.length - 1"></template>
+              <template v-else></template>
+            </li>
+          </ul>
         </div>
       </section>
   </div>
