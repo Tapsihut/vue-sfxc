@@ -25,6 +25,7 @@ import Facilities from '@/views/Abouts/Facilities.vue'
 import OfficeDirectory from '@/views/Abouts/OfficeDirectory.vue'
 import Accredation from '@/views/Abouts/Accredation.vue'
 import Bsoa from '@/views/Academics/Programs/CBE/BSOA.vue'
+import Bsba from '@/views/Academics/Programs/CBE/BSBA.vue'
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
     routes: [
@@ -120,6 +121,14 @@ const router = createRouter({
             path: '/academics/programs/cbe/bsoa',
             name: 'bsoa',
             component: Bsoa,
+            meta: {
+                layout: 'guest',
+            },
+        },
+        {
+            path: '/academics/programs/cbe/bsba',
+            name: 'bsba',
+            component: Bsba,
             meta: {
                 layout: 'guest',
             },

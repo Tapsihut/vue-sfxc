@@ -50,6 +50,7 @@ const programs: Program[] = [
   },
   {
     id: 'bsba',
+    routeName: 'bsba',
     name: 'Bachelor of Science in Business Administration',
     code: 'BSBA',
     department: 'CBE',
