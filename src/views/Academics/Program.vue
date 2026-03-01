@@ -1,8 +1,11 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
+import { useRouter } from 'vue-router'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Separator } from '@/components/ui/separator'
+
+const router = useRouter()
 
 const bsitPicture = 'https://placehold.co/800x800?text=800x800'
 
@@ -18,6 +21,7 @@ interface Program {
   icon: string
   heroImage: string
   color: string
+  routeName?: string
 }
 
 interface College {
@@ -94,7 +98,8 @@ const programs: Program[] = [
     careers: ['Office Manager', 'Administrative Officer', 'Executive Assistant', 'Operations Coordinator'],
     icon: '<path d="M16 20V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/><rect width="20" height="14" x="2" y="6" rx="2"/>',
     heroImage: 'https://placehold.co/800x800?text=800x800',
-    color: 'bg-[#A855F7]'
+    color: 'bg-[#A855F7]',
+    routeName: 'bsoa'
   },
   {
     id: 'criminology',
@@ -206,6 +211,12 @@ const selectCollege = (collegeCode: string) => {
     setTimeout(() => {
       programsSection.value?.scrollIntoView({ behavior: 'smooth', block: 'start' })
     }, 100)
+  }
+}
+
+const navigateToProgram = (program: Program) => {
+  if (program.routeName) {
+    router.push({ name: program.routeName })
   }
 }
 </script>
@@ -332,6 +343,7 @@ const selectCollege = (collegeCode: string) => {
             <div 
               v-for="(program, index) in filteredPrograms" 
               :key="program.id"
+              @click="navigateToProgram(program)"
               class="group relative aspect-square overflow-hidden cursor-pointer animate-fade-in-up"
               :style="{ animationDelay: `${index * 50}ms` }"
             >
