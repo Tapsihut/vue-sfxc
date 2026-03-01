@@ -1,16 +1,145 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Separator } from '@/components/ui/separator'
 import { Button } from '@/components/ui/button'
-import { BookOpen, GraduationCap, ShieldCheck, MonitorCog, Calculator, Briefcase, Sparkles, Target, Users, ChevronRight, Facebook } from 'lucide-vue-next'
+import { BookOpen, GraduationCap, ShieldCheck, MonitorCog, Calculator, Briefcase, Sparkles, Target, Users, ChevronRight, Facebook, ChevronDown } from 'lucide-vue-next'
 
 interface Requirement {
   name: string
   description: string
 }
 
+interface Course {
+  name: string
+  description: string
+}
+
+interface Program {
+  id: string
+  title: string
+  question: string
+  collegeName: string
+  image: string
+  courses: Course[]
+}
+
 const selectedStudentType = ref<'freshmen' | 'transferee' | 'cross-enrollee' | 'international'>('freshmen')
+const selectedProgram = ref<string>('abel')
+const expandedCourses = ref<Record<string, boolean>>({})
+
+const toggleCourse = (programId: string, courseIndex: number) => {
+  const key = `${programId}-${courseIndex}`
+  expandedCourses.value[key] = !expandedCourses.value[key]
+}
+
+const programs: Program[] = [
+  {
+    id: 'abel',
+    title: 'ARTS AND SCIENCES',
+    question: 'Interested in Language, Communication, and Creative Thinking?',
+    collegeName: 'College of Arts and Sciences',
+    image: 'https://placehold.co/600x400',
+    courses: [
+      {
+        name: 'Bachelor of Arts in English Language (ABEL)',
+        description: 'ABEL is ideal for students who love reading, writing, and expressing ideas. This program develops strong communication, critical thinking, and analytical skills. Graduates may pursue careers in education, writing, media, corporate communication, content creation, or further studies in law and graduate school. If you enjoy working with words and ideas, this course can open many doors.'
+      }
+    ]
+  },
+  {
+    id: 'cte',
+    title: 'TEACHER EDUCATION',
+    question: 'Are you an Aspiring Teacher or Educator?',
+    collegeName: 'College of Teacher Education',
+    image: 'https://placehold.co/600x400',
+    courses: [
+      {
+        name: 'Bachelor of Elementary Education (BEEd)',
+        description: 'BEEd is designed for students who want to teach and inspire young learners. This program focuses on child development, teaching strategies, and classroom management. It is best suited for individuals who are patient, creative, and passionate about shaping children\'s foundational learning years.'
+      },
+      {
+        name: 'Bachelor of Secondary Education (BSEd) – English',
+        description: 'This program prepares students to teach English at the secondary level. It is ideal for those who enjoy literature, language, and communication and want to help students develop confidence in speaking, reading, and writing.'
+      },
+      {
+        name: 'Bachelor of Secondary Education (BSEd) – Mathematics',
+        description: 'BSEd Math is for students who enjoy numbers, logic, and problem-solving. The program trains future math educators to explain complex concepts clearly and effectively, preparing them for teaching careers in secondary schools.'
+      }
+    ]
+  },
+  {
+    id: 'ccje',
+    title: 'CRIMINAL JUSTICE EDUCATION',
+    question: 'Do you value Public Service, Law, and Community Safety?',
+    collegeName: 'College of Criminal Justice Education',
+    image: 'https://placehold.co/600x400',
+    courses: [
+      {
+        name: 'Bachelor of Science in Criminology',
+        description: 'BS Criminology is suited for students interested in law enforcement, public safety, and the criminal justice system. The program provides foundational knowledge in crime prevention, investigation, and correctional administration. Graduates may pursue careers in law enforcement agencies, forensic services, or public safety institutions.'
+      }
+    ]
+  },
+  {
+    id: 'ctom',
+    title: 'TECHNOLOGY & OFFICE MANAGEMENT',
+    question: 'Are you excited by Office Management, Technology, and Systems?',
+    collegeName: 'College of Technology & Office Management',
+    image: 'https://placehold.co/600x400',
+    courses: [
+      {
+        name: 'Bachelor of Science in Office Administration',
+        description: 'This program prepares students for professional administrative and office-based roles. It focuses on office procedures, records management, and organizational skills—ideal for students who are detail-oriented, organized, and comfortable working in professional environments.'
+      },
+      {
+        name: 'Bachelor of Science in Information Technology',
+        description: 'BS Information Technology is for students who are interested in computers, systems, and digital solutions. The program covers programming, networking, and information systems, preparing graduates for careers in the fast-growing tech industry.'
+      }
+    ]
+  },
+  {
+    id: 'cbe-accounting',
+    title: 'BUSINESS EDUCATION',
+    question: 'Do Money Matters like Accounting, Finance, and Financial Analysis interest you?',
+    collegeName: 'College of Business Education',
+    image: 'https://placehold.co/600x400',
+    courses: [
+      {
+        name: 'Bachelor of Science in Accountancy',
+        description: 'This program is designed for students aiming to become Certified Public Accountants (CPAs). It requires discipline, analytical thinking, and strong numerical skills, and prepares graduates for professional accounting and auditing careers.'
+      },
+      {
+        name: 'Bachelor of Science in Accounting Information System',
+        description: 'This course combines accounting principles with information technology. It is ideal for students who want to work with computerized accounting systems and financial data management.'
+      },
+      {
+        name: 'Bachelor of Science in Internal Auditing',
+        description: 'BS Internal Auditing focuses on risk management, compliance, and internal control systems. It is suited for students who are analytical, detail-oriented, and committed to ethical standards.'
+      },
+      {
+        name: 'Bachelor of Science in Management Accounting',
+        description: 'This program emphasizes financial planning, budgeting, and decision-making. Graduates support management by providing financial insights that guide business strategies.'
+      }
+    ]
+  },
+  {
+    id: 'cbe-business',
+    title: 'BUSINESS EDUCATION',
+    question: 'Do you have a penchant for Business, Leadership, and Entrepreneurship?',
+    collegeName: 'College of Business Education',
+    image: 'https://placehold.co/600x400',
+    courses: [
+      {
+        name: 'Bachelor of Science in Entrepreneurship',
+        description: 'BS Entrepreneurship is ideal for students who dream of starting and managing their own business. The program develops creativity, innovation, and business planning skills, preparing students for entrepreneurial ventures and enterprise management.'
+      },
+      {
+        name: 'Bachelor of Science in Business Administration',
+        description: 'This flexible program prepares students for various roles in the business world. Students may choose a specialization that fits their interests and career goals: Financial Management, Marketing Management, Operations Management, Human Resources Management, or Business Economics.'
+      }
+    ]
+  }
+]
 
 const freshmenRequirements: Requirement[] = [
   { name: 'Form 138 (Report Card)', description: 'Original copy from senior high school' },
@@ -166,10 +295,10 @@ const currentRequirements = () => {
             At St. Francis Xavier College, we understand that choosing a program is not just about trends or peer pressure. It’s about discovering where your interests, strengths, and future goals meet. This guide is designed to help you understand the programs offered at SFXC and identify which course aligns best with who you are and who you want to become.
           </p>
 
-          <div class="bg-muted/30 p-6 md:p-8 rounded-xl border-l-4 border-tertiary mt-8">
+          <div class="border-l-4 border-tertiary pl-6 md:pl-8 py-2 my-10">
             <h3 class="text-2xl font-bold text-primary mb-4">Start With Yourself</h3>
             <p class="mb-4">Before choosing a course, take a moment to reflect:</p>
-            <ul class="list-disc list-inside pl-4 space-y-2 mb-6 font-medium text-foreground">
+            <ul class="list-disc list-inside pl-2 space-y-3 mb-6 font-medium text-foreground">
               <li>What subjects do you genuinely enjoy?</li>
               <li>What skills come naturally to you?</li>
               <li>Do you see yourself teaching, managing, creating, serving, or leading?</li>
@@ -179,372 +308,172 @@ const currentRequirements = () => {
           </div>
         </div>
 
-        <div class="space-y-16">
-          <!-- 1: ABEL -->
-          <div class="bg-card flex flex-col md:flex-row shadow-lg overflow-hidden group border border-border">
-            <!-- Left Side -->
-            <div class="w-full md:w-5/12 shrink-0 relative overflow-hidden bg-primary/5 min-h-[300px] flex items-center justify-center border-b md:border-b-0 md:border-r border-border">
-              <div class="w-48 h-48 bg-muted border-2 border-dashed border-primary/30 flex flex-col items-center justify-center text-muted-foreground font-semibold text-center rounded-xl z-20 group-hover:scale-110 transition-transform duration-700 bg-background/50 backdrop-blur-sm">
-                <span class="text-xs uppercase tracking-widest mb-1 opacity-70">Image Size</span>
-                <span class="text-xl">400 x 400</span>
-              </div>
-              <!-- Bottom Banner -->
-              <div class="absolute bottom-0 left-0 right-0 flex h-14 w-full overflow-hidden">
-                <div class="w-1/3 bg-primary text-white flex items-center justify-center font-semibold text-sm relative z-10">
-                  College of
-                  <div class="absolute top-0 -right-4 bottom-0 w-8 bg-primary skew-x-[20deg] border-r-[6px] border-tertiary"></div>
-                </div>
-                <div class="w-2/3 bg-primary/90 backdrop-blur-sm text-white flex items-center pl-8 font-black text-[13px] sm:text-sm md:text-base uppercase z-0">
-                  ARTS AND SCIENCES
-                </div>
-              </div>
-            </div>
-            
-            <!-- Right Side -->
-            <div class="w-full md:w-7/12 p-6 md:p-10 flex flex-col justify-center">
-              <h3 class="text-2xl font-extrabold text-primary mb-6 leading-tight">
-                Interested in Language, Communication, and Creative Thinking?
-              </h3>
-              <p class="text-xs font-bold text-muted-foreground uppercase tracking-widest mb-4">Courses Offered:</p>
-              <ul class="space-y-4">
-                <li>
-                  <div class="flex items-start gap-2">
-                    <ChevronRight class="w-4 h-4 text-tertiary shrink-0 mt-1" />
-                    <span class="text-base text-foreground font-medium">Bachelor of Arts in English Language (ABEL)</span>
-                  </div>
-                  <p class="text-sm text-muted-foreground pl-6 mt-1 leading-relaxed">
-                    ABEL is ideal for students who love reading, writing, and expressing ideas. This program develops strong communication, critical thinking, and analytical skills. Graduates may pursue careers in education, writing, media, corporate communication, content creation, or further studies in law and graduate school. If you enjoy working with words and ideas, this course can open many doors.
-                  </p>
-                </li>
-              </ul>
-              <div class="mt-8">
-                <a href="#" class="inline-flex w-10 h-10 bg-primary/5 rounded-full items-center justify-center text-primary hover:bg-primary hover:text-white transition-colors cursor-pointer">
-                  <Facebook class="w-5 h-5" />
-                </a>
-              </div>
-            </div>
-          </div>
-
-          <!-- 2: CTE -->
-          <div class="bg-card flex flex-col md:flex-row shadow-lg overflow-hidden group border border-border">
-            <div class="w-full md:w-5/12 shrink-0 relative overflow-hidden bg-primary/5 min-h-[300px] flex items-center justify-center border-b md:border-b-0 md:border-r border-border">
-              <div class="w-48 h-48 bg-muted border-2 border-dashed border-primary/30 flex flex-col items-center justify-center text-muted-foreground font-semibold text-center rounded-xl z-20 group-hover:scale-110 transition-transform duration-700 bg-background/50 backdrop-blur-sm">
-                <span class="text-xs uppercase tracking-widest mb-1 opacity-70">Image Size</span>
-                <span class="text-xl">400 x 400</span>
-              </div>
-              <div class="absolute bottom-0 left-0 right-0 flex h-14 w-full overflow-hidden">
-                <div class="w-1/3 bg-primary text-white flex items-center justify-center font-semibold text-sm relative z-10">
-                  College of
-                  <div class="absolute top-0 -right-4 bottom-0 w-8 bg-primary skew-x-[20deg] border-r-[6px] border-tertiary"></div>
-                </div>
-                <div class="w-2/3 bg-primary/90 backdrop-blur-sm text-white flex items-center pl-8 font-black text-[13px] sm:text-sm md:text-base uppercase z-0">
-                  TEACHER EDUCATION
-                </div>
-              </div>
-            </div>
-            
-            <div class="w-full md:w-7/12 p-6 md:p-10 flex flex-col justify-center">
-              <h3 class="text-2xl font-extrabold text-primary mb-6 leading-tight">
-                Are you an Aspiring Teacher or Educator?
-              </h3>
-              <p class="text-xs font-bold text-muted-foreground uppercase tracking-widest mb-4">Courses Offered:</p>
-              <ul class="space-y-4">
-                <li>
-                  <div class="flex items-start gap-2">
-                    <ChevronRight class="w-4 h-4 text-tertiary shrink-0 mt-1" />
-                    <span class="text-base text-foreground font-medium">Bachelor of Elementary Education (BEEd)</span>
-                  </div>
-                  <p class="text-sm text-muted-foreground pl-6 mt-1 leading-relaxed">
-                    BEEd is designed for students who want to teach and inspire young learners. This program focuses on child development, teaching strategies, and classroom management. It is best suited for individuals who are patient, creative, and passionate about shaping children’s foundational learning years.
-                  </p>
-                </li>
-                <li>
-                  <div class="flex items-start gap-2">
-                    <ChevronRight class="w-4 h-4 text-tertiary shrink-0 mt-1" />
-                    <span class="text-base text-foreground font-medium">Bachelor of Secondary Education (BSEd) – English</span>
-                  </div>
-                  <p class="text-sm text-muted-foreground pl-6 mt-1 leading-relaxed">
-                    This program prepares students to teach English at the secondary level. It is ideal for those who enjoy literature, language, and communication and want to help students develop confidence in speaking, reading, and writing.
-                  </p>
-                </li>
-                <li>
-                  <div class="flex items-start gap-2">
-                    <ChevronRight class="w-4 h-4 text-tertiary shrink-0 mt-1" />
-                    <span class="text-base text-foreground font-medium">Bachelor of Secondary Education (BSEd) – Mathematics</span>
-                  </div>
-                  <p class="text-sm text-muted-foreground pl-6 mt-1 leading-relaxed">
-                    BSEd Math is for students who enjoy numbers, logic, and problem-solving. The program trains future math educators to explain complex concepts clearly and effectively, preparing them for teaching careers in secondary schools.
-                  </p>
-                </li>
-              </ul>
-              <div class="mt-8">
-                <a href="#" class="inline-flex w-10 h-10 bg-primary/5 rounded-full items-center justify-center text-primary hover:bg-primary hover:text-white transition-colors cursor-pointer">
-                  <Facebook class="w-5 h-5" />
-                </a>
-              </div>
+        <!-- Program Selector -->
+        <div class="mb-16">
+          <div class="mb-8">
+            <h3 class="text-xl md:text-2xl font-bold text-foreground mb-4 text-center">Select a College Program</h3>
+            <div class="flex flex-wrap gap-2 md:gap-3 justify-center">
+              <Button
+                variant="ghost"
+                @click="selectedProgram = 'abel'"
+                :class="[
+                  'px-3 md:px-4 py-2 text-xs md:text-sm font-medium rounded-lg transition-all duration-300',
+                  selectedProgram === 'abel' 
+                    ? 'bg-primary text-primary-foreground shadow-md hover:bg-primary/90' 
+                    : 'hover:bg-primary/10 text-muted-foreground hover:text-foreground'
+                ]"
+              >
+                Arts & Sciences
+              </Button>
+              <Button
+                variant="ghost"
+                @click="selectedProgram = 'cte'"
+                :class="[
+                  'px-3 md:px-4 py-2 text-xs md:text-sm font-medium rounded-lg transition-all duration-300',
+                  selectedProgram === 'cte' 
+                    ? 'bg-primary text-primary-foreground shadow-md hover:bg-primary/90' 
+                    : 'hover:bg-primary/10 text-muted-foreground hover:text-foreground'
+                ]"
+              >
+                Teacher Education
+              </Button>
+              <Button
+                variant="ghost"
+                @click="selectedProgram = 'ccje'"
+                :class="[
+                  'px-3 md:px-4 py-2 text-xs md:text-sm font-medium rounded-lg transition-all duration-300',
+                  selectedProgram === 'ccje' 
+                    ? 'bg-primary text-primary-foreground shadow-md hover:bg-primary/90' 
+                    : 'hover:bg-primary/10 text-muted-foreground hover:text-foreground'
+                ]"
+              >
+                Criminology
+              </Button>
+              <Button
+                variant="ghost"
+                @click="selectedProgram = 'ctom'"
+                :class="[
+                  'px-3 md:px-4 py-2 text-xs md:text-sm font-medium rounded-lg transition-all duration-300',
+                  selectedProgram === 'ctom' 
+                    ? 'bg-primary text-primary-foreground shadow-md hover:bg-primary/90' 
+                    : 'hover:bg-primary/10 text-muted-foreground hover:text-foreground'
+                ]"
+              >
+                Tech & Office
+              </Button>
+              <Button
+                variant="ghost"
+                @click="selectedProgram = 'cbe-accounting'"
+                :class="[
+                  'px-3 md:px-4 py-2 text-xs md:text-sm font-medium rounded-lg transition-all duration-300',
+                  selectedProgram === 'cbe-accounting' 
+                    ? 'bg-primary text-primary-foreground shadow-md hover:bg-primary/90' 
+                    : 'hover:bg-primary/10 text-muted-foreground hover:text-foreground'
+                ]"
+              >
+                Accounting
+              </Button>
+              <Button
+                variant="ghost"
+                @click="selectedProgram = 'cbe-business'"
+                :class="[
+                  'px-3 md:px-4 py-2 text-xs md:text-sm font-medium rounded-lg transition-all duration-300',
+                  selectedProgram === 'cbe-business' 
+                    ? 'bg-primary text-primary-foreground shadow-md hover:bg-primary/90' 
+                    : 'hover:bg-primary/10 text-muted-foreground hover:text-foreground'
+                ]"
+              >
+                Business
+              </Button>
             </div>
           </div>
 
-          <!-- 3: CCJE -->
-          <div class="bg-card flex flex-col md:flex-row shadow-lg overflow-hidden group border border-border">
-            <div class="w-full md:w-5/12 shrink-0 relative overflow-hidden bg-primary/5 min-h-[300px] flex items-center justify-center border-b md:border-b-0 md:border-r border-border">
-              
-              <div class="w-48 h-48 bg-muted border-2 border-dashed border-primary/30 flex flex-col items-center justify-center text-muted-foreground font-semibold text-center rounded-xl z-20 group-hover:scale-110 transition-transform duration-700 bg-background/50 backdrop-blur-sm">
-                <span class="text-xs uppercase tracking-widest mb-1 opacity-70">Image Size</span>
-                <span class="text-xl">400 x 400</span>
+          <!-- Program Info -->
+          <template v-for="program in programs" :key="program.id">
+            <div v-show="selectedProgram === program.id" class="max-w-4xl mx-auto mt-8">
+              <div class="mb-8">
+                <h3 class="text-2xl md:text-3xl font-bold text-primary leading-tight mb-2">
+                  {{ program.question }}
+                </h3>
+                <p class="text-sm md:text-base font-semibold text-tertiary uppercase tracking-widest">
+                  {{ program.collegeName }}
+                </p>
               </div>
-              <div class="absolute bottom-0 left-0 right-0 flex h-14 w-full overflow-hidden z-20">
-                <div class="w-1/3 bg-primary text-white flex items-center justify-center font-semibold text-sm relative z-10">
-                  College of
-                  <div class="absolute top-0 -right-4 bottom-0 w-8 bg-primary skew-x-[20deg] border-r-[6px] border-tertiary"></div>
-                </div>
-                <div class="w-2/3 bg-primary/90 backdrop-blur-sm text-white flex items-center pl-8 font-black text-[13px] sm:text-sm md:text-base uppercase z-0">
-                  CRIMINAL JUSTICE EDUCATION
-                </div>
-              </div>
-            </div>
-            
-            <div class="w-full md:w-7/12 p-6 md:p-10 flex flex-col justify-center">
-              <h3 class="text-2xl font-extrabold text-primary mb-6 leading-tight">
-                Do you value Public Service, Law, and Community Safety?
-              </h3>
-              <p class="text-xs font-bold text-muted-foreground uppercase tracking-widest mb-4">Courses Offered:</p>
-              <ul class="space-y-4">
-                <li>
-                  <div class="flex items-start gap-2">
-                    <ChevronRight class="w-4 h-4 text-tertiary shrink-0 mt-1" />
-                    <span class="text-base text-foreground font-medium">Bachelor of Science in Criminology</span>
-                  </div>
-                  <p class="text-sm text-muted-foreground pl-6 mt-1 leading-relaxed">
-                    BS Criminology is suited for students interested in law enforcement, public safety, and the criminal justice system. The program provides foundational knowledge in crime prevention, investigation, and correctional administration. Graduates may pursue careers in law enforcement agencies, forensic services, or public safety institutions.
-                  </p>
-                </li>
-              </ul>
-              <div class="mt-8">
-                <a href="#" class="inline-flex w-10 h-10 bg-primary/5 rounded-full items-center justify-center text-primary hover:bg-primary hover:text-white transition-colors cursor-pointer">
-                  <Facebook class="w-5 h-5" />
-                </a>
-              </div>
-            </div>
-          </div>
 
-          <!-- 4: IT & Office Admin -->
-          <div class="bg-card flex flex-col md:flex-row shadow-lg overflow-hidden group border border-border">
-            <div class="w-full md:w-5/12 shrink-0 relative overflow-hidden bg-primary/5 min-h-[300px] flex items-center justify-center border-b md:border-b-0 md:border-r border-border">
-              <div class="w-48 h-48 bg-muted border-2 border-dashed border-primary/30 flex flex-col items-center justify-center text-muted-foreground font-semibold text-center rounded-xl z-20 group-hover:scale-110 transition-transform duration-700 bg-background/50 backdrop-blur-sm">
-                <span class="text-xs uppercase tracking-widest mb-1 opacity-70">Image Size</span>
-                <span class="text-xl">400 x 400</span>
-              </div>
-              <div class="absolute bottom-0 left-0 right-0 flex h-14 w-full overflow-hidden">
-                <div class="w-1/3 bg-primary text-white flex items-center justify-center font-semibold text-sm relative z-10">
-                  College of
-                  <div class="absolute top-0 -right-4 bottom-0 w-8 bg-primary skew-x-[20deg] border-r-[6px] border-tertiary"></div>
-                </div>
-                <div class="w-2/3 bg-primary/90 backdrop-blur-sm text-white flex items-center pl-8 font-black text-[11px] sm:text-[13px] md:text-sm uppercase z-0 tracking-tight leading-tight">
-                  TECHNOLOGY &<br>OFFICE MANAGEMENT
-                </div>
-              </div>
-            </div>
-            
-            <div class="w-full md:w-7/12 p-6 md:p-10 flex flex-col justify-center">
-              <h3 class="text-2xl font-extrabold text-primary mb-6 leading-tight">
-                Are you excited by Office Management, Technology, and Systems?
-              </h3>
-              <p class="text-xs font-bold text-muted-foreground uppercase tracking-widest mb-4">Courses Offered:</p>
-              <ul class="space-y-4">
-                <li>
-                  <div class="flex items-start gap-2">
-                    <ChevronRight class="w-4 h-4 text-tertiary shrink-0 mt-1" />
-                    <span class="text-base text-foreground font-medium">Bachelor of Science in Office Administration</span>
+              <div class="mb-8">
+                <p class="text-sm font-semibold text-muted-foreground uppercase tracking-widest mb-4">Courses Offered</p>
+                <div class="space-y-4">
+                  <div
+                    v-for="(course, index) in program.courses"
+                    :key="index"
+                    class="group border-b border-border/50 pb-4 last:border-0"
+                  >
+                    <button
+                      @click="toggleCourse(program.id, index)"
+                      class="w-full flex items-start gap-4 text-left focus:outline-none"
+                    >
+                      <div class="shrink-0 w-6 h-6 rounded-full bg-tertiary/10 text-tertiary flex items-center justify-center text-xs font-bold mt-0.5 group-hover:bg-tertiary group-hover:text-white transition-colors">
+                        {{ index + 1 }}
+                      </div>
+                      <div class="flex-1 min-w-0 flex items-start justify-between gap-4">
+                        <h4 class="text-base font-semibold text-foreground leading-tight hover:text-tertiary transition-colors">{{ course.name }}</h4>
+                        <ChevronDown
+                          class="w-5 h-5 text-muted-foreground shrink-0 transition-transform duration-200"
+                          :class="{ 'rotate-180': expandedCourses[`${program.id}-${index}`] }"
+                        />
+                      </div>
+                    </button>
+                    
+                    <div
+                      v-show="expandedCourses[`${program.id}-${index}`]"
+                      class="pl-10 pr-4 pt-3 text-sm text-muted-foreground leading-relaxed"
+                    >
+                      {{ course.description }}
+                    </div>
                   </div>
-                  <p class="text-sm text-muted-foreground pl-6 mt-1 leading-relaxed">
-                    This program prepares students for professional administrative and office-based roles. It focuses on office procedures, records management, and organizational skills—ideal for students who are detail-oriented, organized, and comfortable working in professional environments.
-                  </p>
-                </li>
-                <li>
-                  <div class="flex items-start gap-2">
-                    <ChevronRight class="w-4 h-4 text-tertiary shrink-0 mt-1" />
-                    <span class="text-base text-foreground font-medium">Bachelor of Science in Information Technology</span>
-                  </div>
-                  <p class="text-sm text-muted-foreground pl-6 mt-1 leading-relaxed">
-                    BS Information Technology is for students who are interested in computers, systems, and digital solutions. The program covers programming, networking, and information systems, preparing graduates for careers in the fast-growing tech industry.
-                  </p>
-                </li>
-              </ul>
-              <div class="mt-8">
-                <a href="#" class="inline-flex w-10 h-10 bg-primary/5 rounded-full items-center justify-center text-primary hover:bg-primary hover:text-white transition-colors cursor-pointer">
-                  <Facebook class="w-5 h-5" />
-                </a>
+                </div>
               </div>
-            </div>
-          </div>
 
-          <!-- 5: Business & Finance (Accounting) -->
-          <div class="bg-card flex flex-col md:flex-row shadow-lg overflow-hidden group border border-border">
-            <div class="w-full md:w-5/12 shrink-0 relative overflow-hidden bg-primary/5 min-h-[300px] flex items-center justify-center border-b md:border-b-0 md:border-r border-border bg-primary/5">
-              
-              <div class="w-48 h-48 bg-muted border-2 border-dashed border-primary/30 flex flex-col items-center justify-center text-muted-foreground font-semibold text-center rounded-xl z-20 group-hover:scale-110 transition-transform duration-700 bg-background/50 backdrop-blur-sm">
-                <span class="text-xs uppercase tracking-widest mb-1 opacity-70">Image Size</span>
-                <span class="text-xl">400 x 400</span>
-              </div>
-              <div class="absolute bottom-0 left-0 right-0 flex h-14 w-full overflow-hidden z-20">
-                <div class="w-1/3 bg-primary text-white flex items-center justify-center font-semibold text-sm relative z-10">
-                  College of
-                  <div class="absolute top-0 -right-4 bottom-0 w-8 bg-primary skew-x-[20deg] border-r-[6px] border-tertiary"></div>
-                </div>
-                <div class="w-2/3 bg-primary/90 backdrop-blur-sm text-white flex items-center pl-8 font-black text-[13px] sm:text-sm md:text-base uppercase z-0">
-                  BUSINESS EDUCATION
-                </div>
-              </div>
-            </div>
-            
-            <div class="w-full md:w-7/12 p-6 md:p-10 flex flex-col justify-center">
-              <h3 class="text-2xl font-extrabold text-primary mb-6 leading-tight">
-                Do Money Matters like Accounting, Finance, and Financial Analysis interest you?
-              </h3>
-              <p class="text-xs font-bold text-muted-foreground uppercase tracking-widest mb-4">Courses Offered:</p>
-              <ul class="space-y-4">
-                <li>
-                  <div class="flex items-start gap-2">
-                    <ChevronRight class="w-4 h-4 text-tertiary shrink-0 mt-1" />
-                    <span class="text-base text-foreground font-medium">Bachelor of Science in Accountancy</span>
-                  </div>
-                  <p class="text-sm text-muted-foreground pl-6 mt-1 leading-relaxed">
-                    This program is designed for students aiming to become Certified Public Accountants (CPAs). It requires discipline, analytical thinking, and strong numerical skills, and prepares graduates for professional accounting and auditing careers.
-                  </p>
-                </li>
-                <li>
-                  <div class="flex items-start gap-2">
-                    <ChevronRight class="w-4 h-4 text-tertiary shrink-0 mt-1" />
-                    <span class="text-base text-foreground font-medium">Bachelor of Science in Accounting Information System</span>
-                  </div>
-                  <p class="text-sm text-muted-foreground pl-6 mt-1 leading-relaxed">
-                    This course combines accounting principles with information technology. It is ideal for students who want to work with computerized accounting systems and financial data management.
-                  </p>
-                </li>
-                <li>
-                  <div class="flex items-start gap-2">
-                    <ChevronRight class="w-4 h-4 text-tertiary shrink-0 mt-1" />
-                    <span class="text-base text-foreground font-medium">Bachelor of Science in Internal Auditing</span>
-                  </div>
-                  <p class="text-sm text-muted-foreground pl-6 mt-1 leading-relaxed">
-                    BS Internal Auditing focuses on risk management, compliance, and internal control systems. It is suited for students who are analytical, detail-oriented, and committed to ethical standards.
-                  </p>
-                </li>
-                <li>
-                  <div class="flex items-start gap-2">
-                    <ChevronRight class="w-4 h-4 text-tertiary shrink-0 mt-1" />
-                    <span class="text-base text-foreground font-medium">Bachelor of Science in Management Accounting</span>
-                  </div>
-                  <p class="text-sm text-muted-foreground pl-6 mt-1 leading-relaxed">
-                    This program emphasizes financial planning, budgeting, and decision-making. Graduates support management by providing financial insights that guide business strategies.
-                  </p>
-                </li>
-              </ul>
-              <div class="mt-8">
-                <a href="#" class="inline-flex w-10 h-10 bg-primary/5 rounded-full items-center justify-center text-primary hover:bg-primary hover:text-white transition-colors cursor-pointer">
+              <div class="pt-6 border-t border-border flex items-center justify-between">
+                <Button variant="link" class="p-0 h-auto text-base text-primary hover:text-primary/80 font-medium transition-colors gap-2">
+                  Learn More
+                  <ChevronRight class="w-4 h-4" />
+                </Button>
+                <Button variant="ghost" size="icon" class="w-10 h-10 bg-primary/5 rounded-full text-primary hover:bg-primary hover:text-white transition-colors">
                   <Facebook class="w-5 h-5" />
-                </a>
+                </Button>
               </div>
             </div>
-          </div>
-
-          <!-- 6: Business & Entrepreneurship -->
-          <div class="bg-card flex flex-col md:flex-row shadow-lg overflow-hidden group border border-border">
-            <div class="w-full md:w-5/12 shrink-0 relative overflow-hidden bg-primary/5 min-h-[300px] flex items-center justify-center border-b md:border-b-0 md:border-r border-border">
-              <div class="w-48 h-48 bg-muted border-2 border-dashed border-primary/30 flex flex-col items-center justify-center text-muted-foreground font-semibold text-center rounded-xl z-20 group-hover:scale-110 transition-transform duration-700 bg-background/50 backdrop-blur-sm">
-                <span class="text-xs uppercase tracking-widest mb-1 opacity-70">Image Size</span>
-                <span class="text-xl">400 x 400</span>
-              </div>
-              <div class="absolute bottom-0 left-0 right-0 flex h-14 w-full overflow-hidden z-20">
-                <div class="w-1/3 bg-primary text-white flex items-center justify-center font-semibold text-sm relative z-10">
-                  College of
-                  <div class="absolute top-0 -right-4 bottom-0 w-8 bg-primary skew-x-[20deg] border-r-[6px] border-tertiary"></div>
-                </div>
-                <div class="w-2/3 bg-primary/90 backdrop-blur-sm text-white flex items-center pl-8 font-black text-[13px] sm:text-sm md:text-base uppercase z-0">
-                  BUSINESS EDUCATION
-                </div>
-              </div>
-            </div>
-            
-            <div class="w-full md:w-7/12 p-6 md:p-10 flex flex-col justify-center">
-              <h3 class="text-2xl font-extrabold text-primary mb-6 leading-tight">
-                Do you have a penchant for Business, Leadership, and Entrepreneurship?
-              </h3>
-              <p class="text-xs font-bold text-muted-foreground uppercase tracking-widest mb-4">Courses Offered:</p>
-              <ul class="space-y-4">
-                <li>
-                  <div class="flex items-start gap-2">
-                    <ChevronRight class="w-4 h-4 text-tertiary shrink-0 mt-1" />
-                    <span class="text-base text-foreground font-medium">Bachelor of Science in Entrepreneurship</span>
-                  </div>
-                  <p class="text-sm text-muted-foreground pl-6 mt-1 leading-relaxed">
-                    BS Entrepreneurship is ideal for students who dream of starting and managing their own business. The program develops creativity, innovation, and business planning skills, preparing students for entrepreneurial ventures and enterprise management.
-                  </p>
-                </li>
-                <li>
-                  <div class="flex items-start gap-2">
-                    <ChevronRight class="w-4 h-4 text-tertiary shrink-0 mt-1" />
-                    <span class="text-base text-foreground font-medium">Bachelor of Science in Business Administration</span>
-                  </div>
-                  <p class="text-sm text-muted-foreground pl-6 mt-1 leading-relaxed">
-                    This flexible program prepares students for various roles in the business world. Students may choose a specialization that fits their interests and career goals:
-                  </p>
-                  <ul class="list-disc list-outside pl-10 mt-3 text-sm text-muted-foreground space-y-2">
-                    <li><span class="font-medium text-foreground">Financial Management</span> – for careers in banking, finance, and investment</li>
-                    <li><span class="font-medium text-foreground">Marketing Management</span> – for students interested in branding, advertising, and customer engagement</li>
-                    <li><span class="font-medium text-foreground">Operations Management</span> – for those focused on systems, efficiency, and business processes</li>
-                    <li><span class="font-medium text-foreground">Human Resources Management</span> – for individuals who want to work with people, training, and organizational development</li>
-                    <li><span class="font-medium text-foreground">Business Economics</span> – for students interested in economic analysis and business decision-making</li>
-                  </ul>
-                </li>
-              </ul>
-              <div class="mt-8">
-                <a href="#" class="inline-flex w-10 h-10 bg-primary/5 rounded-full items-center justify-center text-primary hover:bg-primary hover:text-white transition-colors cursor-pointer">
-                  <Facebook class="w-5 h-5" />
-                </a>
-              </div>
-            </div>
-          </div>
+          </template>
         </div>
 
         <!-- Conclusion Box -->
-        <div class="mt-20 bg-primary p-10 md:p-14 rounded-none shadow-2xl relative overflow-hidden">
-          <!-- Add stylistic elements to match the angular design of the cards -->
-          <div class="absolute left-0 top-0 w-2 h-full bg-tertiary z-20"></div>
-          <div class="absolute -right-20 -bottom-20 w-64 h-64 bg-white/5 rounded-full blur-3xl"></div>
-          <div class="absolute -left-10 -top-10 w-40 h-40 bg-tertiary/10 rounded-full blur-2xl"></div>
+        <div class="mt-24 mb-16 max-w-4xl mx-auto">
+          <div class="text-center md:text-left">
+            <h3 class="text-3xl md:text-4xl font-black mb-3 text-primary uppercase tracking-wide">Your Future Starts With The Right Choice</h3>
+            <div class="h-1.5 w-24 bg-tertiary mb-8 mx-auto md:mx-0"></div>
+          </div>
           
-          <div class="relative z-10 max-w-4xl mx-auto text-center">
-            <h3 class="text-3xl md:text-5xl font-black text-white mb-6 uppercase tracking-wider">Your Future Starts With The Right Choice!</h3>
-            
-            <div class="h-1 w-20 bg-tertiary mx-auto mb-8"></div>
-            
-            <p class="mb-6 text-white/80 text-lg md:text-xl leading-relaxed max-w-3xl mx-auto">
-              There is no single “best” course—only the course that best matches you. The right program is one that challenges you, motivates you, and prepares you for the life you envision.
+          <div class="space-y-6 text-lg text-muted-foreground mb-16">
+            <p class="leading-relaxed">
+              There is no single "best" course—only the course that best matches you. At St. Francis Xavier College, we are committed to guiding you not just toward a degree, but toward a purposeful future.
             </p>
-            <p class="mb-12 text-white/80 text-lg md:text-xl leading-relaxed max-w-3xl mx-auto">
-              At St. Francis Xavier College, we are committed to guiding students not only toward a degree, but toward a meaningful and purposeful future.
-            </p>
+          </div>
             
-            <div class="flex flex-col md:flex-row gap-6 md:gap-12 items-center justify-center font-bold text-white text-xl">
-              <div class="flex flex-col items-center group">
-                <span class="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center mb-3 group-hover:bg-tertiary transition-colors"><span class="text-tertiary group-hover:text-white">1</span></span>
-                <span class="uppercase text-sm tracking-widest text-white/60 mb-1">Choose a course</span>
-                <span class="text-lg">that fits your passion</span>
-              </div>
-              <div class="hidden md:block w-px h-16 bg-white/20"></div>
-              <div class="flex flex-col items-center group">
-                <span class="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center mb-3 group-hover:bg-tertiary transition-colors"><span class="text-tertiary group-hover:text-white">2</span></span>
-                <span class="uppercase text-sm tracking-widest text-white/60 mb-1">Choose a school</span>
-                <span class="text-lg">that supports your growth</span>
-              </div>
-              <div class="hidden md:block w-px h-16 bg-white/20"></div>
-              <div class="flex flex-col items-center group">
-                <span class="w-12 h-12 rounded-full bg-tertiary flex items-center justify-center mb-3 animate-pulse"><span class="text-white">3</span></span>
-                <span class="uppercase text-sm tracking-widest text-tertiary/80 mb-1">Choose</span>
-                <span class="text-lg text-white">St. Francis Xavier College</span>
-              </div>
+          <div class="flex flex-col md:flex-row gap-12 md:gap-6 items-start justify-between border-t border-border pt-12">
+            <div class="flex flex-col items-start w-full md:w-1/3">
+              <h4 class="text-xl font-bold text-foreground mb-2">Reflect</h4>
+              <p class="text-muted-foreground">Choose a course that genuinely fits your passion and your natural strengths.</p>
+            </div>
+
+            <div class="flex flex-col items-start w-full md:w-1/3">
+              <h4 class="text-xl font-bold text-foreground mb-2">Research</h4>
+              <p class="text-muted-foreground">Choose a school that offers the environment to support your personal growth.</p>
+            </div>
+
+            <div class="flex flex-col items-start w-full md:w-1/3">
+              <h4 class="text-xl font-bold text-primary mb-2">Decide</h4>
+              <p class="text-muted-foreground font-medium">Choose St. Francis Xavier College to start building your professional future today.</p>
             </div>
           </div>
         </div>
@@ -562,7 +491,7 @@ const currentRequirements = () => {
           </p>
         </div>
 
-        <div class="bg-card border border-border rounded-2xl shadow-sm overflow-hidden flex flex-col md:flex-row">
+        <div class="overflow-hidden flex flex-col md:flex-row border border-border rounded-2xl shadow-sm">
           <!-- Left Side: Student Type Selection -->
           <div class="w-full md:w-1/3 lg:w-1/4 bg-muted/30 p-4 md:p-6 border-b md:border-b-0 md:border-r border-border flex flex-row md:flex-col gap-2 md:gap-3 overflow-x-auto md:overflow-visible">
             <h3 class="text-lg font-semibold text-foreground mb-2 md:mb-4 px-2 hidden md:block">Student Type</h3>
@@ -644,7 +573,7 @@ const currentRequirements = () => {
               <div
                 v-for="(req, index) in currentRequirements()"
                 :key="index"
-                class="bg-background p-6 rounded-xl border border-border shadow-sm hover:shadow-md transition-all duration-300"
+                class="bg-muted/30 border border-border p-6 hover:shadow-md transition-all duration-300 rounded-xl"
               >
                 <div class="flex items-start gap-4">
                   <div class="shrink-0 w-8 h-8 rounded-full bg-tertiary/10 text-tertiary flex items-center justify-center font-bold text-sm mt-0.5">
@@ -662,7 +591,7 @@ const currentRequirements = () => {
       </div>
     </div>
 
-    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
       <Separator class="my-20" />
 
       <!-- Enrollment Guide Section -->
