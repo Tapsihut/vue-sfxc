@@ -1,6 +1,7 @@
 <script setup lang="ts">
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { ref, computed } from 'vue'
 import { Separator } from '@/components/ui/separator'
+import { Plus, Minus, ChevronRight } from 'lucide-vue-next'
 
 interface FinancialAid {
   name: string
@@ -131,120 +132,124 @@ const financialAids: FinancialAid[] = [
     applicationSteps: []
   }
 ]
+
+const expanded = ref<Record<string, boolean>>({})
+
+const toggle = (name: string) => {
+  expanded.value[name] = !expanded.value[name]
+}
+
+const chedPrograms = computed(() => financialAids.filter(p => p.name.includes('TES') || p.name.includes('CHED')))
+const otherGovPrograms = computed(() => financialAids.filter(p => !p.name.includes('TES') && !p.name.includes('CHED')))
 </script>
 
 <template>
-  <section id="hero" class="relative">
-    <div
-      class="h-120 md:h-[75dvh] flex flex-col relative bg-[url('/src/assets/images/sfxc-building.jpg')] bg-cover bg-center bg-no-repeat"
-    >
-      <div class="absolute inset-0 bg-linear-to-t from-tertiary/90 via-background/20 to-transparent"></div>
-
-      <!-- <div class="relative z-10 mt-auto w-full md:max-w-4xl ps-5 pb-16 md:ps-10 md:pb-24">
-        <h1 class="text-3xl md:text-5xl lg:text-7xl font-bold text-white tracking-tight drop-shadow-md">
-          Accepted Financial Aid at SFXC
-        </h1>
-        <p class="text-white/80 mt-4 text-lg md:text-xl max-w-2xl">
-          Education at SFXC is an investment in our students’ futures.
-        </p>
-      </div> -->
-
-      <div class="absolute bottom-0 left-0 right-0 text-background leading-none">
-        <svg class="w-full h-12 md:h-24" viewBox="0 0 1440 320" preserveAspectRatio="none">
-          <path fill="currentColor" d="M0,224L1440,128L1440,320L0,320Z"></path>
-        </svg>
-      </div>
+  <div class="space-y-16 pb-12 px-4 pt-6 md:px-8 md:pt-10">
+    <div>
+      <h2 class="text-3xl font-bold tracking-tight mb-4 text-foreground md:max-w-[800px]">List of Scholarship and Financial Assistance Programs</h2>
+      <p class="text-lg text-muted-foreground leading-relaxed md:max-w-[800px]">
+        Explore our comprehensive financial assistance programs designed to support your educational journey and make quality learning accessible and achievable.
+      </p>
     </div>
-  </section>
 
-  <div class="min-h-screen bg-background py-16 md:py-24">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-      
-      <!-- Introduction Section -->
-      <div class="mb-16 max-w-4xl mx-auto text-center">
-        <div class="inline-flex items-center justify-center p-4 bg-tertiary/10 rounded-full mb-6 shadow-inner">
-          <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-tertiary"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
-        </div>
-        <h2 class="text-3xl md:text-4xl font-bold text-foreground mb-6 tracking-tight">Investing in Your Future</h2>
-        <p class="text-lg text-muted-foreground mb-6 leading-relaxed">
-          Education at SFXC is an investment in our students’ futures. As our institution continues to strive for the socio-economic development of society, we believe our students deserve quality education. With many of our students coming from humble backgrounds, the Admission and Scholarship Office (ADSO) is more than ready to assist with financial aid for our deserving students.
-        </p>
-        <p class="text-lg text-muted-foreground leading-relaxed">
-          Below is a list of available and accepted financial aid at SFXC. Should there be other scholarships and grants that are not mentioned, contact ADSO for special arrangements.
-        </p>
+    <!-- CHED Programs -->
+    <div class="space-y-6">
+      <div class="border-b-2 border-primary/20 pb-2">
+        <h3 class="text-2xl font-bold text-foreground">CHED Scholarship Programs</h3>
       </div>
-
-      <Separator class="my-16" />
-
-      <!-- Financial Aid List -->
-      <div class="space-y-8">
-        <Card
-          v-for="aid in financialAids"
-          :key="aid.name"
-          class="overflow-hidden border border-border hover:border-tertiary/40 transition-all duration-300 shadow-sm hover:shadow-md"
-        >
-          <div class="flex flex-col lg:flex-row">
-            <!-- Left Side: Info -->
-            <div class="lg:w-2/5 p-6 md:p-8 bg-muted/10 border-b lg:border-b-0 lg:border-r border-border flex flex-col">
-              <div class="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-tertiary/10 text-tertiary mb-6 shadow-inner">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg>
+      
+      <div class="space-y-3">
+        <div v-for="aid in chedPrograms" :key="aid.name" class="border border-border rounded-md overflow-hidden bg-background">
+          <button @click="toggle(aid.name)" class="w-full flex items-center gap-3 p-4 bg-muted/20 hover:bg-muted/50 transition-colors text-left font-semibold text-foreground">
+            <Minus v-if="expanded[aid.name]" class="w-4 h-4 shrink-0 text-foreground" stroke-width="2.5" />
+            <Plus v-else class="w-4 h-4 shrink-0 text-foreground text-opacity-80" stroke-width="2.5" />
+            {{ aid.name }}
+          </button>
+          
+          <div v-show="expanded[aid.name]" class="p-6 border-t border-border bg-background">
+            <div class="mb-6">
+              <div v-if="aid.amount" class="inline-flex items-center gap-2 text-sm font-semibold text-primary mb-3">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" x2="12" y1="2" y2="22"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+                {{ aid.amount }}
               </div>
-              <h3 class="text-2xl font-bold text-foreground mb-4 leading-tight">{{ aid.name }}</h3>
-              <div class="mb-6">
-                <span class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-secondary/10 text-secondary-foreground text-sm font-semibold border border-secondary/20">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" x2="12" y1="2" y2="22"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
-                  {{ aid.amount }}
-                </span>
-              </div>
-              <p class="text-muted-foreground leading-relaxed text-sm md:text-base flex-1">
-                {{ aid.description }}
-              </p>
+              <p class="text-muted-foreground leading-relaxed text-sm md:text-base whitespace-pre-wrap">{{ aid.description }}</p>
             </div>
-
-            <!-- Right Side: Details -->
-            <div class="lg:w-3/5 p-6 md:p-8 space-y-8 bg-card">
-              <!-- Requirements -->
-              <div v-if="aid.requirements.length > 0">
-                <h4 class="text-lg font-semibold text-foreground mb-4 flex items-center gap-2">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-tertiary"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-                  Requirements
+            
+            <div class="gap-8 grid md:grid-cols-2">
+              <div v-if="aid.requirements && aid.requirements.length > 0">
+                <h4 class="text-sm font-bold text-foreground mb-3 tracking-wider flex items-center gap-2">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-tertiary"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                  REQUIREMENTS
                 </h4>
-                <ul class="space-y-3">
-                  <li
-                    v-for="(req, index) in aid.requirements"
-                    :key="index"
-                    class="flex items-start gap-3 text-sm md:text-base"
-                  >
-                    <span class="shrink-0 w-1.5 h-1.5 rounded-full bg-tertiary mt-2"></span>
-                    <span class="text-muted-foreground leading-relaxed">{{ req }}</span>
-                  </li>
+                <ul class="list-disc list-outside ml-4 space-y-2 text-muted-foreground text-sm">
+                  <li v-for="(req, idx) in aid.requirements" :key="idx" class="leading-relaxed pl-1">{{ req }}</li>
                 </ul>
               </div>
-
-              <!-- Application Steps -->
-              <div v-if="aid.applicationSteps.length > 0">
-                <h4 class="text-lg font-semibold text-foreground mb-4 flex items-center gap-2">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-tertiary"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="M15 2H9a1 1 0 0 0-1 1v2a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V3a1 1 0 0 0-1-1Z"/><path d="M12 11h4"/><path d="M12 16h4"/><path d="M8 11h.01"/><path d="M8 16h.01"/></svg>
-                  Application Steps
+              <div v-if="aid.applicationSteps && aid.applicationSteps.length > 0">
+                <h4 class="text-sm font-bold text-foreground mb-3 tracking-wider flex items-center gap-2">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-tertiary"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="M15 2H9a1 1 0 0 0-1 1v2a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V3a1 1 0 0 0-1-1Z"/><path d="M12 11h4"/><path d="M12 16h4"/><path d="M8 11h.01"/><path d="M8 16h.01"/></svg>
+                  APPLICATION STEPS
                 </h4>
-                <div class="space-y-4">
-                  <div
-                    v-for="(step, index) in aid.applicationSteps"
-                    :key="index"
-                    class="flex items-start gap-4 text-sm md:text-base"
-                  >
-                    <div class="shrink-0 w-7 h-7 rounded-full bg-background border-2 border-tertiary/30 text-tertiary flex items-center justify-center font-bold text-xs mt-0.5">
-                      {{ index + 1 }}
-                    </div>
-                    <p class="text-muted-foreground leading-relaxed">{{ step }}</p>
-                  </div>
-                </div>
+                <ul class="list-decimal list-outside ml-4 space-y-2 text-muted-foreground text-sm">
+                  <li v-for="(step, idx) in aid.applicationSteps" :key="idx" class="leading-relaxed pl-1">{{ step }}</li>
+                </ul>
               </div>
             </div>
           </div>
-        </Card>
+        </div>
       </div>
+    </div>
 
+    <!-- Other Government Programs -->
+    <div class="space-y-6">
+      <div class="border-b-2 border-primary/20 pb-2">
+        <h3 class="text-xl md:text-2xl font-bold text-foreground">Other Scholarship Programs</h3>
+      </div>
+      <p class="text-muted-foreground leading-relaxed mb-6">
+        The application for the following Government-Funded Scholarship are agency-direct. Scholars need to submit their applications directly to the scholarship giving agency and transact scholarship concerns like requirements and allowances straight from their office. However, announcements and updates regarding various scholarships offers shall be posted by the ADSO once requested.
+      </p>
+      
+      <div class="space-y-3">
+        <div v-for="(aid, index) in otherGovPrograms" :key="aid.name" class="border border-border rounded-md overflow-hidden bg-background">
+          <button @click="toggle(aid.name)" class="w-full flex items-center gap-3 p-4 bg-muted/20 hover:bg-muted/50 transition-colors text-left font-semibold text-foreground">
+            <span class="text-muted-foreground font-medium text-sm w-4">{{ index + 1 }}.</span>
+            <span class="flex-1">{{ aid.name }}</span>
+            <Minus v-if="expanded[aid.name]" class="w-4 h-4 shrink-0 text-foreground ml-auto" stroke-width="2.5" />
+            <Plus v-else class="w-4 h-4 shrink-0 text-foreground text-opacity-80 ml-auto" stroke-width="2.5" />
+          </button>
+          
+          <div v-show="expanded[aid.name]" class="p-6 border-t border-border bg-background">
+            <div class="mb-6">
+              <div v-if="aid.amount" class="inline-flex items-center gap-2 text-sm font-semibold text-primary mb-3">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" x2="12" y1="2" y2="22"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+                {{ aid.amount }}
+              </div>
+              <p class="text-muted-foreground leading-relaxed text-sm md:text-base whitespace-pre-wrap">{{ aid.description }}</p>
+            </div>
+            
+            <div class="gap-8 grid md:grid-cols-2">
+              <div v-if="aid.requirements && aid.requirements.length > 0">
+                <h4 class="text-sm font-bold text-foreground mb-3 tracking-wider flex items-center gap-2">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-tertiary"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                  REQUIREMENTS
+                </h4>
+                <ul class="list-disc list-outside ml-4 space-y-2 text-muted-foreground text-sm">
+                  <li v-for="(req, idx) in aid.requirements" :key="idx" class="leading-relaxed pl-1">{{ req }}</li>
+                </ul>
+              </div>
+              <div v-if="aid.applicationSteps && aid.applicationSteps.length > 0">
+                <h4 class="text-sm font-bold text-foreground mb-3 tracking-wider flex items-center gap-2">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-tertiary"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="M15 2H9a1 1 0 0 0-1 1v2a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V3a1 1 0 0 0-1-1Z"/><path d="M12 11h4"/><path d="M12 16h4"/><path d="M8 11h.01"/><path d="M8 16h.01"/></svg>
+                  APPLICATION STEPS
+                </h4>
+                <ul class="list-decimal list-outside ml-4 space-y-2 text-muted-foreground text-sm">
+                  <li v-for="(step, idx) in aid.applicationSteps" :key="idx" class="leading-relaxed pl-1">{{ step }}</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
