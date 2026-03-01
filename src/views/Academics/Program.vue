@@ -141,6 +141,19 @@ const programs: Program[] = [
     icon: '<path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>',
     heroImage: 'https://placehold.co/800x800?text=800x800',
     color: 'bg-[#2563EB]'
+  },
+  {
+    id: 'abel',
+    name: 'Bachelor of Arts in English Language',
+    code: 'ABEL',
+    department: 'CTE',
+    description: 'Develops comprehensive knowledge and skills in the English language, linguistic structures, and literature.',
+    duration: '4 years',
+    degree: 'Bachelor of Arts',
+    careers: ['English Instructor', 'Writer/Editor', 'Linguist', 'Communication Specialist'],
+    icon: '<path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/>',
+    heroImage: 'https://placehold.co/800x800?text=800x800',
+    color: 'bg-[#2563EB]'
   }
 ]
 
