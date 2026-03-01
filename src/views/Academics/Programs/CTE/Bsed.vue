@@ -195,6 +195,38 @@ const majors: Major[] = [
             'Seeking Mentorship'
           ]}
         ]
+      },
+      {
+        title: 'CAN I PURSUE THE BSEd MAJOR IN ENGLISH ONLINE AT ST. FRANCIS XAVIER COLLEGE?',
+        contentBlocks: [
+          { type: 'paragraph', content: 'SFXC’s BSEd Major in English combines face-to-face, in-person classes and online learning. This flexible approach ensures that students benefit from hands-on experiences, direct interaction with faculty, and collaborative activities with peers.' }
+        ]
+      },
+      {
+        title: 'WHAT IS THE TYPICAL DURATION OF THE PROGRAM?',
+        contentBlocks: [
+          { type: 'paragraph', content: 'The program usually takes about four years to complete if attending full-time. Part-time students may take longer, depending on their course load. Graduates can review and take the board exam (LEPT—Licensure Examination for Professional Teachers) after finishing the program at SFXC.' }
+        ]
+      },
+      {
+        title: 'WHAT ARE THE PRE-REQUISITES FOR ADMISSION?',
+        contentBlocks: [
+          { type: 'paragraph', content: 'To be eligible for admission to the BSEd major in English program, applicants must meet the following requirements:' },
+          { type: 'list', items: [
+            'High School Diploma or its equivalent',
+            'Completed Application Form',
+            'Submission of required documents such as Birth Certificate, and Transcript of Records (for transferees).'
+          ]}
+        ]
+      },
+      {
+        title: 'HOW CAN I APPLY FOR THE BSED-MAJOR IN ENGLISH PROGRAM?',
+        contentBlocks: [
+          { type: 'paragraph', content: 'Interested applicants are encouraged to submit their applications using the contact details provided below or visit the Admission and Scholarship Office for further information and assistance with the application process. Please ensure that all required documents are submitted before the deadline to be considered for admission.' },
+          { type: 'paragraph', content: 'For further inquiries, kindly visit or contact offices any time between 8:00 AM to 5:00 PM, Monday to Friday.' },
+          { type: 'html', content: '<div class="mt-4"><strong class="text-foreground">𝐀𝐃𝐌𝐈𝐒𝐒𝐈𝐎𝐍 𝐀𝐍𝐃 𝐒𝐂𝐇𝐎𝐋𝐀𝐑𝐒𝐇𝐈𝐏 𝐎𝐅𝐅𝐈𝐂𝐄</strong><br>Facebook: <a href="https://facebook.com/sfxc" target="_blank" class="text-primary hover:underline">SFXC Scholarship Office</a><br>Email: Admission.scholarship@sfxc.edu.ph</div>' },
+          { type: 'html', content: '<div class="mt-2"><strong class="text-foreground">𝐑𝐄𝐆𝐈𝐒𝐓𝐑𝐀𝐑\'𝐒 𝐎𝐅𝐅𝐈𝐂𝐄</strong><br>Facebook: <a href="https://facebook.com/sfxcregistrar" target="_blank" class="text-primary hover:underline">SFXC - Registrar\'s Office</a><br>Email: registraroffice@sfxc.edu.ph<br>Mobile: 0908 885 3687</div>' }
+        ]
       }
     ]
   },
@@ -283,6 +315,38 @@ const majors: Major[] = [
             'Improving your Digital Literacy',
             'Seeking Mentorship'
           ]}
+        ]
+      },
+      {
+        title: 'CAN I PURSUE THE BSEd MAJOR IN MATHEMATICS ONLINE AT ST. FRANCIS XAVIER COLLEGE?',
+        contentBlocks: [
+          { type: 'paragraph', content: 'SFXC’s BSEd Major in Mathematics combines face-to-face, in-person classes and online learning. This flexible approach ensures that students benefit from hands-on experiences, direct interaction with faculty, and collaborative activities with peers.' }
+        ]
+      },
+      {
+        title: 'WHAT IS THE TYPICAL DURATION OF THE PROGRAM?',
+        contentBlocks: [
+          { type: 'paragraph', content: 'The program usually takes about four years to complete if attending full-time. Part-time students may take longer, depending on their course load. Graduates can review and take the board exam (LEPT—Licensure Examination for Professional Teachers) after finishing the program at SFXC.' }
+        ]
+      },
+      {
+        title: 'WHAT ARE THE PRE-REQUISITES FOR ADMISSION?',
+        contentBlocks: [
+          { type: 'paragraph', content: 'To be eligible for admission to the BSEd major in Mathematics program, applicants must meet the following requirements:' },
+          { type: 'list', items: [
+            'High School Diploma or its equivalent',
+            'Completed Application Form',
+            'Submission of required documents such as Birth Certificate, and Transcript of Records (for transferees).'
+          ]}
+        ]
+      },
+      {
+        title: 'HOW CAN I APPLY FOR THE BSED-MAJOR IN MATHEMATICS PROGRAM?',
+        contentBlocks: [
+          { type: 'paragraph', content: 'Interested applicants are encouraged to submit their applications using the contact details provided below or visit the Admission and Scholarship Office for further information and assistance with the application process. Please ensure that all required documents are submitted before the deadline to be considered for admission.' },
+          { type: 'paragraph', content: 'For further inquiries, kindly visit or contact offices any time between 8:00 AM to 5:00 PM, Monday to Friday.' },
+          { type: 'html', content: '<div class="mt-4"><strong class="text-foreground">𝐀𝐃𝐌𝐈𝐒𝐒𝐈𝐎𝐍 𝐀𝐍𝐃 𝐒𝐂𝐇𝐎𝐋𝐀𝐑𝐒𝐇𝐈𝐏 𝐎𝐅𝐅𝐈𝐂𝐄</strong><br>Facebook: <a href="https://facebook.com/sfxc" target="_blank" class="text-primary hover:underline">SFXC Scholarship Office</a><br>Email: Admission.scholarship@sfxc.edu.ph</div>' },
+          { type: 'html', content: '<div class="mt-2"><strong class="text-foreground">𝐑𝐄𝐆𝐈𝐒𝐓𝐑𝐀𝐑\'𝐒 𝐎𝐅𝐅𝐈𝐂𝐄</strong><br>Facebook: <a href="https://facebook.com/sfxcregistrar" target="_blank" class="text-primary hover:underline">SFXC - Registrar\'s Office</a><br>Email: registraroffice@sfxc.edu.ph<br>Mobile: 0908 885 3687</div>' }
         ]
       }
     ]
