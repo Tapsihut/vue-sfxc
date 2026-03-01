@@ -113,7 +113,8 @@ const programs: Program[] = [
     careers: ['Police Officer', 'Criminal Investigator', 'Forensic Specialist', 'Security Manager'],
     icon: '<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10"/>',
     heroImage: 'https://placehold.co/800x800?text=800x800',
-    color: 'bg-[#DC2626]'
+    color: 'bg-[#DC2626]',
+    routeName: 'criminology'
   },
   {
     id: 'bsed',

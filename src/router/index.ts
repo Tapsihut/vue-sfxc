@@ -26,6 +26,7 @@ import OfficeDirectory from '@/views/Abouts/OfficeDirectory.vue'
 import Accredation from '@/views/Abouts/Accredation.vue'
 import Bsoa from '@/views/Academics/Programs/CBE/BSOA.vue'
 import Bsba from '@/views/Academics/Programs/CBE/BSBA.vue'
+import Criminology from '@/views/Academics/Programs/CCJE/Criminology.vue'
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
     routes: [
@@ -129,6 +130,14 @@ const router = createRouter({
             path: '/academics/programs/cbe/bsba',
             name: 'bsba',
             component: Bsba,
+            meta: {
+                layout: 'guest',
+            },
+        },
+        {
+            path: '/academics/programs/ccje/criminology',
+            name: 'criminology',
+            component: Criminology,
             meta: {
                 layout: 'guest',
             },
