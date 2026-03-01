@@ -230,7 +230,15 @@ const router = createRouter({
         }
     ],
     scrollBehavior(to, from, savedPosition) {
-        // always scroll to top
+        if (to.hash) {
+            return {
+                el: to.hash,
+                behavior: 'smooth',
+            }
+        }
+        if (savedPosition) {
+            return savedPosition
+        }
         return { top: 0 }
     },
 })

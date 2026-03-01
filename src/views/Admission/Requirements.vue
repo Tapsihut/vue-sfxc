@@ -248,8 +248,8 @@ const currentRequirements = () => {
           This Admission Hub section is your go-to place for all things related to enrolling at SFXC and becoming a Xavier Knight. Run by the Admission and Scholarship Office, this hub helps interested parents and students…
         </p>
         <ul class="list-disc list-inside text-lg text-muted-foreground mb-8 pl-6 space-y-2">
-          <li><router-link to="/academics/programs" class="text-tertiary hover:underline font-medium">Decide on a course;</router-link></li>
-          <li><router-link to="/admission/guide" class="text-tertiary hover:underline font-medium">Learn how to enroll;</router-link></li>
+          <li><router-link :to="{ hash: '#courses' }" class="text-tertiary hover:underline font-medium">Decide on a course;</router-link></li>
+          <li><router-link :to="{ hash: '#enrollment' }" class="text-tertiary hover:underline font-medium">Learn how to enroll;</router-link></li>
           <li><router-link to="/academics/scholarship" class="text-tertiary hover:underline font-medium">Discover financial aid opportunities (scholarships and grants);</router-link></li>
           <li><router-link to="/academics/enrollment" class="text-tertiary hover:underline font-medium">Enroll online;</router-link> and</li>
           <li><router-link to="/admission/tour" class="text-tertiary hover:underline font-medium">Schedule a campus tour</router-link></li>
@@ -280,7 +280,7 @@ const currentRequirements = () => {
       <Separator class="my-16" />
 
       <!-- What Course Should I Choose Section -->
-      <div class="mb-16">
+      <div id="courses" class="mb-16 scroll-mt-24">
         <div class="mb-12 text-center md:text-left">
           <h2 class="text-3xl md:text-4xl font-black mb-3 text-primary uppercase tracking-wide">What Course Should I Choose?</h2>
           <div class="h-1.5 w-24 bg-tertiary mb-6 mx-auto md:mx-0"></div>
@@ -595,7 +595,7 @@ const currentRequirements = () => {
       <Separator class="my-20" />
 
       <!-- Enrollment Guide Section -->
-      <div>
+      <div id="enrollment" class="scroll-mt-24">
         <div class="text-center mb-12">
           <h2 class="text-3xl font-bold mb-3">How to Enroll at SFXC</h2>
           <p class="text-muted-foreground">The College implements a systematic enrollment process to ensure that all students are properly registered and credited for their academic work. The following steps will be followed for enrollment of new students, old students, and transferee students.</p>
