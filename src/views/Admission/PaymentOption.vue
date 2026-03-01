@@ -133,6 +133,31 @@ const financialAids: FinancialAid[] = [
   }
 ]
 
+
+interface RequirementNode {
+  text: string
+  subItems?: string[]
+}
+
+const parseRequirements = (reqs: string[]): RequirementNode[] => {
+  return reqs.map(req => {
+    const lines = req.split('\n').filter(line => line.trim() !== '')
+    if (lines.length > 1) {
+      return {
+        text: lines[0]?.trim() ?? '',
+        subItems: lines.slice(1).map(line => line.trim())
+      }
+    }
+    return { text: req.trim() }
+  })
+}
+
+const nestedExpanded = ref<Record<string, boolean>>({})
+
+const toggleNested = (key: string) => {
+  nestedExpanded.value[key] = !nestedExpanded.value[key]
+}
+
 const expanded = ref<Record<string, boolean>>({})
 
 const toggle = (name: string) => {
@@ -181,8 +206,26 @@ const otherGovPrograms = computed(() => financialAids.filter(p => !p.name.includ
                   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-tertiary"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
                   REQUIREMENTS
                 </h4>
-                <ul class="list-disc list-outside ml-4 space-y-2 text-muted-foreground text-sm">
-                  <li v-for="(req, idx) in aid.requirements" :key="idx" class="leading-relaxed pl-1">{{ req }}</li>
+                <ul class="space-y-3 text-sm">
+                  <li v-for="(req, idx) in parseRequirements(aid.requirements)" :key="idx" class="leading-relaxed">
+                    <div v-if="req.subItems" class="bg-muted/30 rounded-md border border-border">
+                      <button @click="toggleNested(`${aid.name}-req-${idx}`)" class="w-full flex items-center justify-between p-3 text-left font-medium text-foreground hover:bg-muted/50 transition-colors rounded-md">
+                        <span>{{ req.text }}</span>
+                        <ChevronRight :class="['w-4 h-4 shrink-0 transition-transform duration-200 text-muted-foreground', nestedExpanded[`${aid.name}-req-${idx}`] ? 'rotate-90' : '']" />
+                      </button>
+                      <div v-show="nestedExpanded[`${aid.name}-req-${idx}`]" class="px-3 pb-3 pt-1">
+                        <ul class="space-y-2 ml-2 border-l-2 border-primary/20 pl-4 py-1">
+                          <li v-for="(sub, subIdx) in req.subItems" :key="subIdx" class="text-muted-foreground text-sm leading-relaxed">
+                            {{ sub }}
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                    <div v-else class="flex items-start gap-2 pt-1">
+                      <span class="shrink-0 w-1.5 h-1.5 rounded-full bg-primary mt-1.5"></span>
+                      <span class="text-muted-foreground">{{ req.text }}</span>
+                    </div>
+                  </li>
                 </ul>
               </div>
               <div v-if="aid.applicationSteps && aid.applicationSteps.length > 0">
@@ -233,8 +276,26 @@ const otherGovPrograms = computed(() => financialAids.filter(p => !p.name.includ
                   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-tertiary"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
                   REQUIREMENTS
                 </h4>
-                <ul class="list-disc list-outside ml-4 space-y-2 text-muted-foreground text-sm">
-                  <li v-for="(req, idx) in aid.requirements" :key="idx" class="leading-relaxed pl-1">{{ req }}</li>
+                <ul class="space-y-3 text-sm">
+                  <li v-for="(req, idx) in parseRequirements(aid.requirements)" :key="idx" class="leading-relaxed">
+                    <div v-if="req.subItems" class="bg-muted/30 rounded-md border border-border">
+                      <button @click="toggleNested(`${aid.name}-req-${idx}`)" class="w-full flex items-center justify-between p-3 text-left font-medium text-foreground hover:bg-muted/50 transition-colors rounded-md">
+                        <span>{{ req.text }}</span>
+                        <ChevronRight :class="['w-4 h-4 shrink-0 transition-transform duration-200 text-muted-foreground', nestedExpanded[`${aid.name}-req-${idx}`] ? 'rotate-90' : '']" />
+                      </button>
+                      <div v-show="nestedExpanded[`${aid.name}-req-${idx}`]" class="px-3 pb-3 pt-1">
+                        <ul class="space-y-2 ml-2 border-l-2 border-primary/20 pl-4 py-1">
+                          <li v-for="(sub, subIdx) in req.subItems" :key="subIdx" class="text-muted-foreground text-sm leading-relaxed">
+                            {{ sub }}
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                    <div v-else class="flex items-start gap-2 pt-1">
+                      <span class="shrink-0 w-1.5 h-1.5 rounded-full bg-primary mt-1.5"></span>
+                      <span class="text-muted-foreground">{{ req.text }}</span>
+                    </div>
+                  </li>
                 </ul>
               </div>
               <div v-if="aid.applicationSteps && aid.applicationSteps.length > 0">
