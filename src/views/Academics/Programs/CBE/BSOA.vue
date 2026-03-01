@@ -1,8 +1,9 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card'
+import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { Separator } from '@/components/ui/separator'
+import { Button } from '@/components/ui/button'
 
 interface ProgramSection {
   title: string
@@ -161,7 +162,7 @@ const programUpdates = [
     title: 'Office Administration Week 2026',
     date: 'March 15, 2026',
     excerpt: 'Join us as we celebrate the Office Administration Week with seminars, skills competitions, and a keynote speech from industry experts.',
-    image: 'https://placehold.co/800x600?text=Office+Administration+Week',
+    image: 'https://placehold.co/800x600/000000/FFFFFF?text=800x600',
     author: 'CBE Department',
     category: 'Event'
   },
@@ -170,7 +171,7 @@ const programUpdates = [
     title: 'New Virtual Assistant Certification Integration',
     date: 'February 28, 2026',
     excerpt: 'The BSOA program is proud to announce a new partnership that integrates specialized Virtual Assistant certification within our curriculum.',
-    image: 'https://placehold.co/800x600?text=Virtual+Assistant+Certification',
+    image: 'https://placehold.co/800x600/000000/FFFFFF?text=800x600',
     author: 'Academic Affairs',
     category: 'Curriculum'
   },
@@ -179,7 +180,7 @@ const programUpdates = [
     title: 'Alumni Spotlight: Managing Multinational Operations',
     date: 'January 20, 2026',
     excerpt: 'Read about how our BSOA alumni are leading operational and administrative functions across global corporate offices.',
-    image: 'https://placehold.co/800x600?text=Alumni+Spotlight',
+    image: 'https://placehold.co/800x600/000000/FFFFFF?text=800x600',
     author: 'Alumni Network',
     category: 'Feature'
   }
@@ -189,7 +190,7 @@ const programUpdates = [
 <template>
   <section id="home" class="relative">
     <div
-      class="h-120 md:h-[75dvh] flex flex-col relative bg-[url('/src/assets/images/sfxc-building.jpg')] bg-cover bg-center bg-no-repeat"
+      class="h-120 md:h-[75dvh] flex flex-col relative bg-[url('https://placehold.co/1920x1080/000000/FFFFFF?text=1920x1080')] bg-cover bg-center bg-no-repeat"
     >
       <div
         class="absolute inset-0 bg-linear-to-t from-primary/90 via-background/20 to-transparent"
@@ -233,10 +234,10 @@ const programUpdates = [
           
           <div class="space-y-3">
             <Card v-for="section in programDetails" :key="section.title" class="border border-border rounded-md overflow-hidden bg-card">
-              <button @click="toggle(section.title)" class="w-full flex items-center gap-3 p-4 bg-muted/20 hover:bg-muted/50 transition-colors text-left font-semibold text-card-foreground">
-                <span class="font-bold text-lg leading-none w-4 text-center text-primary">{{ expanded[section.title] ? '-' : '+' }}</span>
-                <span>{{ section.title }}</span>
-              </button>
+              <Button @click="toggle(section.title)" variant="ghost" class="w-full flex justify-start items-center gap-3 p-4 bg-muted/20 hover:bg-muted/50 rounded-none transition-colors text-left font-semibold text-card-foreground h-auto relative whitespace-normal">
+                <span class="font-bold text-lg leading-none w-4 shrink-0 text-center text-primary">{{ expanded[section.title] ? '-' : '+' }}</span>
+                <span class="text-left w-full">{{ section.title }}</span>
+              </Button>
               
               <div v-show="expanded[section.title]" class="p-6 border-t border-border bg-card">
                 <template v-for="(block, idx) in section.contentBlocks" :key="idx">
@@ -263,18 +264,17 @@ const programUpdates = [
       </div>
 
       <!-- Sidebar (Right) -->
-      <div class="lg:col-span-1">
-        <Card class="overflow-hidden shadow-lg lg:sticky lg:top-24 bg-card border-border">
-          <CardContent class="p-6">
-            <div class="aspect-4/5 w-full overflow-hidden rounded-md mb-6 bg-muted">
-              <img src="https://placehold.co/600x800?text=Program+Head" alt="Program Head" class="w-full h-full object-cover" />
+      <div class="lg:col-span-1 space-y-6 lg:sticky lg:top-24 h-max">
+        <Card class="overflow-hidden shadow-lg bg-card border-border">
+          <CardHeader class="pb-4">
+            <div class="aspect-square w-full overflow-hidden rounded-md mb-4 bg-muted">
+              <img src="https://placehold.co/600x600/000000/FFFFFF?text=600x600" alt="Program Head" class="w-full h-full object-cover" />
             </div>
             
-            <div class="mb-6">
-              <CardTitle class="text-xl font-bold uppercase tracking-wide text-primary">Robert Ian P. Rivera</CardTitle>
-              <CardDescription class="text-sm font-medium mt-1">Program Head, BSOA</CardDescription>
-            </div>
-            
+            <CardTitle class="text-xl font-bold uppercase tracking-wide text-primary">Robert Ian P. Rivera</CardTitle>
+            <CardDescription class="text-sm font-medium">Program Head, BSOA</CardDescription>
+          </CardHeader>
+          <CardContent>
             <Separator class="mb-6"/>
 
             <div class="space-y-4">
@@ -297,6 +297,32 @@ const programUpdates = [
             </div>
           </CardContent>
         </Card>
+
+        <!-- Program Governor Card -->
+        <Card class="overflow-hidden shadow-lg bg-card border-border">
+          <CardHeader class="pb-4">
+            <div class="aspect-square w-full overflow-hidden rounded-md mb-4 bg-muted">
+              <img src="https://placehold.co/600x600/000000/FFFFFF?text=600x600" alt="Program Governor" class="w-full h-full object-cover" />
+            </div>
+            
+            <CardTitle class="text-xl font-bold uppercase tracking-wide text-primary">Novie Marie Cabigquiz</CardTitle>
+            <CardDescription class="text-sm font-medium">Governor, BSOA</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <Separator class="mb-6"/>
+
+            <div class="space-y-4">
+              <h4 class="font-semibold text-lg text-foreground">Contact Information</h4>
+              
+              <div class="space-y-3 text-sm text-card-foreground">
+                <div class="flex items-start gap-3">
+                  <span class="mt-0.5 font-medium text-muted-foreground">Email:</span>
+                  <span>cabigquiz.noviemarie@sfxc.edu.ph</span>
+                </div>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
       </div>
       
     </div>
@@ -311,21 +337,21 @@ const programUpdates = [
         <Card 
           v-for="item in programUpdates" 
           :key="item.id" 
-          class="overflow-hidden border-border rounded-xl hover:shadow-lg transition-shadow flex flex-col group bg-card"
+          class="overflow-hidden border-border rounded-xl hover:shadow-lg transition-shadow flex flex-col group bg-card p-0"
         >
           <div class="h-56 overflow-hidden">
             <img :src="item.image" :alt="item.title" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
           </div>
-          <CardContent class="p-6 flex-1 flex flex-col">
-            <div class="mb-4">
+          <CardHeader class="pb-2">
+            <div class="mb-2">
               <Badge variant="secondary" class="font-bold">
                 {{ item.category }}
               </Badge>
             </div>
-            <CardTitle class="text-xl font-bold mb-4 line-clamp-3 transition-colors text-foreground">
+            <CardTitle class="text-xl font-bold line-clamp-2 transition-colors text-foreground">
               {{ item.title }}
             </CardTitle>
-            <div class="flex items-center text-xs text-muted-foreground mb-4 space-x-4">
+            <div class="flex items-center text-xs text-muted-foreground pt-1 space-x-4">
               <div class="flex items-center">
                 <span>by: {{ item.author }}</span>
               </div>
@@ -333,7 +359,9 @@ const programUpdates = [
                 <span>{{ item.date }}</span>
               </div>
             </div>
-            <CardDescription class="text-sm line-clamp-3 mt-auto mb-0">
+          </CardHeader>
+          <CardContent class="flex-1">
+            <CardDescription class="text-sm line-clamp-3">
               {{ item.excerpt }}
             </CardDescription>
           </CardContent>
