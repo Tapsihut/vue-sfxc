@@ -2,6 +2,8 @@
 import { ref, computed } from 'vue'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
+import { Separator } from '@/components/ui/separator'
+import { Plus, Minus } from 'lucide-vue-next'
 const bsitPicture = 'https://placehold.co/800x800?text=800x800'
 
 interface Program {
@@ -165,6 +167,31 @@ const colleges: College[] = [
   }
 ]
 
+const otherProgramsData = [
+  {
+    name: 'Unit Earner Program',
+    description: 'This program is designed for professionals who wish to earn education units to qualify for the Licensure Examination for Teachers (LET). It provides the necessary pedagogical knowledge and skills for effective teaching.'
+  },
+  {
+    name: 'Technical Vocational Programs',
+    description: 'Our TechVoc programs offer practical, skills-based training aligned with industry standards. These short-course programs prepare students for immediate employment and TESDA certification.'
+  },
+  {
+    name: 'Research Development Office',
+    description: 'The Research Development Office (RDO) spearheads the institution\'s research initiatives, fostering a culture of innovation and scholarly inquiry among faculty and students for the advancement of knowledge and community development.'
+  },
+  {
+    name: 'International Relations Office',
+    description: 'The International Relations Office (IRO) establishes global partnerships and programs, providing students and faculty with international exposure, exchange opportunities, and collaborative linkages across borders.'
+  }
+]
+
+const expandedOtherPrograms = ref<Record<string, boolean>>({})
+
+const toggleOtherProgram = (name: string) => {
+  expandedOtherPrograms.value[name] = !expandedOtherPrograms.value[name]
+}
+
 const selectedCollege = ref<string | null>(null)
 const programsSection = ref<HTMLElement | null>(null)
 
@@ -187,31 +214,52 @@ const selectCollege = (collegeCode: string) => {
 
 <template>
   <div class="min-h-screen bg-background pb-24">
-    <!-- Hero Section -->
-    <section
-      class="relative h-[58vh] flex items-end overflow-hidden bg-[url('https://placehold.co/1920x1080?text=1920x1080')] bg-cover bg-center"
-    >
-      <!-- <div class="absolute inset-0 bg-linear-to-t from-background via-black/60 to-transparent" /> -->
-
-      <!-- <div class="relative z-10 w-full max-w-7xl mx-auto px-6 lg:px-12 pb-14 animate-fade-in-up">
-        <Badge variant="outline" class="mb-6 px-4 py-1.5 text-xs tracking-[0.2em] uppercase rounded-none border-white/20 text-white bg-transparent backdrop-blur-sm">
-          Academic Programs
-        </Badge>
-        <h1 class="text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight text-white leading-tight mb-4">
-          Colleges &<br class="hidden sm:block" /> Programs.
-        </h1>
-        <p class="text-lg md:text-xl text-white/80 font-light leading-relaxed max-w-2xl">
-          Explore the degree and graduate programs offered at St. Francis Xavier College.
-        </p>
-      </div> -->
+    <!-- Hero Section (Article Style) -->
+    <section id="hero" class="relative">
+      <div class="h-[40vh] md:h-[50dvh] flex flex-col relative bg-primary/5 bg-no-repeat">
+        <div class="absolute inset-0 bg-linear-to-t from-tertiary/90 via-background/20 to-transparent"></div>
+        <div class="absolute bottom-0 left-0 right-0 text-background leading-none">
+          <svg class="w-full h-12 md:h-24" viewBox="0 0 1440 320" preserveAspectRatio="none">
+            <path fill="currentColor" d="M0,224L1440,128L1440,320L0,320Z"></path>
+          </svg>
+        </div>
+      </div>
     </section>
 
+    <!-- Academics Article Content -->
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 md:pt-16 mt-8">
+      <h1 class="text-4xl md:text-5xl font-extrabold text-foreground mb-8">Academics at SFXC</h1>
+      
+      <div class="space-y-6 text-lg md:text-xl text-muted-foreground mb-16 leading-relaxed">
+        <p>
+          At St. Francis Xavier College, we form Xavier Knights, committed to service, strengthened by fortitude, driven toward excellence, and grounded in Christ-centeredness.
+        </p>
+        <p>
+          Here, you don’t just learn — you grow in character, conviction, and purpose. Our holistic education shapes not only what you know, but who you become.
+        </p>
+        
+        <div class="border-l-4 border-tertiary pl-6 md:pl-8 py-4 my-10 bg-muted/30 rounded-r-lg">
+          <p class="text-2xl md:text-3xl font-bold text-primary mb-2 leading-tight">
+            This is where leaders are formed.<br>
+            This is where impact begins.
+          </p>
+        </div>
+
+        <p class="font-bold text-foreground text-xl">
+          Choose SFXC. Become a Xavier Knight.
+        </p>
+      </div>
+
+      <Separator class="my-16" />
+    </div>
+
     <!-- College Selection Section -->
-    <section class="max-w-7xl mx-auto px-6 lg:px-12 mt-12">
-      <!-- <div class="text-center mb-12">
-        <h2 class="text-3xl md:text-4xl font-bold mb-3">Choose Your College</h2>
-        <p class="text-muted-foreground text-lg">Select a college to view available programs</p>
-      </div> -->
+    <section class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 mt-16 md:mt-24">
+      <div class="mb-12">
+        <h2 class="text-3xl md:text-4xl font-black mb-3 text-primary uppercase tracking-wide">Start your Xavier Knight Education today</h2>
+        <div class="h-1.5 w-24 bg-tertiary mb-6"></div>
+        <p class="text-lg text-muted-foreground">Select a college to explore our various programs and find the path that fits your goals.</p>
+      </div>
 
       <!-- College Cards -->
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
@@ -281,7 +329,7 @@ const selectCollege = (collegeCode: string) => {
           <TransitionGroup 
             name="list" 
             tag="div" 
-            class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2"
+            class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4"
           >
             <div 
               v-for="(program, index) in filteredPrograms" 
@@ -347,66 +395,32 @@ const selectCollege = (collegeCode: string) => {
         </div>
       </Transition>
     </section>
+
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      <Separator class="my-16" />
+    </div>
+
+      <!-- Other Programs Section -->
+      <section class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 mt-24 mb-12">
+        <div class="mb-12">
+          <h2 class="text-3xl md:text-4xl font-black mb-3 text-primary uppercase tracking-wide">Explore Other Programs</h2>
+          <div class="h-1.5 w-24 bg-tertiary mb-6"></div>
+          <p class="text-lg text-muted-foreground">Discover other educational opportunities and offices dedicated to your success.</p>
+        </div>
+        
+        <div class="space-y-3">
+          <div v-for="program in otherProgramsData" :key="program.name" class="border border-border rounded-md overflow-hidden bg-background">
+            <button @click="toggleOtherProgram(program.name)" class="w-full flex items-center gap-3 p-4 bg-muted/20 hover:bg-muted/50 transition-colors text-left font-semibold text-foreground">
+              <span class="flex-1 text-lg">{{ program.name }}</span>
+              <Minus v-if="expandedOtherPrograms[program.name]" class="w-5 h-5 shrink-0 text-foreground ml-auto" stroke-width="2.5" />
+              <Plus v-else class="w-5 h-5 shrink-0 text-foreground text-opacity-80 ml-auto" stroke-width="2.5" />
+            </button>
+            
+            <div v-show="expandedOtherPrograms[program.name]" class="p-6 border-t border-border bg-background">
+              <p class="text-muted-foreground leading-relaxed text-sm md:text-base whitespace-pre-wrap">{{ program.description }}</p>
+            </div>
+          </div>
+        </div>
+      </section>
   </div>
 </template>
-
-<style scoped>
-/* Animations */
-@keyframes fade-in {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-
-@keyframes fade-in-up {
-  from {
-    opacity: 0;
-    transform: translateY(15px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.animate-fade-in {
-  animation: fade-in 0.6s ease-out forwards;
-}
-
-.animate-fade-in-up {
-  animation: fade-in-up 0.5s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
-  opacity: 0;
-}
-
-/* Transition Group */
-.list-move,
-.list-enter-active,
-.list-leave-active {
-  transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
-}
-
-.list-enter-from,
-.list-leave-to {
-  opacity: 0;
-  transform: scale(0.96) translateY(10px);
-}
-
-.list-leave-active {
-  position: absolute;
-}
-
-/* Slide Down Transition */
-.slide-down-enter-active,
-.slide-down-leave-active {
-  transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
-}
-
-.slide-down-enter-from {
-  opacity: 0;
-  transform: translateY(-20px);
-}
-
-.slide-down-leave-to {
-  opacity: 0;
-  transform: translateY(-10px);
-}
-</style>
