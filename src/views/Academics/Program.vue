@@ -141,7 +141,8 @@ const programs: Program[] = [
     careers: ['Elementary Teacher', 'Education Coordinator', 'Curriculum Developer', 'School Administrator'],
     icon: '<path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>',
     heroImage: 'https://placehold.co/800x800?text=800x800',
-    color: 'bg-[#2563EB]'
+    color: 'bg-[#2563EB]',
+    routeName: 'beed'
   },
   {
     id: 'abel',

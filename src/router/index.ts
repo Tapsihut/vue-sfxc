@@ -28,6 +28,7 @@ import Bsoa from '@/views/Academics/Programs/CBE/BSOA.vue'
 import Bsba from '@/views/Academics/Programs/CBE/BSBA.vue'
 import Criminology from '@/views/Academics/Programs/CCJE/Criminology.vue'
 import Bsed from '@/views/Academics/Programs/CTE/Bsed.vue'
+import Beed from '@/views/Academics/Programs/CTE/Beed.vue'
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
     routes: [
@@ -147,6 +148,14 @@ const router = createRouter({
             path: '/academics/programs/cte/bsed',
             name: 'bsed',
             component: Bsed,
+            meta: {
+                layout: 'guest',
+            },
+        },
+        {
+            path: '/academics/programs/cte/beed',
+            name: 'beed',
+            component: Beed,
             meta: {
                 layout: 'guest',
             },
