@@ -115,7 +115,8 @@ const programs: Program[] = [
     careers: ['Internal Auditor', 'Risk Analyst', 'Compliance Officer', 'Fraud Investigator'],
     icon: '<circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><path d="m11 8 3 3-3 3"/>',
     heroImage: 'https://placehold.co/800x800?text=800x800',
-    color: 'bg-[#14B8A6]'
+    color: 'bg-[#14B8A6]',
+    routeName: 'bsia'
   },
   {
     id: 'ma',
