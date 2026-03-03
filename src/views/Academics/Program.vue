@@ -73,7 +73,8 @@ const programs: Program[] = [
     careers: ['Certified Public Accountant', 'Auditor', 'Tax Consultant', 'Financial Analyst'],
     icon: '<rect width="16" height="20" x="4" y="2" rx="2" ry="2"/><path d="M9 22v-4h6v4"/><path d="M8 6h.01"/><path d="M16 6h.01"/><path d="M12 6h.01"/><path d="M12 10h.01"/><path d="M12 14h.01"/><path d="M16 10h.01"/><path d="M16 14h.01"/><path d="M8 10h.01"/><path d="M8 14h.01"/>',
     heroImage: 'https://placehold.co/800x800?text=800x800',
-    color: 'bg-[#3B82F6]'
+    color: 'bg-[#3B82F6]',
+    routeName: 'bsa'
   },
   {
     id: 'ais',
@@ -101,6 +102,45 @@ const programs: Program[] = [
     heroImage: 'https://placehold.co/800x800?text=800x800',
     color: 'bg-[#A855F7]',
     routeName: 'bsoa'
+  },
+  {
+    id: 'ia',
+    name: 'Bachelor of Science in Internal Auditing',
+    code: 'BSIA',
+    department: 'CBE',
+    description: 'Prepares students for a career in internal auditing, risk management, and corporate governance.',
+    duration: '4 years',
+    degree: 'Bachelor of Science',
+    careers: ['Internal Auditor', 'Risk Analyst', 'Compliance Officer', 'Fraud Investigator'],
+    icon: '<circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><path d="m11 8 3 3-3 3"/>',
+    heroImage: 'https://placehold.co/800x800?text=800x800',
+    color: 'bg-[#14B8A6]'
+  },
+  {
+    id: 'ma',
+    name: 'Bachelor of Science in Management Accounting',
+    code: 'BSMA',
+    department: 'CBE',
+    description: 'Focuses on financial planning, performance management, and strategic decision-making.',
+    duration: '4 years',
+    degree: 'Bachelor of Science',
+    careers: ['Management Accountant', 'Financial Controller', 'Cost Consultant', 'Business Analyst'],
+    icon: '<path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/>',
+    heroImage: 'https://placehold.co/800x800?text=800x800',
+    color: 'bg-[#EC4899]'
+  },
+  {
+    id: 'entrepreneurship',
+    name: 'Bachelor of Science in Entrepreneurship',
+    code: 'BSE',
+    department: 'CBE',
+    description: 'Equips students with the mindset and skills to start, manage, and grow their own business ventures.',
+    duration: '4 years',
+    degree: 'Bachelor of Science',
+    careers: ['Business Owner', 'Startup Founder', 'Business Consultant', 'Innovator'],
+    icon: '<path d="M12 2v20"/><path d="m17 5-5-3-5 3"/><path d="m17 19-5 3-5-3"/><path d="M2 12h20"/><path d="m5 7-3 5 3 5"/><path d="m19 7 3 5-3 5"/>',
+    heroImage: 'https://placehold.co/800x800?text=800x800',
+    color: 'bg-[#F97316]'
   },
   {
     id: 'criminology',

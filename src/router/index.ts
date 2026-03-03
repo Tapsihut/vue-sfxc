@@ -24,9 +24,13 @@ import Stories from '@/views/Community/Stories.vue'
 import Facilities from '@/views/Abouts/Facilities.vue'
 import OfficeDirectory from '@/views/Abouts/OfficeDirectory.vue'
 import Accredation from '@/views/Abouts/Accredation.vue'
+//CBE
 import Bsoa from '@/views/Academics/Programs/CBE/BSOA.vue'
 import Bsba from '@/views/Academics/Programs/CBE/BSBA.vue'
+import Bsa from '@/views/Academics/Programs/CBE/BSA.vue'
+//CCJE
 import Criminology from '@/views/Academics/Programs/CCJE/Criminology.vue'
+//CTE
 import Bsed from '@/views/Academics/Programs/CTE/Bsed.vue'
 import Beed from '@/views/Academics/Programs/CTE/Beed.vue'
 const router = createRouter({
@@ -132,6 +136,14 @@ const router = createRouter({
             path: '/academics/programs/cbe/bsba',
             name: 'bsba',
             component: Bsba,
+            meta: {
+                layout: 'guest',
+            },
+        },
+        {
+            path: '/academics/programs/cbe/bsa',
+            name: 'bsa',
+            component: Bsa,
             meta: {
                 layout: 'guest',
             },
