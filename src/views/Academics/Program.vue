@@ -243,7 +243,7 @@ const otherProgramsData = [
   {
     name: 'Technical Vocational Programs',
     description: 'Our TechVoc programs offer practical, skills-based training aligned with industry standards. These short-course programs prepare students for immediate employment and TESDA certification.',
-    link: '#' // Replace with actual link
+    link: '/academics/programs/tech-voc'
   },
   {
     name: 'Research Development Office',

@@ -41,6 +41,7 @@ import Abel from '@/views/Academics/Programs/CTE/Abel.vue'
 
 //Other
 import UnitEarner from '@/views/Academics/Programs/UnitEarner.vue'
+import TechVoc from '@/views/Academics/Programs/TechVoc.vue'
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
     routes: [
@@ -224,6 +225,14 @@ const router = createRouter({
             path: '/academics/programs/unit-earner',
             name: 'unit-earner',
             component: UnitEarner,
+            meta: {
+                layout: 'guest',
+            },
+        },
+        {
+            path: '/academics/programs/tech-voc',
+            name: 'tech-voc',
+            component: TechVoc,
             meta: {
                 layout: 'guest',
             },
