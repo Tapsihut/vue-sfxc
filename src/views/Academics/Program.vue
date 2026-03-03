@@ -73,7 +73,8 @@ const programs: Program[] = [
     careers: ['Certified Public Accountant', 'Auditor', 'Tax Consultant', 'Financial Analyst'],
     icon: '<rect width="16" height="20" x="4" y="2" rx="2" ry="2"/><path d="M9 22v-4h6v4"/><path d="M8 6h.01"/><path d="M16 6h.01"/><path d="M12 6h.01"/><path d="M12 10h.01"/><path d="M12 14h.01"/><path d="M16 10h.01"/><path d="M16 14h.01"/><path d="M8 10h.01"/><path d="M8 14h.01"/>',
     heroImage: 'https://placehold.co/800x800?text=800x800',
-    color: 'bg-[#3B82F6]'
+    color: 'bg-[#3B82F6]',
+    routeName: 'bsa'
   },
   {
     id: 'ais',
@@ -86,7 +87,8 @@ const programs: Program[] = [
     careers: ['Systems Accountant', 'IT Auditor', 'Business Analyst', 'Data Analyst'],
     icon: '<ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v14a9 3 0 0 0 18 0V5"/><path d="M3 12a9 3 0 0 0 18 0"/>',
     heroImage: 'https://placehold.co/800x800?text=800x800',
-    color: 'bg-[#3B82F6]'
+    color: 'bg-[#3B82F6]',
+    routeName: 'bsais'
   },
   {
     id: 'oa',
@@ -101,6 +103,48 @@ const programs: Program[] = [
     heroImage: 'https://placehold.co/800x800?text=800x800',
     color: 'bg-[#A855F7]',
     routeName: 'bsoa'
+  },
+  {
+    id: 'ia',
+    name: 'Bachelor of Science in Internal Auditing',
+    code: 'BSIA',
+    department: 'CBE',
+    description: 'Prepares students for a career in internal auditing, risk management, and corporate governance.',
+    duration: '4 years',
+    degree: 'Bachelor of Science',
+    careers: ['Internal Auditor', 'Risk Analyst', 'Compliance Officer', 'Fraud Investigator'],
+    icon: '<circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><path d="m11 8 3 3-3 3"/>',
+    heroImage: 'https://placehold.co/800x800?text=800x800',
+    color: 'bg-[#14B8A6]',
+    routeName: 'bsia'
+  },
+  {
+    id: 'ma',
+    name: 'Bachelor of Science in Management Accounting',
+    code: 'BSMA',
+    department: 'CBE',
+    description: 'Focuses on financial planning, performance management, and strategic decision-making.',
+    duration: '4 years',
+    degree: 'Bachelor of Science',
+    careers: ['Management Accountant', 'Financial Controller', 'Cost Consultant', 'Business Analyst'],
+    icon: '<path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/>',
+    heroImage: 'https://placehold.co/800x800?text=800x800',
+    color: 'bg-[#EC4899]',
+    routeName: 'bsma'
+  },
+  {
+    id: 'entrepreneurship',
+    name: 'Bachelor of Science in Entrepreneurship',
+    code: 'BSE',
+    department: 'CBE',
+    description: 'Equips students with the mindset and skills to start, manage, and grow their own business ventures.',
+    duration: '4 years',
+    degree: 'Bachelor of Science',
+    careers: ['Business Owner', 'Startup Founder', 'Business Consultant', 'Innovator'],
+    icon: '<path d="M12 2v20"/><path d="m17 5-5-3-5 3"/><path d="m17 19-5 3-5-3"/><path d="M2 12h20"/><path d="m5 7-3 5 3 5"/><path d="m19 7 3 5-3 5"/>',
+    heroImage: 'https://placehold.co/800x800?text=800x800',
+    color: 'bg-[#F97316]',
+    routeName: 'bse'
   },
   {
     id: 'criminology',
@@ -155,7 +199,8 @@ const programs: Program[] = [
     careers: ['English Instructor', 'Writer/Editor', 'Linguist', 'Communication Specialist'],
     icon: '<path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/>',
     heroImage: 'https://placehold.co/800x800?text=800x800',
-    color: 'bg-[#2563EB]'
+    color: 'bg-[#2563EB]',
+    routeName: 'abel'
   }
 ]
 
@@ -193,12 +238,12 @@ const otherProgramsData = [
   {
     name: 'Unit Earner Program',
     description: 'This program is designed for professionals who wish to earn education units to qualify for the Licensure Examination for Teachers (LET). It provides the necessary pedagogical knowledge and skills for effective teaching.',
-    link: '#' // Replace with actual link
+    link: '/academics/programs/unit-earner'
   },
   {
     name: 'Technical Vocational Programs',
     description: 'Our TechVoc programs offer practical, skills-based training aligned with industry standards. These short-course programs prepare students for immediate employment and TESDA certification.',
-    link: '#' // Replace with actual link
+    link: '/academics/programs/tech-voc'
   },
   {
     name: 'Research Development Office',
@@ -208,7 +253,7 @@ const otherProgramsData = [
   {
     name: 'International Relations Office',
     description: 'The International Relations Office (IRO) establishes global partnerships and programs, providing students and faculty with international exposure, exchange opportunities, and collaborative linkages across borders.',
-    link: '#' // Replace with actual link
+    link: '/academics/international-relations'
   }
 ]
 
