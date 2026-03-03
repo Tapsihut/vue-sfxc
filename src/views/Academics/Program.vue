@@ -129,7 +129,8 @@ const programs: Program[] = [
     careers: ['Management Accountant', 'Financial Controller', 'Cost Consultant', 'Business Analyst'],
     icon: '<path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/>',
     heroImage: 'https://placehold.co/800x800?text=800x800',
-    color: 'bg-[#EC4899]'
+    color: 'bg-[#EC4899]',
+    routeName: 'bsma'
   },
   {
     id: 'entrepreneurship',

@@ -30,6 +30,7 @@ import Bsba from '@/views/Academics/Programs/CBE/BSBA.vue'
 import Bsa from '@/views/Academics/Programs/CBE/BSA.vue'
 import Bsais from '@/views/Academics/Programs/CBE/BSAIS.vue'
 import Bsia from '@/views/Academics/Programs/CBE/BSIA.vue'
+import Bsma from '@/views/Academics/Programs/CBE/BSMA.vue'
 //CCJE
 import Criminology from '@/views/Academics/Programs/CCJE/Criminology.vue'
 //CTE
@@ -162,6 +163,14 @@ const router = createRouter({
             path: '/academics/programs/cbe/bsia',
             name: 'bsia',
             component: Bsia,
+            meta: {
+                layout: 'guest',
+            },
+        },
+        {
+            path: '/academics/programs/cbe/bsma',
+            name: 'bsma',
+            component: Bsma,
             meta: {
                 layout: 'guest',
             },
