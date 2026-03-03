@@ -9,6 +9,7 @@ import Organizations from '@/views/Abouts/Organizations.vue'
 import Scholarship from '@/views/Admission/Scholarship.vue'
 import Programs from '@/views/Academics/Program.vue'
 import Tesda from '@/views/Academics/Tesda.vue'
+import InternationalRelation from '@/views/Academics/InternationalRelation.vue'
 import Contact from '@/views/Contact/Contact.vue'
 import NewsAndUpdates from '@/views/Community/NewsAndUpdates.vue'
 import Announcement from '@/views/Community/Announcement.vue'
@@ -129,6 +130,14 @@ const router = createRouter({
             path: '/academics/tesda',
             name: 'tesda',
             component: Tesda,
+            meta: {
+                layout: 'guest',
+            },
+        },
+        {
+            path: '/academics/international-relations',
+            name: 'international-relations',
+            component: InternationalRelation,
             meta: {
                 layout: 'guest',
             },

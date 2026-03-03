@@ -253,7 +253,7 @@ const otherProgramsData = [
   {
     name: 'International Relations Office',
     description: 'The International Relations Office (IRO) establishes global partnerships and programs, providing students and faculty with international exposure, exchange opportunities, and collaborative linkages across borders.',
-    link: '#' // Replace with actual link
+    link: '/academics/international-relations'
   }
 ]
 
