@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card'
+import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { Separator } from '@/components/ui/separator'
 import { Button } from '@/components/ui/button'
@@ -16,95 +16,119 @@ interface ProgramSection {
 
 const programDetails: ProgramSection[] = [
   {
-    title: 'PROGRAM OVERVIEW',
+    title: 'WHAT SUBJECTS WILL I STUDY IN BSA?',
     contentBlocks: [
-      { type: 'paragraph', content: 'The Teacher Certificate Program (TCP), also known as the Unit Earner Program, of St. Francis Xavier College (SFXC) is a specialized academic track designed for graduates of non-education degree programs who aspire to become Licensed Professional Teachers. It is under SFXC’s College of Teacher Education.' },
-      { type: 'paragraph', content: 'This program under the College of Teach provides the required eighteen (18) units of Professional Education (Prof-Ed) mandated for eligibility to take the Licensure Examination for Professional Teachers (LEPT) administered by the Professional Regulation Commission (PRC).' },
-      { type: 'paragraph', content: 'Through this program, SFXC affirms its commitment to academic excellence and professional formation by equipping aspiring educators with foundational pedagogical knowledge, instructional competencies, and ethical grounding necessary for meaningful participation in the teaching profession.' }
-    ]
-  },
-  {
-    title: 'LEGAL BASIS',
-    contentBlocks: [
+      { type: 'paragraph', content: 'Major subjects include:' },
       { type: 'list', items: [
-        'The program is anchored on Republic Act No. 7836, otherwise known as the Philippine Teachers Professionalization Act of 1994, and its subsequent amendments.',
-        'The Teacher Certificate Program is CHED-accredited and duly recognized by the Professional Regulation Commission (PRC) as a valid qualification for LEPT application.',
-        'Upon completion of the required Professional Education units, graduates shall be issued a Certificate of Completion in Professional Education, one of the documentary requirements for LEPT registration.'
+        'Financial Accounting and Reporting',
+        'Cost Accounting',
+        'Auditing',
+        'Taxation',
+        'Business Law',
+        'Management Advisory Services'
       ]}
     ]
   },
   {
-    title: 'WHO MAY ENROLL?',
+    title: 'WHAT SKILLS WILL I GAIN FROM THIS DEGREE?',
     contentBlocks: [
+      { type: 'paragraph', content: 'Key skills developed during the course include:' },
       { type: 'list', items: [
-        'Graduates of any non-education bachelor’s degree program',
-        'Professionals intending to transition into the teaching profession',
-        'Private school teachers without education degrees and without LEPT eligibility',
-        'Working professionals seeking flexible and accessible learning arrangements',
-        'Individuals pursuing career advancement, promotion, or professional growth in the education sector'
+        'Financial Analysis and Reporting',
+        'Budgeting and Financial Planning',
+        'Tax Preparation and Compliance',
+        'Auditing and Internal Control',
+        'Critical Thinking and Problem-Solving',
+        'Attention to Detail',
+        'Proficiency in Accounting Software'
       ]}
     ]
   },
   {
-    title: 'DURATION',
+    title: 'WHAT CAREER OPPORTUNITIES AWAIT BSA GRADUATES?',
     contentBlocks: [
+      { type: 'paragraph', content: 'Our graduates are empowered to become:' },
       { type: 'list', items: [
-        'Students typically enroll in nine (9) units per semester (equivalent to three courses).',
-        'The full eighteen (18) units may generally be completed within one (1) academic year, or two semesters.'
+        'Certified Public Accountant (after passing the CPA Licensure Exam)',
+        'Auditor',
+        'Tax Consultant',
+        'Financial Analyst',
+        'Accountant in private or government sectors',
+        'Accounting Officer',
+        'Budget Analyst'
       ]}
     ]
   },
   {
-    title: 'MODE OF INSTRUCTION',
+    title: 'IS BSA A CHALLENGING PROGRAM?',
     contentBlocks: [
+      { type: 'paragraph', content: 'Yes. BSA is academically rigorous and requires discipline, strong analytical ability, and commitment. Retention policies may apply to ensure academic standards and readiness for the board examination.' }
+    ]
+  },
+  {
+    title: 'WHAT CAREER OPPORTUNITIES ARE AVAILABLE AFTER GRADUATION?',
+    contentBlocks: [
+      { type: 'paragraph', content: 'BSA graduates may pursue careers as:' },
       { type: 'list', items: [
-        'Classes are delivered through an online mode of instruction.',
-        'Schedule: Every Saturday (Weekend Classes).'
+        'Certified Public Accountant (CPA)',
+        'External Auditor',
+        'Internal Auditor',
+        'Tax Consultant',
+        'Financial Analyst',
+        'Accountant in private or government institutions',
+        'Accounting Officer'
+      ]},
+      { type: 'paragraph', content: 'Graduates may also pursue careers in banking, corporate finance, entrepreneurship, or law.' }
+    ]
+  },
+  {
+    title: 'WHAT MAKES BSA A STRONG CAREER CHOICE?',
+    contentBlocks: [
+      { type: 'paragraph', content: 'The BSA program offers:' },
+      { type: 'list', items: [
+        'High employability',
+        'Competitive salary opportunities',
+        'Strong foundation in business and finance',
+        'Clear pathway to professional licensure',
+        'Long-term career growth'
       ]}
     ]
   },
   {
-    title: 'ADMISSION REQUIREMENTS',
+    title: 'WHAT IS THE TYPICAL DURATION OF THE PROGRAM?',
     contentBlocks: [
+      { type: 'paragraph', content: 'The program typically takes five years to complete for full-time students, while part-time students may need more time based on their course load.' }
+    ]
+  },
+  {
+    title: 'CAN BSA GRADUATES TAKE THE CPA LICENSURE EXAMINATION?',
+    contentBlocks: [
+      { type: 'paragraph', content: 'Yes! After completing the BSA degree, graduates are qualified to take the CPA Licensure Examination administered by the Professional Regulation Commission.' }
+    ]
+  },
+  {
+    title: 'IS THERE ON-THE-JOB TRAINING (OJT)?',
+    contentBlocks: [
+      { type: 'paragraph', content: 'Yes. Students undergo internship or practicum training in accounting firms, private companies, or government offices to gain real-world experience.' }
+    ]
+  },
+  {
+    title: 'WHO SHOULD ENROLL IN BSA?',
+    contentBlocks: [
+      { type: 'paragraph', content: 'The program is suitable for students who:' },
       { type: 'list', items: [
-        'Original and photocopy of Transcript of Records (TOR)',
-        'For graduates of private institutions, TOR must bear a Special Order (S.O.)',
-        'PSA-issued Birth Certificate',
-        'Two (2) pieces 2x2 ID photos',
-        'One (1) valid government-issued ID',
-        'Honorable Dismissal (if applicable)',
-        'Marriage Certificate (if applicable)'
+        'Are detail-oriented and organized',
+        'Have strong analytical and logical skills',
+        'Are committed to professional integrity',
+        'Are interested in finance, auditing, and business operations'
       ]}
     ]
   },
   {
-    title: 'TUITION ASSISTANCE',
-    contentBlocks: [
-      { type: 'paragraph', content: 'SFXC offers tuition discounts for early enrollees, subject to existing institutional policies and guidelines.' }
-    ]
-  },
-  {
-    title: 'AFTER PROGRAM COMPLETION',
-    contentBlocks: [
-      { type: 'paragraph', content: 'Upon successful completion of the program, graduates shall:' },
-      { type: 'list', items: [
-        'Receive their Certificate of Completion in Professional Education',
-        'Become eligible to apply for the Licensure Examination for Professional Teachers (LEPT)',
-        'Qualify for teaching positions in public and private secondary and senior high school institutions'
-      ]}
-    ]
-  },
-  {
-    title: 'PROGRAM ACHIEVEMENT',
-    contentBlocks: [
-      { type: 'paragraph', content: 'Albie Catoto, product of SFXC’s Unit Earner Program in 2022, secured the Top 8 rank in the October 2022 Licensure Examination for Professional Teachers (LEPT), earning an outstanding rating of 92.80%.' }
-    ]
-  },
-  {
-    title: 'HOW CAN I APPLY FOR THE UNIT EARNER PROGRAM?',
+    title: 'HOW CAN I APPLY FOR THE BACHELOR OF SCIENCE IN ACCOUNTANCY PROGRAM?',
     contentBlocks: [
       { type: 'html', content: 'To enroll, <a href="/admission/requirements#enrollment" class="text-primary hover:underline font-bold">click here</a> to learn more.' },
-      { type: 'paragraph', content: 'Interested applicants are encouraged to submit their applications through the Admission and Scholarship Office. They can provide further information and assistance with the application process. Please ensure that all required documents are submitted before the deadline to be considered for admission.' },
+      { type: 'paragraph', content: 'Interested applicants are encouraged to submit their applications using the contact details provided below or visit the Admission and Scholarship Office for further information and assistance with the application process. Please ensure that all required documents are submitted before the deadline to be considered for admission.' },
       { type: 'paragraph', content: 'For further inquiries, kindly visit or contact offices any time between 8:00 AM to 5:00 PM, Monday to Friday.' },
       { type: 'html', content: '<div class="mt-4"><strong class="text-foreground">𝐀𝐃𝐌𝐈𝐒𝐒𝐈𝐎𝐍 𝐀𝐍𝐃 𝐒𝐂𝐇𝐎𝐋𝐀𝐑𝐒𝐇𝐈𝐏 𝐎𝐅𝐅𝐈𝐂𝐄</strong><br>Facebook: SFXC Scholarship Office<br>Email: Admission.scholarship@sfxc.edu.ph<br>Mobile: 0908 885 5380</div>' },
       { type: 'html', content: '<div class="mt-2"><strong class="text-foreground">𝐑𝐄𝐆𝐈𝐒𝐓𝐑𝐀𝐑\'𝐒 𝐎𝐅𝐅𝐈𝐂𝐄</strong><br>Facebook: SFXC - Registrar\'s Office<br>Email: registraroffice@sfxc.edu.ph<br>Mobile: 0908 885 3687</div>' }
@@ -118,25 +142,34 @@ const toggle = (title: string) => {
   expanded.value[title] = !expanded.value[title]
 }
 
-// Dummy data for Program Updates styled like NewsAndUpdates
+// Dummy data for Program Updates
 const programUpdates = [
   {
     id: 1,
-    title: 'LEPT Review Session Registration',
+    title: 'CPA Licensure Examination Topnotchers',
     date: 'March 15, 2026',
-    excerpt: 'Registration is now open for the upcoming Licensure Examination for Professional Teachers (LEPT) comprehensive review series.',
+    excerpt: 'Congratulations to our latest batch of Certified Public Accountants who successfully passed the board examination.',
     image: 'https://placehold.co/800x600/000000/FFFFFF?text=800x600',
-    author: 'TCP Coordinator',
-    category: 'Announcement'
+    author: 'CBE Department',
+    category: 'Achievement'
   },
   {
     id: 2,
-    title: 'Topnotcher Recognition Ceremony',
+    title: 'Annual Accounting Quiz Bowl',
     date: 'February 28, 2026',
-    excerpt: 'Join us as we celebrate our recent LEPT passers and honor our top-performing graduates from the Unit Earner Program.',
+    excerpt: 'Test your knowledge in financial accounting, auditing, and taxation at this year\'s collegiate accounting quiz bowl.',
+    image: 'https://placehold.co/800x600/000000/FFFFFF?text=800x600',
+    author: 'JPIA Society',
+    category: 'Event'
+  },
+  {
+    id: 3,
+    title: 'Audit Firm Partnership Announced',
+    date: 'January 20, 2026',
+    excerpt: 'The BSA program is proud to partner with a top 4 audit firm to provide internship opportunities for our senior students.',
     image: 'https://placehold.co/800x600/000000/FFFFFF?text=800x600',
     author: 'Academic Affairs',
-    category: 'Event'
+    category: 'Partnership'
   }
 ]
 </script>
@@ -154,10 +187,10 @@ const programUpdates = [
         <h1
           class="text-3xl md:text-5xl lg:text-7xl font-bold text-white tracking-tight drop-shadow-md"
         >
-          Teacher Certificate Program (TCP)
+          Bachelor of Science in Accountancy
         </h1>
         <p class="text-white/80 mt-4 text-lg md:text-xl max-w-2xl">
-          A specialized academic track designed for graduates of non-education degree programs who aspire to become Licensed Professional Teachers.
+          A robust accounting education designed for students aspiring to build professional careers in the field of Accountancy, preparing them to become future Certified Public Accountants.
         </p>
       </div> -->
 
@@ -179,6 +212,15 @@ const programUpdates = [
       
       <!-- Main Content (Left) -->
       <div class="lg:col-span-2 space-y-16">
+
+        <div class="space-y-6">
+          <p class="text-lg text-muted-foreground leading-relaxed">
+            The Bachelor of Science in Accountancy (BSA) provides a robust accounting education designed for students aspiring to build professional careers in the field of Accountancy, with a particular focus on Public Accounting. Students learn financial accounting, auditing, taxation, management accounting, and business laws. Throughout the students’ college years, it prepares them to become professional accountants and future Certified Public Accountants (CPAs).
+          </p>
+          <p class="text-lg text-muted-foreground leading-relaxed">
+            This program equips students with the technical expertise, ethical grounding, and analytical skills necessary to excel in the dynamic world of financial management and auditing. Furthermore, the BSA program aligns with the latest Competency Framework for Professional Accountants issued by the International Federation of Accountants through their International Education Standards, ensuring graduates meet global standards of excellence and readiness for licensure and professional practice.
+          </p>
+        </div>
 
         <!-- Dropdowns Section -->
         <div class="space-y-6">
@@ -225,8 +267,8 @@ const programUpdates = [
               <img src="https://placehold.co/600x600/000000/FFFFFF?text=600x600" alt="Program Coordinator" class="w-full h-full object-cover" />
             </div>
             
-            <CardTitle class="text-xl font-bold uppercase tracking-wide text-primary">TCP Coordinator</CardTitle>
-            <CardDescription class="text-sm font-medium">College of Teacher Education</CardDescription>
+            <CardTitle class="text-xl font-bold uppercase tracking-wide text-primary">FERRIZA BIANCA ABAN</CardTitle>
+            <CardDescription class="text-sm font-medium">Program Coordinator, BSA</CardDescription>
           </CardHeader>
           <CardContent>
             <Separator class="mb-6"/>
@@ -236,21 +278,18 @@ const programUpdates = [
               
               <div class="space-y-3 text-sm text-card-foreground">
                 <div class="flex items-start gap-3">
+                  <span class="mt-0.5 font-medium text-muted-foreground">Email:</span>
+                  <span>Faban@sfxc.edu.ph</span>
+                </div>
+                <div class="flex items-start gap-3">
                   <span class="mt-0.5 font-medium text-muted-foreground">Mobile:</span>
-                  <span>0981 235 2249</span>
-                </div>
-                <div class="flex items-start gap-3">
-                  <span class="mt-0.5 font-medium text-muted-foreground">Facebook:</span>
-                  <span>SFXC - College of Teacher Education</span>
-                </div>
-                <div class="flex items-start gap-3">
-                  <span class="mt-0.5 font-medium text-muted-foreground">Location:</span>
-                  <span>CTE Building<br/>Saint Francis Xavier College</span>
+                  <span>09484015619</span>
                 </div>
               </div>
             </div>
           </CardContent>
         </Card>
+
       </div>
       
     </div>

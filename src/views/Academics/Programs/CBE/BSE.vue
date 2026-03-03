@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card'
+import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { Separator } from '@/components/ui/separator'
 import { Button } from '@/components/ui/button'
@@ -16,98 +16,103 @@ interface ProgramSection {
 
 const programDetails: ProgramSection[] = [
   {
-    title: 'PROGRAM OVERVIEW',
+    title: 'WHAT IS BACHELOR OF SCIENCE IN ENTREPRENEURSHIP?',
     contentBlocks: [
-      { type: 'paragraph', content: 'The Teacher Certificate Program (TCP), also known as the Unit Earner Program, of St. Francis Xavier College (SFXC) is a specialized academic track designed for graduates of non-education degree programs who aspire to become Licensed Professional Teachers. It is under SFXC’s College of Teacher Education.' },
-      { type: 'paragraph', content: 'This program under the College of Teach provides the required eighteen (18) units of Professional Education (Prof-Ed) mandated for eligibility to take the Licensure Examination for Professional Teachers (LEPT) administered by the Professional Regulation Commission (PRC).' },
-      { type: 'paragraph', content: 'Through this program, SFXC affirms its commitment to academic excellence and professional formation by equipping aspiring educators with foundational pedagogical knowledge, instructional competencies, and ethical grounding necessary for meaningful participation in the teaching profession.' }
+      { type: 'paragraph', content: 'The Bachelor of Science in Entrepreneurship is an undergraduate program that teaches students how to start, manage, and grow businesses. It covers areas like business planning, marketing, finance, and innovation, preparing graduates to launch their own ventures or work in startups.' }
     ]
   },
   {
-    title: 'LEGAL BASIS',
+    title: 'WHAT ARE THE CORE SUBJECTS COVERED IN THIS PROGRAM?',
     contentBlocks: [
+      { type: 'paragraph', content: 'Core subjects in the BS Entrepreneurship typically include:' },
       { type: 'list', items: [
-        'The program is anchored on Republic Act No. 7836, otherwise known as the Philippine Teachers Professionalization Act of 1994, and its subsequent amendments.',
-        'The Teacher Certificate Program is CHED-accredited and duly recognized by the Professional Regulation Commission (PRC) as a valid qualification for LEPT application.',
-        'Upon completion of the required Professional Education units, graduates shall be issued a Certificate of Completion in Professional Education, one of the documentary requirements for LEPT registration.'
+        'Business Planning',
+        'Marketing for Entrepreneurs',
+        'Financial Management',
+        'Innovation and Creativity',
+        'Operations Management',
+        'Small Business Management',
+        'Entrepreneurial Finance',
+        'Business Law',
+        'Economics',
+        'Strategic Management'
       ]}
     ]
   },
   {
-    title: 'WHO MAY ENROLL?',
+    title: 'WHY CHOOSE BACHELOR OF SCIENCE IN ENTREPRENEURSHIP AT ST. FRANCIS XAVIER COLLEGE?',
     contentBlocks: [
+      { type: 'subtitle', content: 'Because we don’t just teach business — we build business leaders!' },
+      { type: 'paragraph', content: 'Our College of Business Education is committed to:' },
       { type: 'list', items: [
-        'Graduates of any non-education bachelor’s degree program',
-        'Professionals intending to transition into the teaching profession',
-        'Private school teachers without education degrees and without LEPT eligibility',
-        'Working professionals seeking flexible and accessible learning arrangements',
-        'Individuals pursuing career advancement, promotion, or professional growth in the education sector'
-      ]}
+        'Practical, real-world learning',
+        'Experienced and inspiring faculty',
+        'Business simulations and case studies',
+        'Industry exposure and networking opportunities',
+        'A culture that nurtures creativity and innovation'
+      ]},
+      { type: 'paragraph', content: 'We proudly shape future CEOs, founders, and changemakers!' }
     ]
   },
   {
-    title: 'DURATION',
+    title: 'WHAT CAREER OPPORTUNITIES AWAIT BS ENTREPRENEURSHIP GRADUATES?',
     contentBlocks: [
+      { type: 'paragraph', content: 'Our graduates are empowered to become:' },
       { type: 'list', items: [
-        'Students typically enroll in nine (9) units per semester (equivalent to three courses).',
-        'The full eighteen (18) units may generally be completed within one (1) academic year, or two semesters.'
-      ]}
+        'Business Owners & Startup Founders',
+        'Business Consultants',
+        'Marketing Managers',
+        'Innovation Officers',
+        'Project Managers',
+        'Family Business Successors',
+        'Social Entrepreneurs'
+      ]},
+      { type: 'paragraph', content: 'Or even pursue advanced studies like MBA and other business-related master’s degrees.' }
     ]
   },
   {
-    title: 'MODE OF INSTRUCTION',
+    title: 'DO I NEED TO ALREADY HAVE A BUSINESS IDEA TO ENROLL?',
     contentBlocks: [
+      { type: 'paragraph', content: 'Not at all! You don’t need a business idea — just passion, creativity, and determination. We’ll help you discover opportunities, develop innovative ideas, and turn them into viable ventures.' }
+    ]
+  },
+  {
+    title: 'WHAT SKILLS WILL I DEVELOP IN THIS PROGRAM?',
+    contentBlocks: [
+      { type: 'paragraph', content: 'You’ll master skills such as:' },
       { type: 'list', items: [
-        'Classes are delivered through an online mode of instruction.',
-        'Schedule: Every Saturday (Weekend Classes).'
-      ]}
+        'Leadership & Decision-Making',
+        'Financial Management',
+        'Marketing & Branding',
+        'Business Planning',
+        'Risk Assessment',
+        'Problem-Solving & Critical Thinking',
+        'Communication & Negotiation'
+      ]},
+      { type: 'paragraph', content: 'These are powerful skills that are valuable in any industry!' }
     ]
   },
   {
-    title: 'ADMISSION REQUIREMENTS',
+    title: 'IS BS ENTREPRENEURSHIP ONLY FOR THOSE WHO WANT TO START A BUSINESS?',
     contentBlocks: [
-      { type: 'list', items: [
-        'Original and photocopy of Transcript of Records (TOR)',
-        'For graduates of private institutions, TOR must bear a Special Order (S.O.)',
-        'PSA-issued Birth Certificate',
-        'Two (2) pieces 2x2 ID photos',
-        'One (1) valid government-issued ID',
-        'Honorable Dismissal (if applicable)',
-        'Marriage Certificate (if applicable)'
-      ]}
+      { type: 'paragraph', content: 'Absolutely not! Entrepreneurial skills are highly valued in corporations, government, NGOs, and multinational companies. Employers seek graduates who are proactive, innovative, and solution-oriented — exactly what our program produces.' }
     ]
   },
   {
-    title: 'TUITION ASSISTANCE',
-    contentBlocks: [
-      { type: 'paragraph', content: 'SFXC offers tuition discounts for early enrollees, subject to existing institutional policies and guidelines.' }
-    ]
-  },
-  {
-    title: 'AFTER PROGRAM COMPLETION',
-    contentBlocks: [
-      { type: 'paragraph', content: 'Upon successful completion of the program, graduates shall:' },
-      { type: 'list', items: [
-        'Receive their Certificate of Completion in Professional Education',
-        'Become eligible to apply for the Licensure Examination for Professional Teachers (LEPT)',
-        'Qualify for teaching positions in public and private secondary and senior high school institutions'
-      ]}
-    ]
-  },
-  {
-    title: 'PROGRAM ACHIEVEMENT',
-    contentBlocks: [
-      { type: 'paragraph', content: 'Albie Catoto, product of SFXC’s Unit Earner Program in 2022, secured the Top 8 rank in the October 2022 Licensure Examination for Professional Teachers (LEPT), earning an outstanding rating of 92.80%.' }
-    ]
-  },
-  {
-    title: 'HOW CAN I APPLY FOR THE UNIT EARNER PROGRAM?',
+    title: 'HOW CAN I ENROLL?',
     contentBlocks: [
       { type: 'html', content: 'To enroll, <a href="/admission/requirements#enrollment" class="text-primary hover:underline font-bold">click here</a> to learn more.' },
-      { type: 'paragraph', content: 'Interested applicants are encouraged to submit their applications through the Admission and Scholarship Office. They can provide further information and assistance with the application process. Please ensure that all required documents are submitted before the deadline to be considered for admission.' },
+      { type: 'paragraph', content: 'Interested applicants are encouraged to submit their applications using the contact details provided below or visit the Admission and Scholarship Office for further information and assistance with the application process. Please ensure that all required documents are submitted before the deadline to be considered for admission.' },
       { type: 'paragraph', content: 'For further inquiries, kindly visit or contact offices any time between 8:00 AM to 5:00 PM, Monday to Friday.' },
       { type: 'html', content: '<div class="mt-4"><strong class="text-foreground">𝐀𝐃𝐌𝐈𝐒𝐒𝐈𝐎𝐍 𝐀𝐍𝐃 𝐒𝐂𝐇𝐎𝐋𝐀𝐑𝐒𝐇𝐈𝐏 𝐎𝐅𝐅𝐈𝐂𝐄</strong><br>Facebook: SFXC Scholarship Office<br>Email: Admission.scholarship@sfxc.edu.ph<br>Mobile: 0908 885 5380</div>' },
       { type: 'html', content: '<div class="mt-2"><strong class="text-foreground">𝐑𝐄𝐆𝐈𝐒𝐓𝐑𝐀𝐑\'𝐒 𝐎𝐅𝐅𝐈𝐂𝐄</strong><br>Facebook: SFXC - Registrar\'s Office<br>Email: registraroffice@sfxc.edu.ph<br>Mobile: 0908 885 3687</div>' }
+    ]
+  },
+  {
+    title: 'HOW DO I CONTACT THE BACHELOR OF SCIENCE IN ENTREPRENEURSHIP PROGRAM?',
+    contentBlocks: [
+      { type: 'paragraph', content: 'For inquiries regarding the Bachelor of Science in Entrepreneurship program, you may contact:' },
+      { type: 'html', content: '<div class="mt-2 text-foreground font-medium">JAYSON ACUÑA<br>Email: jgacuna@sfxc.edu.ph<br>Mobile: 09951552108</div>' }
     ]
   }
 ]
@@ -122,21 +127,30 @@ const toggle = (title: string) => {
 const programUpdates = [
   {
     id: 1,
-    title: 'LEPT Review Session Registration',
+    title: 'Entrepreneurship Week 2026 Pitch Competition',
     date: 'March 15, 2026',
-    excerpt: 'Registration is now open for the upcoming Licensure Examination for Professional Teachers (LEPT) comprehensive review series.',
+    excerpt: 'Join us as we host the annual startup pitch event, showcasing innovative business ideas from our BSE students.',
     image: 'https://placehold.co/800x600/000000/FFFFFF?text=800x600',
-    author: 'TCP Coordinator',
-    category: 'Announcement'
+    author: 'CBE Department',
+    category: 'Event'
   },
   {
     id: 2,
-    title: 'Topnotcher Recognition Ceremony',
+    title: 'Industry Leaders Integration',
     date: 'February 28, 2026',
-    excerpt: 'Join us as we celebrate our recent LEPT passers and honor our top-performing graduates from the Unit Earner Program.',
+    excerpt: 'The BSE program is proud to announce a new partnership connecting students with successful local entrepreneurs.',
     image: 'https://placehold.co/800x600/000000/FFFFFF?text=800x600',
     author: 'Academic Affairs',
-    category: 'Event'
+    category: 'Network'
+  },
+  {
+    id: 3,
+    title: 'Alumni Spotlight: Building Sustainable Businesses',
+    date: 'January 20, 2026',
+    excerpt: 'Read about how our BSE alumni are launching sustainable companies and expanding globally.',
+    image: 'https://placehold.co/800x600/000000/FFFFFF?text=800x600',
+    author: 'Alumni Network',
+    category: 'Feature'
   }
 ]
 </script>
@@ -150,22 +164,10 @@ const programUpdates = [
         class="absolute inset-0 bg-linear-to-t from-primary/90 via-background/20 to-transparent"
       ></div>
 
-      <!-- <div class="relative z-10 mt-auto w-full md:max-w-5xl ps-5 pb-16 md:ps-10 md:pb-24">
-        <h1
-          class="text-3xl md:text-5xl lg:text-7xl font-bold text-white tracking-tight drop-shadow-md"
-        >
-          Teacher Certificate Program (TCP)
-        </h1>
-        <p class="text-white/80 mt-4 text-lg md:text-xl max-w-2xl">
-          A specialized academic track designed for graduates of non-education degree programs who aspire to become Licensed Professional Teachers.
-        </p>
-      </div> -->
-
       <div class="absolute bottom-0 left-0 right-0 text-background leading-none">
         <svg class="w-full h-12 md:h-24" viewBox="0 0 1440 320" preserveAspectRatio="none">
           <path
             fill="currentColor"
-            fill-opacity="1"
             d="M0,224L48,213.3C96,203,192,181,288,181.3C384,181,480,203,576,224C672,245,768,267,864,261.3C960,256,1056,224,1152,197.3C1248,171,1344,149,1392,138.7L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"
           ></path>
         </svg>
@@ -225,8 +227,8 @@ const programUpdates = [
               <img src="https://placehold.co/600x600/000000/FFFFFF?text=600x600" alt="Program Coordinator" class="w-full h-full object-cover" />
             </div>
             
-            <CardTitle class="text-xl font-bold uppercase tracking-wide text-primary">TCP Coordinator</CardTitle>
-            <CardDescription class="text-sm font-medium">College of Teacher Education</CardDescription>
+            <CardTitle class="text-xl font-bold uppercase tracking-wide text-primary">Jayson Acuña</CardTitle>
+            <CardDescription class="text-sm font-medium">Program Coordinator, BSE</CardDescription>
           </CardHeader>
           <CardContent>
             <Separator class="mb-6"/>
@@ -236,16 +238,12 @@ const programUpdates = [
               
               <div class="space-y-3 text-sm text-card-foreground">
                 <div class="flex items-start gap-3">
-                  <span class="mt-0.5 font-medium text-muted-foreground">Mobile:</span>
-                  <span>0981 235 2249</span>
+                  <span class="mt-0.5 font-medium text-muted-foreground">Email:</span>
+                  <span>jgacuna@sfxc.edu.ph</span>
                 </div>
                 <div class="flex items-start gap-3">
-                  <span class="mt-0.5 font-medium text-muted-foreground">Facebook:</span>
-                  <span>SFXC - College of Teacher Education</span>
-                </div>
-                <div class="flex items-start gap-3">
-                  <span class="mt-0.5 font-medium text-muted-foreground">Location:</span>
-                  <span>CTE Building<br/>Saint Francis Xavier College</span>
+                  <span class="mt-0.5 font-medium text-muted-foreground">Phone:</span>
+                  <span>09951552108</span>
                 </div>
               </div>
             </div>
@@ -255,7 +253,7 @@ const programUpdates = [
       
     </div>
 
-    <!-- Program Updates Section (Design referenced from NewsAndUpdates) -->
+    <!-- Program Updates Section -->
     <div class="space-y-6">
       <div class="border-b border-border pb-2">
         <h3 class="text-2xl font-bold text-primary">Program Updates</h3>

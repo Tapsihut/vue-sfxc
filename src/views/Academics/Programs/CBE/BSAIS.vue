@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card'
+import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { Separator } from '@/components/ui/separator'
 import { Button } from '@/components/ui/button'
@@ -16,95 +16,99 @@ interface ProgramSection {
 
 const programDetails: ProgramSection[] = [
   {
-    title: 'PROGRAM OVERVIEW',
+    title: 'WHAT IS BACHELOR OF SCIENCE IN ACCOUNTING INFORMATION SYSTEM?',
     contentBlocks: [
-      { type: 'paragraph', content: 'The Teacher Certificate Program (TCP), also known as the Unit Earner Program, of St. Francis Xavier College (SFXC) is a specialized academic track designed for graduates of non-education degree programs who aspire to become Licensed Professional Teachers. It is under SFXC’s College of Teacher Education.' },
-      { type: 'paragraph', content: 'This program under the College of Teach provides the required eighteen (18) units of Professional Education (Prof-Ed) mandated for eligibility to take the Licensure Examination for Professional Teachers (LEPT) administered by the Professional Regulation Commission (PRC).' },
-      { type: 'paragraph', content: 'Through this program, SFXC affirms its commitment to academic excellence and professional formation by equipping aspiring educators with foundational pedagogical knowledge, instructional competencies, and ethical grounding necessary for meaningful participation in the teaching profession.' }
+      { type: 'paragraph', content: 'BSAIS is a program that blends accounting and IT, teaching students to manage and analyze financial data using technology. Graduates can become system analysts, IT auditors, or financial consultants.' }
     ]
   },
   {
-    title: 'LEGAL BASIS',
+    title: 'HOW IS BSAIS DIFFERENT FROM BSA?',
     contentBlocks: [
+      { type: 'paragraph', content: 'While BSA focuses on financial reporting, auditing, and preparing for the CPA Licensure Exam, BSAIS emphasizes accounting systems, data analytics, internal controls, and business technology solutions.' },
+      { type: 'paragraph', content: 'BSA graduates can take the CPA board exam, while BSAIS graduates focus more on systems and IT-related accounting roles.' }
+    ]
+  },
+  {
+    title: 'WHAT ARE THE CORE SUBJECTS COVERED IN THIS PROGRAM?',
+    contentBlocks: [
+      { type: 'paragraph', content: 'Core subjects in the BSAIS typically include:' },
       { type: 'list', items: [
-        'The program is anchored on Republic Act No. 7836, otherwise known as the Philippine Teachers Professionalization Act of 1994, and its subsequent amendments.',
-        'The Teacher Certificate Program is CHED-accredited and duly recognized by the Professional Regulation Commission (PRC) as a valid qualification for LEPT application.',
-        'Upon completion of the required Professional Education units, graduates shall be issued a Certificate of Completion in Professional Education, one of the documentary requirements for LEPT registration.'
+        'Financial Accounting',
+        'Managerial Accounting',
+        'Accounting Information Systems',
+        'Database Management',
+        'Auditing and Control',
+        'Business Law and Ethics',
+        'Information Technology for Accounting'
       ]}
     ]
   },
   {
-    title: 'WHO MAY ENROLL?',
+    title: 'WHAT SKILLS WILL I GAIN FROM THIS DEGREE?',
     contentBlocks: [
+      { type: 'paragraph', content: 'Students will develop skills such as:' },
       { type: 'list', items: [
-        'Graduates of any non-education bachelor’s degree program',
-        'Professionals intending to transition into the teaching profession',
-        'Private school teachers without education degrees and without LEPT eligibility',
-        'Working professionals seeking flexible and accessible learning arrangements',
-        'Individuals pursuing career advancement, promotion, or professional growth in the education sector'
+        'Financial Analysis and Reporting',
+        'Accounting System Design and Management',
+        'Database Management and Data Analysis',
+        'IT Troubleshooting and Support',
+        'Auditing and Internal Controls'
       ]}
     ]
   },
   {
-    title: 'DURATION',
+    title: 'WHAT ARE THE POSSIBLE OCCUPATIONS AND INDUSTRIES FOR SOMEONE WITH THIS DEGREE?',
     contentBlocks: [
+      { type: 'paragraph', content: 'BS Accounting Information System opens up roles and occupation opportunities, including:' },
       { type: 'list', items: [
-        'Students typically enroll in nine (9) units per semester (equivalent to three courses).',
-        'The full eighteen (18) units may generally be completed within one (1) academic year, or two semesters.'
+        'Accounting Information System Analyst',
+        'Financial Consultant',
+        'Systems Analyst',
+        'Business Intelligence Analyst',
+        'ERP Specialist',
+        'Internal Auditor'
+      ]},
+      { type: 'subtitle', content: 'WHAT INDUSTRIES WILL MOST LIKELY HIRE BS ACCOUNTING INFORMATION SYSTEM GRADUATES?' },
+      { type: 'paragraph', content: 'BS Accounting Information System graduates are needed in various industries, including:' },
+      { type: 'list', items: [
+        'Accounting and Finance',
+        'Information Technology',
+        'Banking and Insurance',
+        'Government',
+        'Healthcare',
+        'Manufacturing'
       ]}
     ]
   },
   {
-    title: 'MODE OF INSTRUCTION',
+    title: 'WHAT IS THE TYPICAL DURATION OF THE PROGRAM?',
     contentBlocks: [
+      { type: 'paragraph', content: 'The program typically takes four years to complete for full-time students, while part-time students may need more time based on their course load.' }
+    ]
+  },
+  {
+    title: 'ARE INTERNSHIPS PART OF THE PROGRAM?',
+    contentBlocks: [
+      { type: 'paragraph', content: 'Absolutely! The Bachelor of Science in Accounting Information System program includes a final-year internship, giving students real-world experience and a chance to apply their knowledge in industry settings.' }
+    ]
+  },
+  {
+    title: 'WHO SHOULD ENROLL IN BSAIS?',
+    contentBlocks: [
+      { type: 'paragraph', content: 'The program is ideal for students who:' },
       { type: 'list', items: [
-        'Classes are delivered through an online mode of instruction.',
-        'Schedule: Every Saturday (Weekend Classes).'
+        'Are interested in both accounting and technology',
+        'Possess analytical and logical thinking skills',
+        'Are detail-oriented',
+        'Want to work in data-driven and technology-based environments'
       ]}
     ]
   },
   {
-    title: 'ADMISSION REQUIREMENTS',
-    contentBlocks: [
-      { type: 'list', items: [
-        'Original and photocopy of Transcript of Records (TOR)',
-        'For graduates of private institutions, TOR must bear a Special Order (S.O.)',
-        'PSA-issued Birth Certificate',
-        'Two (2) pieces 2x2 ID photos',
-        'One (1) valid government-issued ID',
-        'Honorable Dismissal (if applicable)',
-        'Marriage Certificate (if applicable)'
-      ]}
-    ]
-  },
-  {
-    title: 'TUITION ASSISTANCE',
-    contentBlocks: [
-      { type: 'paragraph', content: 'SFXC offers tuition discounts for early enrollees, subject to existing institutional policies and guidelines.' }
-    ]
-  },
-  {
-    title: 'AFTER PROGRAM COMPLETION',
-    contentBlocks: [
-      { type: 'paragraph', content: 'Upon successful completion of the program, graduates shall:' },
-      { type: 'list', items: [
-        'Receive their Certificate of Completion in Professional Education',
-        'Become eligible to apply for the Licensure Examination for Professional Teachers (LEPT)',
-        'Qualify for teaching positions in public and private secondary and senior high school institutions'
-      ]}
-    ]
-  },
-  {
-    title: 'PROGRAM ACHIEVEMENT',
-    contentBlocks: [
-      { type: 'paragraph', content: 'Albie Catoto, product of SFXC’s Unit Earner Program in 2022, secured the Top 8 rank in the October 2022 Licensure Examination for Professional Teachers (LEPT), earning an outstanding rating of 92.80%.' }
-    ]
-  },
-  {
-    title: 'HOW CAN I APPLY FOR THE UNIT EARNER PROGRAM?',
+    title: 'HOW CAN I APPLY FOR THE BACHELOR OF SCIENCE IN ACCOUNTING INFORMATION SYSTEM PROGRAM?',
     contentBlocks: [
       { type: 'html', content: 'To enroll, <a href="/admission/requirements#enrollment" class="text-primary hover:underline font-bold">click here</a> to learn more.' },
-      { type: 'paragraph', content: 'Interested applicants are encouraged to submit their applications through the Admission and Scholarship Office. They can provide further information and assistance with the application process. Please ensure that all required documents are submitted before the deadline to be considered for admission.' },
+      { type: 'paragraph', content: 'Interested applicants are encouraged to submit their applications using the contact details provided below or visit the Admission and Scholarship Office for further information and assistance with the application process. Please ensure that all required documents are submitted before the deadline to be considered for admission.' },
       { type: 'paragraph', content: 'For further inquiries, kindly visit or contact offices any time between 8:00 AM to 5:00 PM, Monday to Friday.' },
       { type: 'html', content: '<div class="mt-4"><strong class="text-foreground">𝐀𝐃𝐌𝐈𝐒𝐒𝐈𝐎𝐍 𝐀𝐍𝐃 𝐒𝐂𝐇𝐎𝐋𝐀𝐑𝐒𝐇𝐈𝐏 𝐎𝐅𝐅𝐈𝐂𝐄</strong><br>Facebook: SFXC Scholarship Office<br>Email: Admission.scholarship@sfxc.edu.ph<br>Mobile: 0908 885 5380</div>' },
       { type: 'html', content: '<div class="mt-2"><strong class="text-foreground">𝐑𝐄𝐆𝐈𝐒𝐓𝐑𝐀𝐑\'𝐒 𝐎𝐅𝐅𝐈𝐂𝐄</strong><br>Facebook: SFXC - Registrar\'s Office<br>Email: registraroffice@sfxc.edu.ph<br>Mobile: 0908 885 3687</div>' }
@@ -118,25 +122,34 @@ const toggle = (title: string) => {
   expanded.value[title] = !expanded.value[title]
 }
 
-// Dummy data for Program Updates styled like NewsAndUpdates
+// Dummy data for Program Updates
 const programUpdates = [
   {
     id: 1,
-    title: 'LEPT Review Session Registration',
-    date: 'March 15, 2026',
-    excerpt: 'Registration is now open for the upcoming Licensure Examination for Professional Teachers (LEPT) comprehensive review series.',
+    title: 'New ERP Software Integration Workshop',
+    date: 'March 20, 2026',
+    excerpt: 'BSAIS students participated in a comprehensive hands-on workshop focused on implementing and managing modern cloud-based ERP systems.',
     image: 'https://placehold.co/800x600/000000/FFFFFF?text=800x600',
-    author: 'TCP Coordinator',
-    category: 'Announcement'
+    author: 'CBE Department',
+    category: 'Event'
   },
   {
     id: 2,
-    title: 'Topnotcher Recognition Ceremony',
-    date: 'February 28, 2026',
-    excerpt: 'Join us as we celebrate our recent LEPT passers and honor our top-performing graduates from the Unit Earner Program.',
+    title: 'Alumni Tech Spotlight: Financial Systems Architect',
+    date: 'February 15, 2026',
+    excerpt: 'Discover how our BSAIS alumni are leading digital transformation initiatives as Financial Systems Architects in top tech firms.',
+    image: 'https://placehold.co/800x600/000000/FFFFFF?text=800x600',
+    author: 'Alumni Network',
+    category: 'Feature'
+  },
+  {
+    id: 3,
+    title: 'Data Analytics Certification Program Launch',
+    date: 'January 10, 2026',
+    excerpt: 'The college successfully launched a new specialized module offering professional certifications in accounting data analytics for senior students.',
     image: 'https://placehold.co/800x600/000000/FFFFFF?text=800x600',
     author: 'Academic Affairs',
-    category: 'Event'
+    category: 'Curriculum'
   }
 ]
 </script>
@@ -154,10 +167,10 @@ const programUpdates = [
         <h1
           class="text-3xl md:text-5xl lg:text-7xl font-bold text-white tracking-tight drop-shadow-md"
         >
-          Teacher Certificate Program (TCP)
+          Bachelor of Science in Accounting Information System
         </h1>
         <p class="text-white/80 mt-4 text-lg md:text-xl max-w-2xl">
-          A specialized academic track designed for graduates of non-education degree programs who aspire to become Licensed Professional Teachers.
+          A program blending accounting expertise with IT skills to prepare students for careers in digital finance, system analysis, and technology-driven business solutions.
         </p>
       </div> -->
 
@@ -179,6 +192,18 @@ const programUpdates = [
       
       <!-- Main Content (Left) -->
       <div class="lg:col-span-2 space-y-16">
+
+        <div class="space-y-6">
+          <p class="text-lg text-muted-foreground leading-relaxed">
+            The Bachelor of Science in Accounting Information Systems (BSAIS) program combines accounting expertise with information technology skills to prepare students for careers in the evolving field of digital finance and business systems. The curriculum covers accounting, auditing, taxation, database management, systems analysis, and information systems security.
+          </p>
+          <p class="text-lg text-muted-foreground leading-relaxed">
+            Students develop technical proficiency, analytical skills, and ethical judgment to design, implement, and manage accounting information systems that support decision-making and organizational efficiency. The program emphasizes the integration of accounting principles with modern technology, preparing graduates to address the challenges of automation, data analytics, and digital transformation in accounting and finance.
+          </p>
+          <p class="text-lg text-muted-foreground leading-relaxed">
+            Graduates are equipped for careers in accounting information systems, financial systems management, auditing, and technology-driven business solutions, and are well-prepared to pursue professional certifications in accounting and IT-related fields.
+          </p>
+        </div>
 
         <!-- Dropdowns Section -->
         <div class="space-y-6">
@@ -225,8 +250,8 @@ const programUpdates = [
               <img src="https://placehold.co/600x600/000000/FFFFFF?text=600x600" alt="Program Coordinator" class="w-full h-full object-cover" />
             </div>
             
-            <CardTitle class="text-xl font-bold uppercase tracking-wide text-primary">TCP Coordinator</CardTitle>
-            <CardDescription class="text-sm font-medium">College of Teacher Education</CardDescription>
+            <CardTitle class="text-xl font-bold uppercase tracking-wide text-primary">FERRIZA BIANCA ABAN</CardTitle>
+            <CardDescription class="text-sm font-medium">Program Coordinator, BSAIS</CardDescription>
           </CardHeader>
           <CardContent>
             <Separator class="mb-6"/>
@@ -236,21 +261,18 @@ const programUpdates = [
               
               <div class="space-y-3 text-sm text-card-foreground">
                 <div class="flex items-start gap-3">
+                  <span class="mt-0.5 font-medium text-muted-foreground">Email:</span>
+                  <span>Faban@sfxc.edu.ph</span>
+                </div>
+                <div class="flex items-start gap-3">
                   <span class="mt-0.5 font-medium text-muted-foreground">Mobile:</span>
-                  <span>0981 235 2249</span>
-                </div>
-                <div class="flex items-start gap-3">
-                  <span class="mt-0.5 font-medium text-muted-foreground">Facebook:</span>
-                  <span>SFXC - College of Teacher Education</span>
-                </div>
-                <div class="flex items-start gap-3">
-                  <span class="mt-0.5 font-medium text-muted-foreground">Location:</span>
-                  <span>CTE Building<br/>Saint Francis Xavier College</span>
+                  <span>09484015619</span>
                 </div>
               </div>
             </div>
           </CardContent>
         </Card>
+
       </div>
       
     </div>

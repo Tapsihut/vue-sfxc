@@ -9,6 +9,7 @@ import Organizations from '@/views/Abouts/Organizations.vue'
 import Scholarship from '@/views/Admission/Scholarship.vue'
 import Programs from '@/views/Academics/Program.vue'
 import Tesda from '@/views/Academics/Tesda.vue'
+import InternationalRelation from '@/views/Academics/InternationalRelation.vue'
 import Contact from '@/views/Contact/Contact.vue'
 import NewsAndUpdates from '@/views/Community/NewsAndUpdates.vue'
 import Announcement from '@/views/Community/Announcement.vue'
@@ -24,11 +25,17 @@ import Stories from '@/views/Community/Stories.vue'
 import Facilities from '@/views/Abouts/Facilities.vue'
 import OfficeDirectory from '@/views/Abouts/OfficeDirectory.vue'
 import Accredation from '@/views/Abouts/Accredation.vue'
-import Bsoa from '@/views/Academics/Programs/CBE/BSOA.vue'
-import Bsba from '@/views/Academics/Programs/CBE/BSBA.vue'
+import Bsoa from '@/views/Academics/Programs/CBE/Bsoa.vue'
+import Bsba from '@/views/Academics/Programs/CBE/Bsba.vue'
 import Criminology from '@/views/Academics/Programs/CCJE/Criminology.vue'
+//CTE
 import Bsed from '@/views/Academics/Programs/CTE/Bsed.vue'
 import Beed from '@/views/Academics/Programs/CTE/Beed.vue'
+import Abel from '@/views/Academics/Programs/CTE/Abel.vue'
+
+//Other
+import UnitEarner from '@/views/Academics/Programs/UnitEarner.vue'
+import TechVoc from '@/views/Academics/Programs/TechVoc.vue'
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
     routes: [
@@ -121,6 +128,14 @@ const router = createRouter({
             },
         },
         {
+            path: '/academics/international-relations',
+            name: 'international-relations',
+            component: InternationalRelation,
+            meta: {
+                layout: 'guest',
+            },
+        },
+        {
             path: '/academics/programs/cbe/bsoa',
             name: 'bsoa',
             component: Bsoa,
@@ -132,6 +147,46 @@ const router = createRouter({
             path: '/academics/programs/cbe/bsba',
             name: 'bsba',
             component: Bsba,
+            meta: {
+                layout: 'guest',
+            },
+        },
+        {
+            path: '/academics/programs/cbe/bsa',
+            name: 'bsa',
+            component: Bsa,
+            meta: {
+                layout: 'guest',
+            },
+        },
+        {
+            path: '/academics/programs/cbe/bsais',
+            name: 'bsais',
+            component: Bsais,
+            meta: {
+                layout: 'guest',
+            },
+        },
+        {
+            path: '/academics/programs/cbe/bsia',
+            name: 'bsia',
+            component: Bsia,
+            meta: {
+                layout: 'guest',
+            },
+        },
+        {
+            path: '/academics/programs/cbe/bsma',
+            name: 'bsma',
+            component: Bsma,
+            meta: {
+                layout: 'guest',
+            },
+        },
+        {
+            path: '/academics/programs/cbe/bse',
+            name: 'bse',
+            component: Bse,
             meta: {
                 layout: 'guest',
             },
@@ -156,6 +211,30 @@ const router = createRouter({
             path: '/academics/programs/cte/beed',
             name: 'beed',
             component: Beed,
+            meta: {
+                layout: 'guest',
+            },
+        },
+        {
+            path: '/academics/programs/cte/abel',
+            name: 'abel',
+            component: Abel,
+            meta: {
+                layout: 'guest',
+            },
+        },
+        {
+            path: '/academics/programs/unit-earner',
+            name: 'unit-earner',
+            component: UnitEarner,
+            meta: {
+                layout: 'guest',
+            },
+        },
+        {
+            path: '/academics/programs/tech-voc',
+            name: 'tech-voc',
+            component: TechVoc,
             meta: {
                 layout: 'guest',
             },
