@@ -87,7 +87,8 @@ const programs: Program[] = [
     careers: ['Systems Accountant', 'IT Auditor', 'Business Analyst', 'Data Analyst'],
     icon: '<ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v14a9 3 0 0 0 18 0V5"/><path d="M3 12a9 3 0 0 0 18 0"/>',
     heroImage: 'https://placehold.co/800x800?text=800x800',
-    color: 'bg-[#3B82F6]'
+    color: 'bg-[#3B82F6]',
+    routeName: 'bsais'
   },
   {
     id: 'oa',
