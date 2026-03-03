@@ -46,6 +46,7 @@ const navigationItems = ref<NavigationItem[]>([
     {
         name: 'About Us',
         type: 'dropdown',
+        to: { name: 'vision-mission' },
         groups: [
             {
                 label: 'Overview',
@@ -95,6 +96,7 @@ const navigationItems = ref<NavigationItem[]>([
     {
         name: 'Admissions',
         type: 'dropdown',
+        to: { name: 'requirements' },
         groups: [
             {
                 label: 'Apply',
@@ -265,7 +267,7 @@ const toggleSubmenu = (menuName: string) => {
 
                                         <!-- Dropdown Type -->
                                         <template v-else-if="item.type === 'dropdown'">
-                                            <NavigationMenuTrigger>{{
+                                            <NavigationMenuTrigger @click="item.to ? $router.push(item.to) : null">{{
                                                 item.name
                                             }}</NavigationMenuTrigger>
                                             <NavigationMenuContent>
@@ -352,19 +354,21 @@ const toggleSubmenu = (menuName: string) => {
 
                                 <!-- Dropdown Type -->
                                 <div v-else-if="item.type === 'dropdown'">
-                                    <button
-                                        @click="toggleSubmenu(item.name.toLowerCase())"
-                                        class="flex items-center justify-between w-full px-4 py-3 text-sm font-medium hover:bg-accent rounded-lg group"
-                                    >
-                                        <span>{{ item.name }}</span>
-                                        <ChevronDown
-                                            class="w-4 h-4 transition-transform duration-200 text-gray-500"
-                                            :class="{
-                                                'rotate-180':
-                                                    activeSubmenu === item.name.toLowerCase(),
-                                            }"
-                                        />
-                                    </button>
+                                    <div class="flex items-center justify-between w-full px-4 py-3 text-sm font-medium hover:bg-accent rounded-lg group">
+                                        <RouterLink v-if="item.to" :to="item.to" class="grow text-left">{{ item.name }}</RouterLink>
+                                        <button v-else @click="toggleSubmenu(item.name.toLowerCase())" class="grow text-left">
+                                            {{ item.name }}
+                                        </button>
+                                        <button @click="toggleSubmenu(item.name.toLowerCase())" class="p-1 ml-2">
+                                            <ChevronDown
+                                                class="w-4 h-4 transition-transform duration-200 text-gray-500"
+                                                :class="{
+                                                    'rotate-180':
+                                                        activeSubmenu === item.name.toLowerCase(),
+                                                }"
+                                            />
+                                        </button>
+                                    </div>
 
                                     <div
                                         v-if="activeSubmenu === item.name.toLowerCase()"
