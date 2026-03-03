@@ -238,7 +238,7 @@ const otherProgramsData = [
   {
     name: 'Unit Earner Program',
     description: 'This program is designed for professionals who wish to earn education units to qualify for the Licensure Examination for Teachers (LET). It provides the necessary pedagogical knowledge and skills for effective teaching.',
-    link: '#' // Replace with actual link
+    link: '/academics/programs/unit-earner'
   },
   {
     name: 'Technical Vocational Programs',
