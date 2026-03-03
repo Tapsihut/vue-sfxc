@@ -143,7 +143,8 @@ const programs: Program[] = [
     careers: ['Business Owner', 'Startup Founder', 'Business Consultant', 'Innovator'],
     icon: '<path d="M12 2v20"/><path d="m17 5-5-3-5 3"/><path d="m17 19-5 3-5-3"/><path d="M2 12h20"/><path d="m5 7-3 5 3 5"/><path d="m19 7 3 5-3 5"/>',
     heroImage: 'https://placehold.co/800x800?text=800x800',
-    color: 'bg-[#F97316]'
+    color: 'bg-[#F97316]',
+    routeName: 'bse'
   },
   {
     id: 'criminology',

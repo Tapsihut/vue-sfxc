@@ -198,9 +198,6 @@ const programUpdates = [
       <div class="lg:col-span-2 space-y-16">
 
         <div class="space-y-6">
-          <Badge class="bg-primary/10 text-primary hover:bg-primary/20 border-primary/20" variant="outline">
-            College of Business Education
-          </Badge>
           <div class="space-y-4">
             <h2 class="text-3xl md:text-5xl font-bold tracking-tight text-foreground">
               Bachelor of Science in Management Accounting
