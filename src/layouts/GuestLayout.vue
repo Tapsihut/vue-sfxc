@@ -136,7 +136,7 @@ const navigationItems = ref<NavigationItem[]>([
                 label: 'Offices',
                 links: [
                     { name: 'Research Development Office', to: '#' },
-                    { name: 'International Relations Office', to: '#' },
+                    { name: 'International Relations Office', to: { name: 'international-relations'} },
                 ],
             },
             // {
