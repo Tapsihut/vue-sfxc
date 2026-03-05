@@ -175,6 +175,12 @@ const otherGovPrograms = computed(() => financialAids.filter(p => !p.name.includ
       <p class="text-lg text-muted-foreground leading-relaxed md:max-w-200">
         Education at SFXC is an investment in our students’ futures. As our institution continues to strive for the socio-economic development of society, we believe our students deserve quality education. With many of our students coming from humble backgrounds, the Admission and Scholarship Office (ADSO) is more than ready to assist with financial aid for our deserving students. <br><br> Below is a list of available and accepted financial aid at SFXC. Should there be other scholarships and grants that are not mentioned, contact ADSO for special arrangements.
       </p>
+      <div class="mt-6 space-y-2 text-sm md:text-base text-muted-foreground md:max-w-200">
+        <p class="text-base md:text-lg font-bold text-foreground">𝐀𝐃𝐌𝐈𝐒𝐒𝐈𝐎𝐍 𝐀𝐍𝐃 𝐒𝐂𝐇𝐎𝐋𝐀𝐑𝐒𝐇𝐈𝐏 𝐎𝐅𝐅𝐈𝐂𝐄</p>
+        <p class="wrap-break-word"><span class="font-semibold text-foreground">Facebook:</span> SFXC Scholarship Office</p>
+        <p class="wrap-break-word"><span class="font-semibold text-foreground">Email:</span> Admission.scholarship@sfxc.edu.ph</p>
+        <p class="wrap-break-word"><span class="font-semibold text-foreground">Mobile:</span> 0908 885 5380</p>
+      </div>
     </div>
 
     <!-- CHED Programs -->
