@@ -45,6 +45,9 @@ const YoutubeIcon = {
           <p class="text-lg text-muted-foreground mb-8">
             Fill out our form details to send us a message. We will get back to you as soon as possible. Alternatively, you may visit our directory to contact the offices/departments directly.
           </p>
+          <p class="text-lg text-muted-foreground mb-8">
+            Use “N/A” if information does not apply to you.
+          </p>
 
           <div class="space-y-6 text-lg text-muted-foreground">
             <div class="flex items-start gap-4">
@@ -141,6 +144,7 @@ const YoutubeIcon = {
                 <option>College of Business Education</option>
                 <option>College of Criminal Justice Education</option>
                 <option>College of Teacher Education</option>
+                <option>Other</option>
               </select>
             </div>
 
@@ -178,6 +182,7 @@ const YoutubeIcon = {
                 <option>Registrar’s Office</option>
                 <option>Research Office</option>
                 <option>Technical Vocational Office</option>
+                <option>Campus Tour</option>
                 <option>Other</option>
               </select>
             </div>
