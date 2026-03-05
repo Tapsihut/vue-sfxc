@@ -267,7 +267,7 @@ const currentRequirements = () => {
         <p class="text-lg text-muted-foreground mb-4">
           The Admission & Scholarship Office transactions are guided by the following objectives:
         </p>
-        <ul class="list-disc list-inside text-lg text-muted-foreground pl-6 space-y-2">
+        <ul class="list-disc list-inside text-lg text-muted-foreground pl-6 space-y-2 mb-4">
           <li>To maintain an efficient, systematic, and transparent admission process.</li>
           <li>To promote accessibility to educational opportunities through scholarships and financial aid.</li>
           <li>To maintain accurate and confidential student and grantee records.</li>
@@ -275,6 +275,10 @@ const currentRequirements = () => {
           <li>To strengthen linkages with external partners for expanded scholarship opportunities.</li>
           <li>To cultivate a culture of excellence, accountability, and service within the office and among student-grantees.</li>
         </ul>
+
+        <p class="text-lg text-muted-foreground mb-8">
+          For assistance with admission and scholarship matters, contact <a href="https://www.facebook.com/SFXC.ADSO" class="text-primary hover:underline font-bold">us here</a>
+        </p>
       </div>
 
       <Separator class="my-16" />
