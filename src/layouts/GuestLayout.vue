@@ -128,8 +128,8 @@ const navigationItems = ref<NavigationItem[]>([
                 label: 'Programs',
                 links: [
                     { name: 'Baccalaureate Programs', to: {name: 'programs'} },
-                    { name: 'Unit Earner Program', to: '#' },
-                    { name: 'Technical Vocational Programs', to: '#' },
+                    { name: 'Unit Earner Program', to: { name: 'unit-earner'} },
+                    { name: 'Technical Vocational Programs', to: { name: 'tech-voc'}},
                 ],
             },
             {
