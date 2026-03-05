@@ -94,7 +94,7 @@ const navigationItems = ref<NavigationItem[]>([
     //     ],
     // },
     {
-        name: 'Admissions',  
+        name: 'Admissions',
         type: 'dropdown',
         to: { name: 'requirements' },
         groups: [
