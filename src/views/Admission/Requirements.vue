@@ -308,7 +308,7 @@ const currentRequirements = () => {
               <li>Do you see yourself teaching, managing, creating, serving, or leading?</li>
               <li>What kind of work environment do you imagine yourself in someday?</li>
             </ul>
-            <p class="font-bold text-primary">Your answers to these questions matter. A course becomes meaningful when it fits you.</p>
+            <p class="font-bold text-primary">Your answers to these questions matter. A course becomes meaningful when it fits you. <a href="/admission/guide" class="text-foreground hover:underline font-bold">Click here</a> to see our short quiz to help decide your preferred course.</p>
           </div>
         </div>
 
