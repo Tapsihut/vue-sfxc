@@ -1,61 +1,81 @@
 <script setup lang="ts">
+import { onMounted } from 'vue'
 import { Quote } from 'lucide-vue-next'
+
+onMounted(() => {
+    const observer = new IntersectionObserver(
+        (entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.querySelectorAll('.reveal-item').forEach((el, i) => {
+                        setTimeout(() => el.classList.add('reveal-visible'), i * 100)
+                    })
+                    observer.unobserve(entry.target)
+                }
+            })
+        },
+        { threshold: 0.1 },
+    )
+    document.querySelectorAll('.reveal-group').forEach((el) => observer.observe(el))
+})
 </script>
 
 <template>
-    <section id="hero" class="relative">
+    <section id="hero" class="relative h-[75dvh] overflow-hidden">
+        <img
+            src="/src/assets/images/sfxc-building.jpg"
+            alt="SFXC Building"
+            class="absolute inset-0 w-full h-full object-cover"
+        />
         <div
-            class="h-120 md:h-[75dvh] flex flex-col relative bg-[url('/src/assets/images/sfxc-building.jpg')] bg-cover bg-center bg-no-repeat"
-        >
-            <div
-                class="absolute inset-0 bg-linear-to-t from-tertiary/90 via-background/20 to-transparent"
-            ></div>
+            class="absolute inset-0 bg-linear-to-r from-black/80 via-black/50 to-black/10 z-1"
+        ></div>
+        <div
+            class="absolute inset-0 bg-linear-to-t from-black/70 via-transparent to-transparent z-1"
+        ></div>
+        <div
+            class="absolute bottom-0 left-0 right-0 h-1/2 bg-linear-to-t from-primary/25 to-transparent z-1"
+        ></div>
 
-            <div class="relative z-10 mt-auto w-full md:max-w-4xl ps-5 pb-16 md:ps-10 md:pb-24">
+        <div class="absolute inset-0 z-10 flex flex-col justify-end pointer-events-none">
+            <div class="max-w-7xl mx-auto w-full px-6 sm:px-8 lg:px-16 pb-12 md:pb-16 reveal-group">
+                <div class="hidden md:flex items-center gap-4 mb-6 reveal-item">
+                    <div class="w-10 h-0.5 bg-primary"></div>
+                    <span class="text-white/50 text-xs font-medium uppercase tracking-[0.3em]"
+                        >St. Francis Xavier College</span
+                    >
+                </div>
                 <h1
-                    class="text-3xl md:text-5xl lg:text-7xl font-bold text-white tracking-tight drop-shadow-md"
+                    class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-white leading-[1.05] mb-4 reveal-item"
+                    style="font-family: 'Times New Roman', Times, serif"
                 >
                     Our School Patron
                 </h1>
-                <p class="text-white/80 mt-4 text-lg md:text-xl max-w-xl">
-                    Saint Francis Xavier - A beacon of faith, service, and evangelization.
+                <p class="text-base md:text-lg text-white/60 max-w-xl leading-relaxed reveal-item">
+                    Saint Francis Xavier — A beacon of faith, service, and evangelization.
                 </p>
-            </div>
-
-            <div class="absolute bottom-0 left-0 right-0 text-background leading-none">
-                <svg class="w-full h-12 md:h-24" viewBox="0 0 1440 320" preserveAspectRatio="none">
-                    <path
-                        fill="currentColor"
-                        fill-opacity="1"
-                        d="M0,224L48,213.3C96,203,192,181,288,181.3C384,181,480,203,576,224C672,245,768,267,864,261.3C960,256,1056,224,1152,197.3C1248,171,1344,149,1392,138.7L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"
-                    ></path>
-                </svg>
             </div>
         </div>
     </section>
 
     <section id="who-was" class="py-24 bg-background scroll-mt-16">
-        <div class="container mx-auto px-4 md:px-8">
-            <div class="grid md:grid-cols-2 gap-12 lg:gap-24 items-center">
-                <div class="relative group px-6">
-                    <div
-                        class="absolute -inset-4 bg-tertiary/10 rounded-2xl -z-10 group-hover:bg-tertiary/20 transition-colors duration-500 skew-x-12"
-                    ></div>
-                    <div
-                        class="skew-x-12 overflow-hidden rounded-xl shadow-xl border border-border"
-                    >
+        <div class="max-w-7xl mx-auto px-6 sm:px-8 lg:px-16">
+            <div class="grid md:grid-cols-2 gap-12 lg:gap-24 items-center reveal-group">
+                <div class="relative group px-6 reveal-item">
+                    <div class="overflow-hidden rounded-xl shadow-xl border border-border">
                         <img
                             src="https://www.catholicapostolatecenter.org/uploads/9/2/4/6/9246931/637779979_orig.jpg"
                             alt="Saint Francis Xavier"
-                            class="w-full object-cover aspect-3/4 -skew-x-12 scale-125"
+                            class="w-full object-cover aspect-3/4 scale-125"
                         />
                     </div>
                 </div>
-                <div>
-                    <div
-                        class="inline-flex items-center gap-2 text-tertiary font-bold mb-4 uppercase tracking-wider text-sm"
-                    >
-                        Our Patron Saint
+                <div class="reveal-item">
+                    <div class="flex items-center gap-4 mb-4">
+                        <div class="w-8 h-0.5 bg-tertiary"></div>
+                        <span class="text-tertiary font-semibold text-xs uppercase tracking-[0.3em]"
+                            >Our Patron Saint</span
+                        >
                     </div>
                     <h3 class="text-3xl md:text-4xl font-bold mb-6 text-foreground leading-tight">
                         Who Was St. Francis Xavier?
@@ -78,21 +98,24 @@ import { Quote } from 'lucide-vue-next'
     </section>
 
     <section id="missionary" class="py-24 bg-muted/20 scroll-mt-16">
-        <div class="container mx-auto px-4 md:px-8 max-w-5xl">
-            <div class="text-center mb-16">
-                <div
-                    class="inline-flex items-center gap-2 text-tertiary font-bold mb-4 uppercase tracking-wider text-sm"
-                >
-                    His Journey
+        <div class="max-w-7xl mx-auto px-6 sm:px-8 lg:px-16">
+            <div class="mb-16 reveal-group">
+                <div class="flex items-center gap-4 mb-4 reveal-item">
+                    <div class="w-8 h-0.5 bg-tertiary"></div>
+                    <span class="text-tertiary font-semibold text-xs uppercase tracking-[0.3em]"
+                        >His Journey</span
+                    >
                 </div>
-                <h3 class="text-3xl md:text-5xl font-bold text-foreground leading-tight">
+                <h3
+                    class="text-3xl md:text-4xl font-bold text-foreground leading-tight reveal-item"
+                >
                     Missionary Work
                 </h3>
             </div>
 
             <div class="space-y-12 md:space-y-16">
-                <div class="grid md:grid-cols-[auto_1fr] gap-6 md:gap-8 items-start">
-                    <div class="flex flex-col items-center md:items-start">
+                <div class="grid md:grid-cols-[auto_1fr] gap-6 md:gap-8 items-start reveal-group">
+                    <div class="flex flex-col items-center md:items-start reveal-item">
                         <div
                             class="w-16 h-16 rounded-xl bg-tertiary/20 flex items-center justify-center mb-3"
                         >
@@ -100,7 +123,7 @@ import { Quote } from 'lucide-vue-next'
                         </div>
                         <div class="h-full w-px bg-tertiary/30 hidden md:block mt-2"></div>
                     </div>
-                    <div class="space-y-3">
+                    <div class="space-y-3 reveal-item">
                         <h4 class="text-xl font-bold text-foreground">The Beginning</h4>
                         <p class="text-muted-foreground text-lg leading-relaxed">
                             Impressed by the Jesuits, King John III of Portugal asked the order for
@@ -111,8 +134,8 @@ import { Quote } from 'lucide-vue-next'
                     </div>
                 </div>
 
-                <div class="grid md:grid-cols-[auto_1fr] gap-6 md:gap-8 items-start">
-                    <div class="flex flex-col items-center md:items-start">
+                <div class="grid md:grid-cols-[auto_1fr] gap-6 md:gap-8 items-start reveal-group">
+                    <div class="flex flex-col items-center md:items-start reveal-item">
                         <div
                             class="w-16 h-16 rounded-xl bg-primary/20 flex items-center justify-center mb-3"
                         >
@@ -120,8 +143,8 @@ import { Quote } from 'lucide-vue-next'
                         </div>
                         <div class="h-full w-px bg-primary/30 hidden md:block mt-2"></div>
                     </div>
-                    <div class="space-y-3">
-                        <h4 class="text-xl font-bold text-foreground">India & Beyond</h4>
+                    <div class="space-y-3 reveal-item">
+                        <h4 class="text-xl font-bold text-foreground">India &amp; Beyond</h4>
                         <p class="text-muted-foreground text-lg leading-relaxed">
                             Xavier arrived in Goa, India, on May 6, 1542. He came to be admired in
                             that country for his ability to live and work side by side with the
@@ -132,15 +155,15 @@ import { Quote } from 'lucide-vue-next'
                     </div>
                 </div>
 
-                <div class="grid md:grid-cols-[auto_1fr] gap-6 md:gap-8 items-start">
-                    <div class="flex flex-col items-center md:items-start">
+                <div class="grid md:grid-cols-[auto_1fr] gap-6 md:gap-8 items-start reveal-group">
+                    <div class="flex flex-col items-center md:items-start reveal-item">
                         <div
                             class="w-16 h-16 rounded-xl bg-secondary/30 flex items-center justify-center mb-3"
                         >
                             <span class="text-2xl font-bold text-secondary">1549</span>
                         </div>
                     </div>
-                    <div class="space-y-3">
+                    <div class="space-y-3 reveal-item">
                         <h4 class="text-xl font-bold text-foreground">Japan</h4>
                         <p class="text-muted-foreground text-lg leading-relaxed">
                             On August 15, 1549, Xavier landed at Kagoshima, Japan. As he had at his
@@ -155,13 +178,14 @@ import { Quote } from 'lucide-vue-next'
     </section>
 
     <section id="legacy" class="py-24 bg-background scroll-mt-16">
-        <div class="container mx-auto px-4 md:px-8">
-            <div class="grid md:grid-cols-2 gap-12 lg:gap-24 items-center">
-                <div class="order-2 md:order-1">
-                    <div
-                        class="inline-flex items-center gap-2 text-tertiary font-bold mb-4 uppercase tracking-wider text-sm"
-                    >
-                        His Final Journey
+        <div class="max-w-7xl mx-auto px-6 sm:px-8 lg:px-16">
+            <div class="grid md:grid-cols-2 gap-12 lg:gap-24 items-center reveal-group">
+                <div class="order-2 md:order-1 reveal-item">
+                    <div class="flex items-center gap-4 mb-4">
+                        <div class="w-8 h-0.5 bg-tertiary"></div>
+                        <span class="text-tertiary font-semibold text-xs uppercase tracking-[0.3em]"
+                            >His Final Journey</span
+                        >
                     </div>
                     <h3 class="text-3xl md:text-4xl font-bold mb-6 text-foreground leading-tight">
                         Last Mission, Death and Legacy
@@ -188,14 +212,12 @@ import { Quote } from 'lucide-vue-next'
                         </p>
                     </div>
                 </div>
-                <div class="order-1 md:order-2 relative group px-6">
-                    <div
-                        class="-skew-x-12 overflow-hidden rounded-xl shadow-xl border border-border"
-                    >
+                <div class="order-1 md:order-2 relative group px-6 reveal-item">
+                    <div class="overflow-hidden rounded-xl shadow-xl border border-border">
                         <img
                             src="https://placehold.co/600x400"
                             alt="St. Francis Xavier Legacy"
-                            class="w-full object-cover aspect-4/3 skew-x-12 scale-125"
+                            class="w-full object-cover aspect-4/3 scale-125"
                         />
                     </div>
                 </div>
@@ -204,37 +226,46 @@ import { Quote } from 'lucide-vue-next'
     </section>
 
     <section id="quote" class="py-24 bg-tertiary text-tertiary-foreground overflow-hidden relative">
-        <div class="container mx-auto px-4 md:px-8 max-w-4xl relative z-10">
+        <div class="max-w-4xl mx-auto px-6 sm:px-8 lg:px-16 relative z-10 reveal-group">
             <div class="text-center">
-                <Quote class="w-12 h-12 mx-auto mb-6 opacity-50" />
-                <blockquote class="text-2xl md:text-3xl font-serif italic leading-relaxed mb-6">
+                <Quote class="w-10 h-10 mx-auto mb-8 opacity-40 reveal-item" />
+                <blockquote
+                    class="text-2xl md:text-3xl font-serif italic leading-relaxed mb-8 reveal-item"
+                >
                     In this life, we find our greatest comfort living in the midst of danger, that
                     is, if we confront them solely for the love of God.
                 </blockquote>
-                <p class="text-lg font-semibold opacity-90">— Saint Francis Xavier</p>
+                <p
+                    class="text-base font-semibold opacity-80 uppercase tracking-[0.2em] reveal-item"
+                >
+                    — Saint Francis Xavier
+                </p>
             </div>
         </div>
     </section>
 
     <section id="logo-rationale" class="py-24 bg-background scroll-mt-16">
-        <div class="container mx-auto px-4 md:px-8 max-w-5xl">
-            <div class="text-center mb-16">
-                <div
-                    class="inline-flex items-center gap-2 text-primary font-bold mb-4 uppercase tracking-wider text-sm"
-                >
-                    Our Identity
+        <div class="max-w-7xl mx-auto px-6 sm:px-8 lg:px-16">
+            <div class="mb-16 reveal-group">
+                <div class="flex items-center gap-4 mb-4 reveal-item">
+                    <div class="w-8 h-0.5 bg-primary"></div>
+                    <span class="text-primary font-semibold text-xs uppercase tracking-[0.3em]"
+                        >Our Identity</span
+                    >
                 </div>
-                <h3 class="text-3xl md:text-5xl font-bold text-foreground leading-tight mb-4">
+                <h3
+                    class="text-3xl md:text-4xl font-bold text-foreground leading-tight mb-4 reveal-item"
+                >
                     Logo Rationale
                 </h3>
-                <p class="text-muted-foreground text-lg max-w-3xl mx-auto">
+                <p class="text-muted-foreground text-base md:text-lg max-w-2xl reveal-item">
                     Each element of our logo carries deep meaning, representing the foundations,
                     values, and aspirations of Saint Francis Xavier College.
                 </p>
             </div>
 
-            <div class="grid md:grid-cols-2 gap-12 lg:gap-16 items-start mb-16">
-                <div class="flex justify-center md:sticky md:top-24">
+            <div class="grid md:grid-cols-2 gap-12 lg:gap-16 items-start mb-16 reveal-group">
+                <div class="flex justify-center md:sticky md:top-24 reveal-item">
                     <div class="relative">
                         <img
                             src="@/assets/images/sfxc-logo-only.png"
@@ -244,7 +275,7 @@ import { Quote } from 'lucide-vue-next'
                     </div>
                 </div>
 
-                <div class="space-y-6">
+                <div class="space-y-6 reveal-item">
                     <!-- Symbols -->
                     <div class="space-y-6">
                         <h4 class="text-xl font-bold text-foreground mb-4">Symbols & Elements</h4>
@@ -377,4 +408,17 @@ import { Quote } from 'lucide-vue-next'
     </section>
 </template>
 
-<style scoped></style>
+<style scoped>
+.reveal-item {
+    opacity: 0;
+    transform: translateY(2rem);
+    transition:
+        opacity 0.6s ease,
+        transform 0.6s ease;
+}
+
+.reveal-item.reveal-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+</style>
