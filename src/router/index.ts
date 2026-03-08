@@ -342,7 +342,7 @@ const router = createRouter({
                 layout: 'guest',
             },
         },
-                {
+        {
             path: '/admission/tour',
             name: 'schedule-tour',
             component: ScheduleTour,
@@ -357,7 +357,7 @@ const router = createRouter({
             meta: {
                 layout: 'guest',
             },
-        }
+        },
     ],
     scrollBehavior(to, from, savedPosition) {
         if (to.hash) {
@@ -366,9 +366,9 @@ const router = createRouter({
                 behavior: 'smooth',
             }
         }
-        if (savedPosition) {
-            return savedPosition
-        }
+        // if (savedPosition) {
+        //     return savedPosition
+        // }
         return { top: 0 }
     },
 })
