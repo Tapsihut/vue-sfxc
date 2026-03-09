@@ -128,6 +128,32 @@ const financialAids: FinancialAid[] = [
         ],
         applicationSteps: [],
     },
+    {
+        name: 'CHED Sugarcane Industry Development Act Scholarship (SIDA-SGP)',
+        description:
+            'A scholarship program for dependents of sugarcane workers and farmers in the Philippines. It aims to support educational opportunities for families involved in the sugarcane industry, providing assistance for tuition and school fees.',
+        amount: 'The scholarship amount is subject to the guidelines and provisions set by the partner agency.',
+        requirements: [
+            'Proof of parent employment in sugarcane industry',
+            'Certificate from sugar mill or plantation',
+            'Valid ID',
+            'Certificate of registration',
+        ],
+        applicationSteps: [],
+    },
+    {
+        name: 'DOST-SEI Junior Level Science Scholarship',
+        description:
+            'A science and technology scholarship program offered by the Department of Science and Technology - Science Education Institute. It is designed to support students pursuing careers in science, technology, engineering, and mathematics (STEM).',
+        amount: 'The scholarship amount is subject to the guidelines and provisions set by the partner agency.',
+        requirements: [
+            'DOST-SEI scholarship certificate',
+            'Certificate of registration',
+            'Valid ID',
+            'High school diploma',
+        ],
+        applicationSteps: [],
+    },
 ]
 
 interface RequirementNode {
