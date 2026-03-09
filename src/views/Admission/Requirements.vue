@@ -372,7 +372,7 @@ onMounted(() => {
                     </li>
                     <li>
                         <router-link
-                            to="/academics/scholarship"
+                            to="/admission/financial-aid"
                             class="text-tertiary hover:underline font-medium"
                             >Discover financial aid opportunities (scholarships and
                             grants);</router-link
