@@ -349,6 +349,22 @@ const router = createRouter({
                 layout: 'guest',
             },
         },
+        {
+            path: '/campus-safety/emergency-preparedness',
+            name: 'emergency-preparedness',
+            component: () => import('@/views/CampusSafety/Emergency.vue'),
+            meta: {
+                layout: 'guest',
+            },
+        },
+        {
+            path: '/campus-safety/health-protocols',
+            name: 'health-protocols',
+            component: () => import('@/views/CampusSafety/HealthProtocols.vue'),
+            meta: {
+                layout: 'guest',
+            },
+        },
     ],
     scrollBehavior(to, from, savedPosition) {
         if (to.hash) {
