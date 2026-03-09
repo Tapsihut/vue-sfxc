@@ -338,12 +338,12 @@ const navigationItems = ref<NavigationItem[]>([
                 links: [
                     {
                         name: 'Emergency and Disaster Preparedness Plan',
-                        to: '#',
+                        to: '/campus-safety/emergency-preparedness',
                         description: 'Be prepared for emergencies',
                     },
                     {
                         name: 'Health Protocols',
-                        to: '#',
+                        to: '/campus-safety/health-protocols',
                         description: 'Health and safety',
                     },
                     // {
