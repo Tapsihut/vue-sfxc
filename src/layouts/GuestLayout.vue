@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, onMounted, onUnmounted } from 'vue'
 import {
     NavigationMenu,
     NavigationMenuContent,
@@ -11,7 +11,19 @@ import {
 } from '@/components/ui/navigation-menu'
 import { Button } from '@/components/ui/button'
 import { Separator } from '@/components/ui/separator'
-import { Menu, X, ChevronDown } from 'lucide-vue-next'
+import {
+    Menu,
+    X,
+    ChevronDown,
+    Building2,
+    Users,
+    GraduationCap,
+    FileText,
+    Globe,
+    Heart,
+    Sparkles,
+    LayoutDashboard,
+} from 'lucide-vue-next'
 import Footer from '@/components/ui/custom/Footer.vue'
 import SchoolLogo from '@/components/ui/custom/logo/SchoolLogo.vue'
 import SFXCLogoOnly from '@/assets/images/sfxc-logo-only.png'
@@ -19,15 +31,30 @@ import SFXCTextOnly from '@/assets/images/sfxc-text-only.png'
 
 const isMobileMenuOpen = ref(false)
 const activeSubmenu = ref<string | null>(null)
+const isScrolled = ref(false)
+
+const handleScroll = () => {
+    isScrolled.value = window.scrollY > 20
+}
+
+onMounted(() => {
+    window.addEventListener('scroll', handleScroll)
+})
+
+onUnmounted(() => {
+    window.removeEventListener('scroll', handleScroll)
+})
 
 interface NavigationLink {
     name: string
-    to: string | { name: string, hash?: string }
+    to: string | { name: string; hash?: string }
+    description?: string
 }
 
 interface NavigationGroup {
     label?: string
     links: NavigationLink[]
+    icon?: any
 }
 
 interface NavigationItem {
@@ -35,6 +62,7 @@ interface NavigationItem {
     type: 'link' | 'dropdown'
     to?: string | { name: string }
     groups?: NavigationGroup[]
+    icon?: any
 }
 
 const navigationItems = ref<NavigationItem[]>([
@@ -50,49 +78,54 @@ const navigationItems = ref<NavigationItem[]>([
         groups: [
             {
                 label: 'Overview',
+                icon: Building2,
                 links: [
-                    { name: 'Mission, Vision, and History', to: { name: 'vision-mission'} },
-                    { name: 'Contact Us', to: '/contact' },
+                    {
+                        name: 'Mission, Vision, and History',
+                        to: { name: 'vision-mission' },
+                        description: 'Our foundation and values',
+                    },
+                    {
+                        name: 'Contact Us',
+                        to: '/contact',
+                        description: 'Get in touch with us',
+                    },
                 ],
             },
             {
                 label: 'Governance & Quality',
+                icon: LayoutDashboard,
                 links: [
-                    { name: 'Leadership and Governance', to: '#' },
-                    { name: 'Office Directory', to: { name: 'office-directory'} },
-                    { name: 'Accreditations, Rankings, and Major Achievements', to: { name: 'accreditation'} },
+                    {
+                        name: 'Leadership and Governance',
+                        to: '#',
+                        description: 'Meet our administration',
+                    },
+                    {
+                        name: 'Office Directory',
+                        to: { name: 'office-directory' },
+                        description: 'Find the right office',
+                    },
+                    {
+                        name: 'Accreditations & Achievements',
+                        to: { name: 'accreditation' },
+                        description: 'Our quality standards',
+                    },
                 ],
             },
             {
                 label: 'Campus',
-                links: [{ name: 'Campus Facilities and Virtual Tour', to: { name: 'facilities'} }],
+                icon: Sparkles,
+                links: [
+                    {
+                        name: 'Campus Facilities and Virtual Tour',
+                        to: { name: 'facilities' },
+                        description: 'Explore our campus',
+                    },
+                ],
             },
         ],
     },
-    // {
-    //     name: 'Community',
-    //     type: 'dropdown',
-    //     groups: [
-    //         {
-    //             label: 'Community',
-    //             links: [
-    //                 { name: 'News and Events Calendar', to: { name: 'news' } },
-    //                 { name: 'Media Gallery', to: { name: 'media-gallery'} },
-    //                 { name: 'Alumni', to: { name: 'alumni'} },
-    //                 { name: 'Careers at SFXC', to: { name: 'careers'} },
-    //             ],
-    //         },
-    //         {
-    //             label: 'Outreach',
-    //             links: [
-    //                 { name: 'Outreach Programs', to: { name: 'outreach-programs'} },
-    //                 { name: 'Partner Barangays/Agencies', to: { name: 'barangay-partners'} },
-    //                 { name: 'Volunteer Opportunities', to: { name: 'volunteer-opportunities'} },
-    //                 { name: 'Impact Stories', to: { name: 'stories'} },
-    //             ],
-    //         },
-    //     ],
-    // },
     {
         name: 'Admissions',
         type: 'dropdown',
@@ -100,23 +133,51 @@ const navigationItems = ref<NavigationItem[]>([
         groups: [
             {
                 label: 'Apply',
+                icon: FileText,
                 links: [
-                    { name: 'How to Apply (Local & International)', to:  { name: 'requirements', hash: '#enrollment' } },
-                    // { name: 'Requirements and Deadlines', to: { name: 'requirements' } },
-                    { name: 'Application Portal Login', to: '#' },
-                    { name: 'Visit/Schedule Tour', to: { name: 'schedule-tour'} },
+                    {
+                        name: 'How to Apply',
+                        to: { name: 'requirements', hash: '#enrollment' },
+                        description: 'Local & International students',
+                    },
+                    {
+                        name: 'Application Portal Login',
+                        to: '#',
+                        description: 'Access your application',
+                    },
+                    {
+                        name: 'Visit/Schedule Tour',
+                        to: { name: 'schedule-tour' },
+                        description: 'See our campus in person',
+                    },
                 ],
             },
             {
                 label: 'Costs & Aid',
+                icon: Heart,
                 links: [
-                    { name: 'Tuition and Financial Aid', to: { name: 'payment-options'} },
-                    { name: 'Scholarships (Philippine/ASEAN-focused)', to: { name: 'scholarship' } },
+                    {
+                        name: 'Tuition and Financial Aid',
+                        to: { name: 'payment-options' },
+                        description: 'Investment in your future',
+                    },
+                    {
+                        name: 'Scholarships',
+                        to: { name: 'scholarship' },
+                        description: 'Philippine/ASEAN-focused',
+                    },
                 ],
             },
             {
                 label: 'Guidance',
-                links: [{ name: 'What Course Should I Choose?', to: { name: 'course-guide' } }],
+                icon: Sparkles,
+                links: [
+                    {
+                        name: 'What Course Should I Choose?',
+                        to: { name: 'course-guide' },
+                        description: 'Find your path',
+                    },
+                ],
             },
         ],
     },
@@ -126,32 +187,41 @@ const navigationItems = ref<NavigationItem[]>([
         groups: [
             {
                 label: 'Programs',
+                icon: GraduationCap,
                 links: [
-                    { name: 'Baccalaureate Programs', to: {name: 'programs'} },
-                    { name: 'Unit Earner Program', to: { name: 'unit-earner'} },
-                    { name: 'Technical Vocational Programs', to: { name: 'tech-voc'}},
+                    {
+                        name: 'Baccalaureate Programs',
+                        to: { name: 'programs' },
+                        description: 'Undergraduate degrees',
+                    },
+                    {
+                        name: 'Unit Earner Program',
+                        to: { name: 'unit-earner' },
+                        description: 'Professional development',
+                    },
+                    {
+                        name: 'Technical Vocational Programs',
+                        to: { name: 'tech-voc' },
+                        description: 'Skills-based training',
+                    },
                 ],
             },
             {
                 label: 'Offices',
+                icon: Building2,
                 links: [
-                    { name: 'Research Development Office', to: '#' },
-                    { name: 'International Relations Office', to: { name: 'international-relations'} },
+                    {
+                        name: 'Research Development Office',
+                        to: '#',
+                        description: 'Advancing knowledge',
+                    },
+                    {
+                        name: 'International Relations Office',
+                        to: { name: 'international-relations' },
+                        description: 'Global partnerships',
+                    },
                 ],
             },
-            // {
-            //     label: 'Recognitions',
-            //     links: [
-            //         { name: 'Faculty Achievements', to: '#' },
-            //         { name: 'External Appointment of Faculty Members', to: '#' },
-            //         { name: 'Institutional Recognition/s', to: '#' },
-            //         { name: 'Program-level Recognitions/s', to: '#' },
-            //     ],
-            // },
-            // {
-            //     label: 'Learning',
-            //     links: [{ name: 'Alternative Learning Arrangements', to: '#' }],
-            // },
         ],
     },
     {
@@ -160,23 +230,69 @@ const navigationItems = ref<NavigationItem[]>([
         groups: [
             {
                 label: 'Student Life',
+                icon: Users,
                 links: [
-                    { name: 'Office of Student Affairs and Services', to: '#' },
-                    { name: 'Campus Housing and Dining', to: '#' },
-                    { name: 'Student Organizations and Clubs', to: { name: 'organizations' } },
-                    { name: 'Athletics and Fitness', to: '#' },
-                    { name: 'Health and Wellness', to: '#' },
-                    { name: 'Career Services', to: '#' },
+                    {
+                        name: 'Office of Student Affairs',
+                        to: '#',
+                        description: 'Student support services',
+                    },
+                    {
+                        name: 'Campus Housing and Dining',
+                        to: '#',
+                        description: 'Living on campus',
+                    },
+                    {
+                        name: 'Student Organizations',
+                        to: { name: 'organizations' },
+                        description: 'Clubs and activities',
+                    },
+                    {
+                        name: 'Athletics and Fitness',
+                        to: '#',
+                        description: 'Sports and wellness',
+                    },
+                    {
+                        name: 'Health and Wellness',
+                        to: '#',
+                        description: 'Your wellbeing matters',
+                    },
+                    {
+                        name: 'Career Services',
+                        to: '#',
+                        description: 'Plan your future',
+                    },
                 ],
             },
             {
                 label: 'Culture & Faith',
+                icon: Heart,
                 links: [
-                    { name: 'Culture and Arts Office', to: '#' },
-                    { name: 'Campus Culture and Traditions', to: '#' },
-                    { name: 'Recollection', to: '#' },
-                    { name: 'Faith (Patron)', to: { name: 'school-patron' } },
-                    { name: 'Impact Stories', to: '#' },
+                    {
+                        name: 'Culture and Arts Office',
+                        to: '#',
+                        description: 'Creative expression',
+                    },
+                    {
+                        name: 'Campus Culture and Traditions',
+                        to: '#',
+                        description: 'Our unique identity',
+                    },
+                    {
+                        name: 'Recollection',
+                        to: '#',
+                        description: 'Spiritual growth',
+                    },
+                    {
+                        name: 'Faith (Patron)',
+                        to: { name: 'school-patron' },
+                        description: 'St. Francis Xavier',
+                    },
+                    {
+                        name: 'Impact Stories',
+                        to: '#',
+                        description: 'Student experiences',
+                    },
                 ],
             },
         ],
@@ -187,23 +303,69 @@ const navigationItems = ref<NavigationItem[]>([
         groups: [
             {
                 label: 'Student Resources',
+                icon: LayoutDashboard,
                 links: [
-                    { name: 'Academic Calendar', to: '#' },
-                    { name: 'Policies and Handbooks', to: '#' },
-                    { name: 'Library Access', to: '#' },
-                    { name: 'XIMS', to: '#' },
-                    { name: 'WIFI Access', to: '#' },
-                    { name: 'Search and Site Map', to: '#' },
+                    {
+                        name: 'Academic Calendar',
+                        to: '#',
+                        description: 'Important dates',
+                    },
+                    {
+                        name: 'Policies and Handbooks',
+                        to: '#',
+                        description: 'Rules and guidelines',
+                    },
+                    {
+                        name: 'Library Access',
+                        to: '#',
+                        description: 'Research resources',
+                    },
+                    {
+                        name: 'XIMS',
+                        to: '#',
+                        description: 'Student portal',
+                    },
+                    {
+                        name: 'WIFI Access',
+                        to: '#',
+                        description: 'Connect to campus',
+                    },
+                    {
+                        name: 'Search and Site Map',
+                        to: '#',
+                        description: 'Find what you need',
+                    },
                 ],
             },
             {
                 label: 'Campus Safety',
+                icon: Sparkles,
                 links: [
-                    { name: 'Emergency Procedures', to: '#' },
-                    { name: 'Disaster Preparedness', to: '#' },
-                    { name: 'Health Protocols', to: '#' },
-                    { name: 'Security Office Contact', to: '#' },
-                    { name: 'Incident Reporting', to: '#' },
+                    {
+                        name: 'Emergency Procedures',
+                        to: '#',
+                        description: 'Stay safe on campus',
+                    },
+                    {
+                        name: 'Disaster Preparedness',
+                        to: '#',
+                        description: 'Be ready',
+                    },
+                    {
+                        name: 'Health Protocols',
+                        to: '#',
+                        description: 'Health and safety',
+                    },
+                    {
+                        name: 'Security Office Contact',
+                        to: '#',
+                        description: '24/7 support',
+                    },
+                    {
+                        name: 'Incident Reporting',
+                        to: '#',
+                        description: 'Report concerns',
+                    },
                 ],
             },
         ],
@@ -232,21 +394,34 @@ const toggleSubmenu = (menuName: string) => {
 
 <template>
     <div class="min-h-screen bg-background font-sans">
-        <header class="bg-white shadow-sm sticky top-0 z-50 border-b">
-            <nav>
-                <div class="px-4 sm:px-6 lg:px-8">
-                    <div class="flex justify-between items-center h-20 bg-white relative z-50">
-                        <div class="flex items-center">
+        <header class="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
+            <nav class="">
+                <div
+                    class="transition-all duration-300 border"
+                    :class="[
+                        isScrolled
+                            ? 'bg-white/70 dark:bg-gray-900/70 backdrop-blur-md shadow-xl border-white/40 dark:border-white/10'
+                            : 'bg-white/40 dark:bg-gray-900/40 backdrop-blur-sm shadow-lg border-white/20 dark:border-white/5',
+                    ]"
+                >
+                    <div class="flex justify-between items-center px-6 h-20">
+                        <!-- Logo -->
+                        <RouterLink
+                            to="/"
+                            class="flex items-center transition-transform duration-200 hover:scale-105"
+                        >
                             <SchoolLogo
                                 :logo-src="SFXCLogoOnly"
                                 :text-src="SFXCTextOnly"
                                 variant="horizontal"
                                 alt="St. Francis Xavier College Logo"
-                                logo-class="w-16"
-                                text-class="w-50"
+                                logo-class="w-14"
+                                text-class="w-44"
                             />
-                        </div>
-                        <div class="hidden md:flex items-center space-x-1">
+                        </RouterLink>
+
+                        <!-- Desktop Navigation -->
+                        <div class="hidden lg:flex items-center">
                             <NavigationMenu>
                                 <NavigationMenuList>
                                     <NavigationMenuItem
@@ -259,60 +434,85 @@ const toggleSubmenu = (menuName: string) => {
                                             as-child
                                             :class="
                                                 navigationMenuTriggerStyle() +
-                                                ' px-3 py-2 text-sm font-medium'
+                                                ' bg-transparent! shadow-none! ring-0!'
                                             "
                                         >
-                                            <RouterLink :to="item.to!">{{ item.name }}</RouterLink>
+                                            <RouterLink :to="item.to!" class="cursor-pointer">
+                                                {{ item.name }}
+                                            </RouterLink>
                                         </NavigationMenuLink>
 
                                         <!-- Dropdown Type -->
                                         <template v-else-if="item.type === 'dropdown'">
-                                            <NavigationMenuTrigger @click="item.to ? $router.push(item.to) : null">{{
-                                                item.name
-                                            }}</NavigationMenuTrigger>
+                                            <NavigationMenuTrigger
+                                                @click="item.to ? $router.push(item.to) : null"
+                                                class="cursor-pointer"
+                                            >
+                                                {{ item.name }}
+                                            </NavigationMenuTrigger>
                                             <NavigationMenuContent>
-                                                <ul
-                                                    class="grid gap-2 p-2"
+                                                <div
+                                                    class="grid gap-3 p-6"
                                                     :class="
                                                         useTwoColumns(item)
-                                                            ? 'w-130 grid-cols-2'
-                                                            : 'w-56 grid-cols-1'
+                                                            ? 'w-150 grid-cols-2'
+                                                            : 'w-100 grid-cols-1'
                                                     "
                                                 >
                                                     <template
                                                         v-for="(group, groupIndex) in item.groups"
                                                         :key="groupIndex"
                                                     >
-                                                        <li
-                                                            class="col-span-1"
-                                                            :class="{
-                                                                'mb-2': useTwoColumns(item),
-                                                            }"
-                                                        >
-                                                            <p
+                                                        <div class="space-y-3">
+                                                            <!-- Group Header with Icon -->
+                                                            <div
                                                                 v-if="group.label"
-                                                                class="px-3 pt-2 pb-1 text-xs font-semibold uppercase tracking-wider text-muted-foreground"
+                                                                class="flex items-center gap-2 px-3 pt-1 pb-2"
                                                             >
-                                                                {{ group.label }}
-                                                            </p>
-                                                            <ul class="grid gap-1">
-                                                                <li
+                                                                <component
+                                                                    :is="group.icon"
+                                                                    v-if="group.icon"
+                                                                    class="w-4 h-4 text-primary"
+                                                                />
+                                                                <p
+                                                                    class="text-sm font-semibold text-foreground"
+                                                                >
+                                                                    {{ group.label }}
+                                                                </p>
+                                                            </div>
+
+                                                            <!-- Links with Descriptions -->
+                                                            <div class="space-y-1">
+                                                                <NavigationMenuLink
                                                                     v-for="subItem in group.links"
                                                                     :key="subItem.name"
+                                                                    as-child
                                                                 >
-                                                                    <NavigationMenuLink as-child>
-                                                                        <RouterLink
-                                                                            :to="subItem.to"
-                                                                            class="block p-3 hover:bg-accent rounded-md"
+                                                                    <RouterLink
+                                                                        :to="subItem.to"
+                                                                        class="block p-3 rounded-lg hover:bg-accent/50 transition-colors duration-200 cursor-pointer group"
+                                                                    >
+                                                                        <div
+                                                                            class="text-sm font-medium text-foreground group-hover:text-primary transition-colors"
                                                                         >
                                                                             {{ subItem.name }}
-                                                                        </RouterLink>
-                                                                    </NavigationMenuLink>
-                                                                </li>
-                                                            </ul>
-                                                        </li>
+                                                                        </div>
+                                                                        <div
+                                                                            v-if="
+                                                                                subItem.description
+                                                                            "
+                                                                            class="text-xs text-muted-foreground mt-0.5"
+                                                                        >
+                                                                            {{
+                                                                                subItem.description
+                                                                            }}
+                                                                        </div>
+                                                                    </RouterLink>
+                                                                </NavigationMenuLink>
+                                                            </div>
+                                                        </div>
                                                     </template>
-                                                </ul>
+                                                </div>
                                             </NavigationMenuContent>
                                         </template>
                                     </NavigationMenuItem>
@@ -320,8 +520,14 @@ const toggleSubmenu = (menuName: string) => {
                             </NavigationMenu>
                         </div>
 
-                        <div class="md:hidden">
-                            <Button variant="ghost" size="icon" @click="toggleMobileMenu">
+                        <!-- Mobile Menu Button -->
+                        <div class="lg:hidden">
+                            <Button
+                                variant="ghost"
+                                size="icon"
+                                @click="toggleMobileMenu"
+                                class="cursor-pointer"
+                            >
                                 <X v-if="isMobileMenuOpen" class="h-6 w-6" />
                                 <Menu v-else class="h-6 w-6" />
                             </Button>
@@ -329,39 +535,51 @@ const toggleSubmenu = (menuName: string) => {
                     </div>
                 </div>
 
+                <!-- Mobile Menu -->
                 <Transition
                     enter-active-class="transition duration-200 ease-out"
-                    enter-from-class="transform -translate-y-4 opacity-0"
+                    enter-from-class="transform -translate-y-2 opacity-0"
                     enter-to-class="transform translate-y-0 opacity-100"
                     leave-active-class="transition duration-150 ease-in"
                     leave-from-class="transform translate-y-0 opacity-100"
-                    leave-to-class="transform -translate-y-4 opacity-0"
+                    leave-to-class="transform -translate-y-2 opacity-0"
                 >
                     <div
                         v-if="isMobileMenuOpen"
-                        class="absolute top-20 left-0 w-full bg-white border-b shadow-xl md:hidden z-40 max-h-[calc(100vh-5rem)] overflow-y-auto"
+                        class="mt-2 bg-white/95 dark:bg-card/95 backdrop-blur-xl rounded-2xl shadow-xl border border-gray-200/50 dark:border-border/50 lg:hidden max-h-[calc(100vh-120px)] overflow-y-auto"
                     >
-                        <div class="flex flex-col p-4 pb-6 space-y-2">
+                        <div class="flex flex-col p-4 space-y-1">
                             <template v-for="item in navigationItems" :key="item.name">
                                 <!-- Link Type -->
                                 <RouterLink
                                     v-if="item.type === 'link'"
                                     :to="item.to!"
-                                    class="flex items-center w-full px-4 py-3 text-sm font-medium hover:bg-accent rounded-lg"
+                                    class="flex items-center w-full px-4 py-3 text-sm font-medium hover:bg-accent rounded-lg transition-colors duration-200 cursor-pointer"
+                                    @click="isMobileMenuOpen = false"
                                 >
                                     {{ item.name }}
                                 </RouterLink>
 
                                 <!-- Dropdown Type -->
-                                <div v-else-if="item.type === 'dropdown'">
-                                    <div class="flex items-center justify-between w-full px-4 py-3 text-sm font-medium hover:bg-accent rounded-lg group">
-                                        <RouterLink v-if="item.to" :to="item.to" class="grow text-left">{{ item.name }}</RouterLink>
-                                        <button v-else @click="toggleSubmenu(item.name.toLowerCase())" class="grow text-left">
+                                <div v-else-if="item.type === 'dropdown'" class="space-y-1">
+                                    <div
+                                        class="flex items-center justify-between w-full px-4 py-3 text-sm font-medium hover:bg-accent rounded-lg group cursor-pointer"
+                                    >
+                                        <RouterLink
+                                            v-if="item.to"
+                                            :to="item.to"
+                                            class="flex-1 text-left"
+                                            @click="isMobileMenuOpen = false"
+                                        >
                                             {{ item.name }}
-                                        </button>
-                                        <button @click="toggleSubmenu(item.name.toLowerCase())" class="p-1 ml-2">
+                                        </RouterLink>
+                                        <span v-else class="flex-1 text-left">{{ item.name }}</span>
+                                        <button
+                                            @click="toggleSubmenu(item.name.toLowerCase())"
+                                            class="p-1 ml-2 rounded hover:bg-accent-foreground/10 transition-colors cursor-pointer"
+                                        >
                                             <ChevronDown
-                                                class="w-4 h-4 transition-transform duration-200 text-gray-500"
+                                                class="w-4 h-4 transition-transform duration-200"
                                                 :class="{
                                                     'rotate-180':
                                                         activeSubmenu === item.name.toLowerCase(),
@@ -370,30 +588,65 @@ const toggleSubmenu = (menuName: string) => {
                                         </button>
                                     </div>
 
-                                    <div
-                                        v-if="activeSubmenu === item.name.toLowerCase()"
-                                        class="px-4 py-2 space-y-1 bg-gray-50 rounded-b-lg mx-2 mt-1"
+                                    <!-- Submenu Items -->
+                                    <Transition
+                                        enter-active-class="transition duration-200 ease-out"
+                                        enter-from-class="transform -translate-y-1 opacity-0"
+                                        enter-to-class="transform translate-y-0 opacity-100"
+                                        leave-active-class="transition duration-150 ease-in"
+                                        leave-from-class="transform translate-y-0 opacity-100"
+                                        leave-to-class="transform -translate-y-1 opacity-0"
                                     >
-                                        <template
-                                            v-for="(group, groupIndex) in item.groups"
-                                            :key="groupIndex"
+                                        <div
+                                            v-if="activeSubmenu === item.name.toLowerCase()"
+                                            class="px-2 py-2 space-y-3 bg-accent/30 rounded-lg ml-2 mr-2"
                                         >
-                                            <p
-                                                v-if="group.label"
-                                                class="px-4 pt-3 pb-1 text-xs font-semibold uppercase tracking-wider text-muted-foreground"
+                                            <template
+                                                v-for="(group, groupIndex) in item.groups"
+                                                :key="groupIndex"
                                             >
-                                                {{ group.label }}
-                                            </p>
-                                            <RouterLink
-                                                v-for="subItem in group.links"
-                                                :key="subItem.name"
-                                                :to="subItem.to"
-                                                class="block px-4 py-2 text-sm rounded-md hover:text-accent-foreground hover:bg-accent"
-                                            >
-                                                {{ subItem.name }}
-                                            </RouterLink>
-                                        </template>
-                                    </div>
+                                                <div class="space-y-1">
+                                                    <!-- Group Label with Icon -->
+                                                    <div
+                                                        v-if="group.label"
+                                                        class="flex items-center gap-2 px-3 pt-2 pb-1"
+                                                    >
+                                                        <component
+                                                            :is="group.icon"
+                                                            v-if="group.icon"
+                                                            class="w-3.5 h-3.5 text-primary"
+                                                        />
+                                                        <p
+                                                            class="text-xs font-semibold uppercase tracking-wider text-muted-foreground"
+                                                        >
+                                                            {{ group.label }}
+                                                        </p>
+                                                    </div>
+
+                                                    <!-- Links -->
+                                                    <RouterLink
+                                                        v-for="subItem in group.links"
+                                                        :key="subItem.name"
+                                                        :to="subItem.to"
+                                                        class="block px-4 py-2.5 rounded-md hover:bg-accent transition-colors duration-200 cursor-pointer"
+                                                        @click="isMobileMenuOpen = false"
+                                                    >
+                                                        <div
+                                                            class="text-sm font-medium text-foreground"
+                                                        >
+                                                            {{ subItem.name }}
+                                                        </div>
+                                                        <div
+                                                            v-if="subItem.description"
+                                                            class="text-xs text-muted-foreground mt-0.5"
+                                                        >
+                                                            {{ subItem.description }}
+                                                        </div>
+                                                    </RouterLink>
+                                                </div>
+                                            </template>
+                                        </div>
+                                    </Transition>
                                 </div>
                             </template>
                         </div>
@@ -402,7 +655,8 @@ const toggleSubmenu = (menuName: string) => {
             </nav>
         </header>
 
-        <main class="w-full overflow-x-hidden max-w-[100vw] relative">
+        <!-- Main Content with Padding for Fixed Header -->
+        <main class="w-full max-w-[100vw] relative pt-20">
             <slot />
         </main>
 

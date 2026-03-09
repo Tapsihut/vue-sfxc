@@ -1,201 +1,252 @@
 <script setup lang="ts">
-import { ArrowRight, Cross, HeartHandshake, Shield, Star } from 'lucide-vue-next'
-import { Button } from '@/components/ui/button'
+import { onMounted } from 'vue'
+import { Cross, HeartHandshake, Shield, Star } from 'lucide-vue-next'
 import { Card, CardContent, CardHeader } from '@/components/ui/card'
+
+onMounted(() => {
+    const observer = new IntersectionObserver(
+        (entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.querySelectorAll('.reveal-item').forEach((el, i) => {
+                        setTimeout(() => el.classList.add('reveal-visible'), i * 100)
+                    })
+                    observer.unobserve(entry.target)
+                }
+            })
+        },
+        { threshold: 0.1 },
+    )
+    document.querySelectorAll('.reveal-group').forEach((el) => observer.observe(el))
+})
 </script>
 
 <template>
-    <section id="home" class="relative">
+    <section id="home" class="relative h-[75dvh] overflow-hidden">
+        <img
+            src="/src/assets/images/sfxc-building.jpg"
+            alt="SFXC Building"
+            class="absolute inset-0 w-full h-full object-cover"
+        />
         <div
-            class="h-120 md:h-[75dvh] flex flex-col relative bg-[url('/src/assets/images/sfxc-building.jpg')] bg-cover bg-center bg-no-repeat"
-        >
-            <div
-                class="absolute inset-0 bg-linear-to-t from-primary/90 via-background/20 to-transparent"
-            ></div>
+            class="absolute inset-0 bg-linear-to-r from-black/80 via-black/50 to-black/10 z-1"
+        ></div>
+        <div
+            class="absolute inset-0 bg-linear-to-t from-black/70 via-transparent to-transparent z-1"
+        ></div>
+        <div
+            class="absolute bottom-0 left-0 right-0 h-1/2 bg-linear-to-t from-primary/25 to-transparent z-1"
+        ></div>
 
-            <div class="absolute bottom-0 left-0 right-0 text-background leading-none">
-                <svg class="w-full h-12 md:h-24" viewBox="0 0 1440 320" preserveAspectRatio="none">
-                    <path
-                        fill="currentColor"
-                        fill-opacity="1"
-                        d="M0,224L48,213.3C96,203,192,181,288,181.3C384,181,480,203,576,224C672,245,768,267,864,261.3C960,256,1056,224,1152,197.3C1248,171,1344,149,1392,138.7L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"
-                    ></path>
-                </svg>
+        <!-- Content overlay -->
+        <div class="absolute inset-0 z-10 flex flex-col justify-end pointer-events-none">
+            <div class="max-w-7xl mx-auto w-full px-6 sm:px-8 lg:px-16 pb-12 md:pb-16">
+                <div class="hidden md:flex items-center gap-4 mb-6">
+                    <div class="w-10 h-0.5 bg-primary"></div>
+                    <span class="text-white/50 text-xs font-medium uppercase tracking-[0.3em]"
+                        >St. Francis Xavier College</span
+                    >
+                </div>
+                <h1
+                    class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-white leading-[1.05] mb-4"
+                    style="font-family: 'Times New Roman', Times, serif"
+                >
+                    Vision &amp; Mission
+                </h1>
+                <p class="text-base md:text-lg text-white/60 max-w-md leading-relaxed">
+                    Faith, purpose, and excellence — the guiding principles of our institution.
+                </p>
             </div>
         </div>
     </section>
 
     <section id="history" class="py-24 bg-muted/20 scroll-mt-16">
         <div class="container mx-auto px-4 md:px-8 max-w-4xl">
-            <div class="text-center mb-16">
-                <div
-                    class="inline-flex items-center gap-2 text-primary font-bold mb-4 uppercase tracking-wider text-sm"
-                >
-                    Our History
+            <div class="mb-16 reveal-group">
+                <div class="flex items-center gap-4 mb-4 reveal-item">
+                    <div class="w-8 h-0.5 bg-primary"></div>
+                    <span class="text-primary font-semibold text-xs uppercase tracking-[0.3em]"
+                        >Our History</span
+                    >
                 </div>
-                <h3 class="text-3xl md:text-5xl font-bold text-foreground leading-tight">
-                    A Legacy of Faith and Learning
+                <h3
+                    class="text-3xl md:text-5xl font-bold text-foreground leading-tight reveal-item"
+                >
+                    A Legacy of Faith<br />and Learning
                 </h3>
             </div>
 
             <div class="relative">
-                <div class="space-y-12 md:space-y-16">
-                    <div class="relative pl-8 md:pl-0 md:pr-1/2 md:pr-12 md:text-right">
+                <!-- Vertical center line (desktop) -->
+                <div
+                    class="hidden md:block absolute left-1/2 -translate-x-px top-0 h-full w-px bg-border"
+                ></div>
+
+                <div class="space-y-12 md:space-y-16 reveal-group">
+                    <div
+                        class="relative pl-8 md:pl-0 md:pr-[calc(50%+2rem)] md:text-right reveal-item"
+                    >
                         <div
-                            class="absolute left-0 top-2 w-3 h-3 rounded-full bg-primary md:left-auto md:right-0 md:-mr-1.5"
+                            class="hidden md:block absolute right-0 top-2 w-3 h-3 rounded-full bg-primary translate-x-[calc(50%+0.5px)] border-2 border-background"
                         ></div>
-                        <div class="md:pr-8">
-                            <p class="text-muted-foreground text-lg leading-relaxed">
-                                St. Francis Xavier College, Inc. (SFXC) is a  non-profit non-stock  corporation
-                                with  Registration  Number  DN - 091-00583   granted  by   the   Security  and
-                                Exchange  Commission  (SEC)  on  July  25,  1991.  This  is  under  the  direct
-                                supervision  of   the  Commission  on  Higher  Education  (CHED)   and   the  
-                                National Manpower and Youth Council (NMYC) for the baccalaureate degrees  and technical-vocational
-                                courses, respectively.
-                            </p>
-                        </div>
+                        <div
+                            class="absolute left-0 top-2 w-3 h-3 rounded-full bg-primary md:hidden"
+                        ></div>
+                        <p class="text-muted-foreground text-base md:text-lg leading-relaxed">
+                            St. Francis Xavier College, Inc. (SFXC) is a non-profit non-stock
+                            corporation with Registration Number DN - 091-00583 granted by the
+                            Security and Exchange Commission (SEC) on July 25, 1991. This is under
+                            the direct supervision of the Commission on Higher Education (CHED) and
+                            the National Manpower and Youth Council (NMYC) for the baccalaureate
+                            degrees and technical-vocational courses, respectively.
+                        </p>
                     </div>
 
-                    <div class="relative pl-8 md:pl-1/2 md:pl-12">
+                    <div class="relative pl-8 md:pl-[calc(50%+2rem)] reveal-item">
                         <div
-                            class="absolute left-0 top-2 w-3 h-3 rounded-full bg-secondary md:right-auto md:left-0 md:-ml-1.5"
+                            class="hidden md:block absolute left-1/2 top-2 w-3 h-3 rounded-full bg-secondary -translate-x-[calc(50%-0.5px)] border-2 border-background"
                         ></div>
-                        <div class="md:pl-8">
-                            <p class="text-muted-foreground text-lg leading-relaxed">
-                                It   was   founded   in  1990  and   originally   named
-                                St.  Francis  Institute  of  Technology  (SFIT)  to  honor
-                                St.  Francis  Xavier,  a  Jesuit  missionary  who  evangelized
-                                those  in  Asia  and  Africa.  The  school  initially  rented
-                                an  old  two-storey  residential  house  of  Mr. and Mrs.  Demetrio  G. del Rosario
-                                that  accommodated 108 students enrolled in short-term technical-vocational course
-                                certificates   and   three   baccalaureate   courses  (i.e.   Bachelor  of  Science in  
-                                Secretarial  Administration, Bachelor  of Science in Elementary Education, and  Bachelor
-                                of  Arts  in  English)  under  the  tutelage  of  20  instructors  and six  members of the administrative staff.
-                            </p>
-                        </div>
+                        <div
+                            class="absolute left-0 top-2 w-3 h-3 rounded-full bg-secondary md:hidden"
+                        ></div>
+                        <p class="text-muted-foreground text-base md:text-lg leading-relaxed">
+                            It was founded in 1990 and originally named St. Francis Institute of
+                            Technology (SFIT) to honor St. Francis Xavier, a Jesuit missionary who
+                            evangelized those in Asia and Africa. The school initially rented an old
+                            two-storey residential house of Mr. and Mrs. Demetrio G. del Rosario
+                            that accommodated 108 students enrolled in short-term
+                            technical-vocational course certificates and three baccalaureate courses
+                            (i.e. Bachelor of Science in Secretarial Administration, Bachelor of
+                            Science in Elementary Education, and Bachelor of Arts in English) under
+                            the tutelage of 20 instructors and six members of the administrative
+                            staff.
+                        </p>
                     </div>
 
-                    <div class="relative pl-8 md:pl-0 md:pr-1/2 md:pr-12 md:text-right">
+                    <div
+                        class="relative pl-8 md:pl-0 md:pr-[calc(50%+2rem)] md:text-right reveal-item"
+                    >
                         <div
-                            class="absolute left-0 top-2 w-3 h-3 rounded-full bg-tertiary md:left-auto md:right-0 md:-mr-1.5"
+                            class="hidden md:block absolute right-0 top-2 w-3 h-3 rounded-full bg-tertiary translate-x-[calc(50%+0.5px)] border-2 border-background"
                         ></div>
-                        <div class="md:pr-8">
-                            <p class="text-muted-foreground text-lg leading-relaxed">
-                                The  founders  of   the   college  were   Messrs.  Mamerto   Prochina,
-                                Baltazar  Lumangyao, Demetrio del Rosario, Romeo Duron, Emmanuel Plaza,
-                                Praxedes  Lambaco, and Segundo Guelos. Mr. Democrito O. Plaza, former congressman
-                                and  governor, personally donated  50  units  of  typewriter  for  the secretarial
-                                course.  After working  in   public  service,  Mrs.  Valentina  G.  Plaza,
-                                former  governor  of  Agusan  del  Sur,  continued  serving  the province’s constituents
-                                through  education.  Board  members  of   the   college  expanded   to  include  founders‘
-                                spouses  to  address the  growing  needs  and increasing  population  of the college.  
-                            </p>
-                        </div>
+                        <div
+                            class="absolute left-0 top-2 w-3 h-3 rounded-full bg-tertiary md:hidden"
+                        ></div>
+                        <p class="text-muted-foreground text-base md:text-lg leading-relaxed">
+                            The founders of the college were Messrs. Mamerto Prochina, Baltazar
+                            Lumangyao, Demetrio del Rosario, Romeo Duron, Emmanuel Plaza, Praxedes
+                            Lambaco, and Segundo Guelos. Mr. Democrito O. Plaza, former congressman
+                            and governor, personally donated 50 units of typewriter for the
+                            secretarial course. After working in public service, Mrs. Valentina G.
+                            Plaza, former governor of Agusan del Sur, continued serving the
+                            province’s constituents through education. Board members of the college
+                            expanded to include founders‘ spouses to address the growing needs and
+                            increasing population of the college.
+                        </p>
                     </div>
-
-                    <!-- <div class="relative pl-8 md:pl-1/2 md:pl-12">
-                        <div
-                            class="absolute left-0 top-2 w-3 h-3 rounded-full bg-primary md:right-auto md:left-0 md:-ml-1.5"
-                        ></div>
-                        <div class="md:pl-8">
-                            <p class="text-muted-foreground text-lg leading-relaxed">
-                                The  founders  of   the   college  were   Messrs.  Mamerto   Prochina,
-                                Baltazar  Lumangyao, Demetrio del Rosario, Romeo Duron, Emmanuel Plaza,
-                                Praxedes  Lambaco, and Segundo Guelos. Mr. Democrito O. Plaza, former congressman
-                                and  governor, personally donated  50  units  of  typewriter  for  the secretarial
-                                course.  After working  in   public  service,  Mrs.  Valentina  G.  Plaza,
-                                former  governor  of  Agusan  del  Sur,  continued  serving  the province’s constituents
-                                through  education.  Board  members  of   the   college  expanded   to  include  founders‘
-                                spouses  to  address the  growing  needs  and increasing  population  of the college.
-                            </p>
-                        </div>
-                    </div> -->
-
-                    <!-- <div class="relative pl-8 md:pl-0 md:pr-1/2 md:pr-12 md:text-right">
-                        <div
-                            class="absolute left-0 top-2 w-3 h-3 rounded-full bg-secondary md:left-auto md:right-0 md:-mr-1.5"
-                        ></div>
-                        <div class="md:pr-8">
-                            <p class="text-muted-foreground text-lg leading-relaxed">
-                                A year after its founding in 1990, the Saint Francis Institute of
-                                Technology (SFIT) was renamed Saint Francis Xavier College (SFXC),
-                                to pay tribute and honor to a Jesuit Missionary, who first set his
-                                foot on the continent of Asia and Africa for evangelization and
-                                conversion of the native descents into catholic-Christians. It is
-                                the same visionary task that this college upholds, that each
-                                graduate shall love to serve God unconditionally through the
-                                practice of his profession and calling.
-                            </p>
-                        </div>
-                    </div> -->
                 </div>
             </div>
         </div>
     </section>
-
+    <!-- Vision & Mission combined section -->
     <section id="vision" class="py-24 bg-background scroll-mt-16">
-        <div class="container mx-auto px-4 md:px-8">
-            <div class="grid md:grid-cols-2 gap-12 lg:gap-24 items-center mb-24">
-                <div class="order-2 md:order-1 px-4 md:px-0">
-                    <div
-                        class="text-3xl inline-flex items-center gap-2 text-primary font-bold mb-4 uppercase tracking-wider"
-                    >
-                        Our Vision
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-16">
+            <!-- Vision -->
+            <div class="grid md:grid-cols-12 gap-12 lg:gap-16 items-center mb-24 reveal-group">
+                <!-- Text: 5 cols -->
+                <div class="md:col-span-5 order-2 md:order-1 reveal-item">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="w-8 h-0.5 bg-primary"></div>
+                        <span class="text-primary font-semibold text-xs uppercase tracking-[0.3em]"
+                            >Our Vision</span
+                        >
                     </div>
-                    <!-- <h3 class="text-3xl md:text-4xl font-bold mb-6 text-foreground leading-tight">
-                        Our Vision
-                    </h3> -->
-                    <p class="text-lg text-muted-foreground leading-relaxed">
-                        An open, leading educational institution upholding excellence-driven and value laden leaders for the socio-economic development of society.
-                    </p>
-                </div>
-                <div class="order-1 md:order-2 relative group px-6">
-                    <div
-                        class="-skew-x-12 overflow-hidden rounded-xl shadow-xl border border-border"
+                    <h3
+                        class="text-3xl md:text-4xl lg:text-5xl font-bold mb-6 text-foreground leading-tight"
                     >
+                        Leading with<br />
+                        <span class="text-primary italic font-serif font-light"
+                            >Excellence &amp; Values</span
+                        >
+                    </h3>
+                    <div
+                        class="relative pl-6 before:absolute before:left-0 before:top-0 before:h-full before:w-0.5 before:bg-linear-to-b before:from-primary/50 before:to-transparent"
+                    >
+                        <p class="text-base md:text-lg text-muted-foreground leading-relaxed">
+                            An open, leading educational institution upholding excellence-driven and
+                            value laden leaders for the socio-economic development of society.
+                        </p>
+                    </div>
+                </div>
+                <!-- Image: 7 cols -->
+                <div class="md:col-span-7 order-1 md:order-2 reveal-item">
+                    <div class="relative group rounded-2xl overflow-hidden shadow-2xl">
+                        <div
+                            class="absolute inset-0 bg-primary/20 z-10 group-hover:bg-transparent transition-colors duration-500"
+                        ></div>
                         <img
-                            src="https://placehold.co/600x400"
+                            src="https://placehold.co/800x500"
                             alt="SFXC Vision"
-                            class="w-full object-cover aspect-4/3 skew-x-12 scale-125"
+                            class="w-full object-cover aspect-video group-hover:scale-105 transition-transform duration-700"
                         />
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
 
-    <section id="mission" class="pb-24 bg-background scroll-mt-16">
-        <div class="container mx-auto px-4 md:px-8">
-            <div class="grid md:grid-cols-2 gap-12 lg:gap-24 items-center mb-24">
-                <div class="relative group px-6">
-                    <div
-                        class="-skew-x-12 overflow-hidden rounded-xl shadow-xl border border-border"
-                    >
+            <!-- Divider -->
+            <div class="flex items-center gap-6 mb-24">
+                <div class="flex-1 h-px bg-border"></div>
+                <span class="text-muted-foreground/40 text-xs uppercase tracking-widest"
+                    >Mission</span
+                >
+                <div class="flex-1 h-px bg-border"></div>
+            </div>
+
+            <!-- Mission -->
+            <div
+                class="grid md:grid-cols-12 gap-12 lg:gap-16 items-center reveal-group"
+                id="mission"
+            >
+                <!-- Image: 7 cols -->
+                <div class="md:col-span-7 reveal-item">
+                    <div class="relative group rounded-2xl overflow-hidden shadow-2xl">
+                        <div
+                            class="absolute inset-0 bg-secondary/20 z-10 group-hover:bg-transparent transition-colors duration-500"
+                        ></div>
                         <img
-                            src="https://placehold.co/600x400"
+                            src="https://placehold.co/800x500"
                             alt="SFXC Mission"
-                            class="w-full object-cover aspect-4/3 skew-x-12 scale-125"
+                            class="w-full object-cover aspect-video group-hover:scale-105 transition-transform duration-700"
                         />
                     </div>
                 </div>
-                <div>
-                    <div
-                        class="inline-flex items-center gap-2 text-primary font-bold mb-4 uppercase tracking-wider text-3xl"
-                    >
-                        Our Mission
+                <!-- Text: 5 cols -->
+                <div class="md:col-span-5 reveal-item">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="w-8 h-0.5 bg-primary"></div>
+                        <span class="text-primary font-semibold text-xs uppercase tracking-[0.3em]"
+                            >Our Mission</span
+                        >
                     </div>
-                    <!-- <h3 class="text-3xl md:text-4xl font-bold mb-6 text-foreground leading-tight">
-                        Innovative Education for Genuine Transformation
-                    </h3> -->
-                    <div class="space-y-4 text-muted-foreground text-lg leading-relaxed">
-                        <p>
-                            The institution pursues innovative approaches in education to enhance instruction, research, and community involvement. It pledges to provide the learners a curricular framework to instill creative and critical thinking in a changing world. Strengthening of culture, environmental care, and values formation are inculcated to guarantee genuine transformation.
+                    <h3
+                        class="text-3xl md:text-4xl lg:text-5xl font-bold mb-6 text-foreground leading-tight"
+                    >
+                        Innovative Education<br />
+                        <span class="text-primary italic font-serif font-light"
+                            >for Genuine Transformation</span
+                        >
+                    </h3>
+                    <div
+                        class="relative pl-6 before:absolute before:left-0 before:top-0 before:h-full before:w-0.5 before:bg-linear-to-b before:from-primary/50 before:to-transparent"
+                    >
+                        <p class="text-base md:text-lg text-muted-foreground leading-relaxed">
+                            The institution pursues innovative approaches in education to enhance
+                            instruction, research, and community involvement. It pledges to provide
+                            the learners a curricular framework to instill creative and critical
+                            thinking in a changing world. Strengthening of culture, environmental
+                            care, and values formation are inculcated to guarantee genuine
+                            transformation.
                         </p>
-                        <!-- <p>
-                            It pledges to provide the learners a curricular framework to instill
-                            creative and critical thinking in a changing world.
-                        </p>
-                        <p>Is inculcated to guarantee genuine transformation.</p> -->
                     </div>
                 </div>
             </div>
@@ -219,16 +270,21 @@ import { Card, CardContent, CardHeader } from '@/components/ui/card'
             </svg>
         </div>
         <main
-            class="container mx-auto px-4 md:px-8 relative z-10 flex md:flex-row justify-center flex-col gap-15 md:gap-10 lg:gap-25 py-8"
+            class="container mx-auto px-4 md:px-8 relative z-10 flex md:flex-row justify-center flex-col gap-15 md:gap-10 lg:gap-25 py-8 reveal-group"
         >
             <!-- Left Side: Header -->
-            <div class="max-w-137.5 md:mt-16 text-center md:text-left">
-                <p class="text-xl text-primary font-semibold mb-2">Guided by S.F.X.C.</p>
+            <div class="max-w-137.5 md:mt-16 text-center md:text-left reveal-item">
+                <div class="flex items-center gap-4 mb-4 justify-center md:justify-start">
+                    <div class="w-8 h-0.5 bg-primary"></div>
+                    <span class="text-primary font-semibold text-xs uppercase tracking-[0.3em]"
+                        >Guided by S.F.X.C.</span
+                    >
+                </div>
                 <h2 class="text-4xl md:text-5xl font-bold tracking-tight mb-6 text-foreground">
                     Our Core Values <br />
                     Define Us.
                 </h2>
-                <p class="text-muted-foreground mb-10 text-lg leading-relaxed">
+                <p class="text-muted-foreground mb-10 text-base md:text-lg leading-relaxed">
                     At St. Francis Xavier College, our values are not just words—they are the
                     foundation of our identity and the compass that guides our community.
                 </p>
@@ -240,7 +296,7 @@ import { Card, CardContent, CardHeader } from '@/components/ui/card'
             >
                 <!-- Card 1: Service -->
                 <Card
-                    class="col-start-1 col-end-2 row-start-1 row-end-4 w-62.5 md:w-55 lg:w-62.5 rounded-3xl p-8 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
+                    class="col-start-1 col-end-2 row-start-1 row-end-4 w-62.5 md:w-55 lg:w-62.5 rounded-3xl p-8 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl reveal-item"
                 >
                     <CardHeader class="p-0">
                         <div class="text-primary">
@@ -262,7 +318,7 @@ import { Card, CardContent, CardHeader } from '@/components/ui/card'
 
                 <!-- Card 2: Fortitude -->
                 <Card
-                    class="col-start-2 col-end-3 row-start-2 row-end-5 w-62.5 md:w-55 lg:w-62.5 rounded-3xl border-primary bg-primary p-8 shadow-lg shadow-primary/20 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
+                    class="col-start-2 col-end-3 row-start-2 row-end-5 w-62.5 md:w-55 lg:w-62.5 rounded-3xl border-primary bg-primary p-8 shadow-lg shadow-primary/20 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl reveal-item"
                 >
                     <CardHeader class="p-0">
                         <div class="text-primary-foreground">
@@ -282,7 +338,7 @@ import { Card, CardContent, CardHeader } from '@/components/ui/card'
 
                 <!-- Card 3: Excellence -->
                 <Card
-                    class="col-start-1 col-end-2 row-start-4 row-end-7 w-62.5 md:w-55 lg:w-62.5 rounded-3xl border-secondary bg-secondary p-8 shadow-lg shadow-secondary/20 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
+                    class="col-start-1 col-end-2 row-start-4 row-end-7 w-62.5 md:w-55 lg:w-62.5 rounded-3xl border-secondary bg-secondary p-8 shadow-lg shadow-secondary/20 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl reveal-item"
                 >
                     <CardHeader class="p-0">
                         <div class="text-secondary-foreground">
@@ -302,7 +358,7 @@ import { Card, CardContent, CardHeader } from '@/components/ui/card'
 
                 <!-- Card 4: Christ-Centeredness -->
                 <Card
-                    class="col-start-2 col-end-3 row-start-5 row-end-8 w-62.5 md:w-55 lg:w-62.5 rounded-3xl p-8 border-tertiary bg-tertiary shadow-lg shadow-tertiary/20 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
+                    class="col-start-2 col-end-3 row-start-5 row-end-8 w-62.5 md:w-55 lg:w-62.5 rounded-3xl p-8 border-tertiary bg-tertiary shadow-lg shadow-tertiary/20 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl reveal-item"
                 >
                     <CardHeader class="p-0">
                         <div class="text-tertiary-foreground">
@@ -342,8 +398,8 @@ import { Card, CardContent, CardHeader } from '@/components/ui/card'
         <div class="container mx-auto px-4 md:px-8 max-w-6xl">
             <div class="space-y-20">
                 <!-- Service -->
-                <div class="grid md:grid-cols-[auto_1fr] gap-8 md:gap-12 items-start">
-                    <div class="flex flex-col items-center md:items-start min-w-48">
+                <div class="grid md:grid-cols-[auto_1fr] gap-8 md:gap-12 items-start reveal-group">
+                    <div class="flex flex-col items-center md:items-start min-w-48 reveal-item">
                         <div
                             class="w-20 h-20 rounded-2xl bg-primary/10 flex items-center justify-center mb-4"
                         >
@@ -352,7 +408,7 @@ import { Card, CardContent, CardHeader } from '@/components/ui/card'
                         <h3 class="text-2xl font-bold text-foreground">Service</h3>
                         <div class="h-1 w-12 bg-primary rounded-full mt-2"></div>
                     </div>
-                    <div class="space-y-4">
+                    <div class="space-y-4 reveal-item">
                         <p class="text-lg text-muted-foreground leading-relaxed">
                             Making decisions and actions which will benefit others
                         </p>
@@ -382,8 +438,8 @@ import { Card, CardContent, CardHeader } from '@/components/ui/card'
                 </div>
 
                 <!-- Fortitude -->
-                <div class="grid md:grid-cols-[1fr_auto] gap-8 md:gap-12 items-start">
-                    <div class="space-y-4 md:order-1">
+                <div class="grid md:grid-cols-[1fr_auto] gap-8 md:gap-12 items-start reveal-group">
+                    <div class="space-y-4 md:order-1 reveal-item">
                         <p class="text-lg text-muted-foreground leading-relaxed">
                             The act of recognizing strengths and weaknesses and persevering to
                             achieve success
@@ -409,7 +465,7 @@ import { Card, CardContent, CardHeader } from '@/components/ui/card'
                         </div>
                     </div>
                     <div
-                        class="flex flex-col items-center md:items-end min-w-48 md:order-2 order-first"
+                        class="flex flex-col items-center md:items-end min-w-48 md:order-2 order-first reveal-item"
                     >
                         <div
                             class="w-20 h-20 rounded-2xl bg-primary/10 flex items-center justify-center mb-4"
@@ -422,8 +478,8 @@ import { Card, CardContent, CardHeader } from '@/components/ui/card'
                 </div>
 
                 <!-- Excellence -->
-                <div class="grid md:grid-cols-[auto_1fr] gap-8 md:gap-12 items-start">
-                    <div class="flex flex-col items-center md:items-start min-w-48">
+                <div class="grid md:grid-cols-[auto_1fr] gap-8 md:gap-12 items-start reveal-group">
+                    <div class="flex flex-col items-center md:items-start min-w-48 reveal-item">
                         <div
                             class="w-20 h-20 rounded-2xl bg-secondary/30 flex items-center justify-center mb-4"
                         >
@@ -432,7 +488,7 @@ import { Card, CardContent, CardHeader } from '@/components/ui/card'
                         <h3 class="text-2xl font-bold text-foreground">eXcellence</h3>
                         <div class="h-1 w-12 bg-secondary rounded-full mt-2"></div>
                     </div>
-                    <div class="space-y-4">
+                    <div class="space-y-4 reveal-item">
                         <p class="text-lg text-muted-foreground leading-relaxed">
                             The commitment to giving one's best all the time and constantly seeking
                             improvement
@@ -457,8 +513,8 @@ import { Card, CardContent, CardHeader } from '@/components/ui/card'
                 </div>
 
                 <!-- Christ-Centeredness -->
-                <div class="grid md:grid-cols-[1fr_auto] gap-8 md:gap-12 items-start">
-                    <div class="space-y-4 md:order-1">
+                <div class="grid md:grid-cols-[1fr_auto] gap-8 md:gap-12 items-start reveal-group">
+                    <div class="space-y-4 md:order-1 reveal-item">
                         <p class="text-lg text-muted-foreground leading-relaxed">
                             Having the faith in turning the ordinary into extraordinary
                         </p>
@@ -485,7 +541,7 @@ import { Card, CardContent, CardHeader } from '@/components/ui/card'
                         </div>
                     </div>
                     <div
-                        class="flex flex-col items-center md:items-end min-w-48 md:order-2 order-first"
+                        class="flex flex-col items-center md:items-end min-w-48 md:order-2 order-first reveal-item"
                     >
                         <div
                             class="w-20 h-20 rounded-2xl bg-tertiary/30 flex items-center justify-center mb-4"
@@ -501,4 +557,17 @@ import { Card, CardContent, CardHeader } from '@/components/ui/card'
     </section>
 </template>
 
-<style scoped></style>
+<style scoped>
+.reveal-item {
+    opacity: 0;
+    transform: translateY(2rem);
+    transition:
+        opacity 0.6s ease,
+        transform 0.6s ease;
+}
+
+.reveal-item.reveal-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+</style>

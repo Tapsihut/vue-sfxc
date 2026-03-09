@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { onMounted } from 'vue'
 import { Users, Lightbulb, Heart, CheckCircle } from 'lucide-vue-next'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 
@@ -64,48 +65,72 @@ const collegeOfficers = {
         { name: 'Isabella Reyes', position: 'BSEd Governor', hasSubordinates: false },
     ],
 }
+
+onMounted(() => {
+    const observer = new IntersectionObserver(
+        (entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.querySelectorAll('.reveal-item').forEach((el, i) => {
+                        setTimeout(() => el.classList.add('reveal-visible'), i * 100)
+                    })
+                    observer.unobserve(entry.target)
+                }
+            })
+        },
+        { threshold: 0.1 },
+    )
+    document.querySelectorAll('.reveal-group').forEach((el) => observer.observe(el))
+})
 </script>
 
 <template>
-    <section id="hero" class="relative">
+    <section id="hero" class="relative h-[75dvh] overflow-hidden">
+        <img
+            src="/src/assets/images/sfxc-building.jpg"
+            alt="SFXC Building"
+            class="absolute inset-0 w-full h-full object-cover"
+        />
         <div
-            class="h-120 md:h-[75dvh] flex flex-col relative bg-[url('/src/assets/images/sfxc-building.jpg')] bg-cover bg-center bg-no-repeat"
-        >
-            <div
-                class="absolute inset-0 bg-linear-to-t from-secondary/90 via-background/20 to-transparent"
-            ></div>
+            class="absolute inset-0 bg-linear-to-r from-black/80 via-black/50 to-black/10 z-1"
+        ></div>
+        <div
+            class="absolute inset-0 bg-linear-to-t from-black/70 via-transparent to-transparent z-1"
+        ></div>
+        <div
+            class="absolute bottom-0 left-0 right-0 h-1/2 bg-linear-to-t from-primary/25 to-transparent z-1"
+        ></div>
 
-            <div class="relative z-10 mt-auto w-full md:max-w-4xl ps-5 pb-16 md:ps-10 md:pb-24">
+        <div class="absolute inset-0 z-10 flex flex-col justify-end pointer-events-none">
+            <div class="max-w-7xl mx-auto w-full px-6 sm:px-8 lg:px-16 pb-12 md:pb-16 reveal-group">
+                <div class="hidden md:flex items-center gap-4 mb-6 reveal-item">
+                    <div class="w-10 h-0.5 bg-primary"></div>
+                    <span class="text-white/50 text-xs font-medium uppercase tracking-[0.3em]"
+                        >St. Francis Xavier College</span
+                    >
+                </div>
                 <h1
-                    class="text-3xl md:text-5xl lg:text-7xl font-bold text-white tracking-tight drop-shadow-md"
+                    class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-white leading-[1.05] mb-4 reveal-item"
+                    style="font-family: 'Times New Roman', Times, serif"
                 >
                     Student Organizations
                 </h1>
-                <p class="text-white/80 mt-4 text-lg md:text-xl max-w-xl">
+                <p class="text-base md:text-lg text-white/60 max-w-xl leading-relaxed reveal-item">
                     Empowering students through leadership, collaboration, and community service.
                 </p>
-            </div>
-
-            <div class="absolute bottom-0 left-0 right-0 text-background leading-none">
-                <svg class="w-full h-12 md:h-24" viewBox="0 0 1440 320" preserveAspectRatio="none">
-                    <path
-                        fill="currentColor"
-                        fill-opacity="1"
-                        d="M0,224L48,213.3C96,203,192,181,288,181.3C384,181,480,203,576,224C672,245,768,267,864,261.3C960,256,1056,224,1152,197.3C1248,171,1344,149,1392,138.7L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"
-                    ></path>
-                </svg>
             </div>
         </div>
     </section>
 
     <section id="student-council" class="py-24 bg-background scroll-mt-16">
-        <div class="container mx-auto px-4 md:px-8">
-            <div class="grid md:grid-cols-2 gap-12 lg:gap-24 items-center mb-20">
-                <div class="order-2 md:order-1">
-                    <div
-                        class="inline-flex items-center gap-2 text-primary font-bold mb-4 uppercase tracking-wider text-sm"
-                    >
-                        Leadership
+        <div class="max-w-7xl mx-auto px-6 sm:px-8 lg:px-16">
+            <div class="grid md:grid-cols-2 gap-12 lg:gap-24 items-center mb-20 reveal-group">
+                <div class="order-2 md:order-1 reveal-item">
+                    <div class="flex items-center gap-4 mb-4">
+                        <div class="w-8 h-0.5 bg-primary"></div>
+                        <span class="text-primary font-semibold text-xs uppercase tracking-[0.3em]"
+                            >Leadership</span
+                        >
                     </div>
                     <h3 class="text-3xl md:text-4xl font-bold mb-6 text-foreground leading-tight">
                         Student Council
@@ -124,30 +149,35 @@ const collegeOfficers = {
                         </p>
                     </div>
                 </div>
-                <div class="order-1 md:order-2 relative group px-6">
-                    <div
-                        class="skew-x-12 overflow-hidden rounded-xl shadow-xl border border-border"
-                    >
+                <div class="order-1 md:order-2 relative group px-6 reveal-item">
+                    <div class="overflow-hidden rounded-xl shadow-xl border border-border">
                         <img
                             src="https://placehold.co/600x400"
                             alt="Student Council"
-                            class="w-full object-cover aspect-4/3 -skew-x-12 scale-125"
+                            class="w-full object-cover aspect-4/3 scale-125"
                         />
                     </div>
                 </div>
             </div>
 
             <!-- SCL Officers Flow Chart -->
-            <div class="max-w-6xl mx-auto">
-                <div class="text-center mb-12">
+            <div class="max-w-5xl mx-auto reveal-group">
+                <div class="text-center mb-12 reveal-item">
+                    <div class="flex items-center gap-6 mb-4 justify-center">
+                        <div class="flex-1 h-px bg-border max-w-24"></div>
+                        <span class="text-muted-foreground/60 text-xs uppercase tracking-widest"
+                            >Organizational Chart</span
+                        >
+                        <div class="flex-1 h-px bg-border max-w-24"></div>
+                    </div>
                     <h4 class="text-2xl md:text-3xl font-bold text-foreground mb-2">
                         SCL Officers
                     </h4>
-                    <p class="text-muted-foreground">Student Council of Leaders</p>
+                    <p class="text-muted-foreground text-sm">Student Council of Leaders</p>
                 </div>
 
                 <!-- President -->
-                <div class="flex flex-col items-center">
+                <div class="flex flex-col items-center reveal-item">
                     <div
                         class="bg-primary text-primary-foreground rounded-2xl p-6 shadow-lg shadow-primary/20 text-center min-w-48"
                     >
@@ -182,7 +212,7 @@ const collegeOfficers = {
 
                                 <!-- Officer Card -->
                                 <div
-                                    class="bg-card border-2 border-border rounded-xl p-4 shadow-md text-center w-full hover:shadow-lg transition-shadow"
+                                    class="bg-card border-2 border-border rounded-xl p-4 shadow-md text-center w-full hover:border-primary/40 hover:shadow-lg transition-all duration-150"
                                 >
                                     <div
                                         class="w-16 h-16 rounded-full bg-primary/10 mx-auto mb-3 overflow-hidden border-2 border-primary/30"
@@ -213,7 +243,7 @@ const collegeOfficers = {
                                         <div
                                             v-for="(sub, subIndex) in officer.subordinates"
                                             :key="subIndex"
-                                            class="bg-muted/50 border border-border rounded-lg p-3 text-center hover:bg-muted transition-colors"
+                                            class="bg-muted/50 border border-border rounded-lg p-3 text-center hover:bg-muted hover:border-border/80 transition-colors duration-150"
                                         >
                                             <div
                                                 class="w-12 h-12 rounded-full bg-secondary/20 mx-auto mb-2 overflow-hidden border border-secondary/30"
@@ -243,24 +273,30 @@ const collegeOfficers = {
 
     <!-- College Presidents/Governors -->
     <section id="college-governors" class="py-24 bg-muted/20 scroll-mt-16">
-        <div class="container mx-auto px-4 md:px-8 max-w-6xl">
-            <div class="text-center mb-16">
-                <div
-                    class="inline-flex items-center gap-2 text-tertiary font-bold mb-4 uppercase tracking-wider text-sm"
-                >
-                    Program Leadership
+        <div class="max-w-7xl mx-auto px-6 sm:px-8 lg:px-16">
+            <div class="mb-16 reveal-group">
+                <div class="flex items-center gap-4 mb-4 reveal-item">
+                    <div class="w-8 h-0.5 bg-tertiary"></div>
+                    <span class="text-tertiary font-semibold text-xs uppercase tracking-[0.3em]"
+                        >Program Leadership</span
+                    >
                 </div>
-                <h3 class="text-3xl md:text-4xl font-bold text-foreground leading-tight">
-                    College Presidents & Governors
+                <h3
+                    class="text-3xl md:text-4xl font-bold text-foreground leading-tight reveal-item"
+                >
+                    College Presidents &amp; Governors
                 </h3>
             </div>
 
             <!-- Top Level Officers - All Same Level -->
-            <div class="grid grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+            <div
+                class="grid grid-cols-2 lg:grid-cols-4 gap-6 mb-8 reveal-group"
+                id="college-org-chart"
+            >
                 <div
                     v-for="(officer, index) in collegeOfficers.topLevel"
                     :key="index"
-                    class="flex flex-col items-center"
+                    class="flex flex-col items-center reveal-item"
                 >
                     <div
                         class="bg-tertiary text-tertiary-foreground rounded-xl p-5 shadow-lg shadow-tertiary/20 text-center w-full"
@@ -290,7 +326,7 @@ const collegeOfficers = {
                             >
                                 <div class="w-px h-4 bg-border"></div>
                                 <div
-                                    class="bg-card border border-border rounded-lg p-3 text-center w-full hover:shadow-md transition-shadow"
+                                    class="bg-card border border-border rounded-lg p-3 text-center w-full hover:border-tertiary/40 hover:shadow-md transition-all duration-150"
                                 >
                                     <div
                                         class="w-12 h-12 rounded-full bg-tertiary/10 mx-auto mb-2 overflow-hidden border border-tertiary/30"
@@ -315,25 +351,30 @@ const collegeOfficers = {
     </section>
 
     <section id="clubs" class="py-24 bg-background scroll-mt-16">
-        <div class="container mx-auto px-4 md:px-8 max-w-6xl">
-            <div class="text-center mb-16">
-                <div
-                    class="inline-flex items-center gap-2 text-secondary font-bold mb-4 uppercase tracking-wider text-sm"
-                >
-                    Student Development
+        <div class="max-w-7xl mx-auto px-6 sm:px-8 lg:px-16">
+            <div class="mb-16 reveal-group">
+                <div class="flex items-center gap-4 mb-4 reveal-item">
+                    <div class="w-8 h-0.5 bg-secondary"></div>
+                    <span class="text-secondary font-semibold text-xs uppercase tracking-[0.3em]"
+                        >Student Development</span
+                    >
                 </div>
-                <h3 class="text-3xl md:text-5xl font-bold text-foreground leading-tight mb-6">
-                    Interest Clubs and Program-based Organizations
+                <h3
+                    class="text-3xl md:text-4xl font-bold text-foreground leading-tight mb-4 reveal-item"
+                >
+                    Interest Clubs &amp; Program-based Organizations
                 </h3>
-                <p class="text-muted-foreground text-lg max-w-3xl mx-auto leading-relaxed">
+                <p
+                    class="text-muted-foreground text-base md:text-lg max-w-2xl leading-relaxed reveal-item"
+                >
                     As part of the school's commitment to ensuring the genuine transformation of
                     students, various Clubs and Program-based Organizations/Affiliations are
                     available for students to join.
                 </p>
             </div>
 
-            <div class="grid md:grid-cols-2 gap-8 mb-12">
-                <Card class="border-2 hover:shadow-lg transition-shadow">
+            <div class="grid md:grid-cols-2 gap-8 mb-12 reveal-group">
+                <Card class="border-2 hover:shadow-lg transition-shadow duration-150 reveal-item">
                     <CardHeader>
                         <div
                             class="w-12 h-12 rounded-lg bg-secondary/20 flex items-center justify-center mb-4"
@@ -351,7 +392,7 @@ const collegeOfficers = {
                     </CardContent>
                 </Card>
 
-                <Card class="border-2 hover:shadow-lg transition-shadow">
+                <Card class="border-2 hover:shadow-lg transition-shadow duration-150 reveal-item">
                     <CardHeader>
                         <div
                             class="w-12 h-12 rounded-lg bg-primary/20 flex items-center justify-center mb-4"
@@ -370,10 +411,12 @@ const collegeOfficers = {
                 </Card>
             </div>
 
-            <div class="bg-background rounded-2xl border-2 border-border p-8 md:p-10">
-                <h4 class="text-2xl font-bold text-foreground mb-6">Guidelines & Policies</h4>
+            <div class="bg-background rounded-2xl border-2 border-border p-8 md:p-10 reveal-group">
+                <h4 class="text-2xl font-bold text-foreground mb-6 reveal-item">
+                    Guidelines &amp; Policies
+                </h4>
                 <div class="space-y-6">
-                    <div class="flex items-start gap-4">
+                    <div class="flex items-start gap-4 reveal-item">
                         <div class="shrink-0">
                             <div
                                 class="w-8 h-8 rounded-full bg-secondary/20 flex items-center justify-center"
@@ -395,7 +438,7 @@ const collegeOfficers = {
                         </div>
                     </div>
 
-                    <div class="flex items-start gap-4">
+                    <div class="flex items-start gap-4 reveal-item">
                         <div class="shrink-0">
                             <div
                                 class="w-8 h-8 rounded-full bg-secondary/20 flex items-center justify-center"
@@ -416,7 +459,7 @@ const collegeOfficers = {
                         </div>
                     </div>
 
-                    <div class="flex items-start gap-4">
+                    <div class="flex items-start gap-4 reveal-item">
                         <div class="shrink-0">
                             <div
                                 class="w-8 h-8 rounded-full bg-destructive/20 flex items-center justify-center"
@@ -448,25 +491,24 @@ const collegeOfficers = {
         </div>
     </section>
 
-    <section id="extension" class="py-24 bg-background scroll-mt-16">
-        <div class="container mx-auto px-4 md:px-8">
-            <div class="grid md:grid-cols-2 gap-12 lg:gap-24 items-center">
-                <div class="relative group px-6">
-                    <div
-                        class="-skew-x-12 overflow-hidden rounded-xl shadow-xl border border-border"
-                    >
+    <section id="extension" class="py-24 bg-muted/10 border-t border-border scroll-mt-16">
+        <div class="max-w-7xl mx-auto px-6 sm:px-8 lg:px-16">
+            <div class="grid md:grid-cols-2 gap-12 lg:gap-24 items-center reveal-group">
+                <div class="relative group px-6 reveal-item">
+                    <div class="overflow-hidden rounded-xl shadow-xl border border-border">
                         <img
                             src="https://placehold.co/600x400"
                             alt="Extension Programs"
-                            class="w-full object-cover aspect-4/3 skew-x-12 scale-125"
+                            class="w-full object-cover aspect-4/3 scale-125"
                         />
                     </div>
                 </div>
-                <div>
-                    <div
-                        class="inline-flex items-center gap-2 text-tertiary font-bold mb-4 uppercase tracking-wider text-sm"
-                    >
-                        Community Service
+                <div class="reveal-item">
+                    <div class="flex items-center gap-4 mb-4">
+                        <div class="w-8 h-0.5 bg-tertiary"></div>
+                        <span class="text-tertiary font-semibold text-xs uppercase tracking-[0.3em]"
+                            >Community Service</span
+                        >
                     </div>
                     <h3 class="text-3xl md:text-4xl font-bold mb-6 text-foreground leading-tight">
                         Extension Programs
@@ -498,19 +540,27 @@ const collegeOfficers = {
     </section>
 
     <section id="goals" class="py-24 bg-muted/30 scroll-mt-16">
-        <div class="container mx-auto px-4 md:px-8 max-w-5xl">
-            <div class="text-center mb-12">
-                <h3 class="text-3xl md:text-4xl font-bold text-foreground leading-tight mb-4">
+        <div class="max-w-7xl mx-auto px-6 sm:px-8 lg:px-16">
+            <div class="mb-12 reveal-group">
+                <div class="flex items-center gap-4 mb-4 reveal-item">
+                    <div class="w-8 h-0.5 bg-primary"></div>
+                    <span class="text-primary font-semibold text-xs uppercase tracking-[0.3em]"
+                        >Community Impact</span
+                    >
+                </div>
+                <h3
+                    class="text-3xl md:text-4xl font-bold text-foreground leading-tight mb-2 reveal-item"
+                >
                     Our Goals
                 </h3>
-                <p class="text-muted-foreground text-lg">
+                <p class="text-muted-foreground text-base md:text-lg reveal-item">
                     Through our community development program, we aim to create lasting impact
                 </p>
             </div>
 
-            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 reveal-group">
                 <div
-                    class="bg-background rounded-xl p-6 border border-border hover:shadow-lg transition-shadow"
+                    class="bg-background rounded-xl p-6 border border-border hover:shadow-lg transition-shadow duration-150 cursor-default reveal-item"
                 >
                     <div
                         class="w-12 h-12 rounded-lg bg-primary/20 flex items-center justify-center mb-4"
@@ -524,7 +574,7 @@ const collegeOfficers = {
                 </div>
 
                 <div
-                    class="bg-background rounded-xl p-6 border border-border hover:shadow-lg transition-shadow"
+                    class="bg-background rounded-xl p-6 border border-border hover:shadow-lg transition-shadow duration-150 cursor-default reveal-item"
                 >
                     <div
                         class="w-12 h-12 rounded-lg bg-secondary/30 flex items-center justify-center mb-4"
@@ -538,7 +588,7 @@ const collegeOfficers = {
                 </div>
 
                 <div
-                    class="bg-background rounded-xl p-6 border border-border hover:shadow-lg transition-shadow"
+                    class="bg-background rounded-xl p-6 border border-border hover:shadow-lg transition-shadow duration-150 cursor-default reveal-item"
                 >
                     <div
                         class="w-12 h-12 rounded-lg bg-tertiary/30 flex items-center justify-center mb-4"
@@ -552,7 +602,7 @@ const collegeOfficers = {
                 </div>
 
                 <div
-                    class="bg-background rounded-xl p-6 border border-border hover:shadow-lg transition-shadow"
+                    class="bg-background rounded-xl p-6 border border-border hover:shadow-lg transition-shadow duration-150 cursor-default reveal-item"
                 >
                     <div
                         class="w-12 h-12 rounded-lg bg-primary/20 flex items-center justify-center mb-4"
@@ -569,4 +619,17 @@ const collegeOfficers = {
     </section>
 </template>
 
-<style scoped></style>
+<style scoped>
+.reveal-item {
+    opacity: 0;
+    transform: translateY(2rem);
+    transition:
+        opacity 0.6s ease,
+        transform 0.6s ease;
+}
+
+.reveal-item.reveal-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+</style>
