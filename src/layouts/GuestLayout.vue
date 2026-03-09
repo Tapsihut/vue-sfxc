@@ -96,11 +96,11 @@ const navigationItems = ref<NavigationItem[]>([
                 label: 'Governance & Quality',
                 icon: LayoutDashboard,
                 links: [
-                    {
-                        name: 'Leadership and Governance',
-                        to: '#',
-                        description: 'Meet our administration',
-                    },
+                    // {
+                    //     name: 'Leadership and Governance',
+                    //     to: '#',
+                    //     description: 'Meet our administration',
+                    // },
                     {
                         name: 'Office Directory',
                         to: { name: 'office-directory' },
@@ -140,11 +140,11 @@ const navigationItems = ref<NavigationItem[]>([
                         to: { name: 'requirements', hash: '#enrollment' },
                         description: 'Local & International students',
                     },
-                    {
-                        name: 'Application Portal Login',
-                        to: '#',
-                        description: 'Access your application',
-                    },
+                    // {
+                    //     name: 'Application Portal Login',
+                    //     to: '#',
+                    //     description: 'Access your application',
+                    // },
                     {
                         name: 'Visit/Schedule Tour',
                         to: { name: 'schedule-tour' },
@@ -157,14 +157,9 @@ const navigationItems = ref<NavigationItem[]>([
                 icon: Heart,
                 links: [
                     {
-                        name: 'Tuition and Financial Aid',
-                        to: { name: 'payment-options' },
+                        name: 'Financial Aid',
+                        to: { name: 'financial-aid' },
                         description: 'Investment in your future',
-                    },
-                    {
-                        name: 'Scholarships',
-                        to: { name: 'scholarship' },
-                        description: 'Philippine/ASEAN-focused',
                     },
                 ],
             },
@@ -311,25 +306,25 @@ const navigationItems = ref<NavigationItem[]>([
                         description: 'Important dates',
                     },
                     {
-                        name: 'Policies and Handbooks',
+                        name: 'Student Guide',
                         to: '#',
                         description: 'Rules and guidelines',
                     },
-                    {
-                        name: 'Library Access',
-                        to: '#',
-                        description: 'Research resources',
-                    },
+                    // {
+                    //     name: 'Library Access',
+                    //     to: '#',
+                    //     description: 'Research resources',
+                    // },
                     {
                         name: 'XIMS',
-                        to: '#',
+                        to: 'xims.sfxc.edu.ph',
                         description: 'Student portal',
                     },
-                    {
-                        name: 'WIFI Access',
-                        to: '#',
-                        description: 'Connect to campus',
-                    },
+                    // {
+                    //     name: 'WIFI Access',
+                    //     to: '#',
+                    //     description: 'Connect to campus',
+                    // },
                     {
                         name: 'Search and Site Map',
                         to: '#',
@@ -342,30 +337,20 @@ const navigationItems = ref<NavigationItem[]>([
                 icon: Sparkles,
                 links: [
                     {
-                        name: 'Emergency Procedures',
+                        name: 'Emergency and Disaster Preparedness Plan',
                         to: '#',
-                        description: 'Stay safe on campus',
-                    },
-                    {
-                        name: 'Disaster Preparedness',
-                        to: '#',
-                        description: 'Be ready',
+                        description: 'Be prepared for emergencies',
                     },
                     {
                         name: 'Health Protocols',
                         to: '#',
                         description: 'Health and safety',
                     },
-                    {
-                        name: 'Security Office Contact',
-                        to: '#',
-                        description: '24/7 support',
-                    },
-                    {
-                        name: 'Incident Reporting',
-                        to: '#',
-                        description: 'Report concerns',
-                    },
+                    // {
+                    //     name: 'Incident Reporting',
+                    //     to: '#',
+                    //     description: 'Report concerns',
+                    // },
                 ],
             },
         ],
