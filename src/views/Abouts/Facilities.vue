@@ -142,7 +142,7 @@ onMounted(() => {
                         class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-white leading-[1.05] mb-4"
                         style="font-family: 'Times New Roman', Times, serif"
                     >
-                        Campus Facilities
+                        Campus Facilities and Virtual Tour
                     </h1>
                     <p class="text-base md:text-lg text-white/60 max-w-md leading-relaxed">
                         Explore our modern infrastructure designed to support a holistic and
