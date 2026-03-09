@@ -2,11 +2,10 @@ import Home from '@/views/Home.vue'
 import VisionMission from '@/views/Abouts/VisionMission.vue'
 import Enrollment from '@/views/Admission/Enrollment.vue'
 import Requirements from '@/views/Admission/Requirements.vue'
-import PaymentOption from '@/views/Admission/PaymentOption.vue'
+import FinancialAid from '@/views/Admission/FinancialAid.vue'
 import { createRouter, createWebHistory } from 'vue-router'
 import SchoolPatron from '@/views/Abouts/SchoolPatron.vue'
 import Organizations from '@/views/Abouts/Organizations.vue'
-import Scholarship from '@/views/Admission/Scholarship.vue'
 import Programs from '@/views/Academics/Program.vue'
 import Tesda from '@/views/Academics/Tesda.vue'
 import InternationalRelation from '@/views/Academics/InternationalRelation.vue'
@@ -106,14 +105,6 @@ const router = createRouter({
             path: '/academics/enrollment',
             name: 'enrollment',
             component: Enrollment,
-            meta: {
-                layout: 'guest',
-            },
-        },
-        {
-            path: '/academics/scholarship',
-            name: 'scholarship',
-            component: Scholarship,
             meta: {
                 layout: 'guest',
             },
@@ -335,9 +326,9 @@ const router = createRouter({
             },
         },
         {
-            path: '/admission/payment-options',
-            name: 'payment-options',
-            component: PaymentOption,
+            path: '/admission/financial-aid',
+            name: 'financial-aid',
+            component: FinancialAid,
             meta: {
                 layout: 'guest',
             },
