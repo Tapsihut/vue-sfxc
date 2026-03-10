@@ -4,7 +4,7 @@ import Enrollment from '@/views/Admission/Enrollment.vue'
 import Requirements from '@/views/Admission/Requirements.vue'
 import FinancialAid from '@/views/Admission/FinancialAid.vue'
 import { createRouter, createWebHistory } from 'vue-router'
-import SchoolPatron from '@/views/Abouts/SchoolPatron.vue'
+import SchoolPatron from '@/views/CultureFaith/SchoolPatron.vue'
 import Organizations from '@/views/Abouts/Organizations.vue'
 import Programs from '@/views/Academics/Program.vue'
 import Tesda from '@/views/Academics/Tesda.vue'
@@ -62,7 +62,7 @@ const router = createRouter({
             },
         },
         {
-            path: '/about/school-patron',
+            path: '/culture-faith/school-patron',
             name: 'school-patron',
             component: SchoolPatron,
             meta: {
@@ -374,9 +374,89 @@ const router = createRouter({
             },
         },
         {
+            path: '/student-resources/academic-calendar',
+            name: 'academic-calendar',
+            component: () => import('@/views/StudentResource/AcademicCalendar.vue'),
+            meta: {
+                layout: 'guest',
+            },
+        },
+        {
+            path: '/student-resources/site-map',
+            name: 'site-map',
+            component: () => import('@/views/StudentResource/SiteMap.vue'),
+            meta: {
+                layout: 'guest',
+            },
+        },
+        {
             path: '/student-life/osas',
             name: 'osas',
             component: () => import('@/views/StudentLife/OSAS.vue'),
+            meta: {
+                layout: 'guest',
+            },
+        },
+        {
+            path: '/student-life/campus-housing',
+            name: 'campus-housing',
+            component: () => import('@/views/StudentLife/Housing.vue'),
+            meta: {
+                layout: 'guest',
+            },
+        },
+        {
+            path: '/student-life/athletics-fitness',
+            name: 'athletics-fitness',
+            component: () => import('@/views/StudentLife/AthleticsFitness.vue'),
+            meta: {
+                layout: 'guest',
+            },
+        },
+        {
+            path: '/culture-faith/campus-culture',
+            name: 'campus-culture',
+            component: () => import('@/views/CultureFaith/CampusCultureTraditions.vue'),
+            meta: {
+                layout: 'guest',
+            },
+        },
+        {
+            path: '/student-life/career-services',
+            name: 'career-services',
+            component: () => import('@/views/StudentLife/CareerServices.vue'),
+            meta: {
+                layout: 'guest',
+            },
+        },
+        {
+            path: '/culture-faith/culture-arts',
+            name: 'culture-arts',
+            component: () => import('@/views/CultureFaith/CultureArtsOffice.vue'),
+            meta: {
+                layout: 'guest',
+            },
+        },
+        {
+            path: '/student-life/health-wellness',
+            name: 'health-wellness',
+            component: () => import('@/views/StudentLife/HealthWellness.vue'),
+            meta: {
+                layout: 'guest',
+            },
+        },
+        {
+            path: '/culture-faith/impact-stories',
+            name: 'impact-stories',
+            component: () => import('@/views/CultureFaith/ImpactStories.vue'),
+            meta: {
+                layout: 'guest',
+            },
+        },
+        {
+            path: '/culture-faith/recollection',
+            name: 'recollection',
+            component: () => import('@/views/CultureFaith/Recollection.vue'),
             meta: {
                 layout: 'guest',
             },
