@@ -31,7 +31,7 @@ export const navigationItems: NavigationItem[] = [
                     },
                     {
                         name: 'Contact Us',
-                        to: '/contact',
+                        to: { name: 'contact' },
                         description: 'Get in touch with us',
                     },
                 ],
