@@ -15,7 +15,6 @@ interface Facility {
     features: string[]
 }
 
-// Merged: facilities that also serve as tour stops — no redundant data
 const facilities: Facility[] = [
     {
         id: 1,
@@ -51,29 +50,58 @@ const facilities: Facility[] = [
     },
     {
         id: 4,
-        name: 'Sports Complex',
+        name: 'Classroom',
         description:
-            'A multi-court complex for basketball, volleyball, athletics, and fitness training.',
+            'A modern learning space equipped with the latest technology for an engaging educational experience.',
         image: 'https://placehold.co/800x600?text=800x600',
-        tag: 'Athletics',
-        features: ['Basketball Court', 'Volleyball Court', 'Fitness Equipment', 'Outdoor Track'],
+        tag: 'Academic',
+        features: [
+            'Smart Board',
+            'High-Speed Internet',
+            'Comfortable Seating',
+            'Interactive Learning',
+        ],
     },
     {
         id: 5,
-        name: 'Chapel',
-        description: 'A serene sacred space for daily Mass, quiet prayer, and spiritual formation.',
+        name: 'Audio Visual Room',
+        description:
+            'A versatile space for multimedia presentations, film screenings, and creative projects with state-of-the-art AV equipment.',
         image: 'https://placehold.co/800x600?text=800x600',
-        tag: 'Spiritual',
-        features: ['Daily Mass', 'Quiet Reflection', 'Religious Events', 'Spiritual Direction'],
+        tag: 'Technology',
+        features: ['Projector', 'Sound System', 'Recording Equipment', 'Flexible Seating'],
     },
     {
         id: 6,
-        name: 'Cafeteria',
+        name: 'Comfort Room',
         description:
-            'A bright, spacious dining hall offering nutritious, affordable meals in a clean environment.',
+            'Clean and well-maintained facilities with accessibility features to ensure comfort for all students and visitors.',
         image: 'https://placehold.co/800x600?text=800x600',
-        tag: 'Dining',
-        features: ['Balanced Meals', 'Ample Seating', 'Affordable Pricing', 'Sanitary Standards'],
+        tag: 'Facilities',
+        features: ['Accessible Stalls', 'Hygienic', 'Regularly Maintained', 'Family-Friendly'],
+    },
+    {
+        id: 7,
+        name: 'Elevator',
+        description:
+            'A modern elevator system providing easy access to all floors, designed with safety and efficiency in mind.',
+        image: 'https://placehold.co/800x600?text=800x600',
+        tag: 'Facilities',
+        features: ['Spacious', 'Safety Features', 'Energy Efficient', 'Regular Maintenance'],
+    },
+    {
+        id: 8,
+        name: 'Clinic',
+        description:
+            'On-site health services staffed by qualified medical professionals, offering first aid and wellness support to our school community.',
+        image: 'https://placehold.co/800x600?text=800x600',
+        tag: 'Health',
+        features: [
+            'First Aid',
+            'Health Consultations',
+            'Wellness Programs',
+            'Confidential Support',
+        ],
     },
 ]
 
