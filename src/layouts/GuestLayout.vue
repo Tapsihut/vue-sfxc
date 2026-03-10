@@ -49,6 +49,7 @@ interface NavigationLink {
     name: string
     to: string | { name: string; hash?: string }
     description?: string
+    external?: boolean
 }
 
 interface NavigationGroup {
@@ -229,7 +230,7 @@ const navigationItems = ref<NavigationItem[]>([
                 links: [
                     {
                         name: 'Office of Student Affairs',
-                        to: '#',
+                        to: { name: 'osas' },
                         description: 'Student support services',
                     },
                     {
@@ -307,7 +308,7 @@ const navigationItems = ref<NavigationItem[]>([
                     },
                     {
                         name: 'Student Guide',
-                        to: '#',
+                        to: { name: 'student-guide' },
                         description: 'Rules and guidelines',
                     },
                     // {
@@ -317,8 +318,9 @@ const navigationItems = ref<NavigationItem[]>([
                     // },
                     {
                         name: 'XIMS',
-                        to: 'xims.sfxc.edu.ph',
+                        to: 'https://xims.sfxc.edu.ph',
                         description: 'Student portal',
+                        external: true,
                     },
                     // {
                     //     name: 'WIFI Access',
@@ -473,7 +475,31 @@ const toggleSubmenu = (menuName: string) => {
                                                                     :key="subItem.name"
                                                                     as-child
                                                                 >
+                                                                    <a
+                                                                        v-if="subItem.external"
+                                                                        :href="subItem.to as string"
+                                                                        target="_blank"
+                                                                        rel="noopener noreferrer"
+                                                                        class="block p-3 rounded-lg hover:bg-accent/50 transition-colors duration-200 cursor-pointer group"
+                                                                    >
+                                                                        <div
+                                                                            class="text-sm font-medium text-foreground group-hover:text-primary transition-colors"
+                                                                        >
+                                                                            {{ subItem.name }}
+                                                                        </div>
+                                                                        <div
+                                                                            v-if="
+                                                                                subItem.description
+                                                                            "
+                                                                            class="text-xs text-muted-foreground mt-0.5"
+                                                                        >
+                                                                            {{
+                                                                                subItem.description
+                                                                            }}
+                                                                        </div>
+                                                                    </a>
                                                                     <RouterLink
+                                                                        v-else
                                                                         :to="subItem.to"
                                                                         class="block p-3 rounded-lg hover:bg-accent/50 transition-colors duration-200 cursor-pointer group"
                                                                     >
@@ -609,25 +635,48 @@ const toggleSubmenu = (menuName: string) => {
                                                     </div>
 
                                                     <!-- Links -->
-                                                    <RouterLink
+                                                    <template
                                                         v-for="subItem in group.links"
                                                         :key="subItem.name"
-                                                        :to="subItem.to"
-                                                        class="block px-4 py-2.5 rounded-md hover:bg-accent transition-colors duration-200 cursor-pointer"
-                                                        @click="isMobileMenuOpen = false"
                                                     >
-                                                        <div
-                                                            class="text-sm font-medium text-foreground"
+                                                        <a
+                                                            v-if="subItem.external"
+                                                            :href="subItem.to as string"
+                                                            target="_blank"
+                                                            rel="noopener noreferrer"
+                                                            class="block px-4 py-2.5 rounded-md hover:bg-accent transition-colors duration-200 cursor-pointer"
                                                         >
-                                                            {{ subItem.name }}
-                                                        </div>
-                                                        <div
-                                                            v-if="subItem.description"
-                                                            class="text-xs text-muted-foreground mt-0.5"
+                                                            <div
+                                                                class="text-sm font-medium text-foreground"
+                                                            >
+                                                                {{ subItem.name }}
+                                                            </div>
+                                                            <div
+                                                                v-if="subItem.description"
+                                                                class="text-xs text-muted-foreground mt-0.5"
+                                                            >
+                                                                {{ subItem.description }}
+                                                            </div>
+                                                        </a>
+                                                        <RouterLink
+                                                            v-else
+                                                            :to="subItem.to"
+                                                            class="block px-4 py-2.5 rounded-md hover:bg-accent transition-colors duration-200 cursor-pointer"
+                                                            @click="isMobileMenuOpen = false"
                                                         >
-                                                            {{ subItem.description }}
-                                                        </div>
-                                                    </RouterLink>
+                                                            <div
+                                                                class="text-sm font-medium text-foreground"
+                                                            >
+                                                                {{ subItem.name }}
+                                                            </div>
+                                                            <div
+                                                                v-if="subItem.description"
+                                                                class="text-xs text-muted-foreground mt-0.5"
+                                                            >
+                                                                {{ subItem.description }}
+                                                            </div>
+                                                        </RouterLink>
+                                                    </template>
                                                 </div>
                                             </template>
                                         </div>
