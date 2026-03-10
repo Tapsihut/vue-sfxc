@@ -235,7 +235,7 @@ const navigationItems = ref<NavigationItem[]>([
                     },
                     {
                         name: 'Campus Housing and Dining',
-                        to: '#',
+                        to: { name: 'campus-housing' },
                         description: 'Living on campus',
                     },
                     {
@@ -245,17 +245,17 @@ const navigationItems = ref<NavigationItem[]>([
                     },
                     {
                         name: 'Athletics and Fitness',
-                        to: '#',
+                        to: { name: 'athletics-fitness' },
                         description: 'Sports and wellness',
                     },
                     {
                         name: 'Health and Wellness',
-                        to: '#',
+                        to: { name: 'health-wellness' },
                         description: 'Your wellbeing matters',
                     },
                     {
                         name: 'Career Services',
-                        to: '#',
+                        to: { name: 'career-services' },
                         description: 'Plan your future',
                     },
                 ],
@@ -266,17 +266,17 @@ const navigationItems = ref<NavigationItem[]>([
                 links: [
                     {
                         name: 'Culture and Arts Office',
-                        to: '#',
+                        to: { name: 'culture-arts' },
                         description: 'Creative expression',
                     },
                     {
                         name: 'Campus Culture and Traditions',
-                        to: '#',
+                        to: { name: 'campus-culture' },
                         description: 'Our unique identity',
                     },
                     {
                         name: 'Recollection',
-                        to: '#',
+                        to: { name: 'recollection' },
                         description: 'Spiritual growth',
                     },
                     {
@@ -286,7 +286,7 @@ const navigationItems = ref<NavigationItem[]>([
                     },
                     {
                         name: 'Impact Stories',
-                        to: '#',
+                        to: { name: 'impact-stories' },
                         description: 'Student experiences',
                     },
                 ],
@@ -303,7 +303,7 @@ const navigationItems = ref<NavigationItem[]>([
                 links: [
                     {
                         name: 'Academic Calendar',
-                        to: '#',
+                        to: { name: 'academic-calendar' },
                         description: 'Important dates',
                     },
                     {
@@ -329,7 +329,7 @@ const navigationItems = ref<NavigationItem[]>([
                     // },
                     {
                         name: 'Search and Site Map',
-                        to: '#',
+                        to: { name: 'site-map' },
                         description: 'Find what you need',
                     },
                 ],
