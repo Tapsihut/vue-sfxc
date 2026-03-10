@@ -241,8 +241,9 @@ export const navigationItems: NavigationItem[] = [
                     },
                     {
                         name: 'Student Guide',
-                        to: { name: 'student-guide' },
+                        to: 'https://drive.google.com/file/d/12zIRcTRmMy131AZS3mtVXF_8u1kPNLph/view?usp=drive_link',
                         description: 'Rules and guidelines',
+                        external: true,
                     },
                     {
                         name: 'XIMS',
