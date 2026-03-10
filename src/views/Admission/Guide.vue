@@ -4,6 +4,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { Separator } from '@/components/ui/separator'
+import { RouterLink } from 'vue-router'
 
 interface Interest {
     id: string
@@ -537,7 +538,7 @@ watch(showResults, async () => {
                                 Get personalized guidance from our admissions team
                             </p>
                             <Button variant="outline" class="w-full" as-child>
-                                <a href="/contact">Contact Us</a>
+                                <RouterLink :to="{ name: 'contact' }"> Contact Us </RouterLink>
                             </Button>
                         </CardContent>
                     </Card>
