@@ -365,6 +365,22 @@ const router = createRouter({
                 layout: 'guest',
             },
         },
+        {
+            path: '/student-resources/student-guide',
+            name: 'student-guide',
+            component: () => import('@/views/StudentResource/StudentGuide.vue'),
+            meta: {
+                layout: 'guest',
+            },
+        },
+        {
+            path: '/student-life/osas',
+            name: 'osas',
+            component: () => import('@/views/StudentLife/OSAS.vue'),
+            meta: {
+                layout: 'guest',
+            },
+        },
     ],
     scrollBehavior(to, from, savedPosition) {
         if (to.hash) {
