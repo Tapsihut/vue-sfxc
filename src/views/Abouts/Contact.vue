@@ -70,6 +70,8 @@ onMounted(() => {
                     height="400"
                     style="border: 0"
                     loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"
+                    allowfullscreen
                 ></iframe>
             </div>
         </div>
