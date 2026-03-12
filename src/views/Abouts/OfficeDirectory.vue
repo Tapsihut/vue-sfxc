@@ -1,301 +1,31 @@
 <script setup lang="ts">
-import { ref, computed, onMounted } from 'vue'
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui/card'
+import PageHero from '@/components/ui/custom/PageHero.vue'
+import { useOfficeDirectory } from '@/composables/useOfficeDirectory'
 
-interface Office {
-    id: string
-    name: string
-    department: string
-    email: string
-    email2?: string
-    phone: string
-}
-
-const offices: Office[] = [
-    // A. Colleges
-    {
-        id: 'ccje',
-        name: 'CCJE',
-        department: 'A. Colleges',
-        email: 'ccje@sfxc.edu.ph',
-        phone: '0908 885 5383',
-    },
-    {
-        id: 'cte',
-        name: 'CTE',
-        department: 'A. Colleges',
-        email: 'cte@sfxc.edu.ph',
-        phone: '0908 885 6149',
-    },
-    {
-        id: 'cbe-bsa',
-        name: 'CBE (BSA/AT)',
-        department: 'A. Colleges',
-        email: 'bsa@sfxc.edu.ph',
-        phone: '0908 885 5381',
-    },
-    {
-        id: 'bsba',
-        name: 'BSBA',
-        department: 'A. Colleges',
-        email: 'bsba@sfxc.edu.ph',
-        phone: '0908 885 5334',
-    },
-    {
-        id: 'bsit',
-        name: 'BSIT',
-        department: 'A. Colleges',
-        email: 'bsit@sfxc.edu.ph',
-        phone: '0908 885 5376',
-    },
-    {
-        id: 'bsoa',
-        name: 'BSOA',
-        department: 'A. Colleges',
-        email: '',
-        phone: '0908 885 5359',
-    },
-    // B. Accounting & Finance
-    {
-        id: 'accounting',
-        name: 'Accounting Office',
-        department: 'B. Accounting & Finance',
-        email: 'accountingoffice@sfxc.edu.ph',
-        phone: '0908 885 3694',
-    },
-    {
-        id: 'finance',
-        name: 'Finance Office',
-        department: 'B. Accounting & Finance',
-        email: 'financeoffice@sfxc.edu.ph',
-        phone: '0908 885 4520',
-    },
-    {
-        id: 'property',
-        name: 'Property & Merchandising Office',
-        department: 'B. Accounting & Finance',
-        email: 'merchandising@sfxc.edu.ph',
-        phone: '0908 885 4521',
-    },
-    {
-        id: 'student-accounts',
-        name: 'Student Accounts',
-        department: 'B. Accounting & Finance',
-        email: 'studentaccounts@sfxc.edu.ph',
-        phone: '0966 720 9527',
-    },
-    {
-        id: 'helpdesk',
-        name: 'Account Help Desk',
-        department: 'B. Accounting & Finance',
-        email: 'accounthelpdesk@sfxc.edu.ph',
-        phone: '',
-    },
-    // C. Academics Support
-    {
-        id: 'osas',
-        name: 'OSAS',
-        department: 'C. Academics Support',
-        email: 'osas@sfxc.edu.ph',
-        phone: '0908 885 6201',
-    },
-    {
-        id: 'guidance',
-        name: 'Guidance Counseling',
-        department: 'C. Academics Support',
-        email: 'guidanceoffice@sfxc.edu.ph',
-        phone: '',
-    },
-    {
-        id: 'gender',
-        name: 'Gender Development',
-        department: 'C. Academics Support',
-        email: 'genderdevelopment@sfxc.edu.ph',
-        phone: '',
-    },
-    {
-        id: 'registrar',
-        name: 'Registrar Office',
-        department: 'C. Academics Support',
-        email: 'registraroffice@sfxc.edu.ph',
-        phone: '0908 885 3687',
-    },
-    {
-        id: 'admission',
-        name: 'Admission Scholarship',
-        department: 'C. Academics Support',
-        email: 'admission.scholarship@sfxc.edu.ph',
-        email2: 'scholarships@sfxc.edu.ph',
-        phone: '0908 885 4527',
-    },
-    // D. Department/Offices
-    {
-        id: 'hr',
-        name: 'Human Resources Department',
-        department: 'D. Department/Offices',
-        email: 'humanresources@sfxc.edu.ph',
-        email2: 'recruitment@sfxc.edu.ph',
-        phone: '0939 936 5618',
-    },
-    {
-        id: 'communications',
-        name: 'Information and Communications',
-        department: 'D. Department/Offices',
-        email: 'communications@sfxc.edu.ph',
-        email2: 'gclassroom_ico@sfxc.edu.ph',
-        phone: '',
-    },
-    {
-        id: 'marketing',
-        name: 'Marketing Office',
-        department: 'D. Department/Offices',
-        email: 'marketing@sfxc.edu.ph',
-        phone: '0908 885 5380',
-    },
-    {
-        id: 'community',
-        name: 'Community Development Services',
-        department: 'D. Department/Offices',
-        email: 'communityextension@sfxc.edu.ph',
-        phone: '',
-    },
-    {
-        id: 'evp',
-        name: 'EVP Operations',
-        department: 'D. Department/Offices',
-        email: 'evp.operations@sfxc.edu.ph',
-        phone: '',
-    },
-    {
-        id: 'library',
-        name: 'Library',
-        department: 'D. Department/Offices',
-        email: 'library@sfxc.edu.ph',
-        phone: '',
-    },
-    {
-        id: 'research',
-        name: 'Research Office',
-        department: 'D. Department/Offices',
-        email: 'researchdev@sfxc.edu.ph',
-        phone: '',
-    },
-    {
-        id: 'clinic',
-        name: 'School Clinic',
-        department: 'D. Department/Offices',
-        email: 'clinic@sfxc.edu.ph',
-        phone: '',
-    },
-    {
-        id: 'compliance',
-        name: 'SFXC Compliance',
-        department: 'D. Department/Offices',
-        email: 'compliance@sfxc.edu.ph',
-        phone: '',
-    },
-    {
-        id: 'student-accounts-dept',
-        name: 'Student Accounts',
-        department: 'D. Department/Offices',
-        email: 'studentaccounts@sfxc.edu.ph',
-        phone: '',
-    },
-    {
-        id: 'techvoc',
-        name: 'TechVoc',
-        department: 'D. Department/Offices',
-        email: 'techvoc@sfxc.edu.ph',
-        phone: '',
-    },
-]
-
-const departments = ['All', ...new Set(offices.map((o) => o.department))]
-const searchQuery = ref('')
-const activeDept = ref('All')
-
-onMounted(() => {
-    const observer = new IntersectionObserver(
-        (entries) => {
-            entries.forEach((entry) => {
-                if (entry.isIntersecting) {
-                    entry.target.querySelectorAll('.reveal-item').forEach((el, i) => {
-                        setTimeout(() => el.classList.add('reveal-visible'), i * 100)
-                    })
-                    observer.unobserve(entry.target)
-                }
-            })
-        },
-        { threshold: 0.1 },
-    )
-    document.querySelectorAll('.reveal-group').forEach((el) => observer.observe(el))
-})
-
-const filteredOffices = computed(() => {
-    const query = searchQuery.value.toLowerCase().trim()
-    return offices.filter((office) => {
-        const matchesDept = activeDept.value === 'All' || office.department === activeDept.value
-        const matchesSearch =
-            !query ||
-            office.name.toLowerCase().includes(query) ||
-            office.email.toLowerCase().includes(query) ||
-            (office.email2 && office.email2.toLowerCase().includes(query))
-
-        return matchesDept && matchesSearch
-    })
-})
+const { offices, departments, searchQuery, activeDept, filteredOffices } = useOfficeDirectory()
 </script>
 
 <template>
-    <section class="relative h-[75dvh] overflow-hidden">
-        <img
-            src="/src/assets/images/sfxc-building.jpg"
-            alt="SFXC Building"
-            class="absolute inset-0 w-full h-full object-cover"
-        />
-        <div
-            class="absolute inset-0 bg-linear-to-r from-black/80 via-black/50 to-black/10 z-1"
-        ></div>
-        <div
-            class="absolute inset-0 bg-linear-to-t from-black/70 via-transparent to-transparent z-1"
-        ></div>
-        <div
-            class="absolute bottom-0 left-0 right-0 h-1/2 bg-linear-to-t from-primary/25 to-transparent z-1"
-        ></div>
+    <PageHero
+        subtitle="Find the right department, contact key personnel, and access essential campus services instantly."
+    >
+        <template #title>Connect with Our Offices</template>
+    </PageHero>
 
-        <!-- Content overlay -->
-        <div class="absolute inset-0 z-10 flex flex-col justify-end pointer-events-none">
-            <div class="max-w-7xl mx-auto w-full px-6 sm:px-8 lg:px-16 pb-12 md:pb-16">
-                <div class="hidden md:flex items-center gap-4 mb-6">
-                    <div class="w-10 h-0.5 bg-primary"></div>
-                    <span class="text-white/50 text-xs font-medium uppercase tracking-[0.3em]"
-                        >St. Francis Xavier College</span
-                    >
-                </div>
-                <h1
-                    class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-white leading-[1.05] mb-4"
-                    style="font-family: 'Times New Roman', Times, serif"
-                >
-                    Connect with Our Offices
-                </h1>
-                <p class="text-base md:text-lg text-white/60 max-w-md leading-relaxed">
-                    Find the right department, contact key personnel, and access essential campus
-                    services instantly.
-                </p>
-            </div>
-        </div>
-    </section>
-
-    <!-- MAIN CONTENT -->
     <div class="bg-background pb-24">
         <div
-            class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-5 gap-8 items-start px-6 lg:px-12 py-16 reveal-group"
+            class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-5 gap-8 items-start px-6 lg:px-12 py-16"
         >
             <!-- Left Column: Search & Info -->
-            <div class="lg:col-span-2 space-y-6 reveal-item">
-                <!-- Search Card -->
+            <div
+                class="lg:col-span-2 space-y-6"
+                v-motion
+                :initial="{ opacity: 0, x: -24 }"
+                :visible-once="{ opacity: 1, x: 0, transition: { duration: 600 } }"
+            >
                 <Card>
                     <CardHeader>
                         <CardTitle>Search Directory</CardTitle>
@@ -337,7 +67,6 @@ const filteredOffices = computed(() => {
                     </CardContent>
                 </Card>
 
-                <!-- Campus Info Card -->
                 <Card>
                     <CardHeader>
                         <CardTitle>Main Campus</CardTitle>
@@ -401,7 +130,12 @@ const filteredOffices = computed(() => {
             </div>
 
             <!-- Right Column: Directory List -->
-            <div class="lg:col-span-3 reveal-item">
+            <div
+                class="lg:col-span-3"
+                v-motion
+                :initial="{ opacity: 0, y: 24 }"
+                :visible-once="{ opacity: 1, y: 0, transition: { delay: 150, duration: 600 } }"
+            >
                 <Card class="h-175 flex flex-col overflow-hidden">
                     <CardHeader class="border-b border-border/40 bg-muted/10 pb-4">
                         <CardTitle>Departments &amp; Offices</CardTitle>
@@ -473,7 +207,6 @@ const filteredOffices = computed(() => {
                                 </div>
                             </div>
 
-                            <!-- Empty State -->
                             <div
                                 v-if="filteredOffices.length === 0"
                                 class="p-12 flex flex-col items-center justify-center text-center"
@@ -511,19 +244,6 @@ const filteredOffices = computed(() => {
 </template>
 
 <style scoped>
-.reveal-item {
-    opacity: 0;
-    transform: translateY(2rem);
-    transition:
-        opacity 0.6s ease,
-        transform 0.6s ease;
-}
-
-.reveal-item.reveal-visible {
-    opacity: 1;
-    transform: translateY(0);
-}
-
 .custom-scrollbar::-webkit-scrollbar {
     width: 6px;
 }

@@ -1,90 +1,50 @@
 <script setup lang="ts">
-import { onMounted } from 'vue'
 import { Cross, HeartHandshake, Shield, Star } from 'lucide-vue-next'
 import { Card, CardContent, CardHeader } from '@/components/ui/card'
-
-onMounted(() => {
-    const observer = new IntersectionObserver(
-        (entries) => {
-            entries.forEach((entry) => {
-                if (entry.isIntersecting) {
-                    entry.target.querySelectorAll('.reveal-item').forEach((el, i) => {
-                        setTimeout(() => el.classList.add('reveal-visible'), i * 100)
-                    })
-                    observer.unobserve(entry.target)
-                }
-            })
-        },
-        { threshold: 0.1 },
-    )
-    document.querySelectorAll('.reveal-group').forEach((el) => observer.observe(el))
-})
+import PageHero from '@/components/ui/custom/PageHero.vue'
 </script>
 
 <template>
-    <section id="home" class="relative h-[75dvh] overflow-hidden">
-        <img
-            src="/src/assets/images/sfxc-building.jpg"
-            alt="SFXC Building"
-            class="absolute inset-0 w-full h-full object-cover"
-        />
-        <div
-            class="absolute inset-0 bg-linear-to-r from-black/80 via-black/50 to-black/10 z-1"
-        ></div>
-        <div
-            class="absolute inset-0 bg-linear-to-t from-black/70 via-transparent to-transparent z-1"
-        ></div>
-        <div
-            class="absolute bottom-0 left-0 right-0 h-1/2 bg-linear-to-t from-primary/25 to-transparent z-1"
-        ></div>
-
-        <!-- Content overlay -->
-        <div class="absolute inset-0 z-10 flex flex-col justify-end pointer-events-none">
-            <div class="max-w-7xl mx-auto w-full px-6 sm:px-8 lg:px-16 pb-12 md:pb-16">
-                <div class="hidden md:flex items-center gap-4 mb-6">
-                    <div class="w-10 h-0.5 bg-primary"></div>
-                    <span class="text-white/50 text-xs font-medium uppercase tracking-[0.3em]"
-                        >St. Francis Xavier College</span
-                    >
-                </div>
-                <h1
-                    class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-white leading-[1.05] mb-4"
-                    style="font-family: 'Times New Roman', Times, serif"
-                >
-                    Vision &amp; Mission
-                </h1>
-                <p class="text-base md:text-lg text-white/60 max-w-md leading-relaxed">
-                    Faith, purpose, and excellence — the guiding principles of our institution.
-                </p>
-            </div>
-        </div>
-    </section>
+    <PageHero
+        subtitle="Faith, purpose, and excellence — the guiding principles of our institution."
+    >
+        <template #title>Vision &amp; Mission</template>
+    </PageHero>
 
     <section id="history" class="py-24 bg-muted/20 scroll-mt-16">
         <div class="container mx-auto px-4 md:px-8 max-w-4xl">
-            <div class="mb-16 reveal-group">
-                <div class="flex items-center gap-4 mb-4 reveal-item">
+            <div class="mb-16">
+                <div
+                    class="flex items-center gap-4 mb-4"
+                    v-motion
+                    :initial="{ opacity: 0, x: -16 }"
+                    :visible-once="{ opacity: 1, x: 0, transition: { duration: 600 } }"
+                >
                     <div class="w-8 h-0.5 bg-primary"></div>
                     <span class="text-primary font-semibold text-xs uppercase tracking-[0.3em]"
                         >Our History</span
                     >
                 </div>
                 <h3
-                    class="text-3xl md:text-5xl font-bold text-foreground leading-tight reveal-item"
+                    class="text-3xl md:text-5xl font-bold text-foreground leading-tight"
+                    v-motion
+                    :initial="{ opacity: 0, y: 24 }"
+                    :visible-once="{ opacity: 1, y: 0, transition: { delay: 100, duration: 700 } }"
                 >
                     A Legacy of Faith<br />and Learning
                 </h3>
             </div>
 
             <div class="relative">
-                <!-- Vertical center line (desktop) -->
                 <div
                     class="hidden md:block absolute left-1/2 -translate-x-px top-0 h-full w-px bg-border"
                 ></div>
-
-                <div class="space-y-12 md:space-y-16 reveal-group">
+                <div class="space-y-12 md:space-y-16">
                     <div
-                        class="relative pl-8 md:pl-0 md:pr-[calc(50%+2rem)] md:text-right reveal-item"
+                        class="relative pl-8 md:pl-0 md:pr-[calc(50%+2rem)] md:text-right"
+                        v-motion
+                        :initial="{ opacity: 0, x: -30 }"
+                        :visible-once="{ opacity: 1, x: 0, transition: { duration: 700 } }"
                     >
                         <div
                             class="hidden md:block absolute right-0 top-2 w-3 h-3 rounded-full bg-primary translate-x-[calc(50%+0.5px)] border-2 border-background"
@@ -102,7 +62,12 @@ onMounted(() => {
                         </p>
                     </div>
 
-                    <div class="relative pl-8 md:pl-[calc(50%+2rem)] reveal-item">
+                    <div
+                        class="relative pl-8 md:pl-[calc(50%+2rem)]"
+                        v-motion
+                        :initial="{ opacity: 0, x: 30 }"
+                        :visible-once="{ opacity: 1, x: 0, transition: { duration: 700 } }"
+                    >
                         <div
                             class="hidden md:block absolute left-1/2 top-2 w-3 h-3 rounded-full bg-secondary -translate-x-[calc(50%-0.5px)] border-2 border-background"
                         ></div>
@@ -124,7 +89,10 @@ onMounted(() => {
                     </div>
 
                     <div
-                        class="relative pl-8 md:pl-0 md:pr-[calc(50%+2rem)] md:text-right reveal-item"
+                        class="relative pl-8 md:pl-0 md:pr-[calc(50%+2rem)] md:text-right"
+                        v-motion
+                        :initial="{ opacity: 0, x: -30 }"
+                        :visible-once="{ opacity: 1, x: 0, transition: { duration: 700 } }"
                     >
                         <div
                             class="hidden md:block absolute right-0 top-2 w-3 h-3 rounded-full bg-tertiary translate-x-[calc(50%+0.5px)] border-2 border-background"
@@ -139,8 +107,8 @@ onMounted(() => {
                             and governor, personally donated 50 units of typewriter for the
                             secretarial course. After working in public service, Mrs. Valentina G.
                             Plaza, former governor of Agusan del Sur, continued serving the
-                            province’s constituents through education. Board members of the college
-                            expanded to include founders‘ spouses to address the growing needs and
+                            province's constituents through education. Board members of the college
+                            expanded to include founders' spouses to address the growing needs and
                             increasing population of the college.
                         </p>
                     </div>
@@ -148,13 +116,16 @@ onMounted(() => {
             </div>
         </div>
     </section>
-    <!-- Vision & Mission combined section -->
+
     <section id="vision" class="py-24 bg-background scroll-mt-16">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-16">
-            <!-- Vision -->
-            <div class="grid md:grid-cols-12 gap-12 lg:gap-16 items-center mb-24 reveal-group">
-                <!-- Text: 5 cols -->
-                <div class="md:col-span-5 order-2 md:order-1 reveal-item">
+            <div class="grid md:grid-cols-12 gap-12 lg:gap-16 items-center mb-24">
+                <div
+                    class="md:col-span-5 order-2 md:order-1"
+                    v-motion
+                    :initial="{ opacity: 0, x: -30 }"
+                    :visible-once="{ opacity: 1, x: 0, transition: { duration: 700 } }"
+                >
                     <div class="flex items-center gap-4 mb-6">
                         <div class="w-8 h-0.5 bg-primary"></div>
                         <span class="text-primary font-semibold text-xs uppercase tracking-[0.3em]"
@@ -178,8 +149,12 @@ onMounted(() => {
                         </p>
                     </div>
                 </div>
-                <!-- Image: 7 cols -->
-                <div class="md:col-span-7 order-1 md:order-2 reveal-item">
+                <div
+                    class="md:col-span-7 order-1 md:order-2"
+                    v-motion
+                    :initial="{ opacity: 0, scale: 0.96 }"
+                    :visible-once="{ opacity: 1, scale: 1, transition: { duration: 800 } }"
+                >
                     <div class="relative group rounded-2xl overflow-hidden shadow-2xl">
                         <div
                             class="absolute inset-0 bg-primary/20 z-10 group-hover:bg-transparent transition-colors duration-500"
@@ -193,7 +168,6 @@ onMounted(() => {
                 </div>
             </div>
 
-            <!-- Divider -->
             <div class="flex items-center gap-6 mb-24">
                 <div class="flex-1 h-px bg-border"></div>
                 <span class="text-muted-foreground/40 text-xs uppercase tracking-widest"
@@ -202,13 +176,13 @@ onMounted(() => {
                 <div class="flex-1 h-px bg-border"></div>
             </div>
 
-            <!-- Mission -->
-            <div
-                class="grid md:grid-cols-12 gap-12 lg:gap-16 items-center reveal-group"
-                id="mission"
-            >
-                <!-- Image: 7 cols -->
-                <div class="md:col-span-7 reveal-item">
+            <div class="grid md:grid-cols-12 gap-12 lg:gap-16 items-center" id="mission">
+                <div
+                    class="md:col-span-7"
+                    v-motion
+                    :initial="{ opacity: 0, scale: 0.96 }"
+                    :visible-once="{ opacity: 1, scale: 1, transition: { duration: 800 } }"
+                >
                     <div class="relative group rounded-2xl overflow-hidden shadow-2xl">
                         <div
                             class="absolute inset-0 bg-secondary/20 z-10 group-hover:bg-transparent transition-colors duration-500"
@@ -220,8 +194,12 @@ onMounted(() => {
                         />
                     </div>
                 </div>
-                <!-- Text: 5 cols -->
-                <div class="md:col-span-5 reveal-item">
+                <div
+                    class="md:col-span-5"
+                    v-motion
+                    :initial="{ opacity: 0, x: 30 }"
+                    :visible-once="{ opacity: 1, x: 0, transition: { duration: 700 } }"
+                >
                     <div class="flex items-center gap-4 mb-6">
                         <div class="w-8 h-0.5 bg-primary"></div>
                         <span class="text-primary font-semibold text-xs uppercase tracking-[0.3em]"
@@ -270,10 +248,14 @@ onMounted(() => {
             </svg>
         </div>
         <main
-            class="container mx-auto px-4 md:px-8 relative z-10 flex md:flex-row justify-center flex-col gap-15 md:gap-10 lg:gap-25 py-8 reveal-group"
+            class="container mx-auto px-4 md:px-8 relative z-10 flex md:flex-row justify-center flex-col gap-15 md:gap-10 lg:gap-25 py-8"
         >
-            <!-- Left Side: Header -->
-            <div class="max-w-137.5 md:mt-16 text-center md:text-left reveal-item">
+            <div
+                class="max-w-137.5 md:mt-16 text-center md:text-left"
+                v-motion
+                :initial="{ opacity: 0, y: 30 }"
+                :visible-once="{ opacity: 1, y: 0, transition: { duration: 700 } }"
+            >
                 <div class="flex items-center gap-4 mb-4 justify-center md:justify-start">
                     <div class="w-8 h-0.5 bg-primary"></div>
                     <span class="text-primary font-semibold text-xs uppercase tracking-[0.3em]"
@@ -281,8 +263,7 @@ onMounted(() => {
                     >
                 </div>
                 <h2 class="text-4xl md:text-5xl font-bold tracking-tight mb-6 text-foreground">
-                    Our Core Values <br />
-                    Define Us.
+                    Our Core Values <br />Define Us.
                 </h2>
                 <p class="text-muted-foreground mb-10 text-base md:text-lg leading-relaxed">
                     At St. Francis Xavier College, our values are not just words—they are the
@@ -290,19 +271,22 @@ onMounted(() => {
                 </p>
             </div>
 
-            <!-- Right Side: The Grid (Layout Preserved, Styles Themed) -->
             <div
                 class="flex flex-col items-center gap-7.5 md:grid md:grid-cols-[220px_220px] md:grid-rows-8 lg:grid-cols-[250px_250px] lg:gap-11.25 md:-mt-12.5"
             >
-                <!-- Card 1: Service -->
                 <Card
-                    class="col-start-1 col-end-2 row-start-1 row-end-4 w-62.5 md:w-55 lg:w-62.5 rounded-3xl p-8 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl reveal-item"
+                    class="col-start-1 col-end-2 row-start-1 row-end-4 w-62.5 md:w-55 lg:w-62.5 rounded-3xl p-8 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
+                    v-motion
+                    :initial="{ opacity: 0, y: 40 }"
+                    :visible-once="{
+                        opacity: 1,
+                        y: 0,
+                        transition: { delay: 0, duration: 600, type: 'tween', ease: 'easeOut' },
+                    }"
                 >
-                    <CardHeader class="p-0">
-                        <div class="text-primary">
-                            <HeartHandshake />
-                        </div>
-                    </CardHeader>
+                    <CardHeader class="p-0"
+                        ><div class="text-primary"><HeartHandshake /></div
+                    ></CardHeader>
                     <CardContent class="p-0">
                         <span class="select-none text-5xl font-bold leading-none text-foreground/20"
                             >S<span class="text-primary">.</span></span
@@ -316,15 +300,19 @@ onMounted(() => {
                     </CardContent>
                 </Card>
 
-                <!-- Card 2: Fortitude -->
                 <Card
-                    class="col-start-2 col-end-3 row-start-2 row-end-5 w-62.5 md:w-55 lg:w-62.5 rounded-3xl border-primary bg-primary p-8 shadow-lg shadow-primary/20 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl reveal-item"
+                    class="col-start-2 col-end-3 row-start-2 row-end-5 w-62.5 md:w-55 lg:w-62.5 rounded-3xl border-primary bg-primary p-8 shadow-lg shadow-primary/20 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
+                    v-motion
+                    :initial="{ opacity: 0, y: 40 }"
+                    :visible-once="{
+                        opacity: 1,
+                        y: 0,
+                        transition: { delay: 150, duration: 600, type: 'tween', ease: 'easeOut' },
+                    }"
                 >
-                    <CardHeader class="p-0">
-                        <div class="text-primary-foreground">
-                            <Shield />
-                        </div>
-                    </CardHeader>
+                    <CardHeader class="p-0"
+                        ><div class="text-primary-foreground"><Shield /></div
+                    ></CardHeader>
                     <CardContent class="p-0 text-primary-foreground">
                         <span class="select-none text-5xl font-bold leading-none opacity-50"
                             >F<span class="text-white">.</span></span
@@ -336,15 +324,19 @@ onMounted(() => {
                     </CardContent>
                 </Card>
 
-                <!-- Card 3: Excellence -->
                 <Card
-                    class="col-start-1 col-end-2 row-start-4 row-end-7 w-62.5 md:w-55 lg:w-62.5 rounded-3xl border-secondary bg-secondary p-8 shadow-lg shadow-secondary/20 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl reveal-item"
+                    class="col-start-1 col-end-2 row-start-4 row-end-7 w-62.5 md:w-55 lg:w-62.5 rounded-3xl border-secondary bg-secondary p-8 shadow-lg shadow-secondary/20 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
+                    v-motion
+                    :initial="{ opacity: 0, y: 40 }"
+                    :visible-once="{
+                        opacity: 1,
+                        y: 0,
+                        transition: { delay: 300, duration: 600, type: 'tween', ease: 'easeOut' },
+                    }"
                 >
-                    <CardHeader class="p-0">
-                        <div class="text-secondary-foreground">
-                            <Star />
-                        </div>
-                    </CardHeader>
+                    <CardHeader class="p-0"
+                        ><div class="text-secondary-foreground"><Star /></div
+                    ></CardHeader>
                     <CardContent class="p-0 text-secondary-foreground">
                         <span class="select-none text-5xl font-bold leading-none opacity-50"
                             >X<span class="text-foreground">.</span></span
@@ -356,15 +348,19 @@ onMounted(() => {
                     </CardContent>
                 </Card>
 
-                <!-- Card 4: Christ-Centeredness -->
                 <Card
-                    class="col-start-2 col-end-3 row-start-5 row-end-8 w-62.5 md:w-55 lg:w-62.5 rounded-3xl p-8 border-tertiary bg-tertiary shadow-lg shadow-tertiary/20 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl reveal-item"
+                    class="col-start-2 col-end-3 row-start-5 row-end-8 w-62.5 md:w-55 lg:w-62.5 rounded-3xl p-8 border-tertiary bg-tertiary shadow-lg shadow-tertiary/20 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
+                    v-motion
+                    :initial="{ opacity: 0, y: 40 }"
+                    :visible-once="{
+                        opacity: 1,
+                        y: 0,
+                        transition: { delay: 450, duration: 600, type: 'tween', ease: 'easeOut' },
+                    }"
                 >
-                    <CardHeader class="p-0">
-                        <div class="text-tertiary-foreground">
-                            <Cross />
-                        </div>
-                    </CardHeader>
+                    <CardHeader class="p-0"
+                        ><div class="text-tertiary-foreground"><Cross /></div
+                    ></CardHeader>
                     <CardContent class="p-0 text-tertiary-foreground">
                         <span class="select-none text-5xl font-bold leading-none opacity-50"
                             >C<span class="text-foreground">.</span></span
@@ -397,9 +393,13 @@ onMounted(() => {
     <section id="core-details" class="py-24 bg-background scroll-mt-16">
         <div class="container mx-auto px-4 md:px-8 max-w-6xl">
             <div class="space-y-20">
-                <!-- Service -->
-                <div class="grid md:grid-cols-[auto_1fr] gap-8 md:gap-12 items-start reveal-group">
-                    <div class="flex flex-col items-center md:items-start min-w-48 reveal-item">
+                <div
+                    class="grid md:grid-cols-[auto_1fr] gap-8 md:gap-12 items-start"
+                    v-motion
+                    :initial="{ opacity: 0, y: 32 }"
+                    :visible-once="{ opacity: 1, y: 0, transition: { duration: 700 } }"
+                >
+                    <div class="flex flex-col items-center md:items-start min-w-48">
                         <div
                             class="w-20 h-20 rounded-2xl bg-primary/10 flex items-center justify-center mb-4"
                         >
@@ -408,7 +408,7 @@ onMounted(() => {
                         <h3 class="text-2xl font-bold text-foreground">Service</h3>
                         <div class="h-1 w-12 bg-primary rounded-full mt-2"></div>
                     </div>
-                    <div class="space-y-4 reveal-item">
+                    <div class="space-y-4">
                         <p class="text-lg text-muted-foreground leading-relaxed">
                             Making decisions and actions which will benefit others
                         </p>
@@ -437,9 +437,13 @@ onMounted(() => {
                     </div>
                 </div>
 
-                <!-- Fortitude -->
-                <div class="grid md:grid-cols-[1fr_auto] gap-8 md:gap-12 items-start reveal-group">
-                    <div class="space-y-4 md:order-1 reveal-item">
+                <div
+                    class="grid md:grid-cols-[1fr_auto] gap-8 md:gap-12 items-start"
+                    v-motion
+                    :initial="{ opacity: 0, y: 32 }"
+                    :visible-once="{ opacity: 1, y: 0, transition: { duration: 700 } }"
+                >
+                    <div class="space-y-4 md:order-1">
                         <p class="text-lg text-muted-foreground leading-relaxed">
                             The act of recognizing strengths and weaknesses and persevering to
                             achieve success
@@ -465,7 +469,7 @@ onMounted(() => {
                         </div>
                     </div>
                     <div
-                        class="flex flex-col items-center md:items-end min-w-48 md:order-2 order-first reveal-item"
+                        class="flex flex-col items-center md:items-end min-w-48 md:order-2 order-first"
                     >
                         <div
                             class="w-20 h-20 rounded-2xl bg-primary/10 flex items-center justify-center mb-4"
@@ -477,9 +481,13 @@ onMounted(() => {
                     </div>
                 </div>
 
-                <!-- Excellence -->
-                <div class="grid md:grid-cols-[auto_1fr] gap-8 md:gap-12 items-start reveal-group">
-                    <div class="flex flex-col items-center md:items-start min-w-48 reveal-item">
+                <div
+                    class="grid md:grid-cols-[auto_1fr] gap-8 md:gap-12 items-start"
+                    v-motion
+                    :initial="{ opacity: 0, y: 32 }"
+                    :visible-once="{ opacity: 1, y: 0, transition: { duration: 700 } }"
+                >
+                    <div class="flex flex-col items-center md:items-start min-w-48">
                         <div
                             class="w-20 h-20 rounded-2xl bg-secondary/30 flex items-center justify-center mb-4"
                         >
@@ -488,7 +496,7 @@ onMounted(() => {
                         <h3 class="text-2xl font-bold text-foreground">eXcellence</h3>
                         <div class="h-1 w-12 bg-secondary rounded-full mt-2"></div>
                     </div>
-                    <div class="space-y-4 reveal-item">
+                    <div class="space-y-4">
                         <p class="text-lg text-muted-foreground leading-relaxed">
                             The commitment to giving one's best all the time and constantly seeking
                             improvement
@@ -512,9 +520,13 @@ onMounted(() => {
                     </div>
                 </div>
 
-                <!-- Christ-Centeredness -->
-                <div class="grid md:grid-cols-[1fr_auto] gap-8 md:gap-12 items-start reveal-group">
-                    <div class="space-y-4 md:order-1 reveal-item">
+                <div
+                    class="grid md:grid-cols-[1fr_auto] gap-8 md:gap-12 items-start"
+                    v-motion
+                    :initial="{ opacity: 0, y: 32 }"
+                    :visible-once="{ opacity: 1, y: 0, transition: { duration: 700 } }"
+                >
+                    <div class="space-y-4 md:order-1">
                         <p class="text-lg text-muted-foreground leading-relaxed">
                             Having the faith in turning the ordinary into extraordinary
                         </p>
@@ -541,7 +553,7 @@ onMounted(() => {
                         </div>
                     </div>
                     <div
-                        class="flex flex-col items-center md:items-end min-w-48 md:order-2 order-first reveal-item"
+                        class="flex flex-col items-center md:items-end min-w-48 md:order-2 order-first"
                     >
                         <div
                             class="w-20 h-20 rounded-2xl bg-tertiary/30 flex items-center justify-center mb-4"
@@ -556,18 +568,3 @@ onMounted(() => {
         </div>
     </section>
 </template>
-
-<style scoped>
-.reveal-item {
-    opacity: 0;
-    transform: translateY(2rem);
-    transition:
-        opacity 0.6s ease,
-        transform 0.6s ease;
-}
-
-.reveal-item.reveal-visible {
-    opacity: 1;
-    transform: translateY(0);
-}
-</style>
