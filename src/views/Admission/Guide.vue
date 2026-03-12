@@ -1,393 +1,71 @@
 <script setup lang="ts">
-import { ref, onMounted, watch, nextTick } from 'vue'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import { useCourseGuide } from '@/composables/useCourseGuide'
+import PageHero from '@/components/ui/custom/PageHero.vue'
+import InterestCard from '@/components/ui/custom/InterestCard.vue'
+import RecommendationCard from '@/components/ui/custom/RecommendationCard.vue'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
-import { Badge } from '@/components/ui/badge'
 import { Separator } from '@/components/ui/separator'
 import { RouterLink } from 'vue-router'
 
-interface Interest {
-    id: string
-    title: string
-    description: string
-    courses: string[]
-}
-
-interface CourseRecommendation {
-    name: string
-    code: string
-    matchReason: string
-    careers: string[]
-    skills: string[]
-}
-
-const selectedInterests = ref<string[]>([])
-const showResults = ref(false)
-
-const interests: Interest[] = [
-    {
-        id: 'technology',
-        title: 'Technology & Innovation',
-        description: 'I enjoy working with computers, coding, and emerging technologies',
-        courses: ['BSIT', 'BSAIS'],
-    },
-    {
-        id: 'business',
-        title: 'Business & Entrepreneurship',
-        description: 'I am interested in starting businesses and managing organizations',
-        courses: ['BSBA', 'BSOA'],
-    },
-    {
-        id: 'numbers',
-        title: 'Numbers & Analytics',
-        description: 'I like working with data, calculations, and financial analysis',
-        courses: ['BSA', 'BSAIS'],
-    },
-    {
-        id: 'helping',
-        title: 'Helping & Teaching',
-        description: 'I want to make a difference by educating and guiding others',
-        courses: ['BEED', 'BSED'],
-    },
-    {
-        id: 'service',
-        title: 'Public Service & Safety',
-        description: 'I am passionate about law enforcement and community protection',
-        courses: ['BSCRIM'],
-    },
-    {
-        id: 'hospitality',
-        title: 'Hospitality & Tourism',
-        description: 'I enjoy customer service, travel, and hotel management',
-        courses: ['BSHM'],
-    },
-    {
-        id: 'creative',
-        title: 'Creative & Design',
-        description: 'I like expressing ideas through art, design, and creativity',
-        courses: ['BSIT', 'BSHM'],
-    },
-    {
-        id: 'leadership',
-        title: 'Leadership & Management',
-        description: 'I am good at leading teams and organizing projects',
-        courses: ['BSBA', 'BSOA', 'BSCRIM'],
-    },
-]
-
-const courseDatabase: Record<string, CourseRecommendation> = {
-    BSIT: {
-        name: 'Bachelor of Science in Information Technology',
-        code: 'BSIT',
-        matchReason:
-            'Perfect for tech enthusiasts who want to build software and manage IT systems',
-        careers: [
-            'Software Developer',
-            'Network Administrator',
-            'Systems Analyst',
-            'IT Consultant',
-        ],
-        skills: ['Programming', 'Problem Solving', 'Logical Thinking', 'Technical Analysis'],
-    },
-    BSBA: {
-        name: 'Bachelor of Science in Business Administration',
-        code: 'BSBA',
-        matchReason:
-            'Ideal for those who want to lead organizations and develop business strategies',
-        careers: [
-            'Business Manager',
-            'Operations Manager',
-            'Entrepreneur',
-            'Management Consultant',
-        ],
-        skills: ['Leadership', 'Strategic Planning', 'Communication', 'Decision Making'],
-    },
-    BSA: {
-        name: 'Bachelor of Science in Accountancy',
-        code: 'BSA',
-        matchReason: 'Best choice for those who excel in mathematics and financial analysis',
-        careers: ['Certified Public Accountant', 'Auditor', 'Tax Consultant', 'Financial Analyst'],
-        skills: ['Attention to Detail', 'Analytical Thinking', 'Ethics', 'Financial Management'],
-    },
-    BSAIS: {
-        name: 'Bachelor of Science in Accounting Information System',
-        code: 'BSAIS',
-        matchReason: 'Combines technology and accounting for modern business solutions',
-        careers: ['Systems Accountant', 'IT Auditor', 'Business Analyst', 'Data Analyst'],
-        skills: ['Technical Skills', 'Accounting Knowledge', 'Data Analysis', 'System Design'],
-    },
-    BSOA: {
-        name: 'Bachelor of Science in Office Administration',
-        code: 'BSOA',
-        matchReason:
-            'Great for organized individuals who excel in administrative and management tasks',
-        careers: [
-            'Office Manager',
-            'Administrative Officer',
-            'Executive Assistant',
-            'Operations Coordinator',
-        ],
-        skills: ['Organization', 'Communication', 'Time Management', 'Coordination'],
-    },
-    BSCRIM: {
-        name: 'Bachelor of Science in Criminology',
-        code: 'BSCRIM',
-        matchReason: 'Perfect for those dedicated to public safety and law enforcement',
-        careers: [
-            'Police Officer',
-            'Criminal Investigator',
-            'Forensic Specialist',
-            'Security Manager',
-        ],
-        skills: ['Physical Fitness', 'Critical Thinking', 'Ethics', 'Investigation'],
-    },
-    BEED: {
-        name: 'Bachelor of Elementary Education',
-        code: 'BEED',
-        matchReason: 'Ideal for patient and caring individuals who love teaching children',
-        careers: [
-            'Elementary Teacher',
-            'Curriculum Developer',
-            'Educational Coordinator',
-            'Child Development Specialist',
-        ],
-        skills: ['Patience', 'Communication', 'Creativity', 'Child Psychology'],
-    },
-    BSED: {
-        name: 'Bachelor of Secondary Education',
-        code: 'BSED',
-        matchReason: 'Great for subject specialists who want to teach high school students',
-        careers: [
-            'High School Teacher',
-            'Subject Specialist',
-            'Curriculum Developer',
-            'Education Coordinator',
-        ],
-        skills: ['Subject Expertise', 'Communication', 'Classroom Management', 'Mentoring'],
-    },
-    BSHM: {
-        name: 'Bachelor of Science in Hospitality Management',
-        code: 'BSHM',
-        matchReason: 'Perfect for people-oriented individuals who love customer service',
-        careers: ['Hotel Manager', 'Event Coordinator', 'Restaurant Manager', 'Tourism Officer'],
-        skills: ['Customer Service', 'Communication', 'Problem Solving', 'Cultural Awareness'],
-    },
-}
-
-const toggleInterest = (interestId: string) => {
-    const index = selectedInterests.value.indexOf(interestId)
-    if (index > -1) {
-        selectedInterests.value.splice(index, 1)
-    } else {
-        selectedInterests.value.push(interestId)
-    }
-}
-
-const getRecommendations = (): CourseRecommendation[] => {
-    if (selectedInterests.value.length === 0) return []
-
-    const courseScores: Record<string, number> = {}
-
-    selectedInterests.value.forEach((interestId) => {
-        const interest = interests.find((i) => i.id === interestId)
-        if (interest) {
-            interest.courses.forEach((courseCode) => {
-                courseScores[courseCode] = (courseScores[courseCode] || 0) + 1
-            })
-        }
-    })
-
-    const sortedCourses = Object.entries(courseScores)
-        .sort(([, a], [, b]) => b - a)
-        .map(([code]) => courseDatabase[code])
-        .filter((course): course is CourseRecommendation => course !== undefined)
-
-    return sortedCourses.slice(0, 3)
-}
-
-const handleShowResults = () => {
-    if (selectedInterests.value.length > 0) {
-        showResults.value = true
-    }
-}
-
-const resetQuiz = () => {
-    selectedInterests.value = []
-    showResults.value = false
-}
-
-const setupObserver = () => {
-    const observer = new IntersectionObserver(
-        (entries) => {
-            entries.forEach((entry) => {
-                if (entry.isIntersecting) {
-                    entry.target.querySelectorAll('.reveal-item').forEach((el, i) => {
-                        setTimeout(() => el.classList.add('reveal-visible'), i * 100)
-                    })
-                    observer.unobserve(entry.target)
-                }
-            })
-        },
-        { threshold: 0.1 },
-    )
-    document.querySelectorAll('.reveal-group').forEach((el) => observer.observe(el))
-}
-
-onMounted(setupObserver)
-
-watch(showResults, async () => {
-    await nextTick()
-    setupObserver()
-})
+const {
+    interests,
+    selectedInterests,
+    showResults,
+    recommendations,
+    toggleInterest,
+    handleShowResults,
+    resetQuiz,
+} = useCourseGuide()
 </script>
 
 <template>
-    <section id="hero" class="relative h-[75dvh] overflow-hidden">
-        <img
-            src="/src/assets/images/sfxc-building.jpg"
-            alt="SFXC Building"
-            class="absolute inset-0 w-full h-full object-cover"
-        />
-        <div
-            class="absolute inset-0 bg-linear-to-r from-black/80 via-black/50 to-black/10 z-1"
-        ></div>
-        <div
-            class="absolute inset-0 bg-linear-to-t from-black/70 via-transparent to-transparent z-1"
-        ></div>
-        <div
-            class="absolute bottom-0 left-0 right-0 h-1/2 bg-linear-to-t from-primary/25 to-transparent z-1"
-        ></div>
-        <div class="absolute inset-0 z-10 flex flex-col justify-end pointer-events-none">
-            <div class="max-w-7xl mx-auto w-full px-6 sm:px-8 lg:px-16 pb-12 md:pb-16 reveal-group">
-                <div class="hidden md:flex items-center gap-4 mb-6 reveal-item">
-                    <div class="w-10 h-0.5 bg-primary"></div>
-                    <span class="text-white/50 text-xs font-medium uppercase tracking-[0.3em]"
-                        >St. Francis Xavier College</span
-                    >
-                </div>
-                <h1
-                    class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-white leading-[1.05] mb-4 reveal-item"
-                    style="font-family: 'Times New Roman', Times, serif"
-                >
-                    Course Selection Guide
-                </h1>
-                <p class="text-base md:text-lg text-white/60 max-w-xl leading-relaxed reveal-item">
-                    Not sure which program to choose? Let us help you find your path.
-                </p>
-            </div>
-        </div>
-    </section>
+    <PageHero subtitle="Not sure which program to choose? Let us help you find your path.">
+        <template #title>Course Selection Guide</template>
+    </PageHero>
 
     <div class="bg-background">
         <div class="max-w-7xl mx-auto px-6 sm:px-8 lg:px-16 py-24">
-            <!-- Introduction -->
-            <div v-if="!showResults" class="mb-12 reveal-group">
-                <div class="flex items-center gap-4 mb-4 reveal-item">
-                    <div class="w-8 h-0.5 bg-primary"></div>
-                    <span class="text-primary font-semibold text-xs uppercase tracking-[0.3em]"
-                        >Course Selection</span
-                    >
+            <!-- Interest Selection Phase -->
+            <template v-if="!showResults">
+                <!-- Intro -->
+                <div
+                    class="mb-12"
+                    v-motion
+                    :initial="{ opacity: 0, y: 24 }"
+                    :enter="{ opacity: 1, y: 0, transition: { duration: 600 } }"
+                >
+                    <div class="flex items-center gap-4 mb-4">
+                        <div class="w-8 h-0.5 bg-primary"></div>
+                        <span class="text-primary font-semibold text-xs uppercase tracking-[0.3em]"
+                            >Course Selection</span
+                        >
+                    </div>
+                    <h2 class="text-3xl md:text-4xl font-bold text-foreground mb-4">
+                        Find Your Perfect Course
+                    </h2>
+                    <p class="text-lg text-muted-foreground max-w-2xl">
+                        Select the areas that interest you most. We'll recommend courses that match
+                        your passions and career goals.
+                    </p>
+                    <p class="text-sm text-muted-foreground mt-2">
+                        Select at least one interest to get started
+                    </p>
                 </div>
-                <h2 class="text-3xl md:text-4xl font-bold text-foreground mb-4 reveal-item">
-                    Find Your Perfect Course
-                </h2>
-                <p class="text-lg text-muted-foreground max-w-2xl reveal-item">
-                    Select the areas that interest you most. We'll recommend courses that match your
-                    passions and career goals.
-                </p>
-                <p class="text-sm text-muted-foreground mt-2 reveal-item">
-                    Select at least one interest to get started
-                </p>
-            </div>
 
-            <!-- Interest Selection -->
-            <div v-if="!showResults">
+                <!-- Interest Grid -->
                 <div class="grid md:grid-cols-2 gap-6 mb-12">
-                    <Card
+                    <InterestCard
                         v-for="(interest, index) in interests"
                         :key="interest.id"
-                        :style="{ animationDelay: `${index * 80}ms` }"
-                        :class="[
-                            'card-enter cursor-pointer transition-all duration-300 hover:shadow-xl relative overflow-hidden group',
-                            selectedInterests.includes(interest.id)
-                                ? 'border-primary ring-2 ring-primary/20 shadow-lg scale-[1.02]'
-                                : 'hover:border-primary/50 hover:-translate-y-1',
-                        ]"
-                        @click="toggleInterest(interest.id)"
-                    >
-                        <!-- Selection Indicator Bar -->
-                        <div
-                            :class="[
-                                'absolute left-0 top-0 h-full w-1.5 transition-all duration-300',
-                                selectedInterests.includes(interest.id)
-                                    ? 'bg-primary scale-y-100'
-                                    : 'bg-transparent scale-y-0',
-                            ]"
-                        ></div>
-
-                        <!-- Animated Background Gradient -->
-                        <div
-                            :class="[
-                                'absolute inset-0 bg-linear-to-br from-primary/5 via-transparent to-transparent opacity-0 transition-opacity duration-300',
-                                selectedInterests.includes(interest.id) && 'opacity-100',
-                            ]"
-                        ></div>
-
-                        <CardHeader class="relative">
-                            <div class="flex items-start justify-between gap-4">
-                                <div class="flex-1">
-                                    <CardTitle class="text-lg mb-2 transition-colors duration-200">
-                                        {{ interest.title }}
-                                    </CardTitle>
-                                    <CardDescription class="text-sm leading-relaxed">
-                                        {{ interest.description }}
-                                    </CardDescription>
-                                </div>
-
-                                <!-- Animated Checkbox -->
-                                <div class="relative shrink-0">
-                                    <div
-                                        :class="[
-                                            'w-6 h-6 rounded-md border-2 transition-all duration-300 flex items-center justify-center',
-                                            selectedInterests.includes(interest.id)
-                                                ? 'border-primary bg-primary rotate-360 scale-110'
-                                                : 'border-muted-foreground/40 bg-background group-hover:border-primary/50 group-hover:scale-105',
-                                        ]"
-                                    >
-                                        <!-- Checkmark -->
-                                        <svg
-                                            v-if="selectedInterests.includes(interest.id)"
-                                            class="w-4 h-4 text-white animate-in fade-in zoom-in duration-200"
-                                            fill="none"
-                                            stroke="currentColor"
-                                            viewBox="0 0 24 24"
-                                        >
-                                            <path
-                                                stroke-linecap="round"
-                                                stroke-linejoin="round"
-                                                stroke-width="3"
-                                                d="M5 13l4 4L19 7"
-                                            />
-                                        </svg>
-                                    </div>
-
-                                    <!-- Ripple Effect on Selection -->
-                                    <div
-                                        v-if="selectedInterests.includes(interest.id)"
-                                        class="absolute inset-0 rounded-md border-2 border-primary animate-ping opacity-75"
-                                    ></div>
-                                </div>
-                            </div>
-                        </CardHeader>
-
-                        <!-- Hover Effect Border -->
-                        <div
-                            class="absolute bottom-0 left-0 right-0 h-0.5 bg-linear-to-r from-transparent via-primary to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                        ></div>
-                    </Card>
+                        :interest="interest"
+                        :is-selected="selectedInterests.includes(interest.id)"
+                        :enter-delay="index * 80"
+                        @toggle="toggleInterest"
+                    />
                 </div>
 
-                <!-- Selected Count Indicator -->
+                <!-- CTA -->
                 <div class="flex flex-col items-center gap-4">
                     <div
                         v-if="selectedInterests.length > 0"
@@ -424,84 +102,49 @@ watch(showResults, async () => {
                         </span>
                     </Button>
                 </div>
-            </div>
+            </template>
 
-            <!-- Results -->
-            <div v-else>
-                <div class="mb-12 reveal-group">
-                    <div class="flex items-center gap-4 mb-4 reveal-item">
+            <!-- Results Phase -->
+            <template v-else>
+                <!-- Results Header -->
+                <div
+                    class="mb-12"
+                    v-motion
+                    :initial="{ opacity: 0, y: 24 }"
+                    :enter="{ opacity: 1, y: 0, transition: { duration: 600 } }"
+                >
+                    <div class="flex items-center gap-4 mb-4">
                         <div class="w-8 h-0.5 bg-primary"></div>
                         <span class="text-primary font-semibold text-xs uppercase tracking-[0.3em]"
                             >Recommendations</span
                         >
                     </div>
-                    <h2 class="text-3xl md:text-4xl font-bold text-foreground mb-3 reveal-item">
+                    <h2 class="text-3xl md:text-4xl font-bold text-foreground mb-3">
                         Your Recommended Courses
                     </h2>
-                    <p class="text-lg text-muted-foreground reveal-item">
+                    <p class="text-lg text-muted-foreground">
                         Based on your interests, here are the programs that best match your profile
                     </p>
                 </div>
 
-                <div class="space-y-8 mb-12 reveal-group">
-                    <Card
-                        v-for="(course, index) in getRecommendations()"
+                <div class="space-y-8 mb-12">
+                    <RecommendationCard
+                        v-for="(course, index) in recommendations"
                         :key="course.code"
-                        class="overflow-hidden reveal-item"
-                    >
-                        <CardHeader class="bg-primary/5">
-                            <div class="flex items-start justify-between">
-                                <div class="flex-1">
-                                    <div class="flex items-center gap-3 mb-2">
-                                        <Badge variant="default">
-                                            {{ index === 0 ? 'Best Match' : `Match ${index + 1}` }}
-                                        </Badge>
-                                        <Badge variant="outline">{{ course.code }}</Badge>
-                                    </div>
-                                    <CardTitle class="text-2xl">{{ course.name }}</CardTitle>
-                                    <CardDescription class="mt-2 text-base">
-                                        {{ course.matchReason }}
-                                    </CardDescription>
-                                </div>
-                            </div>
-                        </CardHeader>
-                        <CardContent class="pt-6">
-                            <div class="grid md:grid-cols-2 gap-6">
-                                <div>
-                                    <h4 class="font-semibold mb-3">Career Opportunities</h4>
-                                    <ul class="space-y-2">
-                                        <li
-                                            v-for="career in course.careers"
-                                            :key="career"
-                                            class="flex items-start gap-2 text-sm text-muted-foreground"
-                                        >
-                                            <span class="text-primary mt-1">&#8226;</span>
-                                            <span>{{ career }}</span>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div>
-                                    <h4 class="font-semibold mb-3">Key Skills You'll Develop</h4>
-                                    <div class="flex flex-wrap gap-2">
-                                        <Badge
-                                            v-for="skill in course.skills"
-                                            :key="skill"
-                                            variant="secondary"
-                                        >
-                                            {{ skill }}
-                                        </Badge>
-                                    </div>
-                                </div>
-                            </div>
-                        </CardContent>
-                    </Card>
+                        :course="course"
+                        :index="index"
+                    />
                 </div>
 
                 <Separator class="my-12" />
 
                 <!-- Additional Resources -->
-                <div class="grid md:grid-cols-3 gap-6 mb-12 reveal-group">
-                    <Card class="reveal-item">
+                <div class="grid md:grid-cols-3 gap-6 mb-12">
+                    <Card
+                        v-motion
+                        :initial="{ opacity: 0, y: 24 }"
+                        :visible-once="{ opacity: 1, y: 0, transition: { duration: 500 } }"
+                    >
                         <CardHeader>
                             <CardTitle class="text-lg">Learn More</CardTitle>
                         </CardHeader>
@@ -515,7 +158,15 @@ watch(showResults, async () => {
                         </CardContent>
                     </Card>
 
-                    <Card class="reveal-item">
+                    <Card
+                        v-motion
+                        :initial="{ opacity: 0, y: 24 }"
+                        :visible-once="{
+                            opacity: 1,
+                            y: 0,
+                            transition: { delay: 100, duration: 500 },
+                        }"
+                    >
                         <CardHeader>
                             <CardTitle class="text-lg">Schedule a Visit</CardTitle>
                         </CardHeader>
@@ -529,7 +180,15 @@ watch(showResults, async () => {
                         </CardContent>
                     </Card>
 
-                    <Card class="reveal-item">
+                    <Card
+                        v-motion
+                        :initial="{ opacity: 0, y: 24 }"
+                        :visible-once="{
+                            opacity: 1,
+                            y: 0,
+                            transition: { delay: 200, duration: 500 },
+                        }"
+                    >
                         <CardHeader>
                             <CardTitle class="text-lg">Talk to Admissions</CardTitle>
                         </CardHeader>
@@ -538,46 +197,16 @@ watch(showResults, async () => {
                                 Get personalized guidance from our admissions team
                             </p>
                             <Button variant="outline" class="w-full" as-child>
-                                <RouterLink :to="{ name: 'contact' }"> Contact Us </RouterLink>
+                                <RouterLink :to="{ name: 'contact' }">Contact Us</RouterLink>
                             </Button>
                         </CardContent>
                     </Card>
                 </div>
 
                 <div class="flex justify-center">
-                    <Button variant="ghost" @click="resetQuiz"> Start Over </Button>
+                    <Button variant="ghost" @click="resetQuiz">Start Over</Button>
                 </div>
-            </div>
+            </template>
         </div>
     </div>
 </template>
-
-<style scoped>
-.reveal-item {
-    opacity: 0;
-    transform: translateY(2rem);
-    transition:
-        opacity 0.6s ease,
-        transform 0.6s ease;
-}
-
-.reveal-item.reveal-visible {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-.card-enter {
-    animation: cardEnter 0.5s ease both;
-}
-
-@keyframes cardEnter {
-    from {
-        opacity: 0;
-        transform: translateY(1.5rem);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-</style>
