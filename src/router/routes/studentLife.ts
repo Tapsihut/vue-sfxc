@@ -14,6 +14,12 @@ export const studentLifeRoutes: RouteRecordRaw[] = [
         meta: { layout: 'guest' },
     },
     {
+        path: '/student-life/organizations',
+        name: 'organizations',
+        component: () => import('@/views/StudentLife/Organizations.vue'),
+        meta: { layout: 'guest' },
+    },
+    {
         path: '/student-life/athletics-fitness',
         name: 'athletics-fitness',
         component: () => import('@/views/StudentLife/AthleticsFitness.vue'),

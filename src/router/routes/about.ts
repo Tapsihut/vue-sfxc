@@ -8,12 +8,6 @@ export const aboutRoutes: RouteRecordRaw[] = [
         meta: { layout: 'guest' },
     },
     {
-        path: '/about/organizations',
-        name: 'organizations',
-        component: () => import('@/views/Abouts/Organizations.vue'),
-        meta: { layout: 'guest' },
-    },
-    {
         path: '/about/facilities',
         name: 'facilities',
         component: () => import('@/views/Abouts/Facilities.vue'),
