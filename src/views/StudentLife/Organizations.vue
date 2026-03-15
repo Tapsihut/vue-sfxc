@@ -1,12 +1,15 @@
 <script setup lang="ts">
-import { Users, Lightbulb, Heart, CheckCircle } from 'lucide-vue-next'
+import { Users, Lightbulb } from 'lucide-vue-next'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import PageHero from '@/components/ui/custom/PageHero.vue'
-import { sclOfficers, collegeOfficers } from '@/data/organizations'
+import GoalCard from '@/components/ui/custom/GoalCard.vue'
+import { sclOfficers, collegeOfficers, goalCards, clubPolicies } from '@/data/organizations'
 </script>
 
 <template>
-    <PageHero subtitle="Empowering students through leadership, collaboration, and community service.">
+    <PageHero
+        subtitle="Empowering students through leadership, collaboration, and community service."
+    >
         <template #title>Student Organizations</template>
     </PageHero>
 
@@ -21,7 +24,9 @@ import { sclOfficers, collegeOfficers } from '@/data/organizations'
                 >
                     <div class="flex items-center gap-4 mb-4">
                         <div class="w-8 h-0.5 bg-primary"></div>
-                        <span class="text-primary font-semibold text-xs uppercase tracking-[0.3em]">Leadership</span>
+                        <span class="text-primary font-semibold text-xs uppercase tracking-[0.3em]"
+                            >Leadership</span
+                        >
                     </div>
                     <h3 class="text-3xl md:text-4xl font-bold mb-6 text-foreground leading-tight">
                         Student Council
@@ -66,10 +71,14 @@ import { sclOfficers, collegeOfficers } from '@/data/organizations'
                 >
                     <div class="flex items-center gap-6 mb-4 justify-center">
                         <div class="flex-1 h-px bg-border max-w-24"></div>
-                        <span class="text-muted-foreground/60 text-xs uppercase tracking-widest">Organizational Chart</span>
+                        <span class="text-muted-foreground/60 text-xs uppercase tracking-widest"
+                            >Organizational Chart</span
+                        >
                         <div class="flex-1 h-px bg-border max-w-24"></div>
                     </div>
-                    <h4 class="text-2xl md:text-3xl font-bold text-foreground mb-2">SCL Officers</h4>
+                    <h4 class="text-2xl md:text-3xl font-bold text-foreground mb-2">
+                        SCL Officers
+                    </h4>
                     <p class="text-muted-foreground text-sm">Student Council of Leaders</p>
                 </div>
 
@@ -80,9 +89,17 @@ import { sclOfficers, collegeOfficers } from '@/data/organizations'
                     :initial="{ opacity: 0, y: 24 }"
                     :visible-once="{ opacity: 1, y: 0, transition: { delay: 100, duration: 600 } }"
                 >
-                    <div class="bg-primary text-primary-foreground rounded-2xl p-6 shadow-lg shadow-primary/20 text-center min-w-48">
-                        <div class="w-20 h-20 rounded-full bg-primary-foreground/20 mx-auto mb-3 overflow-hidden border-3 border-primary-foreground/50">
-                            <img src="https://placehold.co/150x150" alt="President" class="w-full h-full object-cover" />
+                    <div
+                        class="bg-primary text-primary-foreground rounded-2xl p-6 shadow-lg shadow-primary/20 text-center min-w-48"
+                    >
+                        <div
+                            class="w-20 h-20 rounded-full bg-primary-foreground/20 mx-auto mb-3 overflow-hidden border-3 border-primary-foreground/50"
+                        >
+                            <img
+                                src="https://placehold.co/150x150"
+                                alt="President"
+                                class="w-full h-full object-cover"
+                            />
                         </div>
                         <p class="font-bold text-lg">{{ sclOfficers[0]?.name }}</p>
                         <p class="text-sm opacity-90">{{ sclOfficers[0]?.position }}</p>
@@ -93,43 +110,72 @@ import { sclOfficers, collegeOfficers } from '@/data/organizations'
                     <div class="w-[80%] max-w-4xl h-px bg-border"></div>
 
                     <!-- Vice Presidents & Secretary & PIO Row -->
-                    <div class="grid grid-cols-2 lg:grid-cols-4 gap-6 w-full max-w-5xl mt-0 relative">
-                        <template v-for="(officer, index) in sclOfficers[0]?.subordinates" :key="index">
+                    <div
+                        class="grid grid-cols-2 lg:grid-cols-4 gap-6 w-full max-w-5xl mt-0 relative"
+                    >
+                        <template
+                            v-for="(officer, index) in sclOfficers[0]?.subordinates"
+                            :key="index"
+                        >
                             <div
                                 class="flex flex-col items-center"
                                 v-motion
                                 :initial="{ opacity: 0, y: 20 }"
-                                :visible-once="{ opacity: 1, y: 0, transition: { delay: index * 100, duration: 500 } }"
+                                :visible-once="{
+                                    opacity: 1,
+                                    y: 0,
+                                    transition: { delay: index * 100, duration: 500 },
+                                }"
                             >
-                                <!-- Vertical connector -->
                                 <div class="w-px h-8 bg-border"></div>
-
-                                <!-- Officer Card -->
-                                <div class="bg-card border-2 border-border rounded-xl p-4 shadow-md text-center w-full hover:border-primary/40 hover:shadow-lg transition-all duration-150">
-                                    <div class="w-16 h-16 rounded-full bg-primary/10 mx-auto mb-3 overflow-hidden border-2 border-primary/30">
-                                        <img src="https://placehold.co/150x150" :alt="officer.position" class="w-full h-full object-cover" />
+                                <div
+                                    class="bg-card border-2 border-border rounded-xl p-4 shadow-md text-center w-full hover:border-primary/40 hover:shadow-lg transition-all duration-150"
+                                >
+                                    <div
+                                        class="w-16 h-16 rounded-full bg-primary/10 mx-auto mb-3 overflow-hidden border-2 border-primary/30"
+                                    >
+                                        <img
+                                            src="https://placehold.co/150x150"
+                                            :alt="officer.position"
+                                            class="w-full h-full object-cover"
+                                        />
                                     </div>
                                     <p class="font-semibold text-foreground">{{ officer.name }}</p>
-                                    <p class="text-xs text-muted-foreground mt-1">{{ officer.position }}</p>
+                                    <p class="text-xs text-muted-foreground mt-1">
+                                        {{ officer.position }}
+                                    </p>
                                 </div>
 
-                                <!-- Subordinates -->
                                 <template v-if="officer.subordinates?.length">
                                     <div class="w-px h-6 bg-border"></div>
                                     <div
                                         class="flex flex-col gap-3 w-full"
-                                        :class="{ 'items-center': officer.subordinates && officer.subordinates.length === 1 }"
+                                        :class="{
+                                            'items-center':
+                                                officer.subordinates &&
+                                                officer.subordinates.length === 1,
+                                        }"
                                     >
                                         <div
                                             v-for="(sub, subIndex) in officer.subordinates"
                                             :key="subIndex"
                                             class="bg-muted/50 border border-border rounded-lg p-3 text-center hover:bg-muted hover:border-border/80 transition-colors duration-150"
                                         >
-                                            <div class="w-12 h-12 rounded-full bg-secondary/20 mx-auto mb-2 overflow-hidden border border-secondary/30">
-                                                <img src="https://placehold.co/150x150" :alt="sub.position" class="w-full h-full object-cover" />
+                                            <div
+                                                class="w-12 h-12 rounded-full bg-secondary/20 mx-auto mb-2 overflow-hidden border border-secondary/30"
+                                            >
+                                                <img
+                                                    src="https://placehold.co/150x150"
+                                                    :alt="sub.position"
+                                                    class="w-full h-full object-cover"
+                                                />
                                             </div>
-                                            <p class="font-medium text-sm text-foreground">{{ sub.name }}</p>
-                                            <p class="text-xs text-muted-foreground">{{ sub.position }}</p>
+                                            <p class="font-medium text-sm text-foreground">
+                                                {{ sub.name }}
+                                            </p>
+                                            <p class="text-xs text-muted-foreground">
+                                                {{ sub.position }}
+                                            </p>
                                         </div>
                                     </div>
                                 </template>
@@ -152,7 +198,9 @@ import { sclOfficers, collegeOfficers } from '@/data/organizations'
             >
                 <div class="flex items-center gap-4 mb-4">
                     <div class="w-8 h-0.5 bg-tertiary"></div>
-                    <span class="text-tertiary font-semibold text-xs uppercase tracking-[0.3em]">Program Leadership</span>
+                    <span class="text-tertiary font-semibold text-xs uppercase tracking-[0.3em]"
+                        >Program Leadership</span
+                    >
                 </div>
                 <h3 class="text-3xl md:text-4xl font-bold text-foreground leading-tight">
                     College Presidents &amp; Governors
@@ -166,17 +214,28 @@ import { sclOfficers, collegeOfficers } from '@/data/organizations'
                     class="flex flex-col items-center"
                     v-motion
                     :initial="{ opacity: 0, y: 20 }"
-                    :visible-once="{ opacity: 1, y: 0, transition: { delay: index * 100, duration: 500 } }"
+                    :visible-once="{
+                        opacity: 1,
+                        y: 0,
+                        transition: { delay: index * 100, duration: 500 },
+                    }"
                 >
-                    <div class="bg-tertiary text-tertiary-foreground rounded-xl p-5 shadow-lg shadow-tertiary/20 text-center w-full">
-                        <div class="w-16 h-16 rounded-full bg-tertiary-foreground/20 mx-auto mb-3 overflow-hidden border-2 border-tertiary-foreground/50">
-                            <img src="https://placehold.co/150x150" :alt="officer.position" class="w-full h-full object-cover" />
+                    <div
+                        class="bg-tertiary text-tertiary-foreground rounded-xl p-5 shadow-lg shadow-tertiary/20 text-center w-full"
+                    >
+                        <div
+                            class="w-16 h-16 rounded-full bg-tertiary-foreground/20 mx-auto mb-3 overflow-hidden border-2 border-tertiary-foreground/50"
+                        >
+                            <img
+                                src="https://placehold.co/150x150"
+                                :alt="officer.position"
+                                class="w-full h-full object-cover"
+                            />
                         </div>
                         <p class="font-bold text-sm">{{ officer.name }}</p>
                         <p class="text-xs opacity-90">{{ officer.position }}</p>
                     </div>
 
-                    <!-- CBE Subordinates -->
                     <template v-if="officer.hasSubordinates && officer.governors">
                         <div class="w-px h-6 bg-border"></div>
                         <div class="w-full h-px bg-border"></div>
@@ -187,11 +246,21 @@ import { sclOfficers, collegeOfficers } from '@/data/organizations'
                                 class="flex flex-col items-center"
                             >
                                 <div class="w-px h-4 bg-border"></div>
-                                <div class="bg-card border border-border rounded-lg p-3 text-center w-full hover:border-tertiary/40 hover:shadow-md transition-all duration-150">
-                                    <div class="w-12 h-12 rounded-full bg-tertiary/10 mx-auto mb-2 overflow-hidden border border-tertiary/30">
-                                        <img src="https://placehold.co/150x150" :alt="gov.position" class="w-full h-full object-cover" />
+                                <div
+                                    class="bg-card border border-border rounded-lg p-3 text-center w-full hover:border-tertiary/40 hover:shadow-md transition-all duration-150"
+                                >
+                                    <div
+                                        class="w-12 h-12 rounded-full bg-tertiary/10 mx-auto mb-2 overflow-hidden border border-tertiary/30"
+                                    >
+                                        <img
+                                            src="https://placehold.co/150x150"
+                                            :alt="gov.position"
+                                            class="w-full h-full object-cover"
+                                        />
                                     </div>
-                                    <p class="font-medium text-xs text-foreground">{{ gov.name }}</p>
+                                    <p class="font-medium text-xs text-foreground">
+                                        {{ gov.name }}
+                                    </p>
                                     <p class="text-xs text-muted-foreground">{{ gov.position }}</p>
                                 </div>
                             </div>
@@ -212,7 +281,9 @@ import { sclOfficers, collegeOfficers } from '@/data/organizations'
             >
                 <div class="flex items-center gap-4 mb-4">
                     <div class="w-8 h-0.5 bg-secondary"></div>
-                    <span class="text-secondary font-semibold text-xs uppercase tracking-[0.3em]">Student Development</span>
+                    <span class="text-secondary font-semibold text-xs uppercase tracking-[0.3em]"
+                        >Student Development</span
+                    >
                 </div>
                 <h3 class="text-3xl md:text-4xl font-bold text-foreground leading-tight mb-4">
                     Interest Clubs &amp; Program-based Organizations
@@ -232,7 +303,9 @@ import { sclOfficers, collegeOfficers } from '@/data/organizations'
                     :visible-once="{ opacity: 1, x: 0, transition: { duration: 600 } }"
                 >
                     <CardHeader>
-                        <div class="w-12 h-12 rounded-lg bg-secondary/20 flex items-center justify-center mb-4">
+                        <div
+                            class="w-12 h-12 rounded-lg bg-secondary/20 flex items-center justify-center mb-4"
+                        >
                             <Users class="w-6 h-6 text-secondary" />
                         </div>
                         <CardTitle>Communication &amp; Teamwork</CardTitle>
@@ -253,7 +326,9 @@ import { sclOfficers, collegeOfficers } from '@/data/organizations'
                     :visible-once="{ opacity: 1, x: 0, transition: { duration: 600 } }"
                 >
                     <CardHeader>
-                        <div class="w-12 h-12 rounded-lg bg-primary/20 flex items-center justify-center mb-4">
+                        <div
+                            class="w-12 h-12 rounded-lg bg-primary/20 flex items-center justify-center mb-4"
+                        >
                             <Lightbulb class="w-6 h-6 text-primary" />
                         </div>
                         <CardTitle>Self-Discovery</CardTitle>
@@ -268,6 +343,7 @@ import { sclOfficers, collegeOfficers } from '@/data/organizations'
                 </Card>
             </div>
 
+            <!-- Guidelines & Policies -->
             <div
                 class="bg-background rounded-2xl border-2 border-border p-8 md:p-10"
                 v-motion
@@ -276,61 +352,43 @@ import { sclOfficers, collegeOfficers } from '@/data/organizations'
             >
                 <h4 class="text-2xl font-bold text-foreground mb-6">Guidelines &amp; Policies</h4>
                 <div class="space-y-6">
-                    <div class="flex items-start gap-4">
+                    <div
+                        v-for="policy in clubPolicies"
+                        :key="policy.number"
+                        class="flex items-start gap-4"
+                    >
                         <div class="shrink-0">
-                            <div class="w-8 h-8 rounded-full bg-secondary/20 flex items-center justify-center">
-                                <span class="text-sm font-bold text-secondary">1</span>
+                            <div
+                                class="w-8 h-8 rounded-full flex items-center justify-center"
+                                :class="
+                                    policy.variant === 'destructive'
+                                        ? 'bg-destructive/20'
+                                        : 'bg-secondary/20'
+                                "
+                            >
+                                <span
+                                    class="text-sm font-bold"
+                                    :class="
+                                        policy.variant === 'destructive'
+                                            ? 'text-destructive'
+                                            : 'text-secondary'
+                                    "
+                                    >{{ policy.number }}</span
+                                >
                             </div>
                         </div>
                         <div>
-                            <h5 class="font-semibold text-foreground mb-2">Application Submission</h5>
+                            <h5 class="font-semibold text-foreground mb-2">{{ policy.title }}</h5>
                             <p class="text-muted-foreground leading-relaxed">
-                                All program-based organizations and interest clubs must submit their
-                                application documents to the Office of Student Affairs and Services
-                                (OSAS) at the beginning of the academic year. This ensures that all
-                                groups are officially recognized and can operate within the school's
-                                framework.
-                            </p>
-                        </div>
-                    </div>
-
-                    <div class="flex items-start gap-4">
-                        <div class="shrink-0">
-                            <div class="w-8 h-8 rounded-full bg-secondary/20 flex items-center justify-center">
-                                <span class="text-sm font-bold text-secondary">2</span>
-                            </div>
-                        </div>
-                        <div>
-                            <h5 class="font-semibold text-foreground mb-2">Fund Collection Approval</h5>
-                            <p class="text-muted-foreground leading-relaxed">
-                                Any fund collections by student organizations must be accompanied by
-                                a resolution for approval. This process ensures transparency and
-                                proper management of funds, allowing for organized and sanctioned
-                                fundraising activities.
-                            </p>
-                        </div>
-                    </div>
-
-                    <div class="flex items-start gap-4">
-                        <div class="shrink-0">
-                            <div class="w-8 h-8 rounded-full bg-destructive/20 flex items-center justify-center">
-                                <span class="text-sm font-bold text-destructive">3</span>
-                            </div>
-                        </div>
-                        <div>
-                            <h5 class="font-semibold text-foreground mb-2">Anti-Hazing Policy</h5>
-                            <p class="text-muted-foreground leading-relaxed">
-                                Hazing is strictly prohibited for both recognized and non-recognized
-                                student organizations. This policy is crucial in maintaining a safe
-                                and respectful environment for all students, protecting their
-                                well-being and fostering a culture of respect and dignity within the
-                                school's community.
+                                {{ policy.description }}
                             </p>
                         </div>
                     </div>
                 </div>
 
-                <div class="mt-8 pt-6 border-t border-border text-muted-foreground text-sm leading-relaxed">
+                <div
+                    class="mt-8 pt-6 border-t border-border text-muted-foreground text-sm leading-relaxed"
+                >
                     These measures collectively support the development of students in a safe,
                     organized, and supportive environment, contributing to their overall growth and
                     self-awareness.
@@ -363,7 +421,9 @@ import { sclOfficers, collegeOfficers } from '@/data/organizations'
                 >
                     <div class="flex items-center gap-4 mb-4">
                         <div class="w-8 h-0.5 bg-tertiary"></div>
-                        <span class="text-tertiary font-semibold text-xs uppercase tracking-[0.3em]">Community Service</span>
+                        <span class="text-tertiary font-semibold text-xs uppercase tracking-[0.3em]"
+                            >Community Service</span
+                        >
                     </div>
                     <h3 class="text-3xl md:text-4xl font-bold mb-6 text-foreground leading-tight">
                         Extension Programs
@@ -404,74 +464,29 @@ import { sclOfficers, collegeOfficers } from '@/data/organizations'
             >
                 <div class="flex items-center gap-4 mb-4">
                     <div class="w-8 h-0.5 bg-primary"></div>
-                    <span class="text-primary font-semibold text-xs uppercase tracking-[0.3em]">Community Impact</span>
+                    <span class="text-primary font-semibold text-xs uppercase tracking-[0.3em]"
+                        >Community Impact</span
+                    >
                 </div>
-                <h3 class="text-3xl md:text-4xl font-bold text-foreground leading-tight mb-2">Our Goals</h3>
+                <h3 class="text-3xl md:text-4xl font-bold text-foreground leading-tight mb-2">
+                    Our Goals
+                </h3>
                 <p class="text-muted-foreground text-base md:text-lg">
                     Through our community development program, we aim to create lasting impact
                 </p>
             </div>
 
             <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-                <div
-                    class="bg-background rounded-xl p-6 border border-border hover:shadow-lg transition-shadow duration-150 cursor-default"
-                    v-motion
-                    :initial="{ opacity: 0, y: 24 }"
-                    :visible-once="{ opacity: 1, y: 0, transition: { delay: 0, duration: 500 } }"
-                >
-                    <div class="w-12 h-12 rounded-lg bg-primary/20 flex items-center justify-center mb-4">
-                        <CheckCircle class="w-6 h-6 text-primary" />
-                    </div>
-                    <h4 class="font-bold text-foreground mb-2">Child Protection</h4>
-                    <p class="text-sm text-muted-foreground">
-                        Protecting children against criminality and deterring crimes
-                    </p>
-                </div>
-
-                <div
-                    class="bg-background rounded-xl p-6 border border-border hover:shadow-lg transition-shadow duration-150 cursor-default"
-                    v-motion
-                    :initial="{ opacity: 0, y: 24 }"
-                    :visible-once="{ opacity: 1, y: 0, transition: { delay: 80, duration: 500 } }"
-                >
-                    <div class="w-12 h-12 rounded-lg bg-secondary/30 flex items-center justify-center mb-4">
-                        <Users class="w-6 h-6 text-secondary" />
-                    </div>
-                    <h4 class="font-bold text-foreground mb-2">Peer Guidance</h4>
-                    <p class="text-sm text-muted-foreground">
-                        Working with peers who share similar interests and aspirations
-                    </p>
-                </div>
-
-                <div
-                    class="bg-background rounded-xl p-6 border border-border hover:shadow-lg transition-shadow duration-150 cursor-default"
-                    v-motion
-                    :initial="{ opacity: 0, y: 24 }"
-                    :visible-once="{ opacity: 1, y: 0, transition: { delay: 160, duration: 500 } }"
-                >
-                    <div class="w-12 h-12 rounded-lg bg-tertiary/30 flex items-center justify-center mb-4">
-                        <Lightbulb class="w-6 h-6 text-tertiary" />
-                    </div>
-                    <h4 class="font-bold text-foreground mb-2">Livelihood Ideas</h4>
-                    <p class="text-sm text-muted-foreground">
-                        Igniting sustainable livelihood and economic development
-                    </p>
-                </div>
-
-                <div
-                    class="bg-background rounded-xl p-6 border border-border hover:shadow-lg transition-shadow duration-150 cursor-default"
-                    v-motion
-                    :initial="{ opacity: 0, y: 24 }"
-                    :visible-once="{ opacity: 1, y: 0, transition: { delay: 240, duration: 500 } }"
-                >
-                    <div class="w-12 h-12 rounded-lg bg-primary/20 flex items-center justify-center mb-4">
-                        <Heart class="w-6 h-6 text-primary" />
-                    </div>
-                    <h4 class="font-bold text-foreground mb-2">Digital Literacy</h4>
-                    <p class="text-sm text-muted-foreground">
-                        Eradicating computer illiteracy and combating digital divide
-                    </p>
-                </div>
+                <GoalCard
+                    v-for="(goal, index) in goalCards"
+                    :key="goal.title"
+                    :title="goal.title"
+                    :description="goal.description"
+                    :icon="goal.icon"
+                    :icon-bg-class="goal.iconBgClass"
+                    :icon-color-class="goal.iconColorClass"
+                    :delay="index * 80"
+                />
             </div>
         </div>
     </section>
