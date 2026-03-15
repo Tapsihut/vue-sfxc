@@ -1,418 +1,59 @@
 <script setup lang="ts">
-import { ref, computed, onMounted } from 'vue'
-import { useRouter } from 'vue-router'
-import { Badge } from '@/components/ui/badge'
-import { Button } from '@/components/ui/button'
 import { Separator } from '@/components/ui/separator'
+import PageHero from '@/components/ui/custom/PageHero.vue'
+import SectionHeader from '@/components/ui/custom/SectionHeader.vue'
+import CollegeTile from '@/components/ui/custom/CollegeTile.vue'
+import ProgramTile from '@/components/ui/custom/ProgramTile.vue'
+import { colleges, otherPrograms } from '@/data/academicPrograms'
+import { usePrograms } from '@/composables/usePrograms'
 
-const router = useRouter()
-
-const bsitPicture = 'https://placehold.co/800x800?text=800x800'
-
-interface Program {
-    id: string
-    name: string
-    code: string
-    department: string
-    description: string
-    duration: string
-    degree: string
-    careers: string[]
-    icon: string
-    heroImage: string
-    color: string
-    routeName?: string
-}
-
-interface College {
-    id: string
-    name: string
-    code: string
-    description: string
-    heroImage: string
-    color: string
-    icon: string
-}
-
-const programs: Program[] = [
-    {
-        id: 'it',
-        name: 'Bachelor of Science in Information Technology',
-        code: 'BSIT',
-        department: 'CBE',
-        description:
-            'Comprehensive program in software development, networking, and IT systems management.',
-        duration: '4 years',
-        degree: 'Bachelor of Science',
-        careers: [
-            'Software Developer',
-            'Network Administrator',
-            'Systems Analyst',
-            'IT Consultant',
-        ],
-        icon: '<path d="M20 16V7a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v9m16 0H4m16 0 1.28 2.55a1 1 0 0 1-.9 1.45H3.62a1 1 0 0 1-.9-1.45L4 16"/>',
-        heroImage: bsitPicture,
-        color: 'bg-[#22C55E]',
-    },
-    {
-        id: 'bsba',
-        routeName: 'bsba',
-        name: 'Bachelor of Science in Business Administration',
-        code: 'BSBA',
-        department: 'CBE',
-        description:
-            'Develops comprehensive business management skills and strategic thinking for modern organizations.',
-        duration: '4 years',
-        degree: 'Bachelor of Science',
-        careers: [
-            'Business Manager',
-            'Operations Manager',
-            'Entrepreneur',
-            'Management Consultant',
-        ],
-        icon: '<path d="M16 20V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/><rect width="20" height="14" x="2" y="6" rx="2"/>',
-        heroImage: 'https://placehold.co/800x800?text=800x800',
-        color: 'bg-[#FBBF24]',
-    },
-    {
-        id: 'accountancy',
-        name: 'Bachelor of Science in Accountancy',
-        code: 'BSA',
-        department: 'CBE',
-        description:
-            'Comprehensive program designed to produce competent certified public accountants.',
-        duration: '4 years',
-        degree: 'Bachelor of Science',
-        careers: ['Certified Public Accountant', 'Auditor', 'Tax Consultant', 'Financial Analyst'],
-        icon: '<rect width="16" height="20" x="4" y="2" rx="2" ry="2"/><path d="M9 22v-4h6v4"/><path d="M8 6h.01"/><path d="M16 6h.01"/><path d="M12 6h.01"/><path d="M12 10h.01"/><path d="M12 14h.01"/><path d="M16 10h.01"/><path d="M16 14h.01"/><path d="M8 10h.01"/><path d="M8 14h.01"/>',
-        heroImage: 'https://placehold.co/800x800?text=800x800',
-        color: 'bg-[#3B82F6]',
-        routeName: 'bsa',
-    },
-    {
-        id: 'ais',
-        name: 'Bachelor of Science in Accounting Information System',
-        code: 'BSAIS',
-        department: 'CBE',
-        description:
-            'Combines accounting principles with information technology for modern business solutions.',
-        duration: '4 years',
-        degree: 'Bachelor of Science',
-        careers: ['Systems Accountant', 'IT Auditor', 'Business Analyst', 'Data Analyst'],
-        icon: '<ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v14a9 3 0 0 0 18 0V5"/><path d="M3 12a9 3 0 0 0 18 0"/>',
-        heroImage: 'https://placehold.co/800x800?text=800x800',
-        color: 'bg-[#3B82F6]',
-        routeName: 'bsais',
-    },
-    {
-        id: 'oa',
-        name: 'Bachelor of Science in Office Administration',
-        code: 'BSOA',
-        department: 'CBE',
-        description:
-            'Trains students in office management, administrative functions, and business operations.',
-        duration: '4 years',
-        degree: 'Bachelor of Science',
-        careers: [
-            'Office Manager',
-            'Administrative Officer',
-            'Executive Assistant',
-            'Operations Coordinator',
-        ],
-        icon: '<path d="M16 20V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/><rect width="20" height="14" x="2" y="6" rx="2"/>',
-        heroImage: 'https://placehold.co/800x800?text=800x800',
-        color: 'bg-[#A855F7]',
-        routeName: 'bsoa',
-    },
-    {
-        id: 'ia',
-        name: 'Bachelor of Science in Internal Auditing',
-        code: 'BSIA',
-        department: 'CBE',
-        description:
-            'Prepares students for a career in internal auditing, risk management, and corporate governance.',
-        duration: '4 years',
-        degree: 'Bachelor of Science',
-        careers: ['Internal Auditor', 'Risk Analyst', 'Compliance Officer', 'Fraud Investigator'],
-        icon: '<circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><path d="m11 8 3 3-3 3"/>',
-        heroImage: 'https://placehold.co/800x800?text=800x800',
-        color: 'bg-[#14B8A6]',
-        routeName: 'bsia',
-    },
-    {
-        id: 'ma',
-        name: 'Bachelor of Science in Management Accounting',
-        code: 'BSMA',
-        department: 'CBE',
-        description:
-            'Focuses on financial planning, performance management, and strategic decision-making.',
-        duration: '4 years',
-        degree: 'Bachelor of Science',
-        careers: [
-            'Management Accountant',
-            'Financial Controller',
-            'Cost Consultant',
-            'Business Analyst',
-        ],
-        icon: '<path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/>',
-        heroImage: 'https://placehold.co/800x800?text=800x800',
-        color: 'bg-[#EC4899]',
-        routeName: 'bsma',
-    },
-    {
-        id: 'entrepreneurship',
-        name: 'Bachelor of Science in Entrepreneurship',
-        code: 'BSE',
-        department: 'CBE',
-        description:
-            'Equips students with the mindset and skills to start, manage, and grow their own business ventures.',
-        duration: '4 years',
-        degree: 'Bachelor of Science',
-        careers: ['Business Owner', 'Startup Founder', 'Business Consultant', 'Innovator'],
-        icon: '<path d="M12 2v20"/><path d="m17 5-5-3-5 3"/><path d="m17 19-5 3-5-3"/><path d="M2 12h20"/><path d="m5 7-3 5 3 5"/><path d="m19 7 3 5-3 5"/>',
-        heroImage: 'https://placehold.co/800x800?text=800x800',
-        color: 'bg-[#F97316]',
-        routeName: 'bse',
-    },
-    {
-        id: 'criminology',
-        name: 'Bachelor of Science in Criminology',
-        code: 'BSCRIM',
-        department: 'CCJE',
-        description:
-            'Prepares students for careers in law enforcement, crime prevention, and criminal justice system.',
-        duration: '4 years',
-        degree: 'Bachelor of Science',
-        careers: [
-            'Police Officer',
-            'Criminal Investigator',
-            'Forensic Specialist',
-            'Security Manager',
-        ],
-        icon: '<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10"/>',
-        heroImage: 'https://placehold.co/800x800?text=800x800',
-        color: 'bg-[#DC2626]',
-        routeName: 'criminology',
-    },
-    {
-        id: 'bsed',
-        name: 'Bachelor of Science in Secondary Education',
-        code: 'BSED',
-        department: 'CTE',
-        description:
-            'Prepares future educators for teaching various subjects in secondary education.',
-        duration: '4 years',
-        degree: 'Bachelor of Secondary Education',
-        careers: [
-            'High School Teacher',
-            'Subject Specialist',
-            'Curriculum Developer',
-            'Education Coordinator',
-        ],
-        icon: '<path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>',
-        heroImage: 'https://placehold.co/800x800?text=800x800',
-        color: 'bg-[#1E40AF]',
-        routeName: 'bsed',
-    },
-    {
-        id: 'beed',
-        name: 'Bachelor of Science in Elementary Education',
-        code: 'BEED',
-        department: 'CTE',
-        description: 'Prepares future educators for teaching in elementary education.',
-        duration: '4 years',
-        degree: 'Bachelor of Elementary Education',
-        careers: [
-            'Elementary Teacher',
-            'Education Coordinator',
-            'Curriculum Developer',
-            'School Administrator',
-        ],
-        icon: '<path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>',
-        heroImage: 'https://placehold.co/800x800?text=800x800',
-        color: 'bg-[#2563EB]',
-        routeName: 'beed',
-    },
-    {
-        id: 'abel',
-        name: 'Bachelor of Arts in English Language',
-        code: 'ABEL',
-        department: 'CTE',
-        description:
-            'Develops comprehensive knowledge and skills in the English language, linguistic structures, and literature.',
-        duration: '4 years',
-        degree: 'Bachelor of Arts',
-        careers: ['English Instructor', 'Writer/Editor', 'Linguist', 'Communication Specialist'],
-        icon: '<path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/>',
-        heroImage: 'https://placehold.co/800x800?text=800x800',
-        color: 'bg-[#2563EB]',
-        routeName: 'abel',
-    },
-]
-
-const colleges: College[] = [
-    {
-        id: 'cbe',
-        name: 'College of Business Education',
-        code: 'CBE',
-        description:
-            'Empowering future business leaders and entrepreneurs with innovative management and technology skills.',
-        heroImage: 'https://placehold.co/800x800?text=800x800',
-        color: 'bg-[#DDA63A]',
-        icon: '<path d="M16 20V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/><rect width="20" height="14" x="2" y="6" rx="2"/>',
-    },
-    {
-        id: 'cte',
-        name: 'College of Teachers Education',
-        code: 'CTE',
-        description:
-            'Shaping passionate educators who inspire and transform lives through quality teaching.',
-        heroImage: 'https://placehold.co/800x800?text=800x800',
-        color: 'bg-[#1E40AF]',
-        icon: '<path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>',
-    },
-    {
-        id: 'ccje',
-        name: 'College of Criminal Justice Education',
-        code: 'CCJE',
-        description:
-            'Training dedicated professionals committed to upholding justice, law, and public safety.',
-        heroImage: 'https://placehold.co/800x800?text=800x800',
-        color: 'bg-[#DC2626]',
-        icon: '<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10"/>',
-    },
-]
-
-const otherProgramsData = [
-    {
-        name: 'Unit Earner Program',
-        description:
-            'This program is designed for professionals who wish to earn education units to qualify for the Licensure Examination for Teachers (LET). It provides the necessary pedagogical knowledge and skills for effective teaching.',
-        link: '/academics/programs/unit-earner',
-    },
-    {
-        name: 'Technical Vocational Programs',
-        description:
-            'Our TechVoc programs offer practical, skills-based training aligned with industry standards. These short-course programs prepare students for immediate employment and TESDA certification.',
-        link: '/academics/programs/tech-voc',
-    },
-    {
-        name: 'Research Development Office',
-        description:
-            "The Research Development Office (RDO) spearheads the institution's research initiatives, fostering a culture of innovation and scholarly inquiry among faculty and students for the advancement of knowledge and community development.",
-        link: '#', // Replace with actual link
-    },
-    {
-        name: 'International Relations Office',
-        description:
-            'The International Relations Office (IRO) establishes global partnerships and programs, providing students and faculty with international exposure, exchange opportunities, and collaborative linkages across borders.',
-        link: '/academics/international-relations',
-    },
-]
-
-const selectedCollege = ref<string | null>(null)
-const programsSection = ref<HTMLElement | null>(null)
-
-const filteredPrograms = computed(() => {
-    if (!selectedCollege.value) return []
-    return programs.filter((p) => p.department === selectedCollege.value)
-})
-
-const selectCollege = (collegeCode: string) => {
-    const wasSame = selectedCollege.value === collegeCode
-    selectedCollege.value = wasSame ? null : collegeCode
-
-    if (!wasSame && window.innerWidth < 768) {
-        setTimeout(() => {
-            programsSection.value?.scrollIntoView({ behavior: 'smooth', block: 'start' })
-        }, 100)
-    }
-}
-
-const navigateToProgram = (program: Program) => {
-    if (program.routeName) {
-        router.push({ name: program.routeName })
-    }
-}
-
-onMounted(() => {
-    const observer = new IntersectionObserver(
-        (entries) => {
-            entries.forEach((entry) => {
-                if (entry.isIntersecting) {
-                    entry.target.querySelectorAll('.reveal-item').forEach((el, i) => {
-                        setTimeout(() => {
-                            const htmlEl = el as HTMLElement
-                            htmlEl.style.opacity = '1'
-                            htmlEl.style.transform = 'none'
-                        }, i * 100)
-                    })
-                    observer.unobserve(entry.target)
-                }
-            })
-        },
-        { threshold: 0.1 },
-    )
-    document.querySelectorAll('.reveal-group').forEach((el) => observer.observe(el))
-})
+const {
+    selectedCollege,
+    programsSection,
+    filteredPrograms,
+    selectedCollegeName,
+    selectCollege,
+    navigateToProgram,
+} = usePrograms()
 </script>
 
 <template>
     <div class="min-h-screen bg-background pb-24">
-        <!-- Hero Section -->
-        <section class="relative h-[75dvh] overflow-hidden">
-            <img
-                src="/src/assets/images/sfxc-building.jpg"
-                alt="Academic Programs"
-                class="absolute inset-0 w-full h-full object-cover"
-            />
-            <div
-                class="absolute inset-0 bg-linear-to-r from-black/80 via-black/50 to-black/10 z-1"
-            ></div>
-            <div
-                class="absolute inset-0 bg-linear-to-t from-black/70 via-transparent to-transparent z-1"
-            ></div>
-            <div
-                class="absolute bottom-0 left-0 right-0 h-1/2 bg-linear-to-t from-primary/25 to-transparent z-1"
-            ></div>
-            <div class="absolute inset-0 z-10 flex flex-col justify-end pointer-events-none">
-                <div
-                    class="max-w-7xl mx-auto w-full px-6 sm:px-8 lg:px-16 pb-12 md:pb-16 reveal-group"
-                >
-                    <div class="hidden md:flex items-center gap-4 mb-6 reveal-item">
-                        <div class="w-10 h-0.5 bg-primary"></div>
-                        <span class="text-white/50 text-xs font-medium uppercase tracking-[0.3em]"
-                            >St. Francis Xavier College</span
-                        >
-                    </div>
-                    <h1
-                        class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-white leading-[1.05] mb-4 reveal-item"
-                        style="font-family: 'Times New Roman', Times, serif"
-                    >
-                        Academic Programs
-                    </h1>
-                    <p
-                        class="text-base md:text-lg text-white/60 max-w-2xl leading-relaxed reveal-item"
-                    >
-                        Forming Xavier Knights committed to service, excellence, and
-                        Christ-centeredness.
-                    </p>
-                </div>
-            </div>
-        </section>
+        <PageHero
+            subtitle="Forming Xavier Knights committed to service, excellence, and Christ-centeredness."
+            subtitleMax="max-w-2xl"
+        >
+            <template #title>Academic Programs</template>
+        </PageHero>
 
         <!-- Content Wrapper -->
         <div class="max-w-7xl mx-auto px-6 sm:px-8 lg:px-16 py-24">
             <!-- Intro -->
-            <div class="mb-24 reveal-group">
-                <div class="flex items-center gap-4 mb-6 reveal-item">
+            <div class="mb-24">
+                <div
+                    class="flex items-center gap-4 mb-6"
+                    v-motion
+                    :initial="{ opacity: 0, x: -24 }"
+                    :visible-once="{
+                        opacity: 1,
+                        x: 0,
+                        transition: { duration: 600, ease: 'easeOut' },
+                    }"
+                >
                     <div class="w-8 h-0.5 bg-primary"></div>
                     <span class="text-primary font-semibold text-xs uppercase tracking-[0.3em]"
                         >Our Mission</span
                     >
                 </div>
                 <div
-                    class="space-y-6 text-lg md:text-xl text-muted-foreground leading-relaxed reveal-item"
+                    class="space-y-6 text-lg md:text-xl text-muted-foreground leading-relaxed"
+                    v-motion
+                    :initial="{ opacity: 0, y: 24 }"
+                    :visible-once="{
+                        opacity: 1,
+                        y: 0,
+                        transition: { delay: 120, duration: 600, ease: 'easeOut' },
+                    }"
                 >
                     <p>
                         At St. Francis Xavier College, we form Xavier Knights, committed to service,
@@ -420,7 +61,7 @@ onMounted(() => {
                         Christ-centeredness.
                     </p>
                     <p>
-                        Here, you don’t just learn — you grow in character, conviction, and purpose.
+                        Here, you don't just learn — you grow in character, conviction, and purpose.
                         Our holistic education shapes not only what you know, but who you become.
                     </p>
                     <div
@@ -441,197 +82,58 @@ onMounted(() => {
 
             <!-- College Selection Section -->
             <div class="mt-16 md:mt-24">
-                <div class="mb-12 reveal-group">
-                    <div class="flex items-center gap-4 mb-4 reveal-item">
-                        <div class="w-8 h-0.5 bg-primary"></div>
-                        <span class="text-primary font-semibold text-xs uppercase tracking-[0.3em]"
-                            >Colleges</span
-                        >
-                    </div>
-                    <h2 class="text-3xl md:text-4xl font-bold text-foreground mb-4 reveal-item">
-                        Start your Xavier Knight Education today
-                    </h2>
-                    <p class="text-lg text-muted-foreground reveal-item">
-                        Select a college to explore our various programs and find the path that fits
-                        your goals.
-                    </p>
+                <div class="mb-12">
+                    <SectionHeader
+                        label="Colleges"
+                        title="Start your Xavier Knight Education today"
+                        description="Select a college to explore our various programs and find the path that fits your goals."
+                    />
                 </div>
 
                 <!-- College Cards -->
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16 reveal-group">
-                    <div
-                        v-for="college in colleges"
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
+                    <CollegeTile
+                        v-for="(college, index) in colleges"
                         :key="college.id"
-                        @click="selectCollege(college.code)"
-                        class="group relative aspect-square overflow-hidden cursor-pointer transition-all duration-300 hover:shadow-2xl reveal-item"
-                        :class="selectedCollege === college.code ? 'ring-4 ring-primary' : ''"
-                    >
-                        <!-- Background Image -->
-                        <img
-                            :src="college.heroImage"
-                            class="absolute inset-0 w-full h-full object-cover grayscale transition-transform duration-700 group-hover:scale-110"
-                        />
-
-                        <!-- Color Overlay -->
-                        <div
-                            class="absolute inset-0 mix-blend-multiply opacity-90 transition-opacity duration-300 group-hover:opacity-100"
-                            :class="college.color"
-                        ></div>
-
-                        <!-- Content -->
-                        <div class="absolute inset-0 p-6 flex flex-col text-white z-10">
-                            <!-- Header -->
-                            <div>
-                                <h3
-                                    class="text-2xl sm:text-3xl font-bold uppercase leading-tight tracking-wide mb-2"
-                                >
-                                    {{ college.code }}
-                                </h3>
-                                <p class="text-sm sm:text-base font-medium opacity-90">
-                                    {{ college.name }}
-                                </p>
-                            </div>
-
-                            <!-- Icon -->
-                            <div class="mt-auto flex justify-center pb-4">
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    viewBox="0 0 24 24"
-                                    fill="none"
-                                    stroke="currentColor"
-                                    stroke-width="1.5"
-                                    stroke-linecap="round"
-                                    stroke-linejoin="round"
-                                    class="w-20 h-20 sm:w-24 sm:h-24 text-white opacity-90 transition-transform duration-300 group-hover:scale-110 group-hover:opacity-100"
-                                    v-html="college.icon"
-                                ></svg>
-                            </div>
-
-                            <!-- Hover Overlay -->
-                            <div
-                                class="absolute inset-0 bg-black/80 p-6 flex flex-col justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 backdrop-blur-sm"
-                            >
-                                <p
-                                    class="text-sm font-bold text-white mb-2 uppercase tracking-wider"
-                                >
-                                    {{ college.code }}
-                                </p>
-                                <p class="text-base text-white leading-relaxed">
-                                    {{ college.description }}
-                                </p>
-                                <Button
-                                    variant="outline"
-                                    class="mt-6 border-white text-white hover:bg-white hover:text-black transition-all"
-                                >
-                                    {{
-                                        selectedCollege === college.code
-                                            ? 'Hide Programs'
-                                            : 'View Programs'
-                                    }}
-                                </Button>
-                            </div>
-                        </div>
-                    </div>
+                        :college="college"
+                        :is-selected="selectedCollege === college.code"
+                        :index="index"
+                        @select="selectCollege"
+                    />
                 </div>
 
-                <!-- Programs Grid (Banner Style) -->
+                <!-- Programs Grid -->
                 <Transition name="slide-down">
                     <div
                         v-if="selectedCollege && filteredPrograms.length > 0"
                         class="mt-8"
                         ref="programsSection"
                     >
-                        <div class="flex items-center gap-4 mb-8">
+                        <div
+                            class="flex items-center gap-4 mb-8"
+                            v-motion
+                            :initial="{ opacity: 0, x: -24 }"
+                            :enter="{
+                                opacity: 1,
+                                x: 0,
+                                transition: { duration: 500, ease: 'easeOut' },
+                            }"
+                        >
                             <div class="w-8 h-0.5 bg-primary"></div>
                             <h2 class="text-2xl md:text-3xl font-bold text-foreground">
-                                {{ colleges.find((c) => c.code === selectedCollege)?.name }}
+                                {{ selectedCollegeName }}
                             </h2>
                         </div>
 
-                        <TransitionGroup
-                            name="list"
-                            tag="div"
-                            class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4"
-                        >
-                            <div
+                        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+                            <ProgramTile
                                 v-for="(program, index) in filteredPrograms"
                                 :key="program.id"
-                                @click="navigateToProgram(program)"
-                                class="group relative aspect-square overflow-hidden cursor-pointer animate-fade-in-up"
-                                :style="{ animationDelay: `${index * 50}ms` }"
-                            >
-                                <!-- Background Image -->
-                                <img
-                                    :src="program.heroImage"
-                                    class="absolute inset-0 w-full h-full object-cover grayscale transition-transform duration-700 group-hover:scale-110"
-                                />
-
-                                <!-- Color Overlay -->
-                                <div
-                                    class="absolute inset-0 mix-blend-multiply opacity-90 transition-opacity duration-300 group-hover:opacity-100"
-                                    :class="program.color"
-                                ></div>
-
-                                <!-- Content -->
-                                <div
-                                    class="absolute inset-0 p-4 sm:p-6 flex flex-col text-white z-10"
-                                >
-                                    <!-- Header: Code -->
-                                    <div class="flex items-start">
-                                        <h3
-                                            class="text-2xl sm:text-3xl font-bold uppercase leading-tight tracking-wide"
-                                        >
-                                            {{ program.code }}
-                                        </h3>
-                                    </div>
-
-                                    <!-- Program Name -->
-                                    <p class="text-sm sm:text-base font-medium opacity-90 mt-2">
-                                        {{ program.name }}
-                                    </p>
-
-                                    <!-- Icon -->
-                                    <div class="mt-auto flex justify-center pb-4">
-                                        <svg
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            viewBox="0 0 24 24"
-                                            fill="none"
-                                            stroke="currentColor"
-                                            stroke-width="1.5"
-                                            stroke-linecap="round"
-                                            stroke-linejoin="round"
-                                            class="w-16 h-16 sm:w-20 sm:h-20 text-white opacity-90 transition-transform duration-300 group-hover:scale-110 group-hover:opacity-100"
-                                            v-html="program.icon"
-                                        ></svg>
-                                    </div>
-
-                                    <!-- Hover Content Overlay -->
-                                    <div
-                                        class="absolute inset-0 bg-black/80 p-6 flex flex-col justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 backdrop-blur-sm"
-                                    >
-                                        <p
-                                            class="text-sm font-bold text-white mb-2 uppercase tracking-wider"
-                                        >
-                                            {{ program.code }}
-                                        </p>
-                                        <p class="text-xs text-white/80 mb-3">{{ program.name }}</p>
-                                        <p class="text-xs text-white/90 leading-relaxed mb-4">
-                                            {{ program.description }}
-                                        </p>
-                                        <div class="flex flex-wrap gap-1">
-                                            <Badge
-                                                v-for="career in program.careers.slice(0, 2)"
-                                                :key="career"
-                                                variant="outline"
-                                                class="text-[10px] border-white/30 text-white bg-white/10"
-                                            >
-                                                {{ career }}
-                                            </Badge>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </TransitionGroup>
+                                :program="program"
+                                :index="index"
+                                @navigate="navigateToProgram"
+                            />
+                        </div>
                     </div>
                 </Transition>
             </div>
@@ -639,23 +141,25 @@ onMounted(() => {
             <Separator class="my-16" />
 
             <!-- Other Programs Section -->
-            <div class="py-8 reveal-group">
-                <div class="flex items-center gap-4 mb-4 reveal-item">
-                    <div class="w-8 h-0.5 bg-primary"></div>
-                    <span class="text-primary font-semibold text-xs uppercase tracking-[0.3em]"
-                        >More Opportunities</span
-                    >
-                </div>
-                <h2 class="text-3xl md:text-4xl font-bold text-foreground mb-4 reveal-item">
-                    Explore Other Programs
-                </h2>
-                <p class="text-lg text-muted-foreground mb-8 max-w-3xl reveal-item">
-                    Discover other educational opportunities and offices dedicated to your success:
-                </p>
+            <div class="py-8">
+                <SectionHeader
+                    label="More Opportunities"
+                    title="Explore Other Programs"
+                    description="Discover other educational opportunities and offices dedicated to your success:"
+                />
 
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 reveal-item">
+                <div
+                    class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-8"
+                    v-motion
+                    :initial="{ opacity: 0, y: 16 }"
+                    :visible-once="{
+                        opacity: 1,
+                        y: 0,
+                        transition: { delay: 300, duration: 600, ease: 'easeOut' },
+                    }"
+                >
                     <router-link
-                        v-for="program in otherProgramsData"
+                        v-for="program in otherPrograms"
                         :key="program.name"
                         :to="program.link"
                         class="group flex flex-col gap-2 rounded-xl border border-border p-5 hover:border-primary/50 hover:bg-muted/30 transition-all duration-200"
@@ -675,14 +179,6 @@ onMounted(() => {
 </template>
 
 <style scoped>
-.reveal-item {
-    opacity: 0;
-    transform: translateY(2rem);
-    transition:
-        opacity 0.6s ease,
-        transform 0.6s ease;
-}
-
 .slide-down-enter-active,
 .slide-down-leave-active {
     transition: all 0.4s ease;
@@ -692,31 +188,5 @@ onMounted(() => {
 .slide-down-leave-to {
     opacity: 0;
     transform: translateY(-1rem);
-}
-
-.list-enter-active,
-.list-leave-active {
-    transition: all 0.3s ease;
-}
-
-.list-enter-from,
-.list-leave-to {
-    opacity: 0;
-    transform: scale(0.95);
-}
-
-@keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(1rem);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-.animate-fade-in-up {
-    animation: fadeInUp 0.4s ease both;
 }
 </style>
