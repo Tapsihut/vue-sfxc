@@ -1,5 +1,6 @@
 <script setup lang="ts">
 defineProps<{
+    title?: string
     subtitle: string
     subtitleMax?: string
 }>()
@@ -31,9 +32,9 @@ defineProps<{
                     :enter="{ opacity: 1, x: 0, transition: { delay: 200, duration: 700 } }"
                 >
                     <div class="w-10 h-0.5 bg-primary"></div>
-                    <span class="text-white/50 text-xs font-medium uppercase tracking-[0.3em]"
-                        >St. Francis Xavier College</span
-                    >
+                    <span class="text-white/50 text-xs font-medium uppercase tracking-[0.3em]">{{
+                        title ?? 'St. Francis Xavier College'
+                    }}</span>
                 </div>
                 <h1
                     class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-white leading-[1.05] mb-4"
