@@ -280,7 +280,7 @@ function onHeroLeave(el: Element, done: () => void) {
             class="relative flex h-[92dvh] min-h-[520px] items-center overflow-hidden bg-[#104717] text-white"
         >
             <img
-                src="@/assets/images/home/Where Faith Meets Excellence.png"
+                src="@/assets/images/Home/Where Faith Meets Excellence.png"
                 alt="St. Francis Xavier College campus"
                 class="absolute inset-0 h-full w-full object-cover"
             />
@@ -574,7 +574,7 @@ function onHeroLeave(el: Element, done: () => void) {
                         <div class="group relative mt-0 h-75 w-full overflow-hidden rounded-2xl shadow-2xl lg:mt-12 lg:h-100">
                             <div class="absolute inset-0 z-10 bg-primary/20 transition-colors duration-500 group-hover:bg-transparent"></div>
                             <img
-                                src="@/assets/images/home/Campus Life.png"
+                                src="@/assets/images/Home/Campus Life.png"
                                 alt="St. Francis Xavier College campus"
                                 class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
                                 loading="lazy"
