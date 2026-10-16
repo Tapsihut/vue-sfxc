@@ -18,14 +18,19 @@ export const navigationItems: NavigationItem[] = [
     {
         name: 'About Us',
         type: 'dropdown',
-        to: { name: 'vision-mission' },
+        to: { name: 'president-message-history' },
         groups: [
             {
                 label: 'Overview',
                 icon: Building2,
                 links: [
                     {
-                        name: 'Mission, Vision, and History',
+                        name: 'President’s Message & History',
+                        to: { name: 'president-message-history' },
+                        description: 'Read our President’s message and discover the history of St. Francis Xavier College',
+                    },
+                    {
+                        name: 'Mission, Vision, and Core Values',
                         to: { name: 'vision-mission' },
                         description: 'Our foundation and values',
                     },
@@ -40,6 +45,11 @@ export const navigationItems: NavigationItem[] = [
                 label: 'Governance & Quality',
                 icon: LayoutDashboard,
                 links: [
+                    {
+                        name: 'Organizational Structure',
+                        to: { name: 'organizational-structure' },
+                        description: 'Explore the college’s organizational structure and leadership',
+                    },
                     {
                         name: 'Office Directory',
                         to: { name: 'office-directory' },

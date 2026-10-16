@@ -1,11 +1,9 @@
+
 export interface StatItem {
+    id: number
     value: string
     label: string
+    icon: string
+    order: number
+    active: boolean
 }
-
-export const homeStats: StatItem[] = [
-    { value: '50+', label: 'Years of Excellence' },
-    { value: '24', label: 'Academic Programs' },
-    { value: '12k', label: 'Successful Alumni' },
-    { value: '98%', label: 'Employment Rate' },
-]

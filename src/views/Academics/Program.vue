@@ -37,9 +37,10 @@ interface College {
 const programs: Program[] = [
     {
         id: 'it',
+        routeName: 'bsit',
         name: 'Bachelor of Science in Information Technology',
         code: 'BSIT',
-        department: 'CBE',
+        department: 'CICT',
         description:
             'Comprehensive program in software development, networking, and IT systems management.',
         duration: '4 years',
@@ -83,7 +84,12 @@ const programs: Program[] = [
             'Comprehensive program designed to produce competent certified public accountants.',
         duration: '4 years',
         degree: 'Bachelor of Science',
-        careers: ['Certified Public Accountant', 'Auditor', 'Tax Consultant', 'Financial Analyst'],
+        careers: [
+            'Certified Public Accountant',
+            'Auditor',
+            'Tax Consultant',
+            'Financial Analyst',
+        ],
         icon: '<rect width="16" height="20" x="4" y="2" rx="2" ry="2"/><path d="M9 22v-4h6v4"/><path d="M8 6h.01"/><path d="M16 6h.01"/><path d="M12 6h.01"/><path d="M12 10h.01"/><path d="M12 14h.01"/><path d="M16 10h.01"/><path d="M16 14h.01"/><path d="M8 10h.01"/><path d="M8 14h.01"/>',
         heroImage: 'https://placehold.co/800x800?text=800x800',
         color: 'bg-[#3B82F6]',
@@ -98,7 +104,12 @@ const programs: Program[] = [
             'Combines accounting principles with information technology for modern business solutions.',
         duration: '4 years',
         degree: 'Bachelor of Science',
-        careers: ['Systems Accountant', 'IT Auditor', 'Business Analyst', 'Data Analyst'],
+        careers: [
+            'Systems Accountant',
+            'IT Auditor',
+            'Business Analyst',
+            'Data Analyst',
+        ],
         icon: '<ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v14a9 3 0 0 0 18 0V5"/><path d="M3 12a9 3 0 0 0 18 0"/>',
         heroImage: 'https://placehold.co/800x800?text=800x800',
         color: 'bg-[#3B82F6]',
@@ -133,7 +144,12 @@ const programs: Program[] = [
             'Prepares students for a career in internal auditing, risk management, and corporate governance.',
         duration: '4 years',
         degree: 'Bachelor of Science',
-        careers: ['Internal Auditor', 'Risk Analyst', 'Compliance Officer', 'Fraud Investigator'],
+        careers: [
+            'Internal Auditor',
+            'Risk Analyst',
+            'Compliance Officer',
+            'Fraud Investigator',
+        ],
         icon: '<circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><path d="m11 8 3 3-3 3"/>',
         heroImage: 'https://placehold.co/800x800?text=800x800',
         color: 'bg-[#14B8A6]',
@@ -168,7 +184,12 @@ const programs: Program[] = [
             'Equips students with the mindset and skills to start, manage, and grow their own business ventures.',
         duration: '4 years',
         degree: 'Bachelor of Science',
-        careers: ['Business Owner', 'Startup Founder', 'Business Consultant', 'Innovator'],
+        careers: [
+            'Business Owner',
+            'Startup Founder',
+            'Business Consultant',
+            'Innovator',
+        ],
         icon: '<path d="M12 2v20"/><path d="m17 5-5-3-5 3"/><path d="m17 19-5 3-5-3"/><path d="M2 12h20"/><path d="m5 7-3 5 3 5"/><path d="m19 7 3 5-3 5"/>',
         heroImage: 'https://placehold.co/800x800?text=800x800',
         color: 'bg-[#F97316]',
@@ -219,7 +240,8 @@ const programs: Program[] = [
         name: 'Bachelor of Science in Elementary Education',
         code: 'BEED',
         department: 'CTE',
-        description: 'Prepares future educators for teaching in elementary education.',
+        description:
+            'Prepares future educators for teaching in elementary education.',
         duration: '4 years',
         degree: 'Bachelor of Elementary Education',
         careers: [
@@ -242,7 +264,12 @@ const programs: Program[] = [
             'Develops comprehensive knowledge and skills in the English language, linguistic structures, and literature.',
         duration: '4 years',
         degree: 'Bachelor of Arts',
-        careers: ['English Instructor', 'Writer/Editor', 'Linguist', 'Communication Specialist'],
+        careers: [
+            'English Instructor',
+            'Writer/Editor',
+            'Linguist',
+            'Communication Specialist',
+        ],
         icon: '<path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/>',
         heroImage: 'https://placehold.co/800x800?text=800x800',
         color: 'bg-[#2563EB]',
@@ -257,9 +284,19 @@ const colleges: College[] = [
         code: 'CBE',
         description:
             'Empowering future business leaders and entrepreneurs with innovative management and technology skills.',
-        heroImage: 'https://placehold.co/800x800?text=800x800',
+        heroImage: '/src/assets/images/colleges/cbe/official.png',
         color: 'bg-[#DDA63A]',
         icon: '<path d="M16 20V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/><rect width="20" height="14" x="2" y="6" rx="2"/>',
+    },
+    {
+        id: 'cict',
+        name: 'College of Information and Communications Technology',
+        code: 'CICT',
+        description:
+            'Developing technology professionals through information technology, software development, networking, and digital innovation.',
+        heroImage: '/src/assets/images/colleges/cict/official.png',
+        color: 'bg-[#22C55E]',
+        icon: '<rect width="18" height="12" x="3" y="3" rx="2"/><path d="M7 21h10"/><path d="M12 15v6"/>',
     },
     {
         id: 'cte',
@@ -267,7 +304,7 @@ const colleges: College[] = [
         code: 'CTE',
         description:
             'Shaping passionate educators who inspire and transform lives through quality teaching.',
-        heroImage: 'https://placehold.co/800x800?text=800x800',
+        heroImage: '/src/assets/images/colleges/cte/CTE-LOGO.png',
         color: 'bg-[#1E40AF]',
         icon: '<path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>',
     },
@@ -277,7 +314,7 @@ const colleges: College[] = [
         code: 'CCJE',
         description:
             'Training dedicated professionals committed to upholding justice, law, and public safety.',
-        heroImage: 'https://placehold.co/800x800?text=800x800',
+        heroImage: '/src/assets/images/colleges/ccje/CCJE-Logo.png',
         color: 'bg-[#DC2626]',
         icon: '<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10"/>',
     },
@@ -300,7 +337,7 @@ const otherProgramsData = [
         name: 'Research Development Office',
         description:
             "The Research Development Office (RDO) spearheads the institution's research initiatives, fostering a culture of innovation and scholarly inquiry among faculty and students for the advancement of knowledge and community development.",
-        link: '#', // Replace with actual link
+        link: '#',
     },
     {
         name: 'International Relations Office',
@@ -324,7 +361,10 @@ const selectCollege = (collegeCode: string) => {
 
     if (!wasSame && window.innerWidth < 768) {
         setTimeout(() => {
-            programsSection.value?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+            programsSection.value?.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start',
+            })
         }, 100)
     }
 }
@@ -353,6 +393,7 @@ onMounted(() => {
         },
         { threshold: 0.1 },
     )
+
     document.querySelectorAll('.reveal-group').forEach((el) => observer.observe(el))
 })
 </script>
@@ -375,25 +416,26 @@ onMounted(() => {
             <div
                 class="absolute bottom-0 left-0 right-0 h-1/2 bg-linear-to-t from-primary/25 to-transparent z-1"
             ></div>
+
             <div class="absolute inset-0 z-10 flex flex-col justify-end pointer-events-none">
                 <div
                     class="max-w-7xl mx-auto w-full px-6 sm:px-8 lg:px-16 pb-12 md:pb-16 reveal-group"
                 >
                     <div class="hidden md:flex items-center gap-4 mb-6 reveal-item">
                         <div class="w-10 h-0.5 bg-primary"></div>
-                        <span class="text-white/50 text-xs font-medium uppercase tracking-[0.3em]"
-                            >St. Francis Xavier College</span
-                        >
+                        <span class="text-white/50 text-xs font-medium uppercase tracking-[0.3em]">
+                            St. Francis Xavier College
+                        </span>
                     </div>
+
                     <h1
                         class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-white leading-[1.05] mb-4 reveal-item"
                         style="font-family: 'Times New Roman', Times, serif"
                     >
                         Academic Programs
                     </h1>
-                    <p
-                        class="text-base md:text-lg text-white/60 max-w-2xl leading-relaxed reveal-item"
-                    >
+
+                    <p class="text-base md:text-lg text-white/60 max-w-2xl leading-relaxed reveal-item">
                         Forming Xavier Knights committed to service, excellence, and
                         Christ-centeredness.
                     </p>
@@ -407,10 +449,11 @@ onMounted(() => {
             <div class="mb-24 reveal-group">
                 <div class="flex items-center gap-4 mb-6 reveal-item">
                     <div class="w-8 h-0.5 bg-primary"></div>
-                    <span class="text-primary font-semibold text-xs uppercase tracking-[0.3em]"
-                        >Our Mission</span
-                    >
+                    <span class="text-primary font-semibold text-xs uppercase tracking-[0.3em]">
+                        Our Mission
+                    </span>
                 </div>
+
                 <div
                     class="space-y-6 text-lg md:text-xl text-muted-foreground leading-relaxed reveal-item"
                 >
@@ -423,6 +466,7 @@ onMounted(() => {
                         Here, you don’t just learn — you grow in character, conviction, and purpose.
                         Our holistic education shapes not only what you know, but who you become.
                     </p>
+
                     <div
                         class="border-l-4 border-tertiary pl-6 md:pl-8 py-4 my-10 bg-muted/30 rounded-r-lg"
                     >
@@ -431,6 +475,7 @@ onMounted(() => {
                             This is where impact begins.
                         </p>
                     </div>
+
                     <p class="font-bold text-foreground text-xl">
                         Choose SFXC. Become a Xavier Knight.
                     </p>
@@ -444,13 +489,15 @@ onMounted(() => {
                 <div class="mb-12 reveal-group">
                     <div class="flex items-center gap-4 mb-4 reveal-item">
                         <div class="w-8 h-0.5 bg-primary"></div>
-                        <span class="text-primary font-semibold text-xs uppercase tracking-[0.3em]"
-                            >Colleges</span
-                        >
+                        <span class="text-primary font-semibold text-xs uppercase tracking-[0.3em]">
+                            Colleges
+                        </span>
                     </div>
+
                     <h2 class="text-3xl md:text-4xl font-bold text-foreground mb-4 reveal-item">
                         Start your Xavier Knight Education today
                     </h2>
+
                     <p class="text-lg text-muted-foreground reveal-item">
                         Select a college to explore our various programs and find the path that fits
                         your goals.
@@ -458,7 +505,9 @@ onMounted(() => {
                 </div>
 
                 <!-- College Cards -->
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16 reveal-group">
+                <div
+                    class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-6 mb-16 reveal-group"
+                >
                     <div
                         v-for="college in colleges"
                         :key="college.id"
@@ -469,6 +518,7 @@ onMounted(() => {
                         <!-- Background Image -->
                         <img
                             :src="college.heroImage"
+                            :alt="college.name"
                             class="absolute inset-0 w-full h-full object-cover grayscale transition-transform duration-700 group-hover:scale-110"
                         />
 
@@ -480,7 +530,6 @@ onMounted(() => {
 
                         <!-- Content -->
                         <div class="absolute inset-0 p-6 flex flex-col text-white z-10">
-                            <!-- Header -->
                             <div>
                                 <h3
                                     class="text-2xl sm:text-3xl font-bold uppercase leading-tight tracking-wide mb-2"
@@ -511,9 +560,7 @@ onMounted(() => {
                             <div
                                 class="absolute inset-0 bg-black/80 p-6 flex flex-col justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 backdrop-blur-sm"
                             >
-                                <p
-                                    class="text-sm font-bold text-white mb-2 uppercase tracking-wider"
-                                >
+                                <p class="text-sm font-bold text-white mb-2 uppercase tracking-wider">
                                     {{ college.code }}
                                 </p>
                                 <p class="text-base text-white leading-relaxed">
@@ -534,7 +581,7 @@ onMounted(() => {
                     </div>
                 </div>
 
-                <!-- Programs Grid (Banner Style) -->
+                <!-- Programs Grid -->
                 <Transition name="slide-down">
                     <div
                         v-if="selectedCollege && filteredPrograms.length > 0"
@@ -563,6 +610,7 @@ onMounted(() => {
                                 <!-- Background Image -->
                                 <img
                                     :src="program.heroImage"
+                                    :alt="program.name"
                                     class="absolute inset-0 w-full h-full object-cover grayscale transition-transform duration-700 group-hover:scale-110"
                                 />
 
@@ -573,10 +621,7 @@ onMounted(() => {
                                 ></div>
 
                                 <!-- Content -->
-                                <div
-                                    class="absolute inset-0 p-4 sm:p-6 flex flex-col text-white z-10"
-                                >
-                                    <!-- Header: Code -->
+                                <div class="absolute inset-0 p-4 sm:p-6 flex flex-col text-white z-10">
                                     <div class="flex items-start">
                                         <h3
                                             class="text-2xl sm:text-3xl font-bold uppercase leading-tight tracking-wide"
@@ -585,7 +630,6 @@ onMounted(() => {
                                         </h3>
                                     </div>
 
-                                    <!-- Program Name -->
                                     <p class="text-sm sm:text-base font-medium opacity-90 mt-2">
                                         {{ program.name }}
                                     </p>
@@ -609,15 +653,16 @@ onMounted(() => {
                                     <div
                                         class="absolute inset-0 bg-black/80 p-6 flex flex-col justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 backdrop-blur-sm"
                                     >
-                                        <p
-                                            class="text-sm font-bold text-white mb-2 uppercase tracking-wider"
-                                        >
+                                        <p class="text-sm font-bold text-white mb-2 uppercase tracking-wider">
                                             {{ program.code }}
                                         </p>
-                                        <p class="text-xs text-white/80 mb-3">{{ program.name }}</p>
+                                        <p class="text-xs text-white/80 mb-3">
+                                            {{ program.name }}
+                                        </p>
                                         <p class="text-xs text-white/90 leading-relaxed mb-4">
                                             {{ program.description }}
                                         </p>
+
                                         <div class="flex flex-wrap gap-1">
                                             <Badge
                                                 v-for="career in program.careers.slice(0, 2)"
@@ -642,13 +687,15 @@ onMounted(() => {
             <div class="py-8 reveal-group">
                 <div class="flex items-center gap-4 mb-4 reveal-item">
                     <div class="w-8 h-0.5 bg-primary"></div>
-                    <span class="text-primary font-semibold text-xs uppercase tracking-[0.3em]"
-                        >More Opportunities</span
-                    >
+                    <span class="text-primary font-semibold text-xs uppercase tracking-[0.3em]">
+                        More Opportunities
+                    </span>
                 </div>
+
                 <h2 class="text-3xl md:text-4xl font-bold text-foreground mb-4 reveal-item">
                     Explore Other Programs
                 </h2>
+
                 <p class="text-lg text-muted-foreground mb-8 max-w-3xl reveal-item">
                     Discover other educational opportunities and offices dedicated to your success:
                 </p>
@@ -660,13 +707,12 @@ onMounted(() => {
                         :to="program.link"
                         class="group flex flex-col gap-2 rounded-xl border border-border p-5 hover:border-primary/50 hover:bg-muted/30 transition-all duration-200"
                     >
-                        <span
-                            class="font-semibold text-foreground group-hover:text-primary transition-colors"
-                            >{{ program.name }}</span
-                        >
-                        <span class="text-sm text-muted-foreground leading-relaxed">{{
-                            program.description
-                        }}</span>
+                        <span class="font-semibold text-foreground group-hover:text-primary transition-colors">
+                            {{ program.name }}
+                        </span>
+                        <span class="text-sm text-muted-foreground leading-relaxed">
+                            {{ program.description }}
+                        </span>
                     </router-link>
                 </div>
             </div>

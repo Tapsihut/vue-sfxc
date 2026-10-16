@@ -64,6 +64,15 @@ export const academicsRoutes: RouteRecordRaw[] = [
         meta: { layout: 'guest' },
     },
 
+        // CICT Programs
+    {
+        path: '/academics/programs/cict/bsit',
+        name: 'bsit',
+        component: () => import('@/views/Academics/Programs/CICT/BSIT.vue'),
+        meta: { layout: 'guest' },
+    },
+
+
     // CCJE Programs
     {
         path: '/academics/programs/ccje/criminology',
