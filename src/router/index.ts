@@ -23,7 +23,7 @@ const router = createRouter({
 
     // President's Message and History page
     {
-      path: '/president-message-history',
+      path: '/about/president-message-history',
       name: 'president-message-history',
       component: () => import('@/views/Abouts/PresidentMessageHistoryView.vue'),
       meta: {
@@ -33,7 +33,7 @@ const router = createRouter({
 
     // Organizational Structure page
     {
-      path: '/organizational-structure',
+      path: '/about/organizational-structure',
       name: 'organizational-structure',
       component: () => import('@/views/Abouts/OrganizationalStructureView.vue'),
       meta: {

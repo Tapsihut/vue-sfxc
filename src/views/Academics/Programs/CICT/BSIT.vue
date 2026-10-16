@@ -493,22 +493,16 @@ onUnmounted(() => {
                 <aside class="lg:col-span-1 space-y-6 lg:sticky lg:top-24 h-max reveal-group">
                     <Card class="overflow-hidden shadow-lg bg-card border-border reveal-item">
                         <div class="relative p-6 pb-0">
-                            <div
-                                class="aspect-square w-full overflow-hidden rounded-md mb-4 bg-muted flex items-center justify-center"
-                            >
-                                <img
-                                    src="/src/assets/images/colleges/cict/official.png"
-                                    alt="College of Information and Communications Technology logo"
-                                    class="w-full h-full object-contain p-5"
-                                    @error="($event.target as HTMLImageElement).style.display = 'none'"
-                                />
-                                <div class="text-center p-4">
-                                    <span class="text-4xl font-bold text-primary">CICT</span>
-                                    <p class="text-xs text-muted-foreground mt-2">
-                                        College of Information and Communications Technology
-                                    </p>
-                                </div>
-                            </div>
+                        <div
+                            class="aspect-square w-full overflow-hidden rounded-md mb-4 bg-muted flex items-center justify-center"
+                        >
+                            <img
+                                src="/src/assets/images/colleges/cict/official.png"
+                                alt="College of Information and Communications Technology logo"
+                                class="w-full h-full object-contain p-5"
+                                @error="($event.target as HTMLImageElement).style.display = 'none'"
+                            />
+                        </div>
 
                             <CardTitle class="text-xl font-bold uppercase tracking-wide text-primary">
                                 BSIT Program
