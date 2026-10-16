@@ -584,7 +584,7 @@ function onHeroLeave(el: Element, done: () => void) {
                         <div class="group relative h-62.5 w-full overflow-hidden rounded-2xl shadow-xl lg:absolute lg:right-0 lg:top-[20%] lg:z-20 lg:h-87.5 lg:w-[60%]">
                             <div class="absolute inset-0 z-10 bg-secondary/20 transition-colors duration-500 group-hover:bg-transparent"></div>
                             <img
-                                src="@/assets/images/home/Excellence in Education.png"
+                                src="@/assets/images/Home/Excellence in Education.png"
                                 alt="SFXC campus activity"
                                 class="h-full w-full origin-bottom transform object-cover transition-transform duration-1000 group-hover:scale-110"
                                 loading="lazy"
