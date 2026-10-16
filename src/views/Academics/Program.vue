@@ -4,6 +4,11 @@ import { useRouter } from 'vue-router'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Separator } from '@/components/ui/separator'
+import cbeLogo from '@/assets/images/colleges/cbe/official.png'
+import cictLogo from '@/assets/images/colleges/cict/official.png'
+import cteLogo from '@/assets/images/colleges/cte/CTE-LOGO.png'
+import ccjeLogo from '@/assets/images/colleges/ccje/CCJE-Logo.png'
+import sfxcBuilding from '@/assets/images/sfxc-building.jpg'
 
 const router = useRouter()
 
@@ -277,6 +282,7 @@ const programs: Program[] = [
     },
 ]
 
+
 const colleges: College[] = [
     {
         id: 'cbe',
@@ -284,7 +290,7 @@ const colleges: College[] = [
         code: 'CBE',
         description:
             'Empowering future business leaders and entrepreneurs with innovative management and technology skills.',
-        heroImage: '/src/assets/images/colleges/cbe/official.png',
+        heroImage: cbeLogo,
         color: 'bg-[#DDA63A]',
         icon: '<path d="M16 20V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/><rect width="20" height="14" x="2" y="6" rx="2"/>',
     },
@@ -294,7 +300,7 @@ const colleges: College[] = [
         code: 'CICT',
         description:
             'Developing technology professionals through information technology, software development, networking, and digital innovation.',
-        heroImage: '/src/assets/images/colleges/cict/official.png',
+        heroImage: cictLogo,
         color: 'bg-[#22C55E]',
         icon: '<rect width="18" height="12" x="3" y="3" rx="2"/><path d="M7 21h10"/><path d="M12 15v6"/>',
     },
@@ -304,7 +310,7 @@ const colleges: College[] = [
         code: 'CTE',
         description:
             'Shaping passionate educators who inspire and transform lives through quality teaching.',
-        heroImage: '/src/assets/images/colleges/cte/CTE-LOGO.png',
+        heroImage: cteLogo,
         color: 'bg-[#1E40AF]',
         icon: '<path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>',
     },
@@ -314,7 +320,7 @@ const colleges: College[] = [
         code: 'CCJE',
         description:
             'Training dedicated professionals committed to upholding justice, law, and public safety.',
-        heroImage: '/src/assets/images/colleges/ccje/CCJE-Logo.png',
+        heroImage: ccjeLogo,
         color: 'bg-[#DC2626]',
         icon: '<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10"/>',
     },
@@ -403,8 +409,8 @@ onMounted(() => {
         <!-- Hero Section -->
         <section class="relative h-[75dvh] overflow-hidden">
             <img
-                src="/src/assets/images/sfxc-building.jpg"
-                alt="Academic Programs"
+                :src="sfxcBuilding"
+                alt="St. Francis Xavier College Building"
                 class="absolute inset-0 w-full h-full object-cover"
             />
             <div
