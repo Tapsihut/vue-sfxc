@@ -301,12 +301,11 @@ interface PaginationData {
 }
 
 const newsApi = axios.create({
-  baseURL: '/api',
+  baseURL: 'https://api.sfxc.edu.ph/api',
   headers: {
     Accept: 'application/json',
   },
 })
-
 const posts = ref<NewsPost[]>([])
 const loading = ref(false)
 const error = ref('')
@@ -415,11 +414,16 @@ function getExcerpt(post: NewsPost): string {
 }
 
 function getImage(post: NewsPost): string {
+  const imageUrl = post['image_url']
+
+  if (typeof imageUrl === 'string' && imageUrl.trim()) {
+    return imageUrl
+  }
+
   const possibleImage =
     post.featured_image ||
     post.image ||
     post.image_path ||
-    post['image_url'] ||
     post['thumbnail']
 
   if (typeof possibleImage !== 'string' || !possibleImage.trim()) {
@@ -434,11 +438,7 @@ function getImage(post: NewsPost): string {
 
   const normalized = value.replace(/^\/+/, '')
 
-  if (normalized.startsWith('storage/')) {
-    return `http://127.0.0.1:8000/${normalized}`
-  }
-
-  return `http://127.0.0.1:8000/storage/${normalized}`
+  return `https://api.sfxc.edu.ph/${normalized.startsWith('storage/') ? normalized : `storage/${normalized}`}`
 }
 
 function handleImageError(event: Event): void {
