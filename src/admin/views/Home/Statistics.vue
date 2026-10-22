@@ -751,7 +751,13 @@ async function moveUp(statistic: Statistic) {
   const index = sorted.findIndex((item) => item.id === statistic.id)
   if (index <= 0) return
 
-  ;[sorted[index - 1], sorted[index]] = [sorted[index], sorted[index - 1]]
+const current = sorted[index]
+const previous = sorted[index - 1]
+
+if (current && previous) {
+  sorted[index - 1] = current
+  sorted[index] = previous
+}
   statistics.value = sorted.map((item, position) => ({ ...item, order: position + 1 }))
 
   await persistOrder()
@@ -764,7 +770,13 @@ async function moveDown(statistic: Statistic) {
   const index = sorted.findIndex((item) => item.id === statistic.id)
   if (index < 0 || index >= sorted.length - 1) return
 
-  ;[sorted[index], sorted[index + 1]] = [sorted[index + 1], sorted[index]]
+const current = sorted[index]
+const next = sorted[index + 1]
+
+if (current && next) {
+  sorted[index] = next
+  sorted[index + 1] = current
+}
   statistics.value = sorted.map((item, position) => ({ ...item, order: position + 1 }))
 
   await persistOrder()

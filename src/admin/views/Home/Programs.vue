@@ -201,7 +201,7 @@ function resetForm(): void {
   clearImagePreview()
 
   form.value = {
-    college_id: colleges.value.length ? String(colleges.value[0].id) : '',
+    college_id: colleges.value[0] ? String(colleges.value[0].id) : '',
     name: '',
     code: '',
     description: '',

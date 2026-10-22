@@ -117,14 +117,14 @@ function toggleSetting(
   object:
     | typeof settings.value.homepage
     | typeof settings.value.admin,
-  key:
-    | keyof typeof settings.value.homepage
-    | keyof typeof settings.value.admin,
+  key: string,
 ) {
-  const value = object[key]
+  if (key in object) {
+    const value = object[key as keyof typeof object]
 
-  if (typeof value === 'boolean') {
-    object[key] = !value as never
+    if (typeof value === 'boolean') {
+      ;(object as Record<string, unknown>)[key] = !value
+    }
   }
 }
 </script>

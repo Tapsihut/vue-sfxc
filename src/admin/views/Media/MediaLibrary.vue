@@ -282,7 +282,9 @@ function getFileIcon(file: MediaFile): string {
 
 function getFileExtension(name: string): string {
   const parts = name.split('.')
-  return parts.length < 2 ? 'FILE' : parts[parts.length - 1].toUpperCase()
+  return parts.length < 2
+  ? 'FILE'
+  : (parts[parts.length - 1]?.toUpperCase() ?? 'FILE')
 }
 
 function handleOverlayClick(event: MouseEvent) {

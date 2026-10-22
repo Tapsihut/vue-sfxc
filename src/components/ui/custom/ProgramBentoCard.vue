@@ -58,7 +58,7 @@ const bentoClass = computed(() =>
                 >
                     <div class="overflow-hidden">
                         <p class="text-sm text-white/80">
-                            {{ program.description || 'Explore comprehensive curriculum focused on practical skills and theoretical excellence.' }}
+                            {{'Explore comprehensive curriculum focused on practical skills and theoretical excellence.' }}
                         </p>
                     </div>
                 </div>

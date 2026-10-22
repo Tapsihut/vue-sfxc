@@ -131,18 +131,22 @@ function categoryName(category: ApiPost['category']): string {
   return category?.name || 'Uncategorized'
 }
 
+
 function categoryId(post: ApiPost): number | null {
   if (post.category_id != null) return Number(post.category_id)
 
-  if (post.category && typeof post.category === 'object') {
+  const category = post.category
+
+  if (category && typeof category === 'object') {
     const match = categories.value.find(
-      (item) => item.name === post.category?.name,
+      (item) => item.name === category.name,
     )
     return match?.id ?? null
   }
 
   return null
 }
+
 
 function normalizePost(post: ApiPost): Post {
   const rawSections = Array.isArray(post.sections)

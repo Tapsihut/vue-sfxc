@@ -20,7 +20,7 @@ const hasSearchQuery = computed(() => searchQuery.value.trim().length > 0)
 
 const clearSearch = () => {
     searchQuery.value = ''
-    activeDept.value = departments.value[0] ?? 'All Offices'
+    activeDept.value = departments[0] ?? 'All Offices'
 }
 
 const phoneNumbers = (phone: string) =>
@@ -541,7 +541,7 @@ const formatDepartment = (department: string) =>
                                             >
                                                 <a
                                                     v-if="office.phone"
-                                                    :href="phoneHref(phoneNumbers(office.phone)[0])"
+                                                    :href="phoneNumbers(office.phone)[0] ? phoneHref(phoneNumbers(office.phone)[0]!) : undefined"
                                                     class="inline-flex items-center gap-2 text-sm font-semibold text-primary hover:underline"
                                                 >
                                                     <svg

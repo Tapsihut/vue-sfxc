@@ -403,8 +403,12 @@ async function moveSlide(slide: HeroSlide, direction: -1 | 1) {
 
   if (index < 0 || targetIndex < 0 || targetIndex >= ordered.length) return
 
-  const [moved] = ordered.splice(index, 1)
+
+const [moved] = ordered.splice(index, 1)
+
+if (moved !== undefined) {
   ordered.splice(targetIndex, 0, moved)
+}
 
   // Display the intended order immediately; the server remains authoritative.
   ordered.forEach((item, itemIndex) => {

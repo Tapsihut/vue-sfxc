@@ -54,10 +54,12 @@ function getImageUrl(path: string | null | undefined): string | null {
     return `${API_ORIGIN}/${storagePath}`
 }
 
-function getPlaceholder(index: number) {
-    return placeholderPrograms[index % placeholderPrograms.length]
+function getPlaceholder(index: number): LocalProgram {
+    return (
+        placeholderPrograms[index % placeholderPrograms.length] ??
+        placeholderPrograms[0]!
+    )
 }
-
 async function fetchPrograms() {
     loading.value = true
     errorMessage.value = ''
@@ -91,7 +93,7 @@ async function fetchPrograms() {
                     description:
                         program.description ||
                         'Explore comprehensive curriculum focused on practical skills and theoretical excellence.',
-                    image: uploadedImage || placeholder.image,
+                    image: uploadedImage || placeholder.image || '',
                     alt: program.name,
                     college: program.college,
                 } as DisplayProgram
