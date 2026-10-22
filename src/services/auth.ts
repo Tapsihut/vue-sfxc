@@ -1,5 +1,5 @@
-import api from "@/services/api";
-import axios from "axios";
+
+import api from "./api";
 
 export interface AdminUser {
     id: number;
@@ -8,50 +8,79 @@ export interface AdminUser {
     is_admin: boolean;
 }
 
-const authService = {
-    async login(email: string, password: string) {
-        try {
-            console.log("[LOGIN DEBUG] Requesting CSRF cookie...");
+interface LoginResponse {
+    message: string;
+    token: string;
+    token_type: string;
+    user: AdminUser;
+}
 
-            await api.get("/sanctum/csrf-cookie");
+interface UserResponse {
+    user: AdminUser;
+}
 
-            console.log("[LOGIN DEBUG] Sending login request...");
+export async function login(
+    email: string,
+    password: string,
+): Promise<AdminUser> {
+    // Clear any previous token before attempting login.
+    sessionStorage.removeItem("sfxc_admin_token");
 
-            const response = await api.post("/api/login", {
-                email,
-                password,
-            });
+    const response = await api.post<LoginResponse>("/api/login", {
+        email,
+        password,
+    });
 
-            console.log("[LOGIN DEBUG] Login successful:", response.data);
+    const { token, user } = response.data;
 
-            return response.data;
-        } catch (error: unknown) {
-            if (axios.isAxiosError(error)) {
-                console.error("[LOGIN DEBUG] Axios error:", {
-                    message: error.message,
-                    code: error.code,
-                    url: error.config?.url,
-                    baseURL: error.config?.baseURL,
-                    method: error.config?.method,
-                    status: error.response?.status,
-                    response: error.response?.data,
-                });
-            } else {
-                console.error("[LOGIN DEBUG] Non-Axios error:", error);
-            }
+    if (!token || !user?.is_admin) {
+        throw new Error("Valid admin authentication was not returned.");
+    }
 
-            throw error;
+    // Save the Bearer token for subsequent API requests.
+    sessionStorage.setItem("sfxc_admin_token", token);
+
+    return user;
+}
+
+export async function getCurrentUser(): Promise<AdminUser> {
+    if (!sessionStorage.getItem("sfxc_admin_token")) {
+        throw new Error("You are not logged in.");
+    }
+
+    const response = await api.get<UserResponse>("/api/user");
+    const user = response.data.user;
+
+    if (!user?.is_admin) {
+        sessionStorage.removeItem("sfxc_admin_token");
+        throw new Error("Admin access is required.");
+    }
+
+    return user;
+}
+
+export async function logout(): Promise<void> {
+    try {
+        if (sessionStorage.getItem("sfxc_admin_token")) {
+            await api.post("/api/logout");
         }
-    },
+    } finally {
+        // Always clear the local token, even if the API request fails.
+        sessionStorage.removeItem("sfxc_admin_token");
+    }
+}
 
-    async getCurrentUser(): Promise<AdminUser> {
-        const response = await api.get("/api/user");
-        return response.data.user;
-    },
+export function isAuthenticated(): boolean {
+    return Boolean(sessionStorage.getItem("sfxc_admin_token"));
+}
 
-    async logout(): Promise<void> {
-        await api.post("/api/logout");
-    },
+// Default export for components using:
+// import authService from "@/services/auth"
+const authService = {
+    login,
+    getCurrentUser,
+    logout,
+    isAuthenticated,
 };
 
 export default authService;

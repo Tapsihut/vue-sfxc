@@ -3,21 +3,26 @@
 import { ref, onMounted, onUnmounted } from 'vue'
 import { useRouter } from 'vue-router'
 import axios from 'axios'
+
 import SFXCLogoOnly from '@/assets/images/sfxc-logo-only.png'
 import SFXCTextOnly from '@/assets/images/sfxc-text-only.png'
 import loginImage1 from '@/assets/images/login/login-image-01.jpg'
 import loginImage2 from '@/assets/images/login/login-image-02.jpg'
 import loginImage3 from '@/assets/images/login/login-image-03.jpg'
+
 import authService from '@/services/auth'
 
 const router = useRouter()
+
 const email = ref('')
 const password = ref('')
 const showPassword = ref(false)
 const isLoading = ref(false)
 const errorMessage = ref('')
+
 const images = [loginImage1, loginImage2, loginImage3]
 const currentImage = ref(0)
+
 let slideInterval: ReturnType<typeof setInterval> | null = null
 
 onMounted(() => {
@@ -27,11 +32,14 @@ onMounted(() => {
 })
 
 onUnmounted(() => {
-  if (slideInterval) clearInterval(slideInterval)
+  if (slideInterval !== null) {
+    clearInterval(slideInterval)
+  }
 })
 
 const handleLogin = async (): Promise<void> => {
   errorMessage.value = ''
+
   const normalizedEmail = email.value.trim()
 
   if (!normalizedEmail || !password.value) {
@@ -42,10 +50,16 @@ const handleLogin = async (): Promise<void> => {
   isLoading.value = true
 
   try {
-    const response = await authService.login(normalizedEmail, password.value)
+    // authService.login() sends credentials to /api/login.
+    // The service saves the returned Sanctum Bearer token.
+    const user = await authService.login(
+      normalizedEmail,
+      password.value,
+    )
 
-    if (!response.user?.is_admin) {
-      errorMessage.value = 'Your account is not authorized to access the admin dashboard.'
+    if (!user?.is_admin) {
+      errorMessage.value =
+        'Your account is not authorized to access the admin dashboard.'
       return
     }
 
@@ -55,21 +69,37 @@ const handleLogin = async (): Promise<void> => {
       const status = error.response?.status
       const data = error.response?.data
 
-      if (status === 419 || data?.message === 'CSRF token mismatch.') {
-        errorMessage.value = 'Your security session is invalid. Please refresh the page and try again.'
-      } else if (status === 401) {
-        errorMessage.value = data?.message ?? 'Invalid email or password.'
+      if (status === 401) {
+        errorMessage.value =
+          data?.message ?? 'Your login token is invalid or expired.'
       } else if (status === 403) {
-        errorMessage.value = data?.message ?? 'You are not authorized to access the admin dashboard.'
+        errorMessage.value =
+          data?.message ??
+          'Your account is not authorized to access the admin dashboard.'
       } else if (status === 422) {
-        errorMessage.value = data?.errors?.email?.[0] ?? data?.errors?.password?.[0] ?? data?.message ?? 'Please check your email and password.'
+        errorMessage.value =
+          data?.errors?.email?.[0] ??
+          data?.errors?.password?.[0] ??
+          data?.message ??
+          'Please check your email and password.'
+      } else if (status === 429) {
+        errorMessage.value =
+          'Too many login attempts. Please wait a minute and try again.'
+      } else if (status === 419) {
+        errorMessage.value =
+          'The server is still using the old CSRF login flow. Confirm the new API login route is active.'
       } else if (!error.response) {
-        errorMessage.value = 'Cannot connect to the server. Please check that Laravel is running and your connection settings are correct.'
+        errorMessage.value =
+          'Cannot connect to the server. Check that Laravel is running and the API URL is correct.'
       } else {
-        errorMessage.value = data?.message ?? 'Unable to sign in. Please try again.'
+        errorMessage.value =
+          data?.message ?? 'Unable to sign in. Please try again.'
       }
     } else {
-      errorMessage.value = 'An unexpected error occurred. Please try again.'
+      errorMessage.value =
+        error instanceof Error
+          ? error.message
+          : 'An unexpected error occurred. Please try again.'
     }
   } finally {
     isLoading.value = false
@@ -77,7 +107,7 @@ const handleLogin = async (): Promise<void> => {
 }
 
 const goToForgotPassword = (): void => {
-  router.push('/forgot-password')
+  void router.push('/forgot-password')
 }
 </script>
 
