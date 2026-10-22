@@ -6,11 +6,13 @@ import axios from 'axios'
 import sfxcLogo from '@/assets/images/sfxc-logo-only.png'
 
 const route = useRoute()
-
 const newsApi = axios.create({
-  baseURL: '/api',
-  headers: { Accept: 'application/json' },
+  baseURL: 'https://api.sfxc.edu.ph/api',
+  headers: {
+    Accept: 'application/json',
+  },
 })
+
 
 const loading = ref(true)
 const error = ref('')
@@ -68,24 +70,36 @@ const formatDate = (date: string | null | undefined) => {
   })
 }
 
-const getImage = (image: any) => {
+
+const getImage = (image: any): string => {
   if (!image) return ''
 
-  const path = typeof image === 'string'
-    ? image
-    : image.path ?? image.image_path ?? image.url ?? ''
+  const path =
+    typeof image === 'string'
+      ? image
+      : image.image_url ??
+        image.path ??
+        image.image_path ??
+        image.url ??
+        ''
 
-  if (!path) return ''
-  if (/^https?:\/\//i.test(path) || path.startsWith('data:')) return path
+  if (typeof path !== 'string' || !path.trim()) return ''
 
-  const cleanPath = path.replace(/^\/+/, '')
+  const value = path.trim()
 
-  if (cleanPath.startsWith('storage/')) {
-    return `http://127.0.0.1:8000/${cleanPath}`
+  if (/^https?:\/\//i.test(value) || value.startsWith('data:')) {
+    return value
   }
 
-  return `http://127.0.0.1:8000/storage/${cleanPath}`
+  const cleanPath = value.replace(/^\/+/, '')
+
+  if (cleanPath.startsWith('storage/')) {
+    return `https://api.sfxc.edu.ph/${cleanPath}`
+  }
+
+  return `https://api.sfxc.edu.ph/storage/${cleanPath}`
 }
+
 
 const getPostImages = (article: any): any[] => {
   if (!article) return []
