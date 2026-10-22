@@ -2,7 +2,7 @@
 import axios from "axios";
 
 const api = axios.create({
-    baseURL: "",
+    baseURL: "https://api.sfxc.edu.ph",
     withCredentials: true,
     withXSRFToken: true,
     xsrfCookieName: "XSRF-TOKEN",
