@@ -215,7 +215,7 @@ function onHeroLeave(el: Element, done: () => void) {
         <!-- Hero loading state -->
         <div
             v-if="loading"
-            class="relative h-[92dvh] min-h-[520px] overflow-hidden bg-[#104717]"
+            class="relative h-[clamp(420px,36.4583vw,700px)] overflow-hidden bg-[#104717]"
         >
             <img
                 src="@/assets/images/sfxc-building.jpg"
@@ -241,7 +241,7 @@ function onHeroLeave(el: Element, done: () => void) {
         <!-- Admin-managed hero carousel -->
         <Carousel
             v-else-if="slides.length > 0"
-            class="relative h-[92dvh] min-h-[520px] w-full overflow-hidden"
+            class="relative h-[clamp(420px,36.4583vw,700px)] w-full overflow-hidden"
             :plugins="slides.length > 1 ? [autoplay] : []"
             @init-api="setApi"
             @mouseenter="autoplay.stop"
@@ -251,24 +251,16 @@ function onHeroLeave(el: Element, done: () => void) {
                 <CarouselItem
                     v-for="slide in slides"
                     :key="slide.id"
-                    class="h-[92dvh] min-h-[520px] pl-0"
+                    class="h-[clamp(420px,36.4583vw,700px)] pl-0"
                 >
                     <div class="relative h-full w-full">
+                        <!-- Keep uploaded hero images at their original brightness; no dark overlay. -->
                         <img
                             :src="slide.image"
                             :alt="slide.title || 'St. Francis Xavier College'"
                             class="absolute inset-0 h-full w-full object-cover"
                         />
 
-                        <div
-                            class="absolute inset-0 z-[1] bg-gradient-to-r from-black/80 via-black/50 to-black/10"
-                        ></div>
-                        <div
-                            class="absolute inset-0 z-[1] bg-gradient-to-t from-black/70 via-transparent to-transparent"
-                        ></div>
-                        <div
-                            class="absolute inset-x-0 bottom-0 z-[1] h-1/2 bg-gradient-to-t from-[#104717]/25 to-transparent"
-                        ></div>
                     </div>
                 </CarouselItem>
             </CarouselContent>
@@ -277,7 +269,7 @@ function onHeroLeave(el: Element, done: () => void) {
         <!-- Welcome fallback -->
         <div
             v-else-if="showFallback"
-            class="relative flex h-[92dvh] min-h-[520px] items-center overflow-hidden bg-[#104717] text-white"
+            class="relative flex h-[clamp(420px,36.4583vw,700px)] items-center overflow-hidden bg-[#104717] text-white"
         >
             <img
                 src="@/assets/images/Home/Where Faith Meets Excellence.png"
