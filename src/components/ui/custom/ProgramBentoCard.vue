@@ -1,15 +1,59 @@
 <script setup lang="ts">
 import { computed } from 'vue'
+import { useRouter } from 'vue-router'
 import type { Program } from '@/data/programs'
 
+interface CardProgram extends Program {
+    code?: string
+    description?: string | null
+}
+
 const props = defineProps<{
-    program: Program
+    program: CardProgram
     index: number
 }>()
+
+const router = useRouter()
 
 const bentoClass = computed(() =>
     props.index === 0 ? 'md:col-span-2 md:row-span-2' : '',
 )
+
+const routeMap: Record<string, string> = {
+    BSOA: 'bsoa',
+    BSBA: 'bsba',
+    BSA: 'bsa',
+    BSAIS: 'bsais',
+    BSIA: 'bsia',
+    BSMA: 'bsma',
+    BSE: 'bse',
+    BSIT: 'bsit',
+    CRIMINOLOGY: 'criminology',
+    CRIM: 'criminology',
+    BSED: 'bsed',
+    BEED: 'beed',
+    ABEL: 'abel',
+    'UNIT-EARNER': 'unit-earner',
+    'UNIT EARNER': 'unit-earner',
+    'TECH-VOC': 'tech-voc',
+    'TECH VOC': 'tech-voc',
+}
+
+const targetRoute = computed(() => {
+    const code = props.program.code?.trim().toUpperCase()
+    return routeMap[code ?? ''] ?? 'programs'
+})
+
+function openProgram() {
+    router.push({ name: targetRoute.value })
+}
+
+function handleKeydown(event: KeyboardEvent) {
+    if (event.key === 'Enter' || event.key === ' ') {
+        event.preventDefault()
+        openProgram()
+    }
+}
 </script>
 
 <template>
@@ -26,8 +70,13 @@ const bentoClass = computed(() =>
                 ease: 'easeOut',
             },
         }"
-        class="group relative h-full min-h-[250px] cursor-pointer overflow-hidden rounded-3xl border border-border/50 bg-card transition-all duration-300 hover:border-primary/50"
+        class="group relative h-full min-h-[250px] cursor-pointer overflow-hidden rounded-3xl border border-border/50 bg-card transition-all duration-300 hover:border-primary/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
         :class="bentoClass"
+        role="link"
+        tabindex="0"
+        :aria-label="`View ${program.name} program`"
+        @click="openProgram"
+        @keydown="handleKeydown"
     >
         <!-- Background Image -->
         <div class="absolute inset-0 overflow-hidden">
@@ -58,14 +107,17 @@ const bentoClass = computed(() =>
                 >
                     <div class="overflow-hidden">
                         <p class="text-sm text-white/80">
-                            {{'Explore comprehensive curriculum focused on practical skills and theoretical excellence.' }}
+                            {{
+                                program.description ||
+                                'Explore comprehensive curriculum focused on practical skills and theoretical excellence.'
+                            }}
                         </p>
                     </div>
                 </div>
 
                 <!-- Arrow Icon -->
                 <div
-                    class="flex h-10 w-10 items-center justify-center rounded-full bg-white/20 text-white opacity-0 backdrop-blur-md transition-opacity duration-300 delay-100 group-hover:opacity-100"
+                    class="flex h-10 w-10 items-center justify-center rounded-full bg-white/20 text-white opacity-0 backdrop-blur-md transition-opacity duration-300 delay-100 group-hover:opacity-100 group-focus-visible:opacity-100"
                 >
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
