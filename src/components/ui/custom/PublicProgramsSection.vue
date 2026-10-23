@@ -1,5 +1,6 @@
+
 <script setup lang="ts">
-import { onMounted, ref } from 'vue'
+import { computed, onMounted, onUnmounted, ref } from 'vue'
 import api from '@/services/api'
 import ProgramBentoCard from '@/components/ui/custom/ProgramBentoCard.vue'
 import { programs as placeholderPrograms } from '@/data/programs'
@@ -33,8 +34,22 @@ interface DisplayProgram extends LocalProgram {
 const programs = ref<DisplayProgram[]>([])
 const loading = ref(true)
 const errorMessage = ref('')
+const currentSlide = ref(0)
+const programsPerSlide = 3
+
+let carouselTimer: ReturnType<typeof setInterval> | undefined
 
 const API_ORIGIN = 'http://localhost:8000'
+
+const totalSlides = computed(() =>
+    Math.ceil(programs.value.length / programsPerSlide),
+)
+
+const visiblePrograms = computed(() => {
+    const start = currentSlide.value * programsPerSlide
+
+    return programs.value.slice(start, start + programsPerSlide)
+})
 
 function getImageUrl(path: string | null | undefined): string | null {
     if (!path) return null
@@ -60,6 +75,7 @@ function getPlaceholder(index: number): LocalProgram {
         placeholderPrograms[0]!
     )
 }
+
 async function fetchPrograms() {
     loading.value = true
     errorMessage.value = ''
@@ -92,12 +108,14 @@ async function fetchPrograms() {
                     code: program.code,
                     description:
                         program.description ||
-                        'Explore comprehensive curriculum focused on practical skills and theoretical excellence.',
+                        'Explore this academic program and discover the opportunities it offers.',
                     image: uploadedImage || placeholder.image || '',
                     alt: program.name,
                     college: program.college,
                 } as DisplayProgram
             })
+
+        currentSlide.value = 0
     } catch (error) {
         console.error('Failed to load public programs:', error)
         errorMessage.value =
@@ -107,7 +125,65 @@ async function fetchPrograms() {
     }
 }
 
-onMounted(fetchPrograms)
+function stopCarousel() {
+    if (carouselTimer) {
+        clearInterval(carouselTimer)
+        carouselTimer = undefined
+    }
+}
+
+function startCarousel() {
+    stopCarousel()
+
+    if (totalSlides.value <= 1 || loading.value || errorMessage.value) {
+        return
+    }
+
+    carouselTimer = setInterval(() => {
+        currentSlide.value = (currentSlide.value + 1) % totalSlides.value
+    }, 5000)
+}
+
+function nextSlide() {
+    if (totalSlides.value <= 1) return
+
+    currentSlide.value = (currentSlide.value + 1) % totalSlides.value
+    startCarousel()
+}
+
+function previousSlide() {
+    if (totalSlides.value <= 1) return
+
+    currentSlide.value =
+        (currentSlide.value - 1 + totalSlides.value) % totalSlides.value
+
+    startCarousel()
+}
+
+function goToSlide(index: number) {
+    if (index < 0 || index >= totalSlides.value) return
+
+    currentSlide.value = index
+    startCarousel()
+}
+
+function handleFocusOut(event: FocusEvent) {
+    const section = event.currentTarget as HTMLElement
+    const nextTarget = event.relatedTarget as Node | null
+
+    if (!nextTarget || !section.contains(nextTarget)) {
+        startCarousel()
+    }
+}
+
+onMounted(async () => {
+    await fetchPrograms()
+    startCarousel()
+})
+
+onUnmounted(() => {
+    stopCarousel()
+})
 </script>
 
 <template>
@@ -170,7 +246,7 @@ onMounted(fetchPrograms)
                     </p>
                 </div>
 
-                <!-- View All Programs Link -->
+                <!-- View All Programs -->
                 <RouterLink
                     v-motion
                     :initial="{ opacity: 0, x: 16 }"
@@ -209,13 +285,12 @@ onMounted(fetchPrograms)
             <!-- Loading Placeholders -->
             <div
                 v-if="loading"
-                class="grid grid-cols-1 gap-6 auto-rows-[250px] md:grid-cols-2 lg:grid-cols-3 lg:gap-8"
+                class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 lg:gap-8"
             >
                 <div
-                    v-for="item in 6"
+                    v-for="item in 3"
                     :key="item"
-                    class="relative animate-pulse overflow-hidden rounded-3xl bg-muted"
-                    :class="item === 1 ? 'md:col-span-2 md:row-span-2' : ''"
+                    class="relative min-h-[280px] animate-pulse overflow-hidden rounded-3xl bg-muted"
                 >
                     <div
                         class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"
@@ -240,50 +315,49 @@ onMounted(fetchPrograms)
                 <button
                     type="button"
                     class="mt-4 rounded-lg bg-primary px-5 py-2 text-sm font-semibold text-white transition-opacity hover:opacity-90"
-                    @click="fetchPrograms"
+                    @click="fetchPrograms().then(startCarousel)"
                 >
                     Try Again
                 </button>
             </div>
 
-            <!-- Programs Bento Grid -->
+            <!-- Programs Carousel -->
             <div
                 v-else-if="programs.length"
-                class="grid grid-cols-1 gap-6 auto-rows-[250px] md:grid-cols-2 lg:grid-cols-3 lg:gap-8"
+                class="space-y-8"
+                @mouseenter="stopCarousel"
+                @mouseleave="startCarousel"
+                @focusin="stopCarousel"
+                @focusout="handleFocusOut"
             >
-                <!-- Display Up to Five Programs -->
-                <ProgramBentoCard
-                    v-for="(program, index) in programs.slice(0, 5)"
-                    :key="program.id"
-                    :program="program"
-                    :index="index"
-                />
-
-                <!-- Discover More CTA Card -->
-                <RouterLink
-                    v-motion
-                    :initial="{ opacity: 0, y: 32 }"
-                    :visible-once="{
-                        opacity: 1,
-                        y: 0,
-                        transition: {
-                            delay: 500,
-                            duration: 700,
-                            type: 'tween',
-                            ease: 'easeOut',
-                        },
-                    }"
-                    to="/academics/programs"
-                    class="group relative flex cursor-pointer flex-col items-center justify-center overflow-hidden rounded-3xl bg-primary p-8 text-center transition-all duration-300 hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
+                <TransitionGroup
+                    name="program-slide"
+                    tag="div"
+                    class="relative grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 lg:gap-8"
                 >
-                    <!-- Plus Icon -->
-                    <div
-                        class="mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-white/20 text-white transition-transform duration-300 group-hover:scale-110"
+                    <ProgramBentoCard
+                        v-for="(program, index) in visiblePrograms"
+                        :key="program.id"
+                        :program="program"
+                        :index="index"
+                    />
+                </TransitionGroup>
+
+                <!-- Carousel Controls -->
+                <div
+                    v-if="totalSlides > 1"
+                    class="flex flex-wrap items-center justify-center gap-4"
+                >
+                    <button
+                        type="button"
+                        aria-label="Previous programs"
+                        class="flex h-10 w-10 items-center justify-center rounded-full border border-border transition-colors hover:bg-primary hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+                        @click="previousSlide"
                     >
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
-                            width="24"
-                            height="24"
+                            width="20"
+                            height="20"
                             viewBox="0 0 24 24"
                             fill="none"
                             stroke="currentColor"
@@ -291,24 +365,58 @@ onMounted(fetchPrograms)
                             stroke-linecap="round"
                             stroke-linejoin="round"
                         >
-                            <line x1="12" y1="5" x2="12" y2="19" />
-                            <line x1="5" y1="12" x2="19" y2="12" />
+                            <path d="m15 18-6-6 6-6" />
                         </svg>
+                    </button>
+
+                    <div class="flex items-center gap-2">
+                        <button
+                            v-for="slide in totalSlides"
+                            :key="slide"
+                            type="button"
+                            :aria-label="`Go to program slide ${slide}`"
+                            :aria-current="
+                                currentSlide === slide - 1 ? 'true' : undefined
+                            "
+                            class="h-2.5 rounded-full transition-all duration-300"
+                            :class="
+                                currentSlide === slide - 1
+                                    ? 'w-8 bg-primary'
+                                    : 'w-2.5 bg-border hover:bg-primary/50'
+                            "
+                            @click="goToSlide(slide - 1)"
+                        />
                     </div>
 
-                    <h3 class="text-xl font-bold text-white">
-                        Discover More
-                    </h3>
-
-                    <p class="mt-2 text-sm text-white/80">
-                        View All Academic Offerings
-                    </p>
-
-                    <!-- Explore Link Label -->
-                    <div
-                        class="mt-4 flex items-center gap-2 text-sm font-semibold text-white transition-all duration-300 group-hover:gap-4"
+                    <button
+                        type="button"
+                        aria-label="Next programs"
+                        class="flex h-10 w-10 items-center justify-center rounded-full border border-border transition-colors hover:bg-primary hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+                        @click="nextSlide"
                     >
-                        Explore Programs
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="20"
+                            height="20"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                        >
+                            <path d="m9 18 6-6-6-6" />
+                        </svg>
+                    </button>
+                </div>
+
+                <!-- View All Programs -->
+                <div class="flex justify-center">
+                    <RouterLink
+                        to="/academics/programs"
+                        class="inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 font-semibold text-white transition-all hover:gap-4 hover:opacity-90"
+                    >
+                        View All Programs
 
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
@@ -324,8 +432,8 @@ onMounted(fetchPrograms)
                             <path d="M5 12h14" />
                             <path d="m12 5 7 7-7 7" />
                         </svg>
-                    </div>
-                </RouterLink>
+                    </RouterLink>
+                </div>
             </div>
 
             <!-- No Active Programs -->
@@ -366,3 +474,29 @@ onMounted(fetchPrograms)
         </div>
     </section>
 </template>
+
+<style scoped>
+.program-slide-enter-active,
+.program-slide-leave-active {
+    transition:
+        opacity 0.25s ease,
+        transform 0.25s ease;
+}
+
+.program-slide-enter-from {
+    opacity: 0;
+    transform: translateY(10px);
+}
+
+.program-slide-leave-to {
+    opacity: 0;
+    transform: translateY(-10px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .program-slide-enter-active,
+    .program-slide-leave-active {
+        transition: none;
+    }
+}
+</style>
