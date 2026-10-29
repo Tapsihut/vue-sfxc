@@ -689,91 +689,91 @@ function onHeroLeave(el: Element, done: () => void) {
                     ></div>
                 </div>
             </div>
-
             <!-- News loaded successfully -->
             <div v-else-if="posts.length > 0" class="grid h-full gap-6 lg:grid-cols-12 lg:gap-8">
-                <!-- Featured post -->
-                <RouterLink
-                    v-if="featuredPost"
-                    :to="`/news/${featuredPost.slug}`"
-                    v-motion
-                    :initial="{ opacity: 0, y: 32 }"
-                    :visible-once="{ opacity: 1, y: 0, transition: { delay: 200, duration: 700, type: 'tween', ease: 'easeOut' } }"
-                    class="group relative overflow-hidden rounded-3xl shadow-md transition-shadow hover:shadow-xl lg:col-span-7"
+            <!-- Featured post -->
+            <RouterLink
+                v-if="featuredPost"
+                :to="`/news/${featuredPost.slug}`"
+                v-motion
+                :initial="{ opacity: 0, y: 32 }"
+                :visible-once="{ opacity: 1, y: 0, transition: { delay: 200, duration: 700, type: 'tween', ease: 'easeOut' } }"
+                class="group relative isolate block min-h-[460px] overflow-hidden rounded-3xl bg-muted shadow-md transition-shadow hover:shadow-xl sm:min-h-[520px] lg:col-span-7 lg:h-125 lg:min-h-0"
+            >
+                <!-- Background image -->
+                <img
+                    v-if="getNewsImage(featuredPost)"
+                    :src="getNewsImage(featuredPost)!"
+                    :alt="featuredPost.title"
+                    class="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                    @error="($event.target as HTMLImageElement).style.display = 'none'"
+                />
+            
+                <!-- Placeholder when no image is uploaded -->
+                <div
+                    v-else
+                    class="absolute inset-0 flex items-center justify-center bg-muted text-muted-foreground"
+                    aria-label="No image uploaded"
                 >
-                    <div class="relative aspect-4/3 overflow-hidden bg-muted lg:h-125 lg:aspect-auto">
-                        <img
-                            v-if="getNewsImage(featuredPost)"
-                            :src="getNewsImage(featuredPost)!"
-                            :alt="featuredPost.title"
-                            class="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:-rotate-1 group-hover:scale-105"
-                            @error="($event.target as HTMLImageElement).style.display = 'none'"
-                        />
-
-                        <!-- Shown when no image was uploaded -->
-                        <div
-                            v-else
-                            class="absolute inset-0 flex items-center justify-center bg-muted text-muted-foreground"
-                            aria-label="No image uploaded"
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="48"
+                        height="48"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.25"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        aria-hidden="true"
+                    >
+                        <rect x="3" y="3" width="18" height="18" rx="2" />
+                        <circle cx="8.5" cy="8.5" r="1.5" />
+                        <path d="m21 15-5-5L5 21" />
+                    </svg>
+                </div>
+            
+                <!-- Dark overlay for readable text -->
+                <div class="absolute inset-0 bg-gradient-to-t from-black/95 via-black/45 to-transparent"></div>
+            
+                <!-- Featured post content -->
+                <div class="absolute inset-x-0 bottom-0 z-10 flex flex-col justify-end p-5 sm:p-8 lg:p-10">
+                    <span class="mb-3 inline-block w-fit rounded-full bg-primary px-3 py-1 text-xs font-semibold text-primary-foreground shadow-sm">
+                        {{ featuredPost.category?.name ?? 'News' }}
+                    </span>
+            
+                    <h3 class="mb-3 text-xl font-bold leading-tight text-white transition-colors duration-300 group-hover:text-primary sm:text-2xl md:text-3xl">
+                        {{ featuredPost.title }}
+                    </h3>
+            
+                    <p
+                        v-if="featuredPost.excerpt"
+                        class="mb-4 line-clamp-3 max-w-xl text-sm leading-relaxed text-white/85 sm:text-base"
+                    >
+                        {{ featuredPost.excerpt }}
+                    </p>
+            
+                    <div class="flex items-center text-sm font-medium text-white/80">
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="16"
+                            height="16"
+                            class="mr-2 shrink-0"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            aria-hidden="true"
                         >
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                width="48"
-                                height="48"
-                                viewBox="0 0 24 24"
-                                fill="none"
-                                stroke="currentColor"
-                                stroke-width="1.25"
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                            >
-                                <rect x="3" y="3" width="18" height="18" rx="2" />
-                                <circle cx="8.5" cy="8.5" r="1.5" />
-                                <path d="m21 15-5-5L5 21" />
-                            </svg>
-                        </div>
+                            <circle cx="12" cy="12" r="10" />
+                            <polyline points="12 6 12 12 16 14" />
+                        </svg>
+                        {{ formatNewsDate(featuredPost.published_at || featuredPost.created_at) }}
                     </div>
-
-                    <div class="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-transparent"></div>
-
-                    <div class="absolute inset-0 flex flex-col justify-end p-8 lg:p-10">
-                        <div class="mt-auto">
-                            <span class="mb-4 inline-block rounded-full bg-primary px-3 py-1 text-xs font-semibold text-primary-foreground shadow-sm">
-                                {{ featuredPost.category?.name ?? 'News' }}
-                            </span>
-
-                            <h3 class="mb-3 text-2xl font-bold leading-tight text-foreground transition-colors duration-300 group-hover:text-primary md:text-3xl">
-                                {{ featuredPost.title }}
-                            </h3>
-
-                            <p
-                                v-if="featuredPost.excerpt"
-                                class="mb-4 line-clamp-2 max-w-xl text-base text-muted-foreground"
-                            >
-                                {{ featuredPost.excerpt }}
-                            </p>
-
-                            <div class="flex items-center text-sm font-medium text-foreground/70">
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    width="16"
-                                    height="16"
-                                    class="mr-2"
-                                    viewBox="0 0 24 24"
-                                    fill="none"
-                                    stroke="currentColor"
-                                    stroke-width="2"
-                                    stroke-linecap="round"
-                                    stroke-linejoin="round"
-                                >
-                                    <circle cx="12" cy="12" r="10" />
-                                    <polyline points="12 6 12 12 16 14" />
-                                </svg>
-                                {{ formatNewsDate(featuredPost.published_at || featuredPost.created_at) }}
-                            </div>
-                        </div>
-                    </div>
-                </RouterLink>
+                </div>
+            </RouterLink>
 
                 <!-- Other news posts -->
                 <div
