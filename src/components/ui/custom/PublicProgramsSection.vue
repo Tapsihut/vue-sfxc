@@ -305,7 +305,7 @@ onMounted(fetchPrograms)
                         v-for="(program, index) in programs"
                         :key="program.id"
                         data-program-card
-                        class="w-[85%] flex-none snap-start overflow-hidden rounded-3xl sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] xl:w-[calc(25%-18px)]"
+                        class="w-[92%] flex-none snap-start overflow-hidden rounded-3xl sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] xl:w-[calc(25%-18px)]"
                     >
                         <ProgramBentoCard
                             :program="program"
