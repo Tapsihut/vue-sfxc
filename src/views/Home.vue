@@ -147,7 +147,7 @@ onMounted(() => {
 
 const {
     slides,
-    api: Api,
+    api: carouselApi,
     current,
     autoplay,
     slideCounter,
@@ -156,7 +156,7 @@ const {
     showIndicators,
     setApi,
     goToSlide,
-} = useHero()
+} = useHeroCarousel()
 
 const { scrollY } = useScrollY()
 
