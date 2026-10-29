@@ -15,10 +15,6 @@ const props = defineProps<{
 
 const router = useRouter()
 
-const bentoClass = computed(() =>
-    props.index === 0 ? 'md:col-span-2 md:row-span-2' : '',
-)
-
 const routeMap: Record<string, string> = {
     BSOA: 'bsoa',
     BSBA: 'bsba',
@@ -57,21 +53,20 @@ function handleKeydown(event: KeyboardEvent) {
 </script>
 
 <template>
-    <div
+    <article
         v-motion
-        :initial="{ opacity: 0, y: 32 }"
+        :initial="{ opacity: 0, y: 20 }"
         :visible-once="{
             opacity: 1,
             y: 0,
             transition: {
-                delay: index * 100,
-                duration: 700,
+                delay: Math.min(index, 4) * 100,
+                duration: 500,
                 type: 'tween',
                 ease: 'easeOut',
             },
         }"
-        class="group relative h-full min-h-[250px] cursor-pointer overflow-hidden rounded-3xl border border-border/50 bg-card transition-all duration-300 hover:border-primary/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
-        :class="bentoClass"
+        class="group relative h-[340px] overflow-hidden rounded-3xl border border-border/50 bg-card transition-all duration-300 hover:border-primary/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary sm:h-[360px] lg:h-[380px]"
         role="link"
         tabindex="0"
         :aria-label="`View ${program.name} program`"
@@ -79,62 +74,63 @@ function handleKeydown(event: KeyboardEvent) {
         @keydown="handleKeydown"
     >
         <!-- Background Image -->
-        <div class="absolute inset-0 overflow-hidden">
-            <img
-                :src="program.image"
-                :alt="program.alt"
-                loading="lazy"
-                class="h-full w-full object-cover object-center transition-transform duration-700 group-hover:scale-105"
-            />
+        <img
+            :src="program.image"
+            :alt="program.alt || program.name"
+            loading="lazy"
+            class="absolute inset-0 h-full w-full object-cover object-center transition-transform duration-700 group-hover:scale-105"
+        />
 
-            <!-- Gradient Overlay -->
-            <div
-                class="absolute inset-0 bg-linear-to-t from-black/80 via-black/40 to-transparent opacity-80 transition-opacity duration-300 group-hover:opacity-90"
-            ></div>
-        </div>
+        <!-- Gradient Overlay -->
+        <div
+            class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/45 to-transparent"
+        ></div>
 
-        <!-- Content -->
-        <div class="absolute inset-0 flex flex-col justify-end p-6 md:p-8">
-            <div
-                class="translate-y-4 transform transition-transform duration-300 group-hover:translate-y-0"
+        <!-- Program Content -->
+        <div
+            class="absolute inset-x-0 bottom-0 flex flex-col items-start p-5 sm:p-6"
+        >
+            <span
+                v-if="program.code"
+                class="mb-3 inline-flex max-w-full rounded-full border border-white/30 bg-black/30 px-3 py-1 text-xs font-semibold tracking-wide text-white backdrop-blur-sm"
             >
-                <h4 class="mb-2 text-2xl font-bold text-white">
-                    {{ program.name }}
-                </h4>
+                {{ program.code }}
+            </span>
 
-                <div
-                    class="grid grid-rows-[0fr] opacity-0 transition-all duration-300 group-hover:mb-4 group-hover:grid-rows-[1fr] group-hover:opacity-100"
-                >
-                    <div class="overflow-hidden">
-                        <p class="text-sm text-white/80">
-                            {{
-                                program.description ||
-                                'Explore comprehensive curriculum focused on practical skills and theoretical excellence.'
-                            }}
-                        </p>
-                    </div>
-                </div>
+            <h3
+                class="mb-2 line-clamp-3 text-xl leading-snug font-bold text-white sm:text-2xl"
+            >
+                {{ program.name }}
+            </h3>
 
-                <!-- Arrow Icon -->
-                <div
-                    class="flex h-10 w-10 items-center justify-center rounded-full bg-white/20 text-white opacity-0 backdrop-blur-md transition-opacity duration-300 delay-100 group-hover:opacity-100 group-focus-visible:opacity-100"
+            <p
+                class="line-clamp-3 text-sm leading-relaxed text-white/85 sm:line-clamp-4"
+            >
+                {{
+                    program.description ||
+                    'Explore our academic program and prepare for meaningful career opportunities.'
+                }}
+            </p>
+
+            <div
+                class="mt-4 flex items-center gap-2 text-sm font-semibold text-white transition-all duration-300 group-hover:gap-3"
+            >
+                Explore Program
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="18"
+                    height="18"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
                 >
-                    <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="20"
-                        height="20"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="2"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                    >
-                        <path d="M5 12h14" />
-                        <path d="m12 5 7 7-7 7" />
-                    </svg>
-                </div>
+                    <path d="M5 12h14" />
+                    <path d="m12 5 7 7-7 7" />
+                </svg>
             </div>
         </div>
-    </div>
+    </article>
 </template>
