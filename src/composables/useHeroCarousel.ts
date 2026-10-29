@@ -1,4 +1,4 @@
-import { ref, computed, onMounted, nextTick } from 'vue'
+import { ref, computed, onMounted, onBeforeUnmount } from 'vue'
 import Autoplay from 'embla-carousel-autoplay'
 import type { CarouselApi } from '@/components/ui/carousel'
 import apiClient from '@/services/api'
@@ -30,10 +30,12 @@ export function useHeroCarousel() {
     const error = ref<string | null>(null)
 
     const autoplay = Autoplay({
-        delay: 5000,
+        delay: 6000,
         stopOnMouseEnter: true,
         stopOnInteraction: false,
     })
+
+    let removeApiListeners: (() => void) | null = null
 
     const currentSlide = computed(() => slides.value[current.value])
 
@@ -66,35 +68,43 @@ export function useHeroCarousel() {
                 : responseData.data
 
             slides.value = apiSlides
-                .filter(
-                    (slide) =>
+                .filter((slide) => {
+                    return (
                         slide.is_active === true ||
                         slide.is_active === 1 ||
-                        slide.is_active === '1',
-                )
-                .filter((slide) =>
-                    Boolean(slide.image_url || slide.image_path),
-                )
-                .map((slide) => ({
-                    id: slide.id,
-                    title: slide.title,
-                    description: slide.description ?? '',
-                    image:
-                        slide.image_url ??
-                        `${String(apiClient.defaults.baseURL).replace(/\/$/, '')}/storage/${slide.image_path}`,
-                    buttons: slide.button_text
-                        ? [
-                              {
-                                  text: slide.button_text,
-                                  href: slide.button_link || '#',
-                              },
-                          ]
-                        : [],
-                }))
+                        slide.is_active === '1'
+                    )
+                })
+                .filter((slide) => Boolean(slide.image_url || slide.image_path))
+                .map((slide) => {
+                    const baseUrl = String(
+                        apiClient.defaults.baseURL ?? '',
+                    ).replace(/\/$/, '')
 
-            await nextTick()
-            api.value?.reInit()
-            current.value = api.value?.selectedScrollSnap() ?? 0
+                    const image =
+                        slide.image_url ||
+                        (slide.image_path
+                            ? `${baseUrl}/storage/${slide.image_path.replace(/^\/+/, '')}`
+                            : '')
+
+                    return {
+                        id: slide.id,
+                        title: slide.title,
+                        description: slide.description ?? '',
+                        image,
+                        buttons: slide.button_text
+                            ? [
+                                  {
+                                      text: slide.button_text,
+                                      href: slide.button_link || '#',
+                                  },
+                              ]
+                            : [],
+                    }
+                })
+                .filter((slide) => Boolean(slide.image))
+
+            current.value = 0
         } catch (err) {
             console.error('Failed to load homepage hero slides:', err)
             error.value = 'Unable to load the latest hero slides.'
@@ -105,25 +115,41 @@ export function useHeroCarousel() {
     }
 
     function setApi(newApi: CarouselApi) {
-        api.value = newApi
-        if (!newApi) return
+        removeApiListeners?.()
+        removeApiListeners = null
 
-        current.value = newApi.selectedScrollSnap()
+        api.value = newApi
+
+        if (!newApi) return
 
         const update = () => {
             current.value = newApi.selectedScrollSnap()
         }
 
+        update()
+
         newApi.on('select', update)
         newApi.on('reInit', update)
+
+        removeApiListeners = () => {
+            newApi.off('select', update)
+            newApi.off('reInit', update)
+        }
     }
 
     function goToSlide(index: number) {
+        if (index < 0 || index >= slides.value.length) return
         api.value?.scrollTo(index)
     }
 
     onMounted(() => {
         void loadSlides()
+    })
+
+    onBeforeUnmount(() => {
+        removeApiListeners?.()
+        removeApiListeners = null
+        api.value = undefined
     })
 
     return {
