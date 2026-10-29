@@ -147,7 +147,7 @@ onMounted(() => {
 
 const {
     slides,
-    api: carouselApi,
+    api: Api,
     current,
     autoplay,
     slideCounter,
@@ -156,7 +156,7 @@ const {
     showIndicators,
     setApi,
     goToSlide,
-} = useHeroCarousel()
+} = useHero()
 
 const { scrollY } = useScrollY()
 
@@ -237,7 +237,6 @@ function onHeroLeave(el: Element, done: () => void) {
                 </div>
             </div>
         </div>
-
         <!-- Admin-managed hero carousel -->
         <Carousel
             v-else-if="slides.length > 0"
@@ -249,23 +248,24 @@ function onHeroLeave(el: Element, done: () => void) {
         >
             <CarouselContent class="ml-0 h-full">
                 <CarouselItem
-                    v-for="slide in slides"
+                    v-for="(slide, index) in slides"
                     :key="slide.id"
                     class="h-[clamp(420px,36.4583vw,700px)] pl-0"
                 >
                     <div class="relative h-full w-full">
-                        <!-- Keep uploaded hero images at their original brightness; no dark overlay. -->
                         <img
                             :src="slide.image"
                             :alt="slide.title || 'St. Francis Xavier College'"
+                            :loading="index === 0 ? 'eager' : 'lazy'"
+                            :fetchpriority="index === 0 ? 'high' : 'auto'"
+                            decoding="async"
                             class="absolute inset-0 h-full w-full object-cover"
+                            draggable="false"
                         />
-
                     </div>
                 </CarouselItem>
             </CarouselContent>
         </Carousel>
-
         <!-- Welcome fallback -->
         <div
             v-else-if="showFallback"
