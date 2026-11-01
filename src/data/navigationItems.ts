@@ -150,6 +150,12 @@ export const navigationItems: NavigationItem[] = [
                 icon: Building2,
                 links: [
                     {
+                        name: 'SFXC Learning Resource Center',
+                        to: 'https://library.sfxc.edu.ph',
+                        description: 'Explore library resources, e-books, journals, and research services',
+                        external: true,
+                    },
+                    {
                         name: 'Research Development Office',
                         to: '#',
                         description: 'Advancing knowledge',
