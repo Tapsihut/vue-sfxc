@@ -9,7 +9,6 @@ import {
 import PublicProgramsSection from '@/components/ui/custom/PublicProgramsSection.vue'
 import type { StatItem } from '@/data/homeStats'
 import { useHeroCarousel } from '@/composables/useHeroCarousel'
-import { useMottoAnimation } from '@/composables/useMottoAnimation'
 import { useScrollY } from '@/composables/useScrollY'
 import StatCard from '@/components/ui/custom/StatCard.vue'
 import MiniNewsCard from '@/components/ui/custom/MiniNewsCard.vue'
@@ -33,12 +32,13 @@ interface NewsPost {
     } | null
 }
 
-const BACKEND_URL = import.meta.env.VITE_API_URL || 'https://api.sfxc.edu.ph'
+const BACKEND_URL = (
+    import.meta.env.VITE_API_URL || 'https://api.sfxc.edu.ph'
+).replace(/\/+$/, '')
 
 const posts = ref<NewsPost[]>([])
 const newsLoading = ref(true)
 const newsError = ref(false)
-
 const homeStats = ref<StatItem[]>([])
 
 const featuredPost = computed(
@@ -53,9 +53,6 @@ const miniNewsPosts = computed(() => {
         .slice(0, 4)
 })
 
-/**
- * Fetch active statistics managed through the admin dashboard.
- */
 async function fetchHomeStats(): Promise<void> {
     try {
         const response = await api.get('/api/v1/public/statistics')
@@ -75,19 +72,13 @@ async function fetchHomeStats(): Promise<void> {
     }
 }
 
-/**
- * Returns the uploaded image URL.
- * Returns null when no image has been uploaded.
- */
 function getNewsImage(post: NewsPost): string | null {
     const path = post.image_url?.trim() || post.image_path?.trim()
 
-    if (!path) {
-        return null
-    }
+    if (!path) return null
 
     if (/^https?:\/\//i.test(path)) {
-        return path
+        return path.replace(/^http:\/\//i, 'https://')
     }
 
     const normalizedPath = path.replace(/^\/+/, '')
@@ -127,10 +118,7 @@ async function fetchNews(): Promise<void> {
         })
 
         const responseData = response.data?.data
-
-        posts.value = Array.isArray(responseData)
-            ? responseData
-            : []
+        posts.value = Array.isArray(responseData) ? responseData : []
     } catch (error) {
         console.error('Failed to fetch public news:', error)
         newsError.value = true
@@ -139,11 +127,6 @@ async function fetchNews(): Promise<void> {
         newsLoading.value = false
     }
 }
-
-onMounted(() => {
-    fetchNews()
-    fetchHomeStats()
-})
 
 const {
     slides,
@@ -160,68 +143,30 @@ const {
 
 const { scrollY } = useScrollY()
 
-// Mobile motto animation refs
-const startSRef = ref<HTMLElement | null>(null)
-const startFRef = ref<HTMLElement | null>(null)
-const startXRef = ref<HTMLElement | null>(null)
-const startCRef = ref<HTMLElement | null>(null)
-const endSRef = ref<HTMLElement | null>(null)
-const endFRef = ref<HTMLElement | null>(null)
-const endXRef = ref<HTMLElement | null>(null)
-const endCRef = ref<HTMLElement | null>(null)
-
-useMottoAnimation(
-    startSRef,
-    startFRef,
-    startXRef,
-    startCRef,
-    endSRef,
-    endFRef,
-    endXRef,
-    endCRef,
-)
-
-function onHeroEnter(el: Element, done: () => void) {
-    const animation = (el as HTMLElement).animate(
-        [
-            { opacity: '0', transform: 'translateY(24px)' },
-            { opacity: '1', transform: 'translateY(0)' },
-        ],
-        { duration: 700, easing: 'ease', fill: 'forwards' },
-    )
-
-    animation.onfinish = done
-}
-
-function onHeroLeave(el: Element, done: () => void) {
-    ;(el as HTMLElement).style.position = 'absolute'
-
-    const animation = (el as HTMLElement).animate(
-        [
-            { opacity: '1', transform: 'translateY(0)' },
-            { opacity: '0', transform: 'translateY(-12px)' },
-        ],
-        { duration: 350, easing: 'ease', fill: 'forwards' },
-    )
-
-    animation.onfinish = done
-}
+onMounted(() => {
+    fetchNews()
+    fetchHomeStats()
+})
 </script>
-
 
 <template>
     <!-- Homepage Hero -->
     <section id="home" class="relative w-full">
-        <!-- Hero loading state -->
+        <!-- Loading State -->
         <div
             v-if="loading"
-            class="relative h-[clamp(420px,36.4583vw,700px)] overflow-hidden bg-[#104717]"
+            class="relative h-[260px] overflow-hidden bg-[#104717] sm:h-[360px] lg:h-auto lg:aspect-[1920/700]"
         >
             <img
                 src="@/assets/images/sfxc-building.jpg"
-                alt=""
+                alt="St. Francis Xavier College campus"
+                width="1920"
+                height="700"
+                fetchpriority="high"
+                decoding="async"
                 class="absolute inset-0 h-full w-full object-cover opacity-50"
             />
+
             <div class="absolute inset-0 bg-black/40"></div>
 
             <div class="absolute inset-0 flex items-center justify-center">
@@ -229,18 +174,20 @@ function onHeroLeave(el: Element, done: () => void) {
                     <img
                         src="@/assets/images/sfxc-logo-only.png"
                         alt="SFXC logo"
-                        class="h-16 w-16 object-contain"
+                        class="h-14 w-14 object-contain sm:h-16 sm:w-16"
                     />
-                    <p class="text-sm uppercase tracking-[0.2em] text-white/80">
+
+                    <p class="text-xs uppercase tracking-[0.2em] text-white/80 sm:text-sm">
                         St. Francis Xavier College
                     </p>
                 </div>
             </div>
         </div>
-        <!-- Admin-managed hero carousel -->
+
+        <!-- Admin-managed Hero Carousel -->
         <Carousel
             v-else-if="slides.length > 0"
-            class="relative h-[clamp(420px,36.4583vw,700px)] w-full overflow-hidden"
+            class="relative h-[260px] w-full overflow-hidden sm:h-[360px] lg:h-auto lg:aspect-[1920/700]"
             :plugins="slides.length > 1 ? [autoplay] : []"
             @init-api="setApi"
             @mouseenter="autoplay.stop"
@@ -250,53 +197,51 @@ function onHeroLeave(el: Element, done: () => void) {
                 <CarouselItem
                     v-for="(slide, index) in slides"
                     :key="slide.id"
-                    class="h-[clamp(420px,36.4583vw,700px)] pl-0"
+                    class="h-[260px] pl-0 sm:h-[360px] lg:h-full"
                 >
-                    <div class="relative h-full w-full">
+                    <div class="relative h-full w-full bg-[#104717]">
                         <img
                             :src="slide.image"
                             :alt="slide.title || 'St. Francis Xavier College'"
                             :loading="index === 0 ? 'eager' : 'lazy'"
                             :fetchpriority="index === 0 ? 'high' : 'auto'"
                             decoding="async"
-                            class="absolute inset-0 h-full w-full object-cover"
+                            width="1920"
+                            height="700"
+                            class="absolute inset-0 h-full w-full object-cover object-center"
                             draggable="false"
                         />
                     </div>
                 </CarouselItem>
             </CarouselContent>
         </Carousel>
-        <!-- Welcome fallback -->
+
+        <!-- Welcome Fallback -->
         <div
             v-else-if="showFallback"
-            class="relative flex h-[clamp(420px,36.4583vw,700px)] items-center overflow-hidden bg-[#104717] text-white"
+            class="relative flex h-[260px] items-center overflow-hidden bg-[#104717] text-white sm:h-[360px] lg:h-auto lg:aspect-[1920/700]"
         >
             <img
                 src="@/assets/images/Home/Where Faith Meets Excellence.png"
                 alt="St. Francis Xavier College campus"
-                class="absolute inset-0 h-full w-full object-cover"
+                width="1920"
+                height="700"
+                fetchpriority="high"
+                decoding="async"
+                class="absolute inset-0 h-full w-full object-cover object-center"
             />
 
-            <!-- <div
-                class="absolute inset-0 bg-gradient-to-r from-[#082e10]/95 via-[#104717]/75 to-[#104717]/25"
-            ></div> -->
-            <div
-                class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/10"
-            ></div>
+            <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/10"></div>
 
-            <div
-                class="relative z-[2] mx-auto w-full max-w-7xl px-6 pb-36 pt-20 sm:px-8 sm:pb-32 md:px-12 md:pb-24 lg:px-16"
-            >
+            <div class="relative z-[2] mx-auto w-full max-w-7xl px-5 py-8 sm:px-8 sm:py-12 md:px-12 lg:px-16">
                 <div class="max-w-3xl">
-                    <div
-                        class="mb-5 flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.25em] text-white/80 sm:text-sm"
-                    >
-                        <span class="h-0.5 w-8 bg-primary"></span>
+                    <div class="mb-3 flex items-center gap-3 text-[9px] font-semibold uppercase tracking-[0.2em] text-white/80 sm:mb-5 sm:text-sm sm:tracking-[0.25em]">
+                        <span class="h-0.5 w-6 bg-primary sm:w-8"></span>
                         St. Francis Xavier College
                     </div>
 
                     <h1
-                        class="mb-6 text-4xl font-extrabold leading-[1.08] tracking-tight sm:text-5xl md:text-6xl lg:text-7xl"
+                        class="mb-3 text-3xl font-extrabold leading-[1.08] tracking-tight sm:mb-6 sm:text-5xl md:text-6xl lg:text-7xl"
                         style="font-family: 'Times New Roman', Times, serif"
                     >
                         Where Faith
@@ -305,28 +250,18 @@ function onHeroLeave(el: Element, done: () => void) {
                         </span>
                     </h1>
 
-                    <p class="max-w-xl text-base leading-relaxed text-white/85 sm:text-lg md:text-xl">
+                    <p class="max-w-xl text-xs leading-relaxed text-white/90 sm:text-lg md:text-xl">
                         Shaping minds, forming hearts, and building community
                         — guided by faith and driven by excellence.
                     </p>
 
-                    <div class="mt-8 flex flex-wrap gap-3 sm:mt-10">
+                    <div class="mt-5 flex flex-wrap gap-2 sm:mt-10 sm:gap-3">
                         <RouterLink
                             to="/about/vision-mission"
-                            class="inline-flex items-center justify-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground shadow-lg shadow-black/20 transition-all duration-300 hover:gap-4 hover:bg-primary/90 sm:px-7 sm:py-3.5"
+                            class="inline-flex items-center justify-center gap-2 rounded-full bg-primary px-4 py-2 text-xs font-semibold text-primary-foreground shadow-lg transition-all duration-300 hover:bg-primary/90 sm:px-7 sm:py-3.5 sm:text-sm"
                         >
                             Discover SFXC
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                width="17"
-                                height="17"
-                                viewBox="0 0 24 24"
-                                fill="none"
-                                stroke="currentColor"
-                                stroke-width="2"
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                            >
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                 <path d="M5 12h14" />
                                 <path d="m12 5 7 7-7 7" />
                             </svg>
@@ -334,7 +269,7 @@ function onHeroLeave(el: Element, done: () => void) {
 
                         <RouterLink
                             to="/admission/requirements"
-                            class="inline-flex items-center justify-center rounded-full border border-white/60 bg-white/5 px-6 py-3 text-sm font-semibold text-white backdrop-blur-sm transition-colors duration-300 hover:bg-white/15 sm:px-7 sm:py-3.5"
+                            class="inline-flex items-center justify-center rounded-full border border-white/60 bg-white/5 px-4 py-2 text-xs font-semibold text-white backdrop-blur-sm transition-colors duration-300 hover:bg-white/15 sm:px-7 sm:py-3.5 sm:text-sm"
                         >
                             Explore Admissions
                         </RouterLink>
@@ -343,157 +278,102 @@ function onHeroLeave(el: Element, done: () => void) {
             </div>
         </div>
 
-        <!-- Carousel controls for admin-managed hero slides -->
+        <!-- Carousel Controls -->
         <div
             v-if="!loading && slides.length > 0 && showIndicators"
-            class="pointer-events-none absolute inset-x-0 bottom-0 z-10 px-6 pb-8 sm:px-8 sm:pb-10 md:px-12 md:pb-12 lg:px-16"
+            class="pointer-events-none absolute inset-x-0 bottom-0 z-10 px-4 pb-4 sm:px-8 sm:pb-8 md:px-12 md:pb-10 lg:px-16"
         >
-                <div class="mx-auto max-w-7xl">
-                    <div class="mb-5 hidden h-px w-full bg-white/10 sm:block"></div>
+            <div class="mx-auto max-w-7xl">
+                <div class="mb-4 hidden h-px w-full bg-white/10 sm:block"></div>
 
-                    <div class="flex items-center gap-4 sm:gap-6">
-                        <div class="flex items-center gap-2">
-                            <button
-                                v-for="(slide, index) in slides"
-                                :key="slide.id"
-                                :class="[
-                                    'pointer-events-auto cursor-pointer rounded-full border-none p-0 transition-all duration-500',
-                                    current === index
-                                        ? 'h-1.5 w-8 bg-primary'
-                                        : 'h-1.5 w-4 bg-white/30 hover:bg-white/50',
-                                ]"
-                                @click="goToSlide(index)"
-                                :aria-label="`Go to slide ${index + 1}`"
-                                :aria-current="current === index ? 'true' : undefined"
-                            ></button>
-                        </div>
+                <div class="flex items-center gap-3 sm:gap-6">
+                    <div class="flex items-center gap-2">
+                        <button
+                            v-for="(slide, index) in slides"
+                            :key="slide.id"
+                            :class="[
+                                'pointer-events-auto cursor-pointer rounded-full border-none p-0 transition-all duration-500',
+                                current === index
+                                    ? 'h-1.5 w-8 bg-primary'
+                                    : 'h-1.5 w-4 bg-white/50 hover:bg-white',
+                            ]"
+                            @click="goToSlide(index)"
+                            :aria-label="`Go to slide ${index + 1}`"
+                            :aria-current="current === index ? 'true' : undefined"
+                        ></button>
+                    </div>
 
-                        <span class="hidden font-mono text-xs tabular-nums tracking-widest text-white/50 sm:block">
-                            {{ slideCounter }}
-                        </span>
+                    <span class="hidden font-mono text-xs tabular-nums tracking-widest text-white/70 sm:block">
+                        {{ slideCounter }}
+                    </span>
 
-                        <div class="flex-1"></div>
+                    <div class="flex-1"></div>
 
-                        <div class="flex gap-2">
-                            <button
-                                @click="carouselApi?.scrollPrev()"
-                                class="pointer-events-auto flex h-10 w-10 cursor-pointer items-center justify-center rounded-full border border-white/20 bg-white/10 text-white backdrop-blur-md transition-all duration-300 hover:border-white/40 hover:bg-white/20 sm:h-11 sm:w-11"
-                                aria-label="Previous slide"
-                            >
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    width="18"
-                                    height="18"
-                                    viewBox="0 0 24 24"
-                                    fill="none"
-                                    stroke="currentColor"
-                                    stroke-width="2"
-                                    stroke-linecap="round"
-                                    stroke-linejoin="round"
-                                >
-                                    <path d="m15 18-6-6 6-6" />
-                                </svg>
-                            </button>
+                    <div class="flex gap-2">
+                        <button
+                            @click="carouselApi?.scrollPrev()"
+                            class="pointer-events-auto flex h-8 w-8 cursor-pointer items-center justify-center rounded-full border border-white/30 bg-black/20 text-white backdrop-blur-md transition-all hover:bg-white/20 sm:h-11 sm:w-11"
+                            aria-label="Previous slide"
+                        >
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="m15 18-6-6 6-6" />
+                            </svg>
+                        </button>
 
-                            <button
-                                @click="carouselApi?.scrollNext()"
-                                class="pointer-events-auto flex h-10 w-10 cursor-pointer items-center justify-center rounded-full border border-white/20 bg-white/10 text-white backdrop-blur-md transition-all duration-300 hover:border-white/40 hover:bg-white/20 sm:h-11 sm:w-11"
-                                aria-label="Next slide"
-                            >
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    width="18"
-                                    height="18"
-                                    viewBox="0 0 24 24"
-                                    fill="none"
-                                    stroke="currentColor"
-                                    stroke-width="2"
-                                    stroke-linecap="round"
-                                    stroke-linejoin="round"
-                                >
-                                    <path d="m9 18 6-6-6-6" />
-                                </svg>
-                            </button>
-                        </div>
+                        <button
+                            @click="carouselApi?.scrollNext()"
+                            class="pointer-events-auto flex h-8 w-8 cursor-pointer items-center justify-center rounded-full border border-white/30 bg-black/20 text-white backdrop-blur-md transition-all hover:bg-white/20 sm:h-11 sm:w-11"
+                            aria-label="Next slide"
+                        >
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="m9 18 6-6-6-6" />
+                            </svg>
+                        </button>
                     </div>
                 </div>
-            </div>
-
-        <!-- Mobile animated motto -->
-        <div class="pointer-events-none absolute bottom-20 left-0 right-0 z-10 flex items-center justify-center px-4 sm:hidden">
-            <div class="relative flex w-full justify-center">
-                <h2
-                    class="flex flex-col justify-center gap-y-2 text-center text-base font-bold uppercase tracking-widest text-white drop-shadow-lg"
-                    style="font-family: 'Times New Roman', Times, serif"
-                >
-                    <span
-                        v-motion
-                        :initial="{ opacity: 0, y: 10, scale: 0.95 }"
-                        :enter="{ opacity: 1, y: 0, scale: 1, transition: { delay: 500, duration: 1500, type: 'tween' } }"
-                    >
-                        <span ref="startSRef" class="inline-block origin-center">S</span>
-                        <span v-motion :initial="{ opacity: 1 }" :enter="{ opacity: 0, transition: { delay: 5500, duration: 500, type: 'tween' } }" class="inline-block">ervice.</span>
-                    </span>
-
-                    <span
-                        v-motion
-                        :initial="{ opacity: 0, y: 10, scale: 0.95 }"
-                        :enter="{ opacity: 1, y: 0, scale: 1, transition: { delay: 1500, duration: 1500, type: 'tween' } }"
-                    >
-                        <span ref="startFRef" class="inline-block origin-center">F</span>
-                        <span v-motion :initial="{ opacity: 1 }" :enter="{ opacity: 0, transition: { delay: 5500, duration: 500, type: 'tween' } }" class="inline-block">ortitude.</span>
-                    </span>
-
-                    <span
-                        v-motion
-                        :initial="{ opacity: 0, y: 10, scale: 0.95 }"
-                        :enter="{ opacity: 1, y: 0, scale: 1, transition: { delay: 2500, duration: 1500, type: 'tween' } }"
-                    >
-                        <span v-motion :initial="{ opacity: 1 }" :enter="{ opacity: 0, transition: { delay: 5500, duration: 500, type: 'tween' } }" class="inline-block">E</span>
-                        <span ref="startXRef" class="inline-block origin-center">x</span>
-                        <span v-motion :initial="{ opacity: 1 }" :enter="{ opacity: 0, transition: { delay: 5500, duration: 500, type: 'tween' } }" class="inline-block">cellence.</span>
-                    </span>
-
-                    <span
-                        v-motion
-                        :initial="{ opacity: 0, y: 10, scale: 0.95 }"
-                        :enter="{ opacity: 1, y: 0, scale: 1, transition: { delay: 3500, duration: 1500, type: 'tween' } }"
-                    >
-                        <span ref="startCRef" class="inline-block origin-center">C</span>
-                        <span v-motion :initial="{ opacity: 1 }" :enter="{ opacity: 0, transition: { delay: 5500, duration: 500, type: 'tween' } }" class="inline-block">hrist-centeredness.</span>
-                    </span>
-                </h2>
-
-                <h2
-                    class="absolute top-[75%] -translate-y-1/2 whitespace-nowrap text-center text-lg font-bold uppercase tracking-widest text-white drop-shadow-lg"
-                    style="font-family: 'Times New Roman', Times, serif"
-                >
-                    <span ref="endSRef" v-motion :initial="{ opacity: 0 }" :enter="{ opacity: 1, transition: { delay: 6900, duration: 100, type: 'tween' } }">S</span>
-                    <span v-motion :initial="{ opacity: 0, x: -10, filter: 'blur(8px)' }" :enter="{ opacity: 1, x: 0, filter: 'blur(0px)', transition: { delay: 6900, duration: 800, type: 'tween' } }">t. </span>
-                    <span ref="endFRef" v-motion :initial="{ opacity: 0 }" :enter="{ opacity: 1, transition: { delay: 7900, duration: 100, type: 'tween' } }">F</span>
-                    <span v-motion :initial="{ opacity: 0, x: -10, filter: 'blur(8px)' }" :enter="{ opacity: 1, x: 0, filter: 'blur(0px)', transition: { delay: 7900, duration: 800, type: 'tween' } }">rancis </span>
-                    <span ref="endXRef" v-motion :initial="{ opacity: 0 }" :enter="{ opacity: 1, transition: { delay: 8900, duration: 100, type: 'tween' } }">X</span>
-                    <span v-motion :initial="{ opacity: 0, x: -10, filter: 'blur(8px)' }" :enter="{ opacity: 1, x: 0, filter: 'blur(0px)', transition: { delay: 8900, duration: 800, type: 'tween' } }">avier </span>
-                    <span ref="endCRef" v-motion :initial="{ opacity: 0 }" :enter="{ opacity: 1, transition: { delay: 9900, duration: 100, type: 'tween' } }">C</span>
-                    <span v-motion :initial="{ opacity: 0, x: -10, filter: 'blur(8px)' }" :enter="{ opacity: 1, x: 0, filter: 'blur(0px)', transition: { delay: 9900, duration: 800, type: 'tween' } }">ollege</span>
-                </h2>
             </div>
         </div>
     </section>
 
-    <!-- Desktop Motto -->
-    <section class="hidden overflow-hidden bg-background py-8 sm:block">
-        <div class="container mx-auto px-4">
-            <div class="flex items-center justify-center">
-                <h2
-                    class="flex justify-center gap-x-3 whitespace-nowrap text-center text-xl font-bold tracking-[0.2em] text-foreground md:gap-x-4 md:text-2xl lg:text-3xl"
-                    style="font-family: 'Times New Roman', Times, serif"
+    <!-- Motto: Below Hero -->
+    <section class="overflow-hidden bg-background px-3 py-5 sm:py-8 md:py-10">
+        <div class="mx-auto max-w-7xl">
+            <div class="flex flex-wrap items-center justify-center gap-x-2 gap-y-2 text-center sm:gap-x-3 md:gap-x-4">
+                <span
+                    v-motion
+                    :initial="{ opacity: 0, y: 10 }"
+                    :visible-once="{ opacity: 1, y: 0, transition: { delay: 200, duration: 900, type: 'tween' } }"
+                    class="font-serif text-sm font-bold tracking-[0.12em] text-foreground sm:text-xl sm:tracking-[0.2em] md:text-2xl lg:text-3xl"
                 >
-                    <span v-motion :initial="{ opacity: 0, y: 10, scale: 0.95 }" :enter="{ opacity: 1, y: 0, scale: 1, transition: { delay: 500, duration: 1500, type: 'tween' } }">Service.</span>
-                    <span v-motion :initial="{ opacity: 0, y: 10, scale: 0.95 }" :enter="{ opacity: 1, y: 0, scale: 1, transition: { delay: 2000, duration: 1500, type: 'tween' } }">Fortitude.</span>
-                    <span v-motion :initial="{ opacity: 0, y: 10, scale: 0.95 }" :enter="{ opacity: 1, y: 0, scale: 1, transition: { delay: 3500, duration: 1500, type: 'tween' } }">eXcellence.</span>
-                    <span v-motion :initial="{ opacity: 0, y: 10, scale: 0.95 }" :enter="{ opacity: 1, y: 0, scale: 1, transition: { delay: 4500, duration: 1500, type: 'tween' } }">Christ-centeredness.</span>
-                </h2>
+                    Service.
+                </span>
+
+                <span
+                    v-motion
+                    :initial="{ opacity: 0, y: 10 }"
+                    :visible-once="{ opacity: 1, y: 0, transition: { delay: 700, duration: 900, type: 'tween' } }"
+                    class="font-serif text-sm font-bold tracking-[0.12em] text-foreground sm:text-xl sm:tracking-[0.2em] md:text-2xl lg:text-3xl"
+                >
+                    Fortitude.
+                </span>
+
+                <span
+                    v-motion
+                    :initial="{ opacity: 0, y: 10 }"
+                    :visible-once="{ opacity: 1, y: 0, transition: { delay: 1200, duration: 900, type: 'tween' } }"
+                    class="font-serif text-sm font-bold tracking-[0.12em] text-foreground sm:text-xl sm:tracking-[0.2em] md:text-2xl lg:text-3xl"
+                >
+                    eXcellence.
+                </span>
+
+                <span
+                    v-motion
+                    :initial="{ opacity: 0, y: 10 }"
+                    :visible-once="{ opacity: 1, y: 0, transition: { delay: 1700, duration: 900, type: 'tween' } }"
+                    class="font-serif text-sm font-bold tracking-[0.12em] text-foreground sm:text-xl sm:tracking-[0.2em] md:text-2xl lg:text-3xl"
+                >
+                    Christ-centeredness.
+                </span>
             </div>
         </div>
     </section>
@@ -501,7 +381,7 @@ function onHeroLeave(el: Element, done: () => void) {
     <!-- School Heritage -->
     <section
         id="schoolHero"
-        class="relative scroll-mt-16 overflow-hidden bg-background py-20 sm:py-28 md:py-32"
+        class="relative scroll-mt-16 overflow-hidden bg-background py-16 sm:py-28 md:py-32"
     >
         <div
             class="pointer-events-none absolute right-0 top-0 -mr-20 -mt-20 h-96 w-96 rounded-full bg-primary/5 blur-3xl transition-transform duration-1000 ease-out"
@@ -509,7 +389,7 @@ function onHeroLeave(el: Element, done: () => void) {
         ></div>
 
         <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div class="grid items-center gap-12 lg:grid-cols-12 lg:gap-8">
+            <div class="grid items-center gap-10 lg:grid-cols-12 lg:gap-8">
                 <div class="relative z-10 order-2 lg:col-span-5 lg:order-1">
                     <div
                         v-motion
@@ -545,10 +425,12 @@ function onHeroLeave(el: Element, done: () => void) {
                             in education to enhance instruction, research, and community
                             involvement.
                         </p>
+
                         <p>
                             Pledging to provide learners a curricular framework that instills
                             creative and critical thinking in a rapidly changing world.
                         </p>
+
                         <p>
                             Cultural Preservation, Environmental Care, and Values Formation are
                             inculcated to guarantee genuine transformation.
@@ -563,23 +445,27 @@ function onHeroLeave(el: Element, done: () => void) {
                     class="relative order-1 w-full lg:col-span-7 lg:order-2 lg:h-150"
                 >
                     <div class="relative grid h-full grid-cols-2 gap-4">
-                        <div class="group relative mt-0 h-75 w-full overflow-hidden rounded-2xl shadow-2xl lg:mt-12 lg:h-100">
+                        <div class="group relative mt-0 h-64 w-full overflow-hidden rounded-2xl shadow-2xl lg:mt-12 lg:h-100">
                             <div class="absolute inset-0 z-10 bg-primary/20 transition-colors duration-500 group-hover:bg-transparent"></div>
+
                             <img
                                 src="@/assets/images/Home/Campus Life.png"
                                 alt="St. Francis Xavier College campus"
-                                class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
                                 loading="lazy"
+                                decoding="async"
+                                class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
                             />
                         </div>
 
-                        <div class="group relative h-62.5 w-full overflow-hidden rounded-2xl shadow-xl lg:absolute lg:right-0 lg:top-[20%] lg:z-20 lg:h-87.5 lg:w-[60%]">
+                        <div class="group relative h-56 w-full overflow-hidden rounded-2xl shadow-xl lg:absolute lg:right-0 lg:top-[20%] lg:z-20 lg:h-87.5 lg:w-[60%]">
                             <div class="absolute inset-0 z-10 bg-secondary/20 transition-colors duration-500 group-hover:bg-transparent"></div>
+
                             <img
                                 src="@/assets/images/Home/Excellence in Education.png"
                                 alt="SFXC campus activity"
-                                class="h-full w-full origin-bottom transform object-cover transition-transform duration-1000 group-hover:scale-110"
                                 loading="lazy"
+                                decoding="async"
+                                class="h-full w-full origin-bottom transform object-cover transition-transform duration-1000 group-hover:scale-110"
                             />
                         </div>
                     </div>
@@ -591,36 +477,36 @@ function onHeroLeave(el: Element, done: () => void) {
     <!-- Programs Offered -->
     <PublicProgramsSection />
 
-<!-- School Image and Statistics -->
-<section id="schoolImage" class="relative overflow-hidden py-24 sm:py-32">
-    <div class="absolute inset-0">
-        <div class="absolute inset-0 z-10 bg-primary/20 mix-blend-multiply"></div>
+    <!-- School Image and Statistics -->
+    <section id="schoolImage" class="relative overflow-hidden py-20 sm:py-32">
+        <div class="absolute inset-0">
+            <div class="absolute inset-0 z-10 bg-primary/20 mix-blend-multiply"></div>
 
-        <img
-            src="@/assets/images/sfxc-building.jpg"
-            alt="St. Francis Xavier College campus"
-            class="h-full w-full scale-110 transform object-cover transition-transform duration-[20s] ease-linear hover:scale-100"
-            loading="lazy"
-        />
-
-        <div class="absolute inset-0 z-20 bg-gradient-to-t from-background via-background/40 to-transparent"></div>
-    </div>
-
-    <div class="relative z-30 mx-auto flex h-full max-w-7xl flex-col justify-end px-4 sm:px-6 lg:px-8">
-        <div class="mt-auto grid grid-cols-2 gap-4 md:grid-cols-4 md:gap-8">
-            <StatCard
-                v-for="(stat, i) in homeStats"
-                :key="stat.id"
-                :stat="stat"
-                :delay="i * 100"
+            <img
+                src="@/assets/images/sfxc-building.jpg"
+                alt="St. Francis Xavier College campus"
+                loading="lazy"
+                decoding="async"
+                class="h-full w-full scale-110 transform object-cover transition-transform duration-[20s] ease-linear hover:scale-100"
             />
-        </div>
-    </div>
-</section>
 
+            <div class="absolute inset-0 z-20 bg-gradient-to-t from-background via-background/40 to-transparent"></div>
+        </div>
+
+        <div class="relative z-30 mx-auto flex h-full max-w-7xl flex-col justify-end px-4 sm:px-6 lg:px-8">
+            <div class="mt-auto grid grid-cols-2 gap-4 md:grid-cols-4 md:gap-8">
+                <StatCard
+                    v-for="(stat, i) in homeStats"
+                    :key="stat.id"
+                    :stat="stat"
+                    :delay="i * 100"
+                />
+            </div>
+        </div>
+    </section>
 
     <!-- News and Events -->
-    <section id="news" class="relative overflow-hidden bg-background py-20 md:py-28">
+    <section id="news" class="relative overflow-hidden bg-background py-16 sm:py-20 md:py-28">
         <div class="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div class="mb-12 flex flex-col items-start justify-between md:flex-row">
                 <div class="max-w-xl">
@@ -653,27 +539,18 @@ function onHeroLeave(el: Element, done: () => void) {
                     class="hidden items-center gap-2 pb-2 font-medium text-primary transition-all hover:gap-4 md:flex"
                 >
                     View Newsroom
-                    <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="20"
-                        height="20"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="2"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                    >
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <path d="M5 12h14" />
                         <path d="m12 5 7 7-7 7" />
                     </svg>
                 </RouterLink>
             </div>
 
-            <!-- Loading state -->
+            <!-- Loading State -->
             <div v-if="newsLoading" class="grid gap-6 lg:grid-cols-12 lg:gap-8">
                 <div class="animate-pulse overflow-hidden rounded-3xl bg-muted lg:col-span-7">
                     <div class="aspect-4/3 bg-muted lg:h-125 lg:aspect-auto"></div>
+
                     <div class="space-y-3 p-6">
                         <div class="h-4 w-24 rounded bg-muted-foreground/20"></div>
                         <div class="h-6 w-3/4 rounded bg-muted-foreground/20"></div>
@@ -689,93 +566,70 @@ function onHeroLeave(el: Element, done: () => void) {
                     ></div>
                 </div>
             </div>
-            <!-- News loaded successfully -->
-            <div v-else-if="posts.length > 0" class="grid h-full gap-6 lg:grid-cols-12 lg:gap-8">
-            <!-- Featured post -->
-            <RouterLink
-                v-if="featuredPost"
-                :to="`/news/${featuredPost.slug}`"
-                v-motion
-                :initial="{ opacity: 0, y: 32 }"
-                :visible-once="{ opacity: 1, y: 0, transition: { delay: 200, duration: 700, type: 'tween', ease: 'easeOut' } }"
-                class="group relative isolate block min-h-[460px] overflow-hidden rounded-3xl bg-muted shadow-md transition-shadow hover:shadow-xl sm:min-h-[520px] lg:col-span-7 lg:h-125 lg:min-h-0"
-            >
-                <!-- Background image -->
-                <img
-                    v-if="getNewsImage(featuredPost)"
-                    :src="getNewsImage(featuredPost)!"
-                    :alt="featuredPost.title"
-                    class="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
-                    @error="($event.target as HTMLImageElement).style.display = 'none'"
-                />
-            
-                <!-- Placeholder when no image is uploaded -->
-                <div
-                    v-else
-                    class="absolute inset-0 flex items-center justify-center bg-muted text-muted-foreground"
-                    aria-label="No image uploaded"
-                >
-                    <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="48"
-                        height="48"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="1.25"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        aria-hidden="true"
-                    >
-                        <rect x="3" y="3" width="18" height="18" rx="2" />
-                        <circle cx="8.5" cy="8.5" r="1.5" />
-                        <path d="m21 15-5-5L5 21" />
-                    </svg>
-                </div>
-            
-                <!-- Dark overlay for readable text -->
-                <div class="absolute inset-0 bg-gradient-to-t from-black/95 via-black/45 to-transparent"></div>
-            
-                <!-- Featured post content -->
-                <div class="absolute inset-x-0 bottom-0 z-10 flex flex-col justify-end p-5 sm:p-8 lg:p-10">
-                    <span class="mb-3 inline-block w-fit rounded-full bg-primary px-3 py-1 text-xs font-semibold text-primary-foreground shadow-sm">
-                        {{ featuredPost.category?.name ?? 'News' }}
-                    </span>
-            
-                    <h3 class="mb-3 text-xl font-bold leading-tight text-white transition-colors duration-300 group-hover:text-primary sm:text-2xl md:text-3xl">
-                        {{ featuredPost.title }}
-                    </h3>
-            
-                    <p
-                        v-if="featuredPost.excerpt"
-                        class="mb-4 line-clamp-3 max-w-xl text-sm leading-relaxed text-white/85 sm:text-base"
-                    >
-                        {{ featuredPost.excerpt }}
-                    </p>
-            
-                    <div class="flex items-center text-sm font-medium text-white/80">
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="16"
-                            height="16"
-                            class="mr-2 shrink-0"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            stroke-width="2"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            aria-hidden="true"
-                        >
-                            <circle cx="12" cy="12" r="10" />
-                            <polyline points="12 6 12 12 16 14" />
-                        </svg>
-                        {{ formatNewsDate(featuredPost.published_at || featuredPost.created_at) }}
-                    </div>
-                </div>
-            </RouterLink>
 
-                <!-- Other news posts -->
+            <!-- News Loaded Successfully -->
+            <div v-else-if="posts.length > 0" class="grid h-full gap-6 lg:grid-cols-12 lg:gap-8">
+                <!-- Featured Post -->
+                <RouterLink
+                    v-if="featuredPost"
+                    :to="`/news/${featuredPost.slug}`"
+                    v-motion
+                    :initial="{ opacity: 0, y: 32 }"
+                    :visible-once="{ opacity: 1, y: 0, transition: { delay: 200, duration: 700, type: 'tween', ease: 'easeOut' } }"
+                    class="group relative isolate block min-h-[460px] overflow-hidden rounded-3xl bg-muted shadow-md transition-shadow hover:shadow-xl sm:min-h-[520px] lg:col-span-7 lg:h-125 lg:min-h-0"
+                >
+                    <img
+                        v-if="getNewsImage(featuredPost)"
+                        :src="getNewsImage(featuredPost)!"
+                        :alt="featuredPost.title"
+                        loading="lazy"
+                        decoding="async"
+                        class="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                        @error="($event.target as HTMLImageElement).style.display = 'none'"
+                    />
+
+                    <div
+                        v-else
+                        class="absolute inset-0 flex items-center justify-center bg-muted text-muted-foreground"
+                        aria-label="No image uploaded"
+                    >
+                        <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <rect x="3" y="3" width="18" height="18" rx="2" />
+                            <circle cx="8.5" cy="8.5" r="1.5" />
+                            <path d="m21 15-5-5L5 21" />
+                        </svg>
+                    </div>
+
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/95 via-black/45 to-transparent"></div>
+
+                    <div class="absolute inset-x-0 bottom-0 z-10 flex flex-col justify-end p-5 sm:p-8 lg:p-10">
+                        <span class="mb-3 inline-block w-fit rounded-full bg-primary px-3 py-1 text-xs font-semibold text-primary-foreground shadow-sm">
+                            {{ featuredPost.category?.name ?? 'News' }}
+                        </span>
+
+                        <h3 class="mb-3 text-xl font-bold leading-tight text-white transition-colors duration-300 group-hover:text-primary sm:text-2xl md:text-3xl">
+                            {{ featuredPost.title }}
+                        </h3>
+
+                        <p
+                            v-if="featuredPost.excerpt"
+                            class="mb-4 line-clamp-3 max-w-xl text-sm leading-relaxed text-white/85 sm:text-base"
+                        >
+                            {{ featuredPost.excerpt }}
+                        </p>
+
+                        <div class="flex items-center text-sm font-medium text-white/80">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="mr-2 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <circle cx="12" cy="12" r="10" />
+                                <polyline points="12 6 12 12 16 14" />
+                            </svg>
+
+                            {{ formatNewsDate(featuredPost.published_at || featuredPost.created_at) }}
+                        </div>
+                    </div>
+                </RouterLink>
+
+                <!-- Other News Posts -->
                 <div
                     class="flex flex-col gap-4 lg:col-span-5"
                     :class="{ 'lg:col-span-12': !featuredPost }"
@@ -798,17 +652,7 @@ function onHeroLeave(el: Element, done: () => void) {
                         class="mt-2 flex w-full items-center justify-center gap-2 rounded-xl border border-border p-4 text-primary transition-transform active:scale-95 md:hidden"
                     >
                         View All News
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="16"
-                            height="16"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            stroke-width="2"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                        >
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <path d="M5 12h14" />
                             <path d="m12 5 7 7-7 7" />
                         </svg>
@@ -816,23 +660,13 @@ function onHeroLeave(el: Element, done: () => void) {
                 </div>
             </div>
 
-            <!-- No published posts -->
+            <!-- No Published Posts -->
             <div
                 v-else-if="!newsError"
                 class="rounded-3xl border border-dashed border-border px-6 py-16 text-center"
             >
                 <div class="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-primary/10 text-primary">
-                    <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="28"
-                        height="28"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="1.5"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                    >
+                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
                         <path d="M8 2h8l4 4v16H4V2z" />
                         <path d="M8 2v6h8V2" />
                         <path d="M8 14h8" />
@@ -850,7 +684,7 @@ function onHeroLeave(el: Element, done: () => void) {
                 </p>
             </div>
 
-            <!-- API error -->
+            <!-- API Error -->
             <div v-else class="rounded-2xl border border-border p-8 text-center">
                 <p class="mb-4 text-muted-foreground">
                     News is temporarily unavailable. Please try again.

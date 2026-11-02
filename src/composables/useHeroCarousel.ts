@@ -1,3 +1,4 @@
+
 import { ref, computed, onMounted, onBeforeUnmount } from 'vue'
 import Autoplay from 'embla-carousel-autoplay'
 import type { CarouselApi } from '@/components/ui/carousel'
@@ -53,6 +54,30 @@ export function useHeroCarousel() {
         return `${String(current.value + 1).padStart(2, '0')} / ${String(total).padStart(2, '0')}`
     })
 
+    function getImageUrl(slide: ApiHeroSlide): string {
+        const path = slide.image_url?.trim() || slide.image_path?.trim()
+
+        if (!path) return ''
+
+        if (/^https?:\/\//i.test(path)) {
+            return path
+        }
+
+        const baseUrl = String(
+            apiClient.defaults.baseURL || 'https://api.sfxc.edu.ph',
+        ).replace(/\/+$/, '')
+
+        const normalizedPath = path
+            .replace(/\\/g, '/')
+            .replace(/^\/+/, '')
+
+        if (normalizedPath.startsWith('storage/')) {
+            return `${baseUrl}/${normalizedPath}`
+        }
+
+        return `${baseUrl}/storage/${normalizedPath}`
+    }
+
     async function loadSlides() {
         loading.value = true
         error.value = null
@@ -63,6 +88,7 @@ export function useHeroCarousel() {
             >('/api/v1/public/hero-slides')
 
             const responseData = response.data
+
             const apiSlides = Array.isArray(responseData)
                 ? responseData
                 : responseData.data
@@ -75,33 +101,20 @@ export function useHeroCarousel() {
                         slide.is_active === '1'
                     )
                 })
-                .filter((slide) => Boolean(slide.image_url || slide.image_path))
-                .map((slide) => {
-                    const baseUrl = String(
-                        apiClient.defaults.baseURL ?? '',
-                    ).replace(/\/$/, '')
-
-                    const image =
-                        slide.image_url ||
-                        (slide.image_path
-                            ? `${baseUrl}/storage/${slide.image_path.replace(/^\/+/, '')}`
-                            : '')
-
-                    return {
-                        id: slide.id,
-                        title: slide.title,
-                        description: slide.description ?? '',
-                        image,
-                        buttons: slide.button_text
-                            ? [
-                                  {
-                                      text: slide.button_text,
-                                      href: slide.button_link || '#',
-                                  },
-                              ]
-                            : [],
-                    }
-                })
+                .map((slide) => ({
+                    id: slide.id,
+                    title: slide.title,
+                    description: slide.description ?? '',
+                    image: getImageUrl(slide),
+                    buttons: slide.button_text
+                        ? [
+                              {
+                                  text: slide.button_text,
+                                  href: slide.button_link || '#',
+                              },
+                          ]
+                        : [],
+                }))
                 .filter((slide) => Boolean(slide.image))
 
             current.value = 0
