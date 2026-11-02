@@ -155,7 +155,7 @@ onMounted(() => {
         <!-- Loading State -->
         <div
             v-if="loading"
-            class="relative h-[260px] overflow-hidden bg-[#104717] sm:h-[360px] lg:h-auto lg:aspect-[1920/700]"
+            class="relative h-[260px] overflow-hidden bg-[#104717] sm:h-[360px] lg:h-[clamp(360px,36.4583vw,700px)]"
         >
             <img
                 src="@/assets/images/sfxc-building.jpg"
@@ -187,7 +187,7 @@ onMounted(() => {
         <!-- Admin-managed Hero Carousel -->
         <Carousel
             v-else-if="slides.length > 0"
-            class="relative h-[260px] w-full overflow-hidden sm:h-[360px] lg:h-auto lg:aspect-[1920/700]"
+            class="relative h-[260px] w-full overflow-hidden sm:h-[360px] lg:h-[clamp(360px,36.4583vw,700px)]"
             :plugins="slides.length > 1 ? [autoplay] : []"
             @init-api="setApi"
             @mouseenter="autoplay.stop"
@@ -197,7 +197,7 @@ onMounted(() => {
                 <CarouselItem
                     v-for="(slide, index) in slides"
                     :key="slide.id"
-                    class="h-[260px] pl-0 sm:h-[360px] lg:h-full"
+                    class="h-[260px] pl-0 sm:h-[360px] lg:h-[clamp(360px,36.4583vw,700px)]"
                 >
                     <div class="relative h-full w-full bg-[#104717]">
                         <img
@@ -219,7 +219,7 @@ onMounted(() => {
         <!-- Welcome Fallback -->
         <div
             v-else-if="showFallback"
-            class="relative flex h-[260px] items-center overflow-hidden bg-[#104717] text-white sm:h-[360px] lg:h-auto lg:aspect-[1920/700]"
+            class="relative flex h-[260px] items-center overflow-hidden bg-[#104717] text-white sm:h-[360px] lg:h-[clamp(360px,36.4583vw,700px)]"
         >
             <img
                 src="@/assets/images/Home/Where Faith Meets Excellence.png"
